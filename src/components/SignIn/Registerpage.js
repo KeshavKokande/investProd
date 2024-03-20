@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
-
+import RegistrationImage from './../../assets/images/RegFinancialAdvisor.jpg'
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -45,7 +45,7 @@ const Register = () => {
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
-        <img src='https://us.123rf.com/450wm/topvector/topvector2208/topvector220800065/190068059-financial-advisor-giving-advice-on-investment-money-market-analysis-management-planning-for-customer.jpg?ver=6'></img>
+        <img src={RegistrationImage} />
       </div>
       <div className={styles['register-right']}>
          <h2> Welcome User!!!</h2>

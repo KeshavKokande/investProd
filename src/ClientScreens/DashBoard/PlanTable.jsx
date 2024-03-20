@@ -53,7 +53,7 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
             key: 'totalInvestment',
         },
     ];
-
+ console.log(advisorNames);
     const data = uniquePlans.map((plan, index) => ({
       key: plan.planId,
       planName: plan.planName,

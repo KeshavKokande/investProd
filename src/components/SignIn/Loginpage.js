@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styles from "./registerpage.module.css"; // Import CSS module
 import { FcGoogle } from 'react-icons/fc';
-
+// import Swal from 'sweetalert2'
+import LoginImage from './../../assets/images/loginImage.jpg'
 const LoginPage = () => {
   const navigate = useNavigate();
   const [formData,setFormData]=useState({
@@ -28,13 +29,15 @@ const LoginPage = () => {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       if(data.user.role === 'client'){
         navigate('/cldash')
       } else {
         navigate('/advisor_dashboard')
       }
-    })
+    }
+    
+    )
     .catch(error => {
       console.error('Error:', error);
     });
@@ -66,7 +69,7 @@ const LoginPage = () => {
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
-        <img src='https://us.123rf.com/450wm/topvector/topvector2209/topvector220900965/192918408-financial-advisor-giving-advice-investment-money-market-analysis-management-planning-for-customer.jpg?ver=6' alt='' />
+        <img src={LoginImage} alt='' />
       </div>
       <div className={styles['register-right']}>
         <h2> Welcome Back</h2>

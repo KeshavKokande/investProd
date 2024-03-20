@@ -46,7 +46,7 @@ function App() {
           <Route path="/services" element={<Service />} />
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/clform" element={<MultiStepForm />} />
-
+          
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
             <Route path="/clientlist" element={<Clientlist/>} />
