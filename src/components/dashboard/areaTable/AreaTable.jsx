@@ -3,8 +3,7 @@ import "./AreaTable.scss";
 
 const TABLE_HEADS = [
   "Client Name",
-  "Order ID",
-  "Plan ID",
+  "Plan Name",
   "Date",
   "Invested Amount",
 ];
@@ -60,8 +59,7 @@ const AreaTable = () => {
               return (
                 <tr key={purchase._id}>
                   <td>{purchase.clientName}</td>
-                  <td>{purchase._id}</td>
-                  <td>{purchase.planId}</td>
+                  <td>{purchase.planName}</td>
                   <td>{formatDate(purchase.createdAt)}</td>
                   <td>{purchase.investedAmount}</td>
                 </tr>

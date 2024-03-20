@@ -44,9 +44,13 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF19D9'
 const PiChart = ({ data, title }) => {
     // Round off the values
     const roundedData = data.map(item => ({
-        name: item.name,
+        name: item.planName,
         value: Math.round(item.value * 100) / 100 // Round to two decimal places
     }));
+
+    console.log("DATA:", data);
+    console.log("ROUNDED DATA:", roundedData);
+
 
     return (
         <div style={{ textAlign: 'center' }}>

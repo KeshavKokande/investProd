@@ -8,7 +8,7 @@ import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
 
-function InvestmentSummary({transactions, returns }) {
+function InvestmentSummary({ transactions, advisorNames, returns }) {
     // Function to calculate total amount invested in each plan
     const calculateTotalInvestment = (transactions) => {
         const investmentMap = new Map();
@@ -56,6 +56,11 @@ function InvestmentSummary({transactions, returns }) {
         return data;
     }
 
+    const formatCurrency = (value) => {
+        const roundedValue = parseFloat(value).toFixed(2);
+        return `₹${roundedValue}`;
+      };
+
     function roundToTwoDecimalPlaces(num) {
         return Math.round((num + Number.EPSILON) * 100) / 100;
     }
@@ -80,7 +85,7 @@ function InvestmentSummary({transactions, returns }) {
                     cardInfo={{
                         title: "Total Profit",
                         value: roundToTwoDecimalPlaces(totalProfitAmount),
-                        text: `You have ${totalInvestedAmount} Amount.`,
+                        text: `You have ${totalProfitAmount} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -107,7 +112,7 @@ function InvestmentSummary({transactions, returns }) {
             <center><h3 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}>Plan Information:</h3></center>
 
 
-            <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))}totalInvestments={totalInvestments} />
+            <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />
 
 
 

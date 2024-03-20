@@ -6,6 +6,7 @@ import { AreaCards, AreaCharts, AreaTable} from "../../components";
 function DashboardCl() {
     const [transactions, setTransactions] = useState([]);
     const [returns, setReturns] = useState([])
+    const [advisorNames, setAdvisorNames] = useState([]);
 
     useEffect(() => {
       (function(d, t) {
@@ -50,7 +51,8 @@ function DashboardCl() {
           const redat = await ponse.json();
           setTransactions(data.transactions);
           setReturns(redat.profits);
-          console.log("WHOLE DATA:", data)
+          setAdvisorNames(data.advisorNames)
+          // console.log("WHOLE DATA:", data)
           // console.log(redat)
       } catch (error) {
           console.error('Error fetching user data:', error.message);
@@ -64,7 +66,7 @@ return (
           <center><h1 style={{color:"black", fontSize:"30px", fontWeight: "bold"}}> Portfolio Summary</h1></center>
         
             {/* <center><h1> Portfolio Summary</h1></center> */}
-            <InvestmentSummary transactions={transactions} returns={returns}/>
+            <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns}/>
         </div>
     );
 }

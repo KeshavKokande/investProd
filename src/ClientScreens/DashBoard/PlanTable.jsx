@@ -35,25 +35,30 @@ import React from 'react';
 import { Table } from 'antd';
 
 
-const PlanTable = ({ uniquePlans, totalInvestments }) => {
+const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
     const columns = [
-        {
-            title: 'Plan Name',
-            dataIndex: 'planName',
-            key: 'planName',
-        },
-        {
+      {
+          title: 'Plan Name',
+          dataIndex: 'planName',
+          key: 'planName',
+      },
+      {
+          title: 'Advisor Name',
+          dataIndex: 'advisorNames',
+          key: 'advisorNames',
+      },
+      {
             title: 'Total Amount Invested',
             dataIndex: 'totalInvestment',
             key: 'totalInvestment',
         },
     ];
 
-    console.log("UNIQUE PLANS: ", uniquePlans);
-    const data = uniquePlans.map(plan => ({
-        planId: plan.planId, 
-        planName: plan.planName,
-        totalInvestment: totalInvestments.get(plan.planId),
+    const data = uniquePlans.map((plan, index) => ({
+      key: plan.planId,
+      planName: plan.planName,
+      advisorName: advisorNames[index],
+      totalInvestment: totalInvestments.get(plan.planId),
     }));
 
     return (
@@ -66,20 +71,18 @@ const PlanTable = ({ uniquePlans, totalInvestments }) => {
           <thead>
             <tr>
               <th>Plan Names</th>
+              <th>Advisor Name</th>
               <th>Total Amount Invested</th>
             </tr>
           </thead>
           <tbody>
-            {uniquePlans.map((plan) => {
-              const totalInvestment = totalInvestments.get(plan.planId);
-              return (
-                <tr key={plan.planId}>
-                  <td>{plan.planName}</td>
-        
-                  <td>{totalInvestment}</td>
+            {data.map((item) => (
+                <tr key={item.key}>
+                    <td>{item.planName}</td>
+                    <td>{item.advisorName}</td>
+                    <td>{item.totalInvestment}</td>
                 </tr>
-              );
-            })}
+            ))}
           </tbody>
         </table>
       </div>
