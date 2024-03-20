@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import "./AdNewPlans.css"
 const
   AddPlan = () => {
     const [formData, setFormData] = useState({
@@ -108,14 +108,14 @@ const
               <label className="addPlan-label" htmlFor="advise">Advise:</label>
               <input className="addPlan-input position-input" type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
             </div>
+            <label className="" htmlFor="stocks">Stocks:</label>
 
-            <div className="form-grp form-grp2">
-              <label className="addPlan-label" htmlFor="stocks">Stocks:</label>
+            <div>
               {/* <div id="stocks"> */}
               {formData.stocks.map((stock, index) => (
                 <div key={index} id='stocks'>
                   <input
-                    style={{ width: '82%' }}
+                    style={{ width: '50%' }}
                     type="text"
                     id={`stockName${index}`}
                     name={`stockName${index}`}
@@ -124,7 +124,7 @@ const
                     placeholder="Enter stock name"
                   />
                   <input
-                    style={{ width: '100%' }}
+                    style={{ width: '50%' }}
                     type="number"
                     id={`contri${index}`}
                     name={`contri${index}`}

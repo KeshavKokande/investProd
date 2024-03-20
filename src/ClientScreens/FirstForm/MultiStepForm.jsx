@@ -103,7 +103,7 @@ const MultiStepForm = () => {
         <Step label="Terms & Conditions" />
       </Stepper>
 
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form className="form-firstform"onSubmit={handleSubmit} encType="multipart/form-data">
         {activeStep === 0 && (
           <PageOne formData={formData} handleChange={handleFormChange} />
         )}
