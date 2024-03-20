@@ -52,7 +52,7 @@ function DashboardCl() {
           setTransactions(data.transactions);
           setReturns(redat.profits);
           setAdvisorNames(data.advisorNames)
-          // console.log("WHOLE DATA:", data)
+          // console.log("WHOLE DATA:", redat);
           // console.log(redat)
       } catch (error) {
           console.error('Error fetching user data:', error.message);

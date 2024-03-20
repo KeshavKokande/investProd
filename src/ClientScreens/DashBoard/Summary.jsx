@@ -23,6 +23,8 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
         });
         return investmentMap;
     }
+
+    // console.log("TRANSACTION DATA : ", transactions);
     // Function to calculate total invested amount
     const calculateTotalInvestedAmount = (transactions) => {
         let totalInvestedAmount = 0;
@@ -61,10 +63,6 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
         return `₹${roundedValue}`;
       };
 
-    function roundToTwoDecimalPlaces(num) {
-        return Math.round((num + Number.EPSILON) * 100) / 100;
-    }
-
     return (
         <div>
 
@@ -75,8 +73,8 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     percentFillValue={80}
                     cardInfo={{
                         title: "Total Amount Invested",
-                        value: roundToTwoDecimalPlaces(totalInvestedAmount),
-                        text: `You have ${totalInvestedAmount} Amount.`,
+                        value: formatCurrency(totalInvestedAmount),
+                        text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -84,17 +82,17 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     percentFillValue={50}
                     cardInfo={{
                         title: "Total Profit",
-                        value: roundToTwoDecimalPlaces(totalProfitAmount),
-                        text: `You have ${totalProfitAmount} Amount.`,
+                        value: formatCurrency(totalProfitAmount),
+                        text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
                     colors={["#e4e8ef", "#f29a2e"]}
                     percentFillValue={40}
                     cardInfo={{
-                        title: "Total Returns",
-                        value: roundToTwoDecimalPlaces(totalInvestedAmount + totalProfitAmount),
-                        text: `You have ${totalInvestedAmount} Amount.`,
+                        title: "Current Value",
+                        value: formatCurrency(totalInvestedAmount + totalProfitAmount),
+                        text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
                     }}
                 />
             </section>
@@ -102,7 +100,7 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
             <hr />
 
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
-                <p><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => transaction.planId))), totalInvestments)} /></p>
+                <p><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
                 <p><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
 

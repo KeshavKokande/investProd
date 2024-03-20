@@ -45,11 +45,12 @@ const PiChart = ({ data, title }) => {
     // Round off the values
     const roundedData = data.map(item => ({
         name: item.planName,
-        value: Math.round(item.value * 100) / 100 // Round to two decimal places
+        value: Math.round(Math.abs(item.value) * 100) / 100 // Round to two decimal places
     }));
 
     console.log("DATA:", data);
     console.log("ROUNDED DATA:", roundedData);
+    console.log("title:", title);
 
 
     return (
