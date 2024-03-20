@@ -75,7 +75,8 @@ const Register = () => {
          <hr></hr>
 
          <div className='gAuth'>
-          <h2>Continue with <span className="google-icon"><FcGoogle /></span></h2>
+          <h2>Continue with </h2>
+            <span className="google-icon"><FcGoogle /></span>
         </div>
       </div>
 
