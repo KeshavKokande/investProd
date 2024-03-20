@@ -9,18 +9,12 @@ body {
   .adnewplan-plan-container {
 
     display: flex;
-
     justify-content: space-between;
-
     margin: 20px;
-
     padding: 20px;
-
     border-radius: 10px;
-
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-
-    background-color: #fff; /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 
   }
  
@@ -68,10 +62,20 @@ body {
   }
 
   .adnewplans-header{
-    margin: 0 20px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin: 20px 46px;
     display: flex;
     justify-content: space-between;
+    align-content: center;
+    align-items: center;
   }
+.outerMax>h4{
+  font-size: 1.25rem;
+  margin-left: 3rem;
+  font-weight: 700;
+}
+
 
 
   .adnewplans-header button{
@@ -331,11 +335,9 @@ body {
   .outerMax{
 
     border-radius: 10px;
-
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-
-    background-color: #fff; /* White background */
-
-    padding-top: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
 
   }

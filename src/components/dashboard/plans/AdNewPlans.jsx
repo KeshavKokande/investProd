@@ -18,6 +18,7 @@ const AdNewPlans = () => {
           credentials: 'include'
         });
         const data = await response.json();
+        console.log(data);
         setPlansData(data);
       } catch (error) {
         console.log("Error fetching plans data:", error);

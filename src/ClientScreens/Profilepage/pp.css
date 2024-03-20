@@ -1,0 +1,100 @@
+.pp{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 99%;
+    border-radius: 0.8rem;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pp1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:25%;
+    background: #475BE8;
+    border-top-left-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+}
+
+.pp2 {
+
+    background-color: #f1f3f4;
+
+    flex:75%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-radius: 0.8rem;
+   
+
+}
+
+.pp21{
+
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 100%;
+    height:"auto";
+    margin: 2rem;
+    
+}
+
+
+.ppp{
+
+    display: flex;
+    justify-content: left;
+    padding: 5px;
+    padding-left:10px;
+    font-size: 18px;
+    /* border-bottom: 2px solid rgba(128, 128, 128, 0.186); */
+}
+
+.profile-image{
+
+    border: 0.5rem solid white;
+
+
+}
+.info-cont{
+    margin-top: 20px;
+color:gray;
+
+    margin-bottom: 30px;
+    width: 100%;
+}
+.jsonp{
+    
+    font-size: 18px;
+}
+.pp211,.pp212{
+
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    gap: 5rem;
+    
+}
+
+.ppfull{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    height: 88vh; /* Adjust the height as needed */
+
+}
+
+
+.pp213{
+
+    display: flex;
+    width: 100%;
+    justify-content: right;
+
+
+}
