@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import "./AdNewPlans.css";
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks } = plan;
+  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks,advise } = plan;
 
   const renderStocks = () => {
     return stocks.map((stock, index) => (
@@ -39,6 +39,7 @@ const PlanCard = ({ plan, deletePlan }) => {
             <div>Minimum Investment Amount: ${minInvestmentAmount}</div>
             <div>Number of Subscriptions: {noOfSubscription}</div>
             <div>Cap Value: ${capValue}</div>
+            <div>Advise:  {advise}</div>
           </div>
 
           <div className="btn">
