@@ -79,7 +79,7 @@ function InvestmentSummary({ transactions, returns }) {
         colors={["#e4e8ef", "#4ce13f"]}
         percentFillValue={50}
         cardInfo={{
-          title: "Total Amount Invested",
+          title: "Total Profit",
           value: roundToTwoDecimalPlaces(totalProfitAmount),
           text: `You have ${totalInvestedAmount} Amount.`,
         }}
@@ -88,7 +88,7 @@ function InvestmentSummary({ transactions, returns }) {
         colors={["#e4e8ef", "#f29a2e"]}
         percentFillValue={40}
         cardInfo={{
-          title: "Total Amount Invested",
+          title: "Total Returns",
           value: roundToTwoDecimalPlaces(totalInvestedAmount+totalProfitAmount),
           text: `You have ${totalInvestedAmount} Amount.`,
         }}

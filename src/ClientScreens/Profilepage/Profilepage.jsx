@@ -18,7 +18,9 @@ const ProfilePage = () => {
     phone: "000000000",
     address: "adress abcdefghijk lmnopqrst",
     job: "S/W Developer",
-    values: []
+    values: [],
+    age:  "21",
+    gender: "Male"
   });
 
 
@@ -132,7 +134,7 @@ const ProfilePage = () => {
 
             <p className='ppp'><strong>Name:</strong> &nbsp; {plansData.name}</p>
             <p className='ppp'><strong>Email:</strong> &nbsp; {plansData.email}</p>
-            <p className='ppp'><strong>Age:</strong> &nbsp; {profileInfo.job}</p>
+            <p className='ppp'><strong>Age:</strong> &nbsp; {profileInfo.age}</p>
             <p className='ppp'><strong>Job Title:</strong> &nbsp; {profileInfo.job}</p>
 
             </div>
@@ -142,7 +144,7 @@ const ProfilePage = () => {
             <p className='ppp'><strong>Phone:</strong> &nbsp; {profileInfo.phone}</p>
             <p className='ppp'><strong>Address:</strong> &nbsp; {profileInfo.address}</p>
             <p className='ppp'><strong>Qualification:</strong> &nbsp; {profileInfo.job}</p>
-            <p className='ppp'><strong>Gender:</strong> &nbsp; {profileInfo.job}</p>
+            <p className='ppp'><strong>Gender:</strong> &nbsp; {profileInfo.gender}</p>
               
 
             </div>
