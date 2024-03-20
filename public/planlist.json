@@ -1,0 +1,38 @@
+[
+    {
+      "planId": 1,
+      "stock": "ABC",
+      "buyAt": 50,
+      "sellAt": 60,
+      "stopLoss": 45
+    },
+    {
+      "planId": 1,
+      "stock": "DEF",
+      "buyAt": 40,
+      "sellAt": 55,
+      "stopLoss": 35
+    },
+    {
+      "planId": 1,
+      "stock": "GHI",
+      "buyAt": 70,
+      "sellAt": 80,
+      "stopLoss": 65
+    },
+    {
+      "planId": 1,
+      "stock": "JKL",
+      "buyAt": 90,
+      "sellAt": 100,
+      "stopLoss": 85
+    },
+    {
+      "planId": 1,
+      "stock": "MNO",
+      "buyAt": 30,
+      "sellAt": 40,
+      "stopLoss": 25
+    }
+  ]
+  
