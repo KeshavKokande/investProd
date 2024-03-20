@@ -38,9 +38,9 @@ import { Table } from 'antd';
 const PlanTable = ({ uniquePlans, totalInvestments }) => {
     const columns = [
         {
-            title: 'Plan ID',
-            dataIndex: 'planId',
-            key: 'planId',
+            title: 'Plan Name',
+            dataIndex: 'planName',
+            key: 'planName',
         },
         {
             title: 'Total Amount Invested',
@@ -49,9 +49,11 @@ const PlanTable = ({ uniquePlans, totalInvestments }) => {
         },
     ];
 
-    const data = uniquePlans.map(planId => ({
-        planId: planId,
-        totalInvestment: totalInvestments.get(planId),
+    console.log("UNIQUE PLANS: ", uniquePlans);
+    const data = uniquePlans.map(plan => ({
+        planId: plan.planId, 
+        planName: plan.planName,
+        totalInvestment: totalInvestments.get(plan.planId),
     }));
 
     return (
@@ -63,17 +65,17 @@ const PlanTable = ({ uniquePlans, totalInvestments }) => {
         <table>
           <thead>
             <tr>
-              <th>Plan ID</th>
+              <th>Plan Names</th>
               <th>Total Amount Invested</th>
             </tr>
           </thead>
           <tbody>
-            {uniquePlans.map((planId) => {
-              const totalInvestment = totalInvestments.get(planId);
+            {uniquePlans.map((plan) => {
+              const totalInvestment = totalInvestments.get(plan.planId);
               return (
-                <tr key={planId}>
-                  <td>{planId}</td>
-                  
+                <tr key={plan.planId}>
+                  <td>{plan.planName}</td>
+        
                   <td>{totalInvestment}</td>
                 </tr>
               );

@@ -50,8 +50,8 @@ function DashboardCl() {
           const redat = await ponse.json();
           setTransactions(data.transactions);
           setReturns(redat.profits);
-          console.log(data)
-          console.log(redat)
+          console.log("WHOLE DATA:", data)
+          // console.log(redat)
       } catch (error) {
           console.error('Error fetching user data:', error.message);
         }
