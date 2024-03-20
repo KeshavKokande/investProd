@@ -91,7 +91,7 @@ const ClSidebar = () => {
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>
-                <span className="menu-link-text">Advisers</span>
+                <span className="menu-link-text">Advisors</span>
               </Link>
             </li>
             <li className="menu-item">
