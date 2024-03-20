@@ -1,10 +1,21 @@
-form{
+.StepperContainer-0-2-1{
+  width: 70vw;
+  margin: auto;
+}
+
+.completed{
+  background-color: rgb(197, 197, 9) !important;
+}
+
+.cl-form{
   display: grid;
-  grid-gap: 2vh;
+  grid-gap: 4vh;
   justify-items: center;
 }
 
 .container {
+  height: 68vh;
+  justify-items: center;
   padding: 20px;
   background-color: #fbf9f9;
   border-radius: 10px;
@@ -35,21 +46,22 @@ form{
   grid-gap: 6%;
 }
 
-.form-container2 input{
-  width: 100% !important;
-}
+/* .form-container2 input{
+  width: 100% ;
+} */
 
 .form-container1 .question-container{
   width: 96% !important;
 }
 
-.container .image{
+.container .imagecl{
+  width: 28vw;
   display: grid;
   justify-items: center;
 }
 
-.container .image img{
-  width: 70% !important;
+.container .imagecl img{
+  width: 100% !important;
 }
 
 .form-container h2 {
@@ -66,6 +78,8 @@ form{
   /* display: block;
   margin-bottom: 8px;
   color: #333; */
+  font-size: large;
+  font-weight: 600;
   position: static !important;
   background: none !important;
 }
@@ -185,4 +199,18 @@ form{
 
 .register-submit-btn invisible{
   display: hidden;
+}
+
+.terms{
+  display: grid;
+  grid-gap: 2vh;
+}
+
+.terms h3{
+  font-size: x-large;
+  font-weight: 800;
+}
+
+.terms input{
+  width: auto !important;
 }

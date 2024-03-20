@@ -72,7 +72,7 @@ const Loginpage = () => {
       </div>
     <div className='register-right'>
        <h2> Welcome Back</h2>
-       <div className='input-wrapper'>
+       <div className='input-wrapper' style={{width:"fit-content"}} >
            <h4>New User!!!
                 <a href='/register'>   Register Here</a>
           </h4>
@@ -92,7 +92,8 @@ const Loginpage = () => {
        <hr></hr>
  
        <div className='gAuth' onClick={handleGoogleSignIn}>
-          <h2>Continue with <span className="google-icon"><FcGoogle /></span></h2>
+          <h2>Continue with </h2>
+          <span className="google-icon"><FcGoogle /></span>
         </div>
     </div>
  

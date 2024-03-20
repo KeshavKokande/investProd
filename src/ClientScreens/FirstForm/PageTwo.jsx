@@ -9,7 +9,7 @@ const PageTwo = ({ formData, handleChange }) => {
 
   return (
     <div className="container">
-      <div className="image">
+      <div className="imagecl">
         <img src={Questionnare} alt="Questionnaire" />
       </div>
       <div className="form-container form-container1">
