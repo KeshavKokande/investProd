@@ -18,7 +18,8 @@ const LoginPage = () => {
 
   const handleGoogleSignIn = async () => {
     window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google';
-
+  
+    // Assuming the response returns the user's role along with other data
     await fetch('http://localhost:8000/api/v1/check-auth/signin-google', {
       method: 'GET',
       headers: {
@@ -29,15 +30,14 @@ const LoginPage = () => {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
-      if(data.user.role === 'client'){
-        navigate('/cldash')
+      console.log(data);
+      // Check if the role is 'client'
+      if (data.role === 'client') {
+        navigate('/cldash');
       } else {
-        navigate('/advisor_dashboard')
+        navigate('/advisor_dashboard');
       }
-    }
-    
-    )
+    })
     .catch(error => {
       console.error('Error:', error);
     });

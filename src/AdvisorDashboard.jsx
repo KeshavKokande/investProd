@@ -19,7 +19,7 @@ import AdvClView from "./ClientScreens/AdvisersClientView/AdvClView";
 import AdvClProfile from "./ClientScreens/AdvisersClientView/AdvClProfile";
 import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
-
+import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 
 
 
@@ -63,6 +63,7 @@ function App() {
             <Route path="/planscl" element={<PlansCl/>} />
             <Route path="/viewadvi" element={<AdvClView/>} /> 
             <Route path="/plan" element={<Plans/>} />
+            <Route path="/profedit" element={<MultiFormEdit/>}/>
           </Route>
         </Routes>
       </Router>

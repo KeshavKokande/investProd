@@ -1,28 +1,37 @@
 {
-    "otherinfo": [
-      {
-        "field": "Primary Investment Objectives",
-        "ans": "Wealth Accumulation"
-      },
-      {
-        "field": "Risk Tolerance",
-        "ans": "Moderate"
-      },
-      {
-        "field": "Investment Experience",
-        "ans": "Intermediate"
-      },
-      {
-        "field": "Time Horizon",
-        "ans": "Long-term"
-      },
-      {
-        "field": "Income Level",
-        "ans": "High"
-      },
-      {
-        "field": "Asset Allocation Strategy",
-        "ans": "Diversified Portfolio"
-      }
-    ]
-  }
+  "generalinfo": {
+    "name": "Keshav",
+    "email": "keshav@gmail.com",
+    "age": "22",
+    "gender": "Male",
+    "qualification": "M.C.A",
+    "address": "Gurugram",
+    "jobRole": "S/W Developer"
+  },
+  "otherinfo": [
+    {
+      "field": "primary investment objectives",
+      "ans": "Wealth accumulation"
+    },
+    {
+      "field": "risk tolerance",
+      "ans": "Moderate"
+    },
+    {
+      "field": "investment experience",
+      "ans": "Intermediate"
+    },
+    {
+      "field": "time horizon",
+      "ans": "Long-term"
+    },
+    {
+      "field": "income level",
+      "ans": "High"
+    },
+    {
+      "field": "asset allocation strategy",
+      "ans": "Diversified portfolio"
+    }
+  ]
+}
