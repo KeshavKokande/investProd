@@ -46,16 +46,16 @@ const ClSidebar = () => {
   const logoutUser = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/v1/check-auth/logout", {
-        method: "GET", // or 'POST'
+        method: "GET", 
         headers: {
           "Content-Type": "application/json",
-          // You might need to include additional headers depending on your backend requirements
+          
         },
         credentials: "include", // include cookies in the request
       });
       if (response.ok) {
-        // Clear user authentication data (if any)
-        console.log("logout",response);
+        
+        console.log("logout success",response);
         localStorage.removeItem("token");
 
         // Redirect to login page
@@ -115,14 +115,7 @@ const ClSidebar = () => {
                 <span className="menu-link-text">Dashboard</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname === "/profile" ? "active" : ""}`}>
-              <Link to="/profile" className="menu-link">
-                <span className="menu-link-icon">
-                  <MdOutlineCurrencyExchange size={18} />
-                </span>
-                <span className="menu-link-text">Profile</span>
-              </Link>
-            </li>
+            
             <li className={`menu-item ${location.pathname === "/planscl" ? "active" : ""}`}>
               <Link to="/planscl" className="menu-link">
                 <span className="menu-link-icon">
@@ -144,12 +137,20 @@ const ClSidebar = () => {
 
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <Link to="/" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineSettings size={20} />
                 </span>
                 <span className="menu-link-text">Settings</span>
+              </Link>
+            </li> */}
+            <li className={`menu-item ${location.pathname === "/profile" ? "active" : ""}`}>
+              <Link to="/profile" className="menu-link">
+                <span className="menu-link-icon">
+                  <MdOutlineCurrencyExchange size={18} />
+                </span>
+                <span className="menu-link-text">Profile</span>
               </Link>
             </li>
             <li className="menu-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>

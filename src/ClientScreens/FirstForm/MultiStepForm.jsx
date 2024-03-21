@@ -59,6 +59,7 @@ const MultiStepForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form submitted:', formData);
+    navigate('/login'); // Navigate to login page after form submission
   };
 
   const nextStep = () => {
