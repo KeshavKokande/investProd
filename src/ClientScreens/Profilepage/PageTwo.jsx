@@ -1,6 +1,7 @@
 import React from 'react';
 import Questionnare from "./../../assets/images/questionnare.svg";
 import questionsData from './dummyData.json'; // Importing the questions data
+import styles from "./Page.module.css";
 
 const PageTwo = ({ formData, handleChange }) => {
   const handleFormChange = (event) => {
@@ -14,7 +15,7 @@ const PageTwo = ({ formData, handleChange }) => {
           <textarea
             id={question.ques}
             name={question.ques}
-            className="form-control"
+            className={styles['form-control']}
             value={formData.otherinfo.find(info => info.field === question.ques)?.ans || ''}
             onChange={handleFormChange}
           />
@@ -24,7 +25,7 @@ const PageTwo = ({ formData, handleChange }) => {
           <select
             id={question.ques}
             name={question.ques}
-            className="form-control"
+            className={styles['form-control']}
             value={formData.otherinfo.find(info => info.field === question.ques)?.ans || ''}
             onChange={handleFormChange}
           >
@@ -43,7 +44,7 @@ const PageTwo = ({ formData, handleChange }) => {
                 type="radio"
                 name={question.ques}
                 value="yes"
-                className="form-control"
+                className={styles['form-control']}
                 checked={formData.otherinfo.find(info => info.field === question.ques)?.ans === 'yes'}
                 onChange={handleFormChange}
               />{' '}
@@ -54,7 +55,7 @@ const PageTwo = ({ formData, handleChange }) => {
                 type="radio"
                 name={question.ques}
                 value="no"
-                className="form-control"
+                className={styles['form-control']}
                 checked={formData.otherinfo.find(info => info.field === question.ques)?.ans === 'no'}
                 onChange={handleFormChange}
               />{' '}
@@ -71,7 +72,7 @@ const PageTwo = ({ formData, handleChange }) => {
             defaultValue="5"
             id={question.ques}
             name={question.ques}
-            className="form-control"
+            className={styles['form-control']}
             value={formData.otherinfo.find(info => info.field === question.ques)?.ans || ''}
             onChange={handleFormChange}
           />
@@ -83,13 +84,13 @@ const PageTwo = ({ formData, handleChange }) => {
   };
 
   return (
-    <div className="container">
-      <div className="image">
+    <div className={styles.container}>
+      <div className={styles.image}>
         <img src={Questionnare} alt="Questionnaire" />
       </div>
-      <div className="form-container form-container1">
+      <div className={`${styles['form-container']} ${styles['form-container1']}`}>
         {questionsData.map((question, index) => (
-          <div key={index} className="question-container">
+          <div key={index} className={styles['question-container']}>
             <label htmlFor={question.ques}>{question.ques}</label>
             {renderInputField(question)}
           </div>

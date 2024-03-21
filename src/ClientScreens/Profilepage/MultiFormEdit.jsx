@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import clientData from './clientans.json'; // Importing the client data
+import styles from "./Page.module.css";
 
 const MultiFormEdit = () => {
   const [formData, setFormData] = useState(clientData);
@@ -22,7 +23,7 @@ const MultiFormEdit = () => {
       <form onSubmit={handleSubmit}>
         <PageOne formData={formData.generalinfo} handleChange={handleChange} />
         <PageTwo formData={formData} handleChange={handleChange} />
-        <button type="submit" className={`register-submit-btn next-button`}>Submit</button>
+        <button type="submit" className={`${styles['register-submit-btn']} ${styles['next-button']}`}>Submit</button>
       </form>
     </div>
   );

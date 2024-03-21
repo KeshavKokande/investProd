@@ -23,8 +23,7 @@ function HomepageWhy(){
                   Expert Management
                 </h5>
                 <p>
-                  Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-                  Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
+                From crafting personalized investment portfolios to offering timely advice and insights, our experts are committed to guiding you every step of the way. Trust in our expert management to navigate the complexities of the financial landscape and help you make informed decisions that drive long-term success and prosperity.
                 </p>
               </div>
             </div>
@@ -48,11 +47,10 @@ function HomepageWhy(){
               </div>
               <div className="detail-box">
                 <h5>
-                  Instant Trading
+                 High Returns
                 </h5>
                 <p>
-                  Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-                  Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
+                With a focus on strategic diversification and meticulous risk management, our platform empowers you to achieve impressive returns on your investments, providing a pathway to financial success and prosperity.
                 </p>
               </div>
             </div>
@@ -65,17 +63,16 @@ function HomepageWhy(){
                   Happy Customers
                 </h5>
                 <p>
-                  Incidunt odit rerum tenetur alias architecto asperiores omnis cumque doloribus aperiam numquam! Eligendi corrupti, molestias laborum dolores quod nisi vitae voluptate ipsa? In tempore voluptate ducimus officia id, aspernatur nihil.
-                  Tempore laborum nesciunt ut veniam, nemo officia ullam repudiandae repellat veritatis unde reiciendis possimus animi autem natus
+                Experience the satisfaction of joining a thriving community of investors who have chosen us for their financial journey, achieving remarkable gains and securing their financial future with confidence
                 </p>
               </div>
             </div>
           </div>
-          <div className="btn-box">
+          {/* <div className="btn-box">
             <a href="">
               Read More
             </a>
-          </div>
+          </div> */}
         </div>
       </section>
     )

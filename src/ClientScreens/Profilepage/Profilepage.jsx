@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; 
-import './pp.css'
+import styles from './pp.module.css';
 
 const ProfilePage = () => {
   const [profileInfo, setProfileInfo] = useState({
@@ -66,9 +66,9 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className='ppfull'>
-      <div className='pp'>
-        <div className='pp1'>
+    <div className={styles.ppfull}>
+      <div className={styles.pp}>
+        <div className={styles.pp1}>
           <img
             src={profileInfo.img}
             alt='Profile'
@@ -76,30 +76,30 @@ const ProfilePage = () => {
               e.target.onerror = null;
               e.target.src = 'https://avatar.iran.liara.run/public/boy';
             }}
-            className='profile-image'
+            className={styles['profile-image']}
           />
         </div>
-        <div className='pp2'>
-          <div className='pp21'>
-            <div className='pp211'>
+        <div className={styles.pp2}>
+          <div className={styles.pp21}>
+            <div className={styles.pp211}>
               <div>
-                <p className='ppp'><strong>Name:</strong> {profileInfo.name}</p>
-                <p className='ppp'><strong>Email:</strong> {profileInfo.email}</p>
-                <p className='ppp'><strong>Age:</strong> {profileInfo.age}</p>
-                <p className='ppp'><strong>Job Title:</strong> {profileInfo.jobRole}</p>
+                <p className={styles.ppp}><strong>Name:</strong> {profileInfo.name}</p>
+                <p className={styles.ppp}><strong>Email:</strong> {profileInfo.email}</p>
+                <p className={styles.ppp}><strong>Age:</strong> {profileInfo.age}</p>
+                <p className={styles.ppp}><strong>Job Title:</strong> {profileInfo.jobRole}</p>
               </div>
               <div>
-                <p className='ppp'><strong>Phone:</strong> {profileInfo.phone}</p>
-                <p className='ppp'><strong>Address:</strong> {profileInfo.address}</p>
-                <p className='ppp'><strong>Qualification:</strong> {profileInfo.qualification}</p>
-                <p className='ppp'><strong>Gender:</strong> {profileInfo.gender}</p>
+                <p className={styles.ppp}><strong>Phone:</strong> {profileInfo.phone}</p>
+                <p className={styles.ppp}><strong>Address:</strong> {profileInfo.address}</p>
+                <p className={styles.ppp}><strong>Qualification:</strong> {profileInfo.qualification}</p>
+                <p className={styles.ppp}><strong>Gender:</strong> {profileInfo.gender}</p>
               </div>
             </div>
             <hr />
-            <div className='pp212'>
+            <div className={styles.pp212}>
               {/* Display other information here */}
             </div>
-            <div className='pp213'>
+            <div className={styles.pp213}>
               <Link to='/profedit'>
                 <button
                   style={{

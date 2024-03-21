@@ -1,9 +1,8 @@
-// Register.jsx
 import { useState } from 'react';
-import './registerpage.css';
+import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
-
+import RegistrationImage from './../../assets/images/RegFinancialAdvisor.jpg'
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -44,42 +43,40 @@ const Register = () => {
   };
 
   return (
-    <div className='register-container'>
-      <div className='register-left'>
-        <img src='https://us.123rf.com/450wm/topvector/topvector2208/topvector220800065/190068059-financial-advisor-giving-advice-on-investment-money-market-analysis-management-planning-for-customer.jpg?ver=6'></img>
+    <div className={styles['register-container']}>
+      <div className={styles['register-left']}>
+        <img src={RegistrationImage} />
       </div>
-      <div className='register-right'>
+      <div className={styles['register-right']}>
          <h2> Welcome User!!!</h2>
-         <div className='input-wrapper'>
+         <div className={styles['input-wrapper']}>
             <label>Name</label>
             <input type='text' name='name' value={formData.name} onChange={handleChange}></input>
          </div>
        
-         <div className='input-wrapper'>
+         <div className={styles['input-wrapper']}>
             <label>Email</label>
             <input type='email' name='email' value={formData.email} onChange={handleChange}></input>
          </div>
 
-         <div className='input-wrapper'>
+         <div className={styles['input-wrapper']}>
             <label>Password</label>
             <input type='password' name='password' value={formData.password} onChange={handleChange}></input>
          </div>
-         <div className='input-wrapper'>
+         <div className={styles['input-wrapper']}>
             <label>Confirm Password</label>
             <input type='password' name='confirmPassword' value={formData.confirmPassword} onChange={handleChange}></input>
          </div>
          
          <div>
-            <button className='register-btn' onClick={handleSubmit}>Register</button>
+            <button className={styles['register-btn']} onClick={handleSubmit}>Register</button>
          </div>
-         <hr></hr>
-
-         <div className='gAuth'>
+         <hr />
+         <div className={styles['gAuth']}>
           <h2>Continue with </h2>
-            <span className="google-icon"><FcGoogle /></span>
+            <span className={styles['google-icon']}><FcGoogle /></span>
         </div>
       </div>
-
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import PlanCard from './FlipingCard';
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
-import '../Profilepage/style.css';
+import '../Profilepage/style.module.css';
 import "../Plans/Plans.css";
 import { Link } from 'react-router-dom';
 

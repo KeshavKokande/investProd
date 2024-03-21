@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
-import { fetchNews } from '../utils/fetchNews'
-import { stocksArr } from '../utils/seeds/stocksArr'
+import { fetchNews } from './../utils/fetchNews'
+import { stocksArr } from './../utils/seeds/stocksArr'
 
 const DataContext = createContext()
 

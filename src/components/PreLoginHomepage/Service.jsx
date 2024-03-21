@@ -12,7 +12,7 @@ function Service(){
                 Our <span>Services</span>
               </h2>
               <p>
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+              Unlock personalized investment strategies tailored to your financial objectives, guided by expert advisors, and diversified for maximum returns
               </p>
             </div>
             <div className="row">
@@ -23,16 +23,12 @@ function Service(){
                   </div>
                   <div className="detail-box">
                     <h5>
-                      Currency Wallet
+                      Diverse Portfolio Options
                     </h5>
                     <p>
-                      fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                      The
-                      point of using
+                    Explore a wide range of investment opportunities curated by seasoned professionals, tailored to your unique financial goals and risk tolerance."
                     </p>
-                    <a href="">
-                      Read More
-                    </a>
+                   
                   </div>
                 </div>
               </div>
@@ -45,14 +41,10 @@ function Service(){
                     <h5>
                       Security Storage
                     </h5>
-                    <p>
-                      fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                      The
-                      point of using
+                    <p >
+                    Rest assured, your investments are safeguarded with state-of-the-art security measures and robust risk management protocols, ensuring the safety and integrity of your financial assets at every step
                     </p>
-                    <a href="">
-                      Read More
-                    </a>
+                    
                   </div>
                 </div>
               </div>
@@ -63,25 +55,21 @@ function Service(){
                   </div>
                   <div className="detail-box">
                     <h5>
-                      Expert Support
+                      ChatBot Support
                     </h5>
                     <p>
-                      fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                      The
-                      point of using
+                    Receive ongoing support and guidance from our dedicated chatbot, committed to helping you navigate market fluctuations and maximize your investment potential
                     </p>
-                    <a href="">
-                      Read More
-                    </a>
+                    
                   </div>
                 </div>
               </div>
             </div>
-            <div className="btn-box">
+            {/* <div className="btn-box">
               <a href="">
                 View All
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

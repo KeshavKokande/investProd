@@ -15,19 +15,21 @@ function HomepageInfo(){
               <a href="">
                 <i className="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
-                  Location
+                Plot No.-248, Udyog- Vihar,<br />
+Phase-4, Gurgaon,<br />
+Haryana, 122015 
                 </span>
               </a>
               <a href="">
                 <i className="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                  Call +91 124 4345901
                 </span>
               </a>
               <a href="">
                 <i className="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  incedo@incedoinc.com
                 </span>
               </a>
             </div>
@@ -47,7 +49,7 @@ function HomepageInfo(){
             </a>
           </div>
         </div>
-        <div className="col-md-6 col-lg-3 info_col">
+        {/* <div className="col-md-6 col-lg-3 info_col">
           <div className="info_detail">
             <h4>
               Info
@@ -56,7 +58,7 @@ function HomepageInfo(){
               necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
             </p>
           </div>
-        </div>
+        </div> */}
         <div className="col-md-6 col-lg-2 mx-auto info_col">
           
         </div>

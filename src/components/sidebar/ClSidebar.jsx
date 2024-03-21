@@ -94,14 +94,14 @@ const ClSidebar = () => {
                 <span className="menu-link-text">Advisors</span>
               </Link>
             </li>
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <Link to="/" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineMessage size={18} />
                 </span>
                 <span className="menu-link-text">Queries</span>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 
