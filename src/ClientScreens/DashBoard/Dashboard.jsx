@@ -63,6 +63,8 @@ function DashboardCl() {
     }, []);
 return (
         <div className="App">
+            {/* <h1>Welocme Back {advisorNames[0]}</h1> */}
+
           <center><h1 style={{color:"black", fontSize:"30px", fontWeight: "bold"}}> Portfolio Summary</h1></center>
         
             {/* <center><h1> Portfolio Summary</h1></center> */}
