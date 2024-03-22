@@ -1,5 +1,6 @@
 import React from 'react';
-import Questionnare from "./../../assets/images/questionnare.svg";
+import Questionnaire from "./../../assets/images/questionnare.svg";
+import styles from "./Page.module.css";
 const questions = require('./dummyData.json');
 
 const PageTwo = ({ formData, handleChange }) => {
@@ -8,19 +9,19 @@ const PageTwo = ({ formData, handleChange }) => {
   };
 
   return (
-    <div className="container">
-      <div className="image">
-        <img src={Questionnare} alt="Questionnaire" />
+    <div className={styles.container}>
+      <div className={styles.imagecl}>
+        <img src={Questionnaire} alt="Questionnaire" />
       </div>
-      <div className="form-container form-container1">
+      <div className={`${styles['form-container']} ${styles['form-container1']}`}>
         {questions.map((question, index) => (
-          <div key={index} className="question-container">
+          <div key={index} className={styles['question-container']}>
             <label htmlFor={`question_${index}`}>{question.ques}</label>
             {question.type === 'subjective' && (
               <textarea
                 id={`question_${index}`}
                 name={`question_${index}`}
-                className="form-control"
+                className={styles['form-control']}
                 value={formData[`question_${index}`] || ''}
                 onChange={handleFormChange}
               ></textarea>
@@ -32,7 +33,7 @@ const PageTwo = ({ formData, handleChange }) => {
                     type="radio"
                     name={`question_${index}`}
                     value="yes"
-                    className="form-control"
+                    className={styles['form-control']}
                     checked={formData[`question_${index}`] === 'yes'}
                     onChange={handleFormChange}
                   />{' '}
@@ -43,7 +44,7 @@ const PageTwo = ({ formData, handleChange }) => {
                     type="radio"
                     name={`question_${index}`}
                     value="no"
-                    className="form-control"
+                    className={styles['form-control']}
                     checked={formData[`question_${index}`] === 'no'}
                     onChange={handleFormChange}
                   />{' '}
@@ -55,7 +56,7 @@ const PageTwo = ({ formData, handleChange }) => {
               <select
                 id={`question_${index}`}
                 name={`question_${index}`}
-                className="form-control"
+                className={styles['form-control']}
                 value={formData[`question_${index}`] || ''}
                 onChange={handleFormChange}
               >
@@ -74,7 +75,7 @@ const PageTwo = ({ formData, handleChange }) => {
                 defaultValue="5"
                 id={`question_${index}`}
                 name={`question_${index}`}
-                className="form-control"
+                className={styles['form-control']}
                 value={formData[`question_${index}`] || ''}
                 onChange={handleFormChange}
               />
