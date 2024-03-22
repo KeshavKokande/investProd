@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import PersonaDetails from './../../assets/images/personal_details.svg';
-import styles from './Page.module.css';
+import styles from "./Page.module.css";
+import PersonaDetails from "./../../assets/images/personal_details.svg";
 
-const PageOne = ({ formData, handleChange }) => {
-  const [photo, setPhoto] = useState(null);
+const PageOne = ({ formData, handleChange, uploadPhoto }) => {
+  const [genderError, setGenderError] = useState('');
 
-  const handlePhotoUpload = (event) => {
-    const selectedPhoto = event.target.files[0];
-    setPhoto(selectedPhoto);
+  const handleGenderChange = (event) => {
+    handleChange(event); // Forwarding gender change event to parent component
+    const { value } = event.target;
+    setGenderError(value.trim() === '' ? 'Please select your gender' : '');
   };
 
   return (
@@ -16,7 +17,6 @@ const PageOne = ({ formData, handleChange }) => {
         <img src={PersonaDetails} alt="image" />
       </div>
       <div className={styles['form-container']}>
-
         <div className={styles['question-container']}>
           <label htmlFor="name">Name:</label>
           <input
@@ -45,13 +45,15 @@ const PageOne = ({ formData, handleChange }) => {
             id="gender"
             name="gender"
             value={formData.gender}
-            onChange={handleChange}
+            onChange={handleGenderChange}
             className={styles['form-control']}
           >
+            <option value="">Select the option</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
+          {genderError && <p className={styles['error-message']}>{genderError}</p>}
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="qualification">Qualification:</label>
@@ -78,7 +80,7 @@ const PageOne = ({ formData, handleChange }) => {
         <div className={styles['question-container']}>
           <label htmlFor="address">Location:</label>
           <input
-            type = "text"
+            type="text"
             id="address"
             name="address"
             value={formData.address}
@@ -104,20 +106,10 @@ const PageOne = ({ formData, handleChange }) => {
             id="photoId"
             name="photoId"
             accept="image/*"
-            onChange={handlePhotoUpload}
+            onChange={uploadPhoto}
             className={styles['form-control-file']}
           />
         </div>
-        {/* {photo && (
-          <div className={styles['preview-container']}>
-            <p>Preview:</p>
-            <img
-              src={URL.createObjectURL(photo)}
-              alt="Uploaded Photo ID"
-              className={styles['preview-image']}
-            />
-          </div>
-        )} */}
       </div>
     </div>
   );

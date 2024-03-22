@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InvestmentSummary from './Summary';
-
+import { AreaCards, AreaCharts, AreaTable} from "../../components";
+import "./dashboard.css";
 
 function DashboardCl() {
     const [transactions, setTransactions] = useState([]);
@@ -68,6 +69,9 @@ return (
         
             {/* <center><h1> Portfolio Summary</h1></center> */}
             <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns}/>
+            <script>
+          console.log(document.queryselector(".alert"));
+        </script>
         </div>
     );
 }
