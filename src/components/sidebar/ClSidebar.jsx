@@ -46,16 +46,16 @@ const ClSidebar = () => {
   const logoutUser = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/v1/check-auth/logout", {
-        method: "GET", // or 'POST'
+        method: "GET", 
         headers: {
           "Content-Type": "application/json",
-          // You might need to include additional headers depending on your backend requirements
+          
         },
         credentials: "include", // include cookies in the request
       });
       if (response.ok) {
-        // Clear user authentication data (if any)
-        console.log("logout",response);
+        
+        console.log("logout success",response);
         localStorage.removeItem("token");
 
         // Redirect to login page

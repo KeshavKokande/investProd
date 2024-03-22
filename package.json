@@ -27,6 +27,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.6",
+    "reactstrap": "^9.2.2",
     "recharts": "^2.10.3",
     "sass": "^1.69.7",
     "slick-carousel": "^1.8.1",

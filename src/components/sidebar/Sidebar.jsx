@@ -145,14 +145,14 @@ const Sidebar = () => {
 
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <Link to="/" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineSettings size={20} />
                 </span>
                 <span className="menu-link-text">Settings</span>
               </Link>
-            </li>
+            </li> */}
             <li className="menu-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>
               <span className="menu-link">
                 <span className="menu-link-icon">

@@ -1,67 +1,83 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useHistory
+import Swal from 'sweetalert2'; // Import SweetAlert
 import "./AdNewPlans.css"
-const
-  AddPlan = () => {
-    const [formData, setFormData] = useState({
-      planName: '',
-      capValue: '',
-      maxVal: '',
-      returnProfit: '',
-      risk: '',
-      minInvestmentAmount: '',
-      advise: '',
-      stocks: [{ stockName: '', contri: '' }]
+
+const AddPlan = () => {
+  const navigate = useNavigate(); // Initialize useHistory
+  
+  const [formData, setFormData] = useState({
+    planName: '',
+    capValue: '',
+    maxVal: '',
+    returnProfit: '',
+    risk: '',
+    minInvestmentAmount: '',
+    advise: '',
+    stocks: [{ stockName: '', contri: '' }]
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
     });
+  };
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    };
+  const handleStockChange = (e, index, field) => {
+    const { value } = e.target;
+    const updatedStocks = [...formData.stocks];
+    updatedStocks[index][field] = value;
+    setFormData({
+      ...formData,
+      stocks: updatedStocks
+    });
+  };
 
-    const handleStockChange = (e, index, field) => {
-      const { value } = e.target;
-      const updatedStocks = [...formData.stocks];
-      updatedStocks[index][field] = value;
-      setFormData({
-        ...formData,
-        stocks: updatedStocks
-      });
-    };
+  const handleAddStock = () => {
+    setFormData({
+      ...formData,
+      stocks: [...formData.stocks, { stockName: '', contri: '' }]
+    });
+  };
 
-    const handleAddStock = () => {
-      setFormData({
-        ...formData,
-        stocks: [...formData.stocks, { stockName: '', contri: '' }]
-      });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log('Form data:', formData);
-      fetch('http://localhost:8000/api/v1/advisor/add-plans', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData),
-        credentials: 'include'
-      })
+    // Show SweetAlert confirmation dialog
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to create a new plan.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, create it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, proceed with form submission
+        console.log('Form data:', formData);
+        fetch('http://localhost:8000/api/v1/advisor/add-plans', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData),
+          credentials: 'include'
+        })
         .then(response => response.json())
         .then(data => {
           console.log('Response:', data);
+          // Navigate to the plan page upon successful submission
+          navigate('/plan');
         })
         .catch(error => {
           console.error('Error:', error);
         });
-
-        // setTimeout(() => {
-        //   window.location.href = '/plan';
-        // }, 5000);
-    };
-
+      }
+    });
+  };
 
     return (
       <div className="addPlan-form-container">

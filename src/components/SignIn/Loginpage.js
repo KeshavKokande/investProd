@@ -1,73 +1,74 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from "./registerpage.module.css"; // Import CSS module
+import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
-// import Swal from 'sweetalert2'
-import LoginImage from './../../assets/images/loginImage.jpg'
+import LoginImage from './../../assets/images/loginImage.jpg';
+import Swal from 'sweetalert2';
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [formData,setFormData]=useState({
-    email:"",
-    password:""
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
-
-
-  
-  const handleChange=(event)=>{
-    const {name,value}=event.target;
-    setFormData((prevData)=>({...prevData,[name]:value}));
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = () => {
     window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google';
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.email || !formData.password) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter both email and password.'
+      });
+      return;
+    }
   
-    // Assuming the response returns the user's role along with other data
-    await fetch('http://localhost:8000/api/v1/check-auth/signin-google', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData),
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/check-auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include'
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorData.message
+        });
+        return;
+      }
+  
+      const data = await response.json();
       console.log(data);
-      // Check if the role is 'client'
-      if (data.role === 'client') {
+  
+      if (data.user.role === 'client') {
         navigate('/cldash');
       } else {
         navigate('/advisor_dashboard');
       }
-    })
-    .catch(error => {
+    } catch (error) {
       console.error('Error:', error);
-    });
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'An unexpected error occurred. Please try again later.'
+      });
+    }
   };
 
-  const handleSubmit = async () => {
-    await fetch('http://localhost:8000/api/v1/check-auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData),
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      if(data.user.role === 'client'){
-        navigate('/cldash')
-      } else {
-        navigate('/advisor_dashboard')
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  };
 
   return (
     <div className={styles['register-container']}>
@@ -76,30 +77,29 @@ const LoginPage = () => {
       </div>
       <div className={styles['register-right']}>
         <h2> Welcome Back</h2>
-        <div className={styles['input-wrapper']} style={{width:"fit-content"}} >
-          <h4>New User!!!
-              <a href='/register'>   Register Here</a>
-          </h4>
+        <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
+          <h4>New User!!!<a href='/register'>Register Here</a></h4>
         </div>
         <div className={styles['input-wrapper']}>
           <label>Email</label>
-          <input type='email' name='email' value={formData.email} onChange={handleChange}></input>
+          <input type='email' name='email' value={formData.email} onChange={handleChange} />
         </div>
         <div className={styles['input-wrapper']}>
           <label>Password</label>
-          <input type='password' name='password' value={formData.password} onChange={handleChange}></input>
+          <input type='password' name='password' value={formData.password} onChange={handleChange} />
         </div>
-        <div>
-          <button className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
+        {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>}
+        <div style={{width:"100%"}}>
+          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
         </div>
         <hr />
-        <div className={styles['gAuth']} onClick={handleGoogleSignIn}>
-          <h2>Continue with </h2>
+        <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
+          <h2>Continue with</h2>
           <span className={styles['google-icon']}><FcGoogle /></span>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoginPage;

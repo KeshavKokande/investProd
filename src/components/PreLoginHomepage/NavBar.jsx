@@ -16,7 +16,8 @@ function NavBar() {
 
           </nav>
           <div className="banner_main">
-            <h1 className="banner_taital " >financial <br />Service</h1>
+            <h1 className="banner_taital " ><span style={{color:"#6fccd7"}}>In</span>vest</h1>
+            
             <p className="banner_text">Welcome to our investment portal, where seasoned advisors curate tailored investment baskets to help you grow your wealth beyond traditional savings accounts. Explore expert advice, diversified opportunities, and potential gains to achieve your financial goals with confidence. </p>
             {/* <div className="btn_main">
               <div className="more_bt"><a href="#">Read More </a></div>

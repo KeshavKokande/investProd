@@ -6,7 +6,7 @@ function Service(){
     return(
         <section id="services" className="service_section layout_padding">
         <div className="service_container">
-          <div className="container d-flex flex-column flex-wrap">
+          <div className="container services_container d-flex flex-column flex-wrap">
             <div className="heading_container heading_center">
               <h2>
                 Our <span>Services</span>
@@ -17,7 +17,7 @@ function Service(){
             </div>
             <div className="row">
               <div className="col-md-4 ">
-                <div className="box ">
+                <div className="box service_box">
                   <div className="img-box">
                     <img src={s1} alt="" />
                   </div>
@@ -33,7 +33,7 @@ function Service(){
                 </div>
               </div>
               <div className="col-md-4 ">
-                <div className="box ">
+                <div className="box service_box">
                   <div className="img-box">
                     <img src={s2} alt="" />
                   </div>
@@ -49,7 +49,7 @@ function Service(){
                 </div>
               </div>
               <div className="col-md-4 ">
-                <div className="box ">
+                <div className="box service_box">
                   <div className="img-box">
                     <img src={s3} alt="" />
                   </div>
