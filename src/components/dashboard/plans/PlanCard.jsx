@@ -79,25 +79,36 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
 import "./AdNewPlans.css";
+import {useState} from "react";
+import axios from 'axios';
 
-const PlanCard = ({ plan,onDelete }) => {
-  const { _id, capValue, risk, minInvestmentAmount, noOfSubscription, stocks, advise } = plan;
+const PlanCard = ({ plan, deletePlan }) => {
+  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks,advise } = plan;
   const [isDeleting, setIsDeleting] = useState(false);
+  const [tobeDelted, setTobeDelted] = useState(plan._id);
 
   const handleDelete = async () => {
-    console.log(_id);
-    setIsDeleting(true);
-    
     try {
-      await axios.patch(`http://localhost:8000/api/v1/advisor/deletePlan/${_id}`);
-      onDelete(_id); // Notify parent component about the deletion
-      console.log("Plan deleted successfully");
+      const response = await fetch(`http://localhost:8000/api/v1/advisor/deletePlan/${tobeDelted}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error deleting plan');
+      }
+  
+      console.log('Plan deleted successfully');
+      // Optionally, you can update the state or perform any other actions here
     } catch (error) {
-      console.error("Error deleting plan:", error.message);
-    } finally {
-      setIsDeleting(false);
+      console.error('Error deleting plan:', error);
+      // Handle errors here, e.g., show error message to the user
     }
   };
+  
 
   const renderStocks = () => {
     return stocks.map((stock, index) => (
@@ -139,11 +150,7 @@ const PlanCard = ({ plan,onDelete }) => {
           </div>
 
           <div className="btn">
-            {isDeleting ? (
-              <div className="adnewplan-delete-icon">Deleting...</div>
-            ) : (
-              <div className="adnewplan-delete-icon" onClick={handleDelete}>Delete</div>
-            )}
+            <div className="adnewplan-delete-icon" onClick={handleDelete}>Delete</div>
           </div>
         </div>
       </div>
