@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import PersonaDetails from './../../assets/images/personal_details.svg';
-import styles from './Page.module.css';
+import PersonaDetails from "./../../assets/images/personal_details.svg";
+import styles from './PageOne.module.css'; // Import the CSS module
 
-const PageOne = ({ formData, handleChange }) => {
+const PageOne = ({ formData, handleChange, uploadPhoto }) => {
   const [photo, setPhoto] = useState(null);
-
-  const handlePhotoUpload = (event) => {
-    const selectedPhoto = event.target.files[0];
-    setPhoto(selectedPhoto);
-  };
 
   return (
     <div className={styles.container}>
-      <div className={styles.imagecl}>
+      <div className={styles.image}>
         <img src={PersonaDetails} alt="image" />
       </div>
       <div className={styles['form-container']}>
@@ -27,7 +22,7 @@ const PageOne = ({ formData, handleChange }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
             disabled
           />
-        </div >
+        </div>
         <div className={styles['question-container']}>
           <label htmlFor="age">Age:</label>
           <input
@@ -76,15 +71,14 @@ const PageOne = ({ formData, handleChange }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="address">Location:</label>
-          <input
-            type = "text"
+          <label htmlFor="address">Address:</label>
+          <textarea
             id="address"
             name="address"
             value={formData.address}
             onChange={handleChange}
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
-          />
+          ></textarea>
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="jobRole">Job Role:</label>
@@ -104,11 +98,11 @@ const PageOne = ({ formData, handleChange }) => {
             id="photoId"
             name="photoId"
             accept="image/*"
-            onChange={handlePhotoUpload}
+            onChange={uploadPhoto}
             className={styles['form-control-file']}
           />
         </div>
-        {/* {photo && (
+        {photo && (
           <div className={styles['preview-container']}>
             <p>Preview:</p>
             <img
@@ -117,7 +111,7 @@ const PageOne = ({ formData, handleChange }) => {
               className={styles['preview-image']}
             />
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

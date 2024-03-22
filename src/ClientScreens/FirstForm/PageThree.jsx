@@ -1,33 +1,31 @@
+// PageThree.jsx
 import React, { useState } from 'react';
 import termsAndConditions from "./../../assets/images/terms_conditions.svg";
-import styles from './Page.module.css';
 
 const PageThree = ({ agreed, handleCheckboxChange }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.imagecl}>
+    <div className="container">
+      <div className="image">
         <img src={termsAndConditions} alt="image" />
       </div>
-      <div className={`${styles['form-container']} ${styles['form-container2']}`}>
-        <div className={styles.terms}>
+      <div className="form-container form-container2">
+        <div className="terms">
           <h3>Terms and Conditions</h3>
-          <div>
-            <p>
-              By proceeding, you agree to abide by the terms and conditions
-              outlined in our agreement.
-            </p>
-            <p>
-              This is where you include all your terms and conditions text.
-              Make sure it's clear and easy to understand.
-            </p>
-          </div>
+          <p>
+            By proceeding, you agree to abide by the terms and conditions
+            outlined in our agreement.
+          </p>
+          <p>
+            This is where you include all your terms and conditions text.
+            Make sure it's clear and easy to understand.
+          </p>
         </div>
-        <div className={styles['checkbox-container']}>
+        <div className="checkbox-container">
           <input
             type="checkbox"
             checked={agreed}
             onChange={handleCheckboxChange}
-            className={styles['form-control-checkbox']}
+            className="form-control-checkbox"
           />
           <label htmlFor="agreement">I agree to the terms and conditions</label>
         </div>
