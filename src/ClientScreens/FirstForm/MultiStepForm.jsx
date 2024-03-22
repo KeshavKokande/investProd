@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Stepper, Step } from 'react-form-stepper';
-import styles from './Page.module.css';
-import "./Page.module.css";
+import styles from "./Page.module.css";
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
@@ -22,7 +21,7 @@ const MultiStepForm = () => {
     address: '',
     jobRole: '',
     agreement: false,
-    photoId: ''
+    photoId: { data: '', contentType: '' },
   });
 
   const [activeStep, setActiveStep] = useState(0);
@@ -35,6 +34,30 @@ const MultiStepForm = () => {
       ...prevFormData,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  };
+
+  const [photoBase64, setPhotoBase64] = useState(null);
+
+  const handlePhotoUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setPhotoBase64(base64String);
+
+      setFormData({
+        ...formData,
+        photoId: {
+          data: base64String.split(',')[1],
+          contentType: file.type,
+        },
+      });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   const validatePageOne = () => {
@@ -56,10 +79,33 @@ const MultiStepForm = () => {
     return errors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted:', formData);
-    navigate('/login'); // Navigate to login page after form submission
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/client/register-client`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData),
+      });
+
+      console.log(formData);
+      console.log('Response status:', response.status);
+
+      if (!response.ok) {
+        throw new Error('Failed');
+      }
+
+      const data = await response.json();
+      console.log('response:', data);
+
+      navigate('/cldash'); // Navigate to '/cldash' if registration is successful
+
+    } catch (error) {
+      console.error('Error.', error.message);
+    }
   };
 
   const nextStep = () => {
@@ -107,9 +153,9 @@ const MultiStepForm = () => {
         </Stepper>
       </div>
 
-      <form className={styles['cl-form']} onSubmit={handleSubmit} encType="multipart/form-data">
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         {activeStep === 0 && (
-          <PageOne formData={formData} handleChange={handleFormChange} />
+          <PageOne formData={formData} handleChange={handleFormChange} uploadPhoto={handlePhotoUpload} />
         )}
         {activeStep === 1 && (
           <PageTwo formData={formData} handleChange={handleFormChange} />

@@ -153,6 +153,7 @@ const ClSidebar = () => {
                 <span className="menu-link-text">Profile</span>
               </Link>
             </li>
+
             <li className="menu-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>
               <span className="menu-link">
                 <span className="menu-link-icon">
@@ -164,6 +165,10 @@ const ClSidebar = () => {
           </ul>
         </div>
       </div>
+
+
+
+
     </nav>
   );
 };

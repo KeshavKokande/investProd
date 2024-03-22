@@ -1,6 +1,6 @@
 import React from 'react';
-import Questionnare from "./../../assets/images/questionnare.svg";
-import styles from './Page.module.css'; // Import CSS module
+import Questionnaire from "./../../assets/images/questionnare.svg";
+import styles from "./Page.module.css";
 const questions = require('./dummyData.json');
 
 const PageTwo = ({ formData, handleChange }) => {
@@ -11,7 +11,7 @@ const PageTwo = ({ formData, handleChange }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imagecl}>
-        <img src={Questionnare} alt="Questionnaire" />
+        <img src={Questionnaire} alt="Questionnaire" />
       </div>
       <div className={`${styles['form-container']} ${styles['form-container1']}`}>
         {questions.map((question, index) => (

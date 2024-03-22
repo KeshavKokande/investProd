@@ -44,6 +44,12 @@ function PlanView() {
   const plan = plansData.find(plan => plan._id === plan_id);
 
   const handleBuyPlan = async () => {
+    // Validate if investedAmount is less than minInvestmentAmount
+    if (investedAmount < plan.minInvestmentAmount) {
+      Swal.fire('Error', 'Invested amount cannot be less than minimum investment amount.', 'error');
+      return; // Exit the function if validation fails
+    }
+
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to buy this plan?',
@@ -133,6 +139,7 @@ function PlanView() {
 }
 
 export default PlanView;
+
 
 
 // import { useParams } from 'react-router-dom';
