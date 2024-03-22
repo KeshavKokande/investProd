@@ -105,7 +105,7 @@ const Register = () => {
                 onChange={handleChange}
               />
               <button
-                type='button'
+                type='button' 
                 className={styles['password-toggle-btn']}
                 onClick={() => setShowPassword((prevShowPassword) => !prevShowPassword)}
               >
@@ -122,6 +122,7 @@ const Register = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
+
               <button
                 type='button'
                 className={styles['password-toggle-btn']}
@@ -133,11 +134,11 @@ const Register = () => {
             {errors.confirmPassword && <span className={styles['error-message']}>{errors.confirmPassword}</span>}
          </div>
          
-         <div>
-            <button className={styles['register-btn']} onClick={handleSubmit}>Register</button>
+         <div style={{width:"100%"}}>
+            <button id="landing_signup"className={styles['register-btn']} onClick={handleSubmit}>Register</button>
          </div>
          <hr />
-         <div className={styles['gAuth']}>
+         <div id="googlebutton"className={styles['gAuth']}>
           <h2>Continue with </h2>
             <span className={styles['google-icon']}><FcGoogle /></span>
         </div>

@@ -101,14 +101,13 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
             <hr />
 
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
-                <p><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
-                <p><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
+                <p id="piechart"><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
+                <p  id="piechart"><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
 
-            <hr />
 
 
-            <center><h3 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}>Plan Information:</h3></center>
+            <center><h3 style={{ color: "black", marginTop: "20px",fontSize: "2rem",    fontWeight: "400",marginBottom: "25px"}}>Plan Information:</h3></center>
 
 
             <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />
