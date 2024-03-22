@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stepper, Step } from 'react-form-stepper';
 import styles from "./Page.module.css";
 import PageOne from './PageOne';
@@ -66,11 +66,20 @@ const MultiStepForm = () => {
     if (!formData.qualification) errors.qualification = 'Qualification is required';
     if (!formData.address) errors.address = 'Address is required';
     if (!formData.jobRole) errors.jobRole = 'Job Role is required';
+    if (!formData.gender) errors.gender = 'Please select your gender'; // New validation
     return errors;
   };
 
   const validatePageTwo = () => {
-    return {};
+    const errors = {};
+    
+    Object.keys(formData).forEach(key => {
+      
+      if (key.includes('question_') && formData[key] === '' && !key.includes('What is your annual income?')) {
+        errors[key] = 'Please select an option';
+      }
+    });
+    return errors;
   };
 
   const validatePageThree = () => {
@@ -132,6 +141,18 @@ const MultiStepForm = () => {
       setFormErrors(errors);
     }
   };
+
+  // Add a useEffect to invoke validation for page two when activeStep changes to 1
+  useEffect(() => {
+    if (activeStep === 1) {
+      const errors = validatePageTwo();
+      if (Object.keys(errors).length === 0) {
+        setFormErrors({});
+      } else {
+        setFormErrors(errors);
+      }
+    }
+  }, [activeStep]);
 
   const prevStep = () => {
     setActiveStep(activeStep - 1);
