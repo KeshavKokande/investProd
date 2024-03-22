@@ -4,6 +4,7 @@ import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
 import LoginImage from './../../assets/images/loginImage.jpg';
 import Swal from 'sweetalert2';
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const LoginPage = () => {
     password: ""
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedRole, setSelectedRole] = useState("client"); // State to track selected user role
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -69,7 +71,6 @@ const LoginPage = () => {
     }
   };
 
-
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
@@ -89,14 +90,23 @@ const LoginPage = () => {
           <input type='password' name='password' value={formData.password} onChange={handleChange} />
         </div>
         {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>}
+        <div className={styles['input-wrapper']}>
+          
+          <select  className="role-based-toggle"value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
+            <option value="client">Client</option>
+            <option value="advisor">Advisor</option>
+          </select>
+        </div>
         <div style={{width:"100%"}}>
           <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
         </div>
         <hr />
-        <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
-          <h2>Continue with</h2>
-          <span className={styles['google-icon']}><FcGoogle /></span>
-        </div>
+        {selectedRole === 'client' && ( // Render "Continue with Google" button only if selected role is client
+          <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
+            <h2>Continue with</h2>
+            <span className={styles['google-icon']}><FcGoogle /></span>
+          </div>
+        )}
       </div>
     </div>
   );
