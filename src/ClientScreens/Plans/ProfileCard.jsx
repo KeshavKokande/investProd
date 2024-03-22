@@ -20,7 +20,7 @@ const ProfileCard = ({ plan }) => {
                         <img src="https://imgur.com/VcypK5c.png" />
                     </div>
                     <div className="vitamin" >
-                        <h2 >{plan.planName}</h2>
+                        <h2 className="vitamin-h2">{plan.planName}</h2>
 
                     </div>
                     <div className="reviews">
@@ -35,7 +35,7 @@ const ProfileCard = ({ plan }) => {
                         <p style={{ color: "black", fontSize: "14px" }}>👥  :              {plan.noOfSubscription}</p>
 
                     </div>
-                    <div className="buttons">
+                    <div className="buttons-profile">
                         <button>
                             <Link to={`/plan_id/${plan._id}`} style={{ display: 'block', width: '100%', height: '100%',margin: '4px 4px 4px -4px' }}>
                                 Open

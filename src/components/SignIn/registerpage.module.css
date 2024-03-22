@@ -1,3 +1,8 @@
+#googlebutton{
+  border: 2px solid rgb(19, 119, 219) !important;
+  display: flex;
+  width: 100%;
+}
 .register-container {
   margin: auto;
   background-color: #ffffff;
@@ -58,9 +63,11 @@
     background-color: #ffffff;
     padding: 0 5px;
     color: rgb(0, 0, 0);
+    z-index: 2;
   }
   
 
+  
   .input-wrapper input {
     width: 100% !important;
     padding: 10px !important;
@@ -115,3 +122,23 @@
     color: #4285f4 !important;
    
   } */
+  
+  .password-input-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+   
+  .password-toggle-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .error-message{
+    color: #ff1500;
+  }

@@ -5,14 +5,14 @@ function HomepageAbout() {
   return (
   <section id="about" className="about_section layout_padding">
 
-    <div className="container my-custom-container d-flex flex-column flex-wrap bg-#00204a ">
+    <div className="container  about-container my-custom-container d-flex flex-column flex-wrap bg-#00204a ">
       <div className="my-custom-container">
         <div className="heading_container heading_center">
-          <h2>
+          <h2 className='h2about'>
             About <span>Us</span>
           </h2>
           <p>
-            Magni quod blanditiis non minus sed aut voluptatum illum quisquam aspernatur ullam vel beatae rerum ipsum voluptatibus
+          Welcome to our investment portal, where seasoned advisors curate tailored investment baskets to help you grow your wealth beyond traditional savings accounts.
           </p>
         </div>
         <div className="row">
@@ -27,17 +27,12 @@ function HomepageAbout() {
                 We Are InVest
               </h3>
               <p>
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-                in some form, by injected humour, or randomised words which dont look even slightly believable. If you
-                are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in
-                the middle of text. All
+              At InVest, we're dedicated to empowering individuals with the knowledge and tools they need to achieve their financial aspirations. As a trusted investment platform, we connect users with seasoned advisors who offer expert guidance on navigating the complexities of the financial market. With a commitment to transparency, integrity, and innovation.<br /> <br />we strive to make investing accessible, straightforward, and rewarding for all. Whether you're a seasoned investor or just starting out, our platform provides a seamless and secure environment to explore, learn, and grow your wealth. Join us on the journey to financial prosperity and unlock the possibilities of tomorrow, today.
               </p>
-              <p>
-                Molestiae odio earum non qui cumque provident voluptates, repellendus exercitationem, possimus at iste corrupti officiis unde alias eius ducimus reiciendis soluta eveniet. Nobis ullam ab omnis quasi expedita.
-              </p>
-              <a href="">
+              
+              {/* <a href="">
                 Read More
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

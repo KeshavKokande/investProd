@@ -20,14 +20,13 @@
 
 .pp2 {
 
-    background-color: #f1f3f4;
+    
 
     flex:75%;
     display: flex;
     justify-content: left;
     align-items: center;
     border-radius: 0.8rem;
-   
 
 }
 
@@ -47,10 +46,6 @@
 
     display: flex;
     justify-content: left;
-    padding: 5px;
-    padding-left:10px;
-    font-size: 18px;
-    /* border-bottom: 2px solid rgba(128, 128, 128, 0.186); */
 }
 
 .profile-image{
@@ -59,17 +54,7 @@
 
 
 }
-.info-cont{
-    margin-top: 20px;
-color:gray;
 
-    margin-bottom: 30px;
-    width: 100%;
-}
-.jsonp{
-    
-    font-size: 18px;
-}
 .pp211,.pp212{
 
     display: flex;

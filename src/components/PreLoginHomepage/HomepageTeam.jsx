@@ -23,7 +23,7 @@ function HomepageTeam() {
     <section className="team_section layout_padding">
       <div className="container-fluid">
         <div className="heading_container heading_center" >
-          <h2 >Our <span>Team</span></h2>
+          <h2 className='teamsh2' >Our <span>Team</span></h2>
         </div>
         <div className="team_container">
           <div className="row">

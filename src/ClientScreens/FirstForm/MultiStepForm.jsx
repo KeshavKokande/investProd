@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Stepper, Step } from 'react-form-stepper';
-import './Page.css';
+import styles from './Page.module.css';
+import "./Page.module.css";
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
-import { useLocation, useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MultiStepForm = () => {
-  const location = useLocation(); 
+  const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search); 
+  const queryParams = new URLSearchParams(location.search);
   const initialName = sessionStorage.getItem('name') || '';
   const initialEmail = sessionStorage.getItem('email') || '';
   const [formData, setFormData] = useState({
@@ -58,6 +59,7 @@ const MultiStepForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form submitted:', formData);
+    navigate('/login'); // Navigate to login page after form submission
   };
 
   const nextStep = () => {
@@ -75,7 +77,7 @@ const MultiStepForm = () => {
       default:
         break;
     }
-    
+
     if (Object.keys(errors).length === 0) {
       setActiveStep(activeStep + 1);
       setFormErrors({});
@@ -84,7 +86,7 @@ const MultiStepForm = () => {
       setFormErrors(errors);
     }
   };
-  
+
   const prevStep = () => {
     setActiveStep(activeStep - 1);
     setFormErrors({});
@@ -97,13 +99,15 @@ const MultiStepForm = () => {
 
   return (
     <>
-      <Stepper activeStep={activeStep}>
-        <Step label="Personal Details" />
-        <Step label="Questionnaire" />
-        <Step label="Terms & Conditions" />
-      </Stepper>
+      <div className={styles['StepperContainer-0-2-1']}>
+        <Stepper activeStep={activeStep}>
+          <Step label="Personal Details" />
+          <Step label="Questionnaire" />
+          <Step label="Terms & Conditions" />
+        </Stepper>
+      </div>
 
-      <form className='cl-form' onSubmit={handleSubmit} encType="multipart/form-data">
+      <form className={styles['cl-form']} onSubmit={handleSubmit} encType="multipart/form-data">
         {activeStep === 0 && (
           <PageOne formData={formData} handleChange={handleFormChange} />
         )}
@@ -113,19 +117,19 @@ const MultiStepForm = () => {
         {activeStep === 2 && (
           <PageThree agreed={formData.agreement} handleCheckboxChange={handleAgreementChange} />
         )}
-        <div className={`btns ${termsAgreed ? 'terms-agreed' : ''}`}>
+        <div className={`${styles.btns} ${termsAgreed ? styles['terms-agreed'] : ''}`}>
           {activeStep < 2 && (
-            <button type="button" className='next-button' onClick={nextStep}>Next</button>
+            <button type="button" className={styles['next-button']} onClick={nextStep}>Next</button>
           )}
           {activeStep > 0 && (
-            <button type="button" className='prev-button' onClick={prevStep}>Back</button>
+            <button type="button" className={styles['prev-button']} onClick={prevStep}>Back</button>
           )}
           {activeStep === 2 && formData.agreement && (
-            <button className={`register-submit-btn next-button`} type="submit">Submit</button>
+            <button className={`${styles['register-submit-btn']} ${styles['next-button']}`} type="submit">Submit</button>
           )}
         </div>
         {Object.keys(formErrors).length > 0 && (
-          <div className="error-message">
+          <div className={styles['error-message']}>
             {Object.values(formErrors).map((error, index) => (
               <p key={index}>{error}</p>
             ))}

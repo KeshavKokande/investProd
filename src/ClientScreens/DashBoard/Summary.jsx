@@ -8,7 +8,7 @@ import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
 
-function InvestmentSummary({ transactions, returns }) {
+function InvestmentSummary({ transactions, advisorNames, returns }) {
     // Function to calculate total amount invested in each plan
     const calculateTotalInvestment = (transactions) => {
         const investmentMap = new Map();
@@ -24,6 +24,7 @@ function InvestmentSummary({ transactions, returns }) {
         return investmentMap;
     }
 
+    // console.log("TRANSACTION DATA : ", transactions);
     // Function to calculate total invested amount
     const calculateTotalInvestedAmount = (transactions) => {
         let totalInvestedAmount = 0;
@@ -57,61 +58,63 @@ function InvestmentSummary({ transactions, returns }) {
         return data;
     }
 
-    function roundToTwoDecimalPlaces(num) {
-        return Math.round((num + Number.EPSILON) * 100) / 100;
-    }
+    const formatCurrency = (value) => {
+        const roundedValue = parseFloat(value).toFixed(2);
+        return `₹${roundedValue}`;
+      };
 
     return (
         <div>
-           
 
-<section className="content-area-cards">
-      <AreaCard
-        colors={["#e4e8ef", "#475be8"]}
-        percentFillValue={80}
-        cardInfo={{
-          title: "Total Amount Invested",
-          value: roundToTwoDecimalPlaces(totalInvestedAmount), 
-          text: `You have ${totalInvestedAmount} Amount.`,
-        }}
-      />
-      <AreaCard
-        colors={["#e4e8ef", "#4ce13f"]}
-        percentFillValue={50}
-        cardInfo={{
-          title: "Total Amount Invested",
-          value: roundToTwoDecimalPlaces(totalProfitAmount),
-          text: `You have ${totalInvestedAmount} Amount.`,
-        }}
-      />
-      <AreaCard
-        colors={["#e4e8ef", "#f29a2e"]}
-        percentFillValue={40}
-        cardInfo={{
-          title: "Total Amount Invested",
-          value: roundToTwoDecimalPlaces(totalInvestedAmount+totalProfitAmount),
-          text: `You have ${totalInvestedAmount} Amount.`,
-        }}
-      />
-    </section>
 
-            <hr/>
-            
-            <div style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly",padding:"30px"}}>
-                <p><center><strong>Investment</strong></center><br/><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => transaction.planId))), totalInvestments)} /></p>
-                <p><center><strong>Returns</strong></center><br/><PiChart data={totalProfits} /></p>
+            <section className="content-area-cards">
+
+                <AreaCard
+                    colors={["#e4e8ef", "#475be8"]}
+                    percentFillValue={80}
+                    cardInfo={{
+                        title: "Total Amount Invested",
+                        value: formatCurrency(totalInvestedAmount),
+                        text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
+                    }}
+                />
+                <AreaCard
+                    colors={["#e4e8ef", "#4ce13f"]}
+                    percentFillValue={50}
+                    cardInfo={{
+                        title: "Total Profit",
+                        value: formatCurrency(totalProfitAmount),
+                        text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
+                    }}
+                />
+                <AreaCard
+                    colors={["#e4e8ef", "#f29a2e"]}
+                    percentFillValue={40}
+                    cardInfo={{
+                        title: "Current Value",
+                        value: formatCurrency(totalInvestedAmount + totalProfitAmount),
+                        text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
+                    }}
+                />
+            </section>
+
+            <hr />
+
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
+                <p><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
+                <p><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
-            
-            <hr/>
+
+            <hr />
 
 
-                <center><h3 style={{color:"black", fontSize:"30px", fontWeight: "bold"}}>Plan Information:</h3></center>
+            <center><h3 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}>Plan Information:</h3></center>
 
 
-                <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => transaction.planId)))} totalInvestments={totalInvestments} />
+            <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />
 
 
-                
+
         </div>
     );
 }
@@ -120,7 +123,7 @@ export default InvestmentSummary;
 
 
 
- {/* <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+{/* <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
                 <p><strong>Total Amount Invested:</strong><br/> {roundToTwoDecimalPlaces(totalInvestedAmount)}</p>
                 <p><strong>Total Returns:</strong><br/> {roundToTwoDecimalPlaces(totalProfitAmount)}</p>
                 <p><strong>Current Value:</strong><br/> {roundToTwoDecimalPlaces(totalInvestedAmount+totalProfitAmount)}</p>

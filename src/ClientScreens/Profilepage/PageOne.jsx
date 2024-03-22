@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PersonaDetails from './../../assets/images/personal_details.svg';
-import styles from './Page.module.css';
+import PersonaDetails from "./../../assets/images/personal_details.svg";
+import styles from "./Page.module.css";
 
 const PageOne = ({ formData, handleChange }) => {
   const [photo, setPhoto] = useState(null);
@@ -12,11 +12,10 @@ const PageOne = ({ formData, handleChange }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imagecl}>
+      <div className={styles.image}>
         <img src={PersonaDetails} alt="image" />
       </div>
       <div className={styles['form-container']}>
-
         <div className={styles['question-container']}>
           <label htmlFor="name">Name:</label>
           <input
@@ -27,7 +26,7 @@ const PageOne = ({ formData, handleChange }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
             disabled
           />
-        </div >
+        </div>
         <div className={styles['question-container']}>
           <label htmlFor="age">Age:</label>
           <input
@@ -76,15 +75,14 @@ const PageOne = ({ formData, handleChange }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="address">Location:</label>
-          <input
-            type = "text"
+          <label htmlFor="address">Address:</label>
+          <textarea
             id="address"
             name="address"
             value={formData.address}
             onChange={handleChange}
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
-          />
+          ></textarea>
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="jobRole">Job Role:</label>
@@ -108,7 +106,7 @@ const PageOne = ({ formData, handleChange }) => {
             className={styles['form-control-file']}
           />
         </div>
-        {/* {photo && (
+        {photo && (
           <div className={styles['preview-container']}>
             <p>Preview:</p>
             <img
@@ -117,7 +115,7 @@ const PageOne = ({ formData, handleChange }) => {
               className={styles['preview-image']}
             />
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

@@ -36,9 +36,10 @@ const PlanCard = ({ plan, deletePlan }) => {
         <div className="adnewplan-right-section">
           <div className="text">
             <div>Risk: <span className={`adnewplan-risk-dot adnewplan-risk-${risk}`}></span>{risk}</div>
-            <div>Minimum Investment Amount: ${minInvestmentAmount}</div>
+
+            <div>Minimum Investment Amount: ₹{minInvestmentAmount}</div>
             <div>Number of Subscriptions: {noOfSubscription}</div>
-            <div>Cap Value: ${capValue}</div>
+            <div>Cap Value: ₹{capValue}</div>
             <div>Advise:  {advise}</div>
           </div>
 

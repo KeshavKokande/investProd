@@ -1,4 +1,5 @@
-import  { useState } from 'react';
+import { useState } from 'react';
+import styles from "./style.module.css";
 
 const OtherInfoEditForm = ({ initialValues, onSave, onCancel }) => {
   const [editedValues, setEditedValues] = useState([...initialValues]);
@@ -15,12 +16,12 @@ const OtherInfoEditForm = ({ initialValues, onSave, onCancel }) => {
   };
 
   return (
-    <div className="overlay">
-      <div className="edit-form">
+    <div className={styles.overlay}>
+      <div className={styles['edit-form']}>
         <h2>Edit Other Information</h2>
         <form onSubmit={handleSubmit}>
           {editedValues.map((item, index) => (
-            <div key={index} className="form-group">
+            <div key={index} className={styles['form-group']}>
               <label>{item.name}</label>
               <input
                 type="number"
@@ -31,7 +32,7 @@ const OtherInfoEditForm = ({ initialValues, onSave, onCancel }) => {
               />
             </div>
           ))}
-          <div className="form-buttons">
+          <div className={styles['form-buttons']}>
             <button type="submit">Save</button>
             <button type="button" onClick={onCancel}>Cancel</button>
           </div>
