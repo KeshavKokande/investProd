@@ -34,7 +34,7 @@ const AdvisorsCarousel = ({ advisors }) => {
       <div className="mt-20 ">
       <Slider {...settings}>
         {associateAdvisors.map((advisor, index) => (
-          <div key={index} className="bg-white h-[450px] text-black rounded-xl ">
+          <div key={index} className="bg-white h-[450px] text-black infocard rounded-xl ">
            
             <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
               <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full"/>
@@ -42,14 +42,25 @@ const AdvisorsCarousel = ({ advisors }) => {
 
             <div className="flex flex-col items-center justify-center gap-4 p-4">
               <p className="text-xl font-semibold">{advisor.name}</p>
+              <p style={{    textAlign: "justify"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+               <div className='rating'>
+                <div>
+                    
+               <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+</div>
               <Link to={`/advisor_id/${advisor._id}`}>
                <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                </Link>
              </div>
-            
+             </div>
            </div>
         ))}
       </Slider>
+
       </div>
       
     </div>
@@ -60,8 +71,8 @@ const AdvisorsCarousel = ({ advisors }) => {
       <div className='w-4/4 m-auto '>
       <div className="mt-20 ">
       <Slider {...settings}>
-        {advanceAdvisors.map((advisor, index) => (
-          <div key={index} className="bg-white h-[450px] text-black rounded-xl ">
+      {advanceAdvisors.map((advisor, index) => ( 
+          <div key={index} className="bg-white h-[450px] text-black infocard rounded-xl ">
            
             <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
               <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full"/>
@@ -69,12 +80,24 @@ const AdvisorsCarousel = ({ advisors }) => {
 
             <div className="flex flex-col items-center justify-center gap-4 p-4">
               <p className="text-xl font-semibold">{advisor.name}</p>
+
               {/* <p className="text-center">{d.review}</p> */}
-              <Link to={`/advisor_id/${advisor._id}`}>
+                           <p style={{    textAlign: "justify"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+               <div className='rating'>
+                <div>
+                    
+               <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+            
+                </div>   
+                <Link to={`/advisor_id/${advisor._id}`}>
                <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                </Link>
              </div>
-             
+             </div>
            </div>
         ))}
       </Slider>
@@ -89,7 +112,7 @@ const AdvisorsCarousel = ({ advisors }) => {
       <div className="mt-20">
       <Slider {...settings}>
         {expertAdvisors.map((advisor, index) => (
-          <div key={index} className="bg-white h-[450px] text-black rounded-xl">
+          <div key={index} className="bg-white h-[450px] text-black infocard rounded-xl">
             
             <div className='h-56 bg-indigo-500 flex justify-center items-center rounded-t-xl'>
               <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full"/>
@@ -98,11 +121,22 @@ const AdvisorsCarousel = ({ advisors }) => {
             <div className="flex flex-col items-center justify-center gap-4 p-4">
               <p className="text-xl font-semibold">{advisor.name}</p>
               {/* <p className="text-center">{d.review}</p> */}
-              <Link to={`/advisor_id/${advisor._id}`}>
+              <p style={{    textAlign: "justify"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+              <div className='rating'>
+                <div>
+                    
+               <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+            
+                </div>   
+                <Link to={`/advisor_id/${advisor._id}`}>
                <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                </Link>
              </div>
-            
+            </div>
            </div>
         ))}
       </Slider>
