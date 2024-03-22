@@ -30,7 +30,7 @@ const PlanCard = ({ plan, deletePlan }) => {
             <tbody>{renderStocks()}</tbody>
           </table>
         </div>
-
+ 
         <div className="adnewplan-separator"></div>
 
         <div className="adnewplan-right-section">
