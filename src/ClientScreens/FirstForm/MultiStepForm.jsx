@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Stepper, Step } from 'react-form-stepper';
-import styles from "./page.module.css";
+import './Page.css';
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
@@ -145,7 +145,7 @@ const MultiStepForm = () => {
 
   return (
     <>
-      <Stepper activeStep={activeStep} className={styles.stepper}>
+      <Stepper activeStep={activeStep}>
         <Step label="Personal Details" />
         <Step label="Questionnaire" />
         <Step label="Terms & Conditions" />
@@ -161,19 +161,19 @@ const MultiStepForm = () => {
         {activeStep === 2 && (
           <PageThree agreed={formData.agreement} handleCheckboxChange={handleAgreementChange} />
         )}
-        <div className={`${styles.btns} ${termsAgreed ? styles['terms-agreed'] : ''}`}>
+        <div className={`btns ${termsAgreed ? 'terms-agreed' : ''}`}>
           {activeStep < 2 && (
-            <button type="button" className={styles['next-button']} onClick={nextStep}>Next</button>
+            <button type="button" className='next-button' onClick={nextStep}>Next</button>
           )}
           {activeStep > 0 && (
-            <button type="button" className={styles['prev-button']} onClick={prevStep}>Back</button>
+            <button type="button" className='prev-button' onClick={prevStep}>Back</button>
           )}
           {activeStep === 2 && formData.agreement && (
-            <button className={`${styles['register-submit-btn']} ${styles['next-button']}`} type="submit">Submit</button>
+            <button className={`register-submit-btn next-button`} type="submit">Submit</button>
           )}
         </div>
         {Object.keys(formErrors).length > 0 && (
-          <div className={styles['error-message']}>
+          <div className="error-message">
             {Object.values(formErrors).map((error, index) => (
               <p key={index}>{error}</p>
             ))}
