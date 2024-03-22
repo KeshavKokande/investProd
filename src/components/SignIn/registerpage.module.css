@@ -142,3 +142,7 @@
   .error-message{
     color: #ff1500;
   }
+  .role-based-toggle{
+    width: 100% !important;
+    height: 100% !important;
+  }
