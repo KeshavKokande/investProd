@@ -101,7 +101,10 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
             <hr />
 
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
+                
                 <p id="piechart"><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
+                
+               
                 <p  id="piechart"><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
 

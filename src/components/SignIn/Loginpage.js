@@ -97,14 +97,7 @@ const LoginPage = () => {
               >
                 {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
               </button>
-          <input type={showPassword ? 'text' : 'password'} name='password' value={formData.password} onChange={handleChange} />
-          <button
-                type='button'
-                className={styles['password-toggle-btn']}
-                onClick={() => setShowPassword((prevShowPassword) => !prevShowPassword)}
-              >
-                {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
-              </button>
+          
         </div>
         {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>}
         <div className={styles['input-wrapper']}>
