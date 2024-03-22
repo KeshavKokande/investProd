@@ -497,6 +497,12 @@ a:focus {
 .sub_page .hero_area .hero_bg_box {
   display: none;
 }
+#navlinks li a:hover{
+  color: gray;
+  text-decoration: none;
+  padding: 5px;
+  border-bottom: 3px solid gray;
+}
 
 .header_section {
   /* padding: 15px 0; */

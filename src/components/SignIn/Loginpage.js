@@ -5,9 +5,10 @@ import { FcGoogle } from 'react-icons/fc';
 import LoginImage from './../../assets/images/loginImage.jpg';
 import Swal from 'sweetalert2';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -54,7 +55,7 @@ const LoginPage = () => {
         });
         return;
       }
-  
+   
       const data = await response.json();
       console.log(data);
   
@@ -89,7 +90,14 @@ const LoginPage = () => {
         </div>
         <div className={styles['input-wrapper']}>
           <label>Password</label>
-          <input type={showPassword ? 'text' : 'password'} name='password' value={formData.password} onChange={handleChange} />
+          <input type={showPassword ? 'text' : {showPassword ? 'text' : 'password'}} name='password' value={formData.password} onChange={handleChange} />
+          <button
+                type='button'
+                className={styles['password-toggle-btn']}
+                onClick={() => setShowPassword((prevShowPassword) => !prevShowPassword)}
+              >
+                {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+              </button>
           <button
                 type='button'
                 className={styles['password-toggle-btn']}
@@ -120,5 +128,7 @@ const LoginPage = () => {
     </div>
   );
 };
+
+
 
 export default LoginPage;

@@ -67,7 +67,7 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
         {/* <h4 className="data-table-title">Latest Orders</h4> */}
       </div>
       <div className="data-table-diagram">
-        <table>
+        <table border={1}>
           <thead>
             <tr>
               <th>Plan Names</th>
