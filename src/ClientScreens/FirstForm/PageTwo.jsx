@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Questionnaire from "./../../assets/images/questionnare.svg";
 import styles from "./Page.module.css";
 const questions = require('./dummyData.json');
 
 const PageTwo = ({ formData, handleChange }) => {
+  const [errors, setErrors] = useState({});
+
   const handleFormChange = (event) => {
-    handleChange(event); // Call handleChange from MultiStepForm
+    const { name, value } = event.target;
+    handleChange(event);
+
+    // Check if the selected value is empty for MCQ type questions
+    const index = parseInt(name.split('_')[1]); // Extracting the question index from the input name
+    const question = questions[index];
+    const newErrors = { ...errors };
+
+    if (question.type === 'mcq' && !value) {
+      newErrors[name] = `Please select an option`;
+    } else {
+      delete newErrors[name];
+    }
+
+    setErrors(newErrors);
   };
 
   return (
@@ -53,19 +69,23 @@ const PageTwo = ({ formData, handleChange }) => {
               </div>
             )}
             {question.type === 'mcq' && (
-              <select
-                id={`question_${index}`}
-                name={`question_${index}`}
-                className={styles['form-control']}
-                value={formData[`question_${index}`] || ''}
-                onChange={handleFormChange}
-              >
-                {question.opt.map((option, optIndex) => (
-                  <option key={optIndex} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              <div>
+                <select
+                  id={`question_${index}`}
+                  name={`question_${index}`}
+                  className={styles['form-control']}
+                  value={formData[`question_${index}`] || ''}
+                  onChange={handleFormChange}
+                >
+                  <option value="">Select an option</option> {/* Added default option */}
+                  {question.opt.map((option, optIndex) => (
+                    <option key={optIndex} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                {errors[`question_${index}`] && <span className={styles.error}>{errors[`question_${index}`]}</span>}
+              </div>
             )}
             {question.type === 'range_10' && (
               <input
