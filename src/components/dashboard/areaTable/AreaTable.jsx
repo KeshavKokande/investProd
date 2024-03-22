@@ -30,6 +30,7 @@ const AreaTable = () => {
         }); // Assuming the JSON file is named purchase.json and placed in the public folder
         const jsonData = await response.json();
         setTableData(jsonData.transactions);
+        console.log(jsonData)
       } 
       
 

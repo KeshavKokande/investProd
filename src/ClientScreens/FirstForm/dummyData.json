@@ -20,7 +20,9 @@
   },
   {
     "ques": "What is your annual income?",
-    "type": "subjective"
+    "type": "mcq",
+    "opt":["Less than 1 Lakh","Between 1 to 3 Lakhs","Between 3 to 5 Lakhs","Above 5 Lakhs"]
+
   },
   {
     "ques": "What is your investment time horizon?",

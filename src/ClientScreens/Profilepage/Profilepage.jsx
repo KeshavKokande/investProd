@@ -39,7 +39,12 @@ const ProfilePage = () => {
             address: data.address || '',
             gender: data.gender || '',
             jobRole: data.jobRole || '',
-            qualification: data.qualification || ''
+            qualification: data.qualification || '',
+            question_0: data.question_0 ||'',
+            question_1: data.question_1 ||'',
+            question_2: data.question_2 ||'',
+            question_3: data.question_3 ||'',
+            question_4: data.question_4 ||''
           });
           setIsLoading(false);
           console.log(data)
@@ -83,21 +88,27 @@ const ProfilePage = () => {
           <div className={styles.pp21}>
             <div className={styles.pp211}>
               <div>
-                <p className={styles.ppp}><strong>Name:</strong> {profileInfo.name}</p>
-                <p className={styles.ppp}><strong>Email:</strong> {profileInfo.email}</p>
-                <p className={styles.ppp}><strong>Age:</strong> {profileInfo.age}</p>
-                <p className={styles.ppp}><strong>Job Title:</strong> {profileInfo.jobRole}</p>
+                <p className={styles.ppp}><strong>Name:</strong>&nbsp;{profileInfo.name}</p>
+                <p className={styles.ppp}><strong>Email:</strong>&nbsp;{profileInfo.email}</p>
+                <p className={styles.ppp}><strong>Age:</strong>&nbsp;{profileInfo.age}</p>
+                <p className={styles.ppp}><strong>Job Title:</strong>&nbsp;{profileInfo.jobRole}</p>
               </div>
               <div>
-                <p className={styles.ppp}><strong>Phone:</strong> {profileInfo.phone}</p>
-                <p className={styles.ppp}><strong>Address:</strong> {profileInfo.address}</p>
-                <p className={styles.ppp}><strong>Qualification:</strong> {profileInfo.qualification}</p>
-                <p className={styles.ppp}><strong>Gender:</strong> {profileInfo.gender}</p>
+                <p className={styles.ppp}><strong>Phone:</strong>&nbsp;{profileInfo.phone}</p>
+                <p className={styles.ppp}><strong>Address:</strong>&nbsp;{profileInfo.address}</p>
+                <p className={styles.ppp}><strong>Qualification:</strong>&nbsp;{profileInfo.qualification}</p>
+                <p className={styles.ppp}><strong>Gender:</strong>&nbsp;{profileInfo.gender}</p>
               </div>
             </div>
             <hr />
             <div className={styles.pp212}>
-              {/* Display other information here */}
+
+            <p className={styles.ppp}><strong>Primary Investment Objectives:</strong>&nbsp;{profileInfo.question_0}</p>
+            <p className={styles.ppp}><strong>Risk Tolerance:</strong>&nbsp;{profileInfo. question_1}</p>
+            <p className={styles.ppp}><strong>Investment Experience:</strong>&nbsp;{profileInfo. question_2}</p>
+            <p className={styles.ppp}><strong>Time Horizon:</strong>&nbsp;{profileInfo. question_3}</p>
+            <p className={styles.ppp}><strong>Income Level:</strong>&nbsp;{profileInfo.question_4}</p>
+              
             </div>
             <div className={styles.pp213}>
               <Link to='/profedit'>

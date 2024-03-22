@@ -1,43 +1,64 @@
-import { useState, useEffect } from 'react';
-import "../areaTable/AreaTable.scss";
-import AreaTableAction from "../areaTable/AreaTableAction";
+import React, { useState, useEffect } from 'react';
+import '../areaTable/AreaTable.scss';
+import AreaTableAction from '../areaTable/AreaTableAction';
 
 const TABLE_HEADS = [
-  "Client ID",
-  "Client Name",
-  "Client Email",
-  "Plan IDs"
+  'Client Name',
+  'Client Email',
+  'Plan Names', // Updated table header to reflect plan names
 ];
-
 
 const Clientlist = () => {
   const [tableData, setTableData] = useState([]);
+  const [planData, setPlansData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      try 
-      {
+      try {
         const response = await fetch('http://localhost:8000/api/v1/advisor/list-of-clients', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
-          credentials: 'include'
-        })
-        if (!response.ok) {
+          credentials: 'include',
+        });
+
+        const plansResponse = await fetch('http://localhost:8000/api/v1/advisor/list-of-plans', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (!response.ok || !plansResponse.ok) {
           throw new Error('Failed to fetch user data');
         }
-        const data = await response.json();
-        setTableData(data.clients);
-      }
 
-      catch (error) {
+        const clientsData = await response.json();
+        const plansData = await plansResponse.json();
+
+        setTableData(clientsData.clients);
+        setPlansData(plansData.plans); // Assuming plansData contains an array of plans under the key 'plans'
+      } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
   }, []);
+
+  const getPlanNames = (planIds) => {
+    if (!Array.isArray(planData)) {
+      console.error('Plan data is not an array:', planData);
+      return [];
+    }
+
+    return planIds.map((planId) => {
+      const plan = planData.find((plan) => plan._id === planId);
+      return plan ? plan.planName : 'Unknown Plan';
+    });
+  };
 
   return (
     <section className="content-area-table">
@@ -56,15 +77,14 @@ const Clientlist = () => {
           <tbody>
             {tableData.map((client) => (
               <tr key={client._id}>
-                <td>{client._id}</td>
                 <td>{client.name}</td>
                 <td>{client.email}</td>
                 <td>
-                  {client.planIds.map((planId) => (
-                    <div key={planId}>{planId}</div>
+                  {getPlanNames(client.planIds).map((planName, index) => (
+                    <div key={index}>{planName}</div>
                   ))}
                 </td>
-                </tr>
+              </tr>
             ))}
           </tbody>
         </table>
@@ -74,10 +94,3 @@ const Clientlist = () => {
 };
 
 export default Clientlist;
-
-
-  
-
-
-
-

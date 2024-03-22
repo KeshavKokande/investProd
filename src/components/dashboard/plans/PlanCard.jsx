@@ -1,8 +1,35 @@
 import PropTypes from "prop-types";
 import "./AdNewPlans.css";
+import {useState} from "react";
+import axios from 'axios';
 
 const PlanCard = ({ plan, deletePlan }) => {
   const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks,advise } = plan;
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [tobeDelted, setTobeDelted] = useState(plan._id);
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/advisor/deletePlan/${tobeDelted}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error deleting plan');
+      }
+  
+      console.log('Plan deleted successfully');
+      // Optionally, you can update the state or perform any other actions here
+    } catch (error) {
+      console.error('Error deleting plan:', error);
+      // Handle errors here, e.g., show error message to the user
+    }
+  };
+  
 
   const renderStocks = () => {
     return stocks.map((stock, index) => (
@@ -44,7 +71,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           </div>
 
           <div className="btn">
-            <div className="adnewplan-delete-icon" onClick={() => deletePlan && deletePlan(plan._id)}>Delete</div>
+            <div className="adnewplan-delete-icon" onClick={handleDelete}>Delete</div>
           </div>
         </div>
       </div>
