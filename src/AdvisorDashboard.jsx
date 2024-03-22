@@ -2,6 +2,8 @@ import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MoonIcon from "./assets/icons/moon.svg";
 import SunIcon from "./assets/icons/sun.svg";
+import Cookie from 'js-cookie';
+import withAuthProtection from './withAuthProtection'; 
 import BaseLayout from "./layout/BaseLayout";
 import ClBaseLayout from "./layout/ClBaseLayout";
 import { Dashboard } from "./screens";
