@@ -11,16 +11,19 @@ import './../../components/AdvisorCardsPage/TestpageAdv.css'
 
 const settings = {
       dots: true,
-      infinite: true,
+      infinite: false, //keep it false for advisers less than 3 if more than three change to true
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow:3,
       slidesToScroll: 1
     };
 
-const AdvisorsCarousel = ({ advisors,advisor }) => {
-  const associateAdvisors = advisors.filter(advisor => advisor.cat_type === "Associate");
-  const advanceAdvisors = advisors.filter(advisor => advisor.cat_type === "Advance");
-  const expertAdvisors = advisors.filter(advisor => advisor.cat_type === "Expert");
+const AdvisorsCarousel = ({ advisors }) => {
+  const associateAdvisors = advisors.filter(advisor => advisor.category === "Standard");
+  const advanceAdvisors = advisors.filter(advisor => advisor.category === "Executive");
+  const expertAdvisors = advisors.filter(advisor => advisor.category === "Premium");
+
+
+  
 
   
 
