@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import termsAndConditions from "./../../assets/images/terms_conditions.svg";
-import styles from './Page.module.css';
+import styles from "./Page.module.css";
 
 const PageThree = ({ agreed, handleCheckboxChange }) => {
   return (
@@ -11,16 +11,14 @@ const PageThree = ({ agreed, handleCheckboxChange }) => {
       <div className={`${styles['form-container']} ${styles['form-container2']}`}>
         <div className={styles.terms}>
           <h3>Terms and Conditions</h3>
-          <div>
-            <p>
-              By proceeding, you agree to abide by the terms and conditions
-              outlined in our agreement.
-            </p>
-            <p>
-              This is where you include all your terms and conditions text.
-              Make sure it's clear and easy to understand.
-            </p>
-          </div>
+          <p>
+            By proceeding, you agree to abide by the terms and conditions
+            outlined in our agreement.
+          </p>
+          <p>
+            This is where you include all your terms and conditions text.
+            Make sure it's clear and easy to understand.
+          </p>
         </div>
         <div className={styles['checkbox-container']}>
           <input
