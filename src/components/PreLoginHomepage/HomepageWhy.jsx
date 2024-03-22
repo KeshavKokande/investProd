@@ -8,8 +8,8 @@ function HomepageWhy(){
     return(
         <section className="why_section layout_padding">
         <div className="container d-flex flex-column flex-wrap">
-          <div className="heading_container heading_center">
-            <h2>
+          <div className="heading_container whychoose heading_center">
+            <h2 >
               Why Choose <span>Us</span>
             </h2>
           </div>

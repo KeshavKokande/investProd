@@ -75,11 +75,11 @@ const LoginPage = () => {
           <input type='password' name='password' value={formData.password} onChange={handleChange} />
         </div>
         {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>}
-        <div>
-          <button className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
+        <div style={{width:"100%"}}>
+          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
         </div>
         <hr />
-        <div className={styles['gAuth']} onClick={handleGoogleSignIn}>
+        <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
           <h2>Continue with</h2>
           <span className={styles['google-icon']}><FcGoogle /></span>
         </div>
