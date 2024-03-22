@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InvestmentSummary from './Summary';
-// import data from "./data.json"
-import { AreaCards, AreaCharts, AreaTable} from "../../components";
+
 
 function DashboardCl() {
     const [transactions, setTransactions] = useState([]);

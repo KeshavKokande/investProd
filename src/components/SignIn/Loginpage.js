@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
 import LoginImage from './../../assets/images/loginImage.jpg';
-
+import Swal from 'sweetalert2';
 const LoginPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -23,10 +23,14 @@ const LoginPage = () => {
 
   const handleSubmit = async () => {
     if (!formData.email || !formData.password) {
-      setErrorMessage('Please enter both email and password.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter both email and password.'
+      });
       return;
     }
-
+  
     try {
       const response = await fetch('http://localhost:8000/api/v1/check-auth/login', {
         method: 'POST',
@@ -36,15 +40,20 @@ const LoginPage = () => {
         body: JSON.stringify(formData),
         credentials: 'include'
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
-        setErrorMessage(`Error: ${errorData.message}`);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorData.message
+        });
         return;
       }
-
+  
       const data = await response.json();
       console.log(data);
+  
       if (data.user.role === 'client') {
         navigate('/cldash');
       } else {
@@ -52,9 +61,14 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setErrorMessage('An unexpected error occurred. Please try again later.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'An unexpected error occurred. Please try again later.'
+      });
     }
   };
+
 
   return (
     <div className={styles['register-container']}>
