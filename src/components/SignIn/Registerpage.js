@@ -95,7 +95,7 @@ const Register = () => {
         <img src={RegistrationImage} alt="Registration" />
       </div>
       <div className={styles['register-right']}>
-        <h2>Welcome User!!!</h2>
+        <h2>Welcome Client!!!</h2>
         <div className={styles['input-wrapper']}>
           <label>Name</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
