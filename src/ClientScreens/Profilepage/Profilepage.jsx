@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
         if (response.status === 200) {
           const data = response.data.client;
-          const imageDataArray = data.photoId?.data?.data || []; // Get the image data array
+          const imageDataArray = data.ppfoto?.data?.data || []; // Get the image data array
           const imageDataUrl = arrayToDataURL(imageDataArray); // Convert array to data URL
           
           setProfileInfo({

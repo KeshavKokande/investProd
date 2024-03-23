@@ -22,6 +22,8 @@ const MultiStepForm = () => {
     jobRole: '',
     agreement: false,
     photoId: { data: '', contentType: '' },
+    ppfoto: { data: '', contentType: '' },
+    phone: ''
   });
 
   const [activeStep, setActiveStep] = useState(0);
@@ -49,6 +51,29 @@ const MultiStepForm = () => {
       setFormData({
         ...formData,
         photoId: {
+          data: base64String.split(',')[1],
+          contentType: file.type,
+        },
+      });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+  const handleppu = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setPhotoBase64(base64String);
+
+      setFormData({
+        ...formData,
+        ppfoto: {
           data: base64String.split(',')[1],
           contentType: file.type,
         },
@@ -176,7 +201,7 @@ const MultiStepForm = () => {
 
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         {activeStep === 0 && (
-          <PageOne formData={formData} handleChange={handleFormChange} uploadPhoto={handlePhotoUpload} />
+          <PageOne formData={formData} handleChange={handleFormChange} uploadPhoto={handlePhotoUpload} ppupload={handleppu} />
         )}
         {activeStep === 1 && (
           <PageTwo formData={formData} handleChange={handleFormChange} />

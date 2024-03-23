@@ -149,6 +149,18 @@ body {
     background-color: #66bb6a; /* Light green */
 
   }
+
+  .adnewplan-risk-false {
+
+    background-color: #ef5350; /* Red */
+
+  }
+
+  .adnewplan-risk-true {
+
+    background-color: #66bb6a; /* Light green */
+
+  }
  
   .adnewplan-delete-icon {
 
