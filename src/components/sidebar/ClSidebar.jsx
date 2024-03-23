@@ -1,3 +1,4 @@
+
 import { useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { LIGHT_THEME } from "../../constants/themeConstants";
@@ -6,12 +7,12 @@ import LogoWhite from "../../assets/images/logo_white.svg";
 import Swal from "sweetalert2";
 import {
   MdOutlineClose,
-  MdOutlineCurrencyExchange,
+
   MdOutlineGridView,
   MdOutlineLogout,
-  MdOutlineMessage,
+ 
   MdOutlinePeople,
-  MdOutlineSettings,
+
   MdOutlineShoppingBag,
  
 } from "react-icons/md";
@@ -134,6 +135,7 @@ const ClSidebar = () => {
                 <span className="menu-link-text">Advisors</span>
               </Link>
             </li>
+            
             <li className={`menu-item ${location.pathname === "/news" ? "active" : ""}`}>
               <Link to="/news" className="menu-link">
                 <span className="menu-link-icon">
@@ -147,14 +149,7 @@ const ClSidebar = () => {
 
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
-            {/* <li className="menu-item">
-              <Link to="/news" className="menu-link">
-                <span className="menu-link-icon">
-                  <MdOutlineSettings size={20} />
-                </span>
-                <span className="menu-link-text">NEWS</span>
-              </Link>
-            </li> */}
+            
             <li className={`menu-item ${location.pathname === "/profile" ? "active" : ""}`}>
               <Link to="/profile" className="menu-link">
                 <span className="menu-link-icon">
