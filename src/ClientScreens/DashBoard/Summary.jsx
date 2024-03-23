@@ -1,7 +1,7 @@
 import React from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
-import { Flex } from 'antd';
+
 
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
@@ -39,25 +39,27 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
 
     // Extracting unique plan IDs
     const uniquePlanIds = [...new Set(returns.map(returns => returns.planId))];
-
+    
     const totalProfitAmount = returns.reduce((acc, curr) => acc + curr.profit, 0);
 
     // Calculating total profit for each unique plan ID
     const totalProfits = uniquePlanIds.map(planId => {
         const planProfits = returns.filter(returns => returns.planId === planId);
         const totalProfit = planProfits.reduce((acc, curr) => acc + curr.profit, 0);
-        return { name: planId, value: totalProfit };
+        const planName = transactions.find(transaction => transaction.planId === planId).planName;
+        return { name: planName, value: totalProfit };
     });
 
     // Function to format data for PieChart
     const formatDataForPieChart = (uniquePlans, totalInvestments) => {
-        const data = uniquePlans.map(planId => ({
-            name: planId,
+        const data = uniquePlans.map((planId) => ({
+            name: transactions.find(transaction => transaction.planId === planId).planName,
             value: totalInvestments.get(planId)
         }));
         return data;
     }
 
+    
     const formatCurrency = (value) => {
         const roundedValue = parseFloat(value).toFixed(2);
         return `₹${roundedValue}`;
@@ -101,7 +103,10 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
             <hr />
 
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
-                <p id="piechart"><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
+                
+                <p id="piechart"><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)}  /></p>
+                
+               
                 <p  id="piechart"><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
 
