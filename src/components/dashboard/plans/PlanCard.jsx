@@ -77,13 +77,10 @@
 
 import PropTypes from "prop-types";
 import { useState } from "react";
-import axios from "axios"; // Import axios for making HTTP requests
 import "./AdNewPlans.css";
-import {useState} from "react";
-import axios from 'axios';
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks,advise } = plan;
+  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks,advise,isActive } = plan;
   const [isDeleting, setIsDeleting] = useState(false);
   const [tobeDelted, setTobeDelted] = useState(plan._id);
 
@@ -108,9 +105,12 @@ const PlanCard = ({ plan, deletePlan }) => {
       // Handle errors here, e.g., show error message to the user
     }
   };
+
+  const isActiveString = plan.isActive ? 'Active' : 'Inactive';
   
 
   const renderStocks = () => {
+  
     return stocks.map((stock, index) => (
       <tr key={index}>
         <td className="adnewplan-td">{stock.stockName}</td>
@@ -147,6 +147,7 @@ const PlanCard = ({ plan, deletePlan }) => {
             <div>Number of Subscriptions: {noOfSubscription}</div>
             <div>Cap Value: ₹{capValue}</div>
             <div>Advise:  {advise}</div>
+            <div>isActive:  {isActiveString}</div>
           </div>
 
           <div className="btn">
