@@ -29,7 +29,8 @@ function PlansCl() {
             throw new Error('Failed to fetch user data');
           }
           const data = await response.json();
-          setplansData(data.plans);
+          const filteredPlans = data.plans.filter(plan => plan.isActive);
+          setplansData(filteredPlans);
 
           console.log(data)
 
