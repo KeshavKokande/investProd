@@ -1,4 +1,5 @@
-import  { useState } from 'react';
+import { useState } from 'react';
+import styles from "./Page.module.css";
 
 const GeneralInfoEditForm = ({ initialValues, onSave, onCancel }) => {
   const [editedValues, setEditedValues] = useState(initialValues);
@@ -14,11 +15,11 @@ const GeneralInfoEditForm = ({ initialValues, onSave, onCancel }) => {
   };
 
   return (
-    <div className="overlay">
-      <div className="edit-form">
+    <div className={styles.overlay}>
+      <div className={styles['edit-form']}>
         <h2>Edit General Information</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="email">Email</label>
             <input
               type="text"
@@ -28,7 +29,7 @@ const GeneralInfoEditForm = ({ initialValues, onSave, onCancel }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="phone">Phone</label>
             <input
               type="text"
@@ -38,7 +39,7 @@ const GeneralInfoEditForm = ({ initialValues, onSave, onCancel }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="address">Address</label>
             <input
               type="text"
@@ -48,7 +49,7 @@ const GeneralInfoEditForm = ({ initialValues, onSave, onCancel }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label htmlFor="job">Job Title</label>
             <input
               type="text"
@@ -58,7 +59,7 @@ const GeneralInfoEditForm = ({ initialValues, onSave, onCancel }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-buttons">
+          <div className={styles['form-buttons']}>
             <button type="submit">Save</button>
             <button type="button" onClick={onCancel}>Cancel</button>
           </div>

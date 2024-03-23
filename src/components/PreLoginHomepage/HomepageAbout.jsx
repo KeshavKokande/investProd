@@ -5,10 +5,10 @@ function HomepageAbout() {
   return (
   <section id="about" className="about_section layout_padding">
 
-    <div className="container my-custom-container d-flex flex-column flex-wrap bg-#00204a ">
+    <div className="container  about-container my-custom-container d-flex flex-column flex-wrap bg-#00204a ">
       <div className="my-custom-container">
         <div className="heading_container heading_center">
-          <h2>
+          <h2 className='h2about'>
             About <span>Us</span>
           </h2>
           <p>

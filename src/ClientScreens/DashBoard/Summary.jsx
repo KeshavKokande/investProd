@@ -1,7 +1,7 @@
 import React from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
-import { Flex } from 'antd';
+
 
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
@@ -23,6 +23,8 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
         });
         return investmentMap;
     }
+
+    // console.log("TRANSACTION DATA : ", transactions);
     // Function to calculate total invested amount
     const calculateTotalInvestedAmount = (transactions) => {
         let totalInvestedAmount = 0;
@@ -37,46 +39,45 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
 
     // Extracting unique plan IDs
     const uniquePlanIds = [...new Set(returns.map(returns => returns.planId))];
-
+    
     const totalProfitAmount = returns.reduce((acc, curr) => acc + curr.profit, 0);
 
     // Calculating total profit for each unique plan ID
     const totalProfits = uniquePlanIds.map(planId => {
         const planProfits = returns.filter(returns => returns.planId === planId);
         const totalProfit = planProfits.reduce((acc, curr) => acc + curr.profit, 0);
-        return { name: planId, value: totalProfit };
+        const planName = transactions.find(transaction => transaction.planId === planId).planName;
+        return { name: planName, value: totalProfit };
     });
 
     // Function to format data for PieChart
     const formatDataForPieChart = (uniquePlans, totalInvestments) => {
-        const data = uniquePlans.map(planId => ({
-            name: planId,
+        const data = uniquePlans.map((planId) => ({
+            name: transactions.find(transaction => transaction.planId === planId).planName,
             value: totalInvestments.get(planId)
         }));
         return data;
     }
 
+    
     const formatCurrency = (value) => {
         const roundedValue = parseFloat(value).toFixed(2);
         return `₹${roundedValue}`;
       };
-
-    function roundToTwoDecimalPlaces(num) {
-        return Math.round((num + Number.EPSILON) * 100) / 100;
-    }
 
     return (
         <div>
 
 
             <section className="content-area-cards">
+
                 <AreaCard
                     colors={["#e4e8ef", "#475be8"]}
                     percentFillValue={80}
                     cardInfo={{
                         title: "Total Amount Invested",
-                        value: roundToTwoDecimalPlaces(totalInvestedAmount),
-                        text: `You have ${totalInvestedAmount} Amount.`,
+                        value: formatCurrency(totalInvestedAmount),
+                        text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -84,17 +85,17 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     percentFillValue={50}
                     cardInfo={{
                         title: "Total Profit",
-                        value: roundToTwoDecimalPlaces(totalProfitAmount),
-                        text: `You have ${totalProfitAmount} Amount.`,
+                        value: formatCurrency(totalProfitAmount),
+                        text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
                     colors={["#e4e8ef", "#f29a2e"]}
                     percentFillValue={40}
                     cardInfo={{
-                        title: "Total Returns",
-                        value: roundToTwoDecimalPlaces(totalInvestedAmount + totalProfitAmount),
-                        text: `You have ${totalInvestedAmount} Amount.`,
+                        title: "Current Value",
+                        value: formatCurrency(totalInvestedAmount + totalProfitAmount),
+                        text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
                     }}
                 />
             </section>
@@ -102,14 +103,16 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
             <hr />
 
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
-                <p><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => transaction.planId))), totalInvestments)} /></p>
-                <p><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
+                
+                <p id="piechart"><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)}  /></p>
+                
+               
+                <p  id="piechart"><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
 
-            <hr />
 
 
-            <center><h3 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}>Plan Information:</h3></center>
+            <center><h3 style={{ color: "black", marginTop: "20px",fontSize: "2rem",    fontWeight: "400",marginBottom: "25px"}}>Plan Information:</h3></center>
 
 
             <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />

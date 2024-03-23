@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InvestmentSummary from './Summary';
-// import data from "./data.json"
 import { AreaCards, AreaCharts, AreaTable} from "../../components";
+import "./dashboard.css";
 
 function DashboardCl() {
     const [transactions, setTransactions] = useState([]);
@@ -52,7 +52,7 @@ function DashboardCl() {
           setTransactions(data.transactions);
           setReturns(redat.profits);
           setAdvisorNames(data.advisorNames)
-          // console.log("WHOLE DATA:", data)
+          // console.log("WHOLE DATA:", redat);
           // console.log(redat)
       } catch (error) {
           console.error('Error fetching user data:', error.message);
@@ -63,10 +63,15 @@ function DashboardCl() {
     }, []);
 return (
         <div className="App">
+            {/* <h1>Welocme Back {advisorNames[0]}</h1> */}
+
           <center><h1 style={{color:"black", fontSize:"30px", fontWeight: "bold"}}> Portfolio Summary</h1></center>
         
             {/* <center><h1> Portfolio Summary</h1></center> */}
             <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns}/>
+            <script>
+          console.log(document.queryselector(".alert"));
+        </script>
         </div>
     );
 }

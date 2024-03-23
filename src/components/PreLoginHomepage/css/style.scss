@@ -37,7 +37,9 @@ body {
   background-color: #ffffff;
   overflow-x: hidden;
 }
-
+.bg-light-nv{
+  background-color: transparent !important;
+}
 .layout_padding {
   padding: 90px 0;
 }
@@ -71,6 +73,7 @@ body {
     position: relative;
     font-weight: bold;
     margin-bottom: 0;
+    font-size: 2.5rem !important;
 
     span {
       color: $primary1;
@@ -80,8 +83,13 @@ body {
   p {
     margin-top: 10px;
     margin-bottom: 0;
+    font-weight: 600;
+  }
+  .col-md-6{
+    padding: 20px;
   }
 
+  
   &.heading_center {
     align-items: center;
     text-align: center;

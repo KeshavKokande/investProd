@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stepper, Step } from 'react-form-stepper';
-import styles from './Page.module.css';
-import "./Page.module.css";
+import styles from "./Page.module.css";
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
@@ -22,7 +21,9 @@ const MultiStepForm = () => {
     address: '',
     jobRole: '',
     agreement: false,
-    photoId: ''
+    photoId: { data: '', contentType: '' },
+    ppfoto: { data: '', contentType: '' },
+    phone: ''
   });
 
   const [activeStep, setActiveStep] = useState(0);
@@ -37,17 +38,73 @@ const MultiStepForm = () => {
     }));
   };
 
+  const [photoBase64, setPhotoBase64] = useState(null);
+
+  const handlePhotoUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setPhotoBase64(base64String);
+
+      setFormData({
+        ...formData,
+        photoId: {
+          data: base64String.split(',')[1],
+          contentType: file.type,
+        },
+      });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+  const handleppu = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setPhotoBase64(base64String);
+
+      setFormData({
+        ...formData,
+        ppfoto: {
+          data: base64String.split(',')[1],
+          contentType: file.type,
+        },
+      });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   const validatePageOne = () => {
     const errors = {};
     if (!formData.age) errors.age = 'Age is required';
     if (!formData.qualification) errors.qualification = 'Qualification is required';
     if (!formData.address) errors.address = 'Address is required';
     if (!formData.jobRole) errors.jobRole = 'Job Role is required';
+    if (!formData.gender) errors.gender = 'Please select your gender'; // New validation
     return errors;
   };
 
   const validatePageTwo = () => {
-    return {};
+    const errors = {};
+    
+    Object.keys(formData).forEach(key => {
+      
+      if (key.includes('question_') && formData[key] === '' && !key.includes('What is your annual income?')) {
+        errors[key] = 'Please select an option';
+      }
+    });
+    return errors;
   };
 
   const validatePageThree = () => {
@@ -56,9 +113,33 @@ const MultiStepForm = () => {
     return errors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted:', formData);
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/client/register-client`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData),
+      });
+
+      console.log(formData);
+      console.log('Response status:', response.status);
+
+      if (!response.ok) {
+        throw new Error('Failed');
+      }
+
+      const data = await response.json();
+      console.log('response:', data);
+
+      navigate('/cldash'); // Navigate to '/cldash' if registration is successful
+
+    } catch (error) {
+      console.error('Error.', error.message);
+    }
   };
 
   const nextStep = () => {
@@ -86,6 +167,18 @@ const MultiStepForm = () => {
     }
   };
 
+  // Add a useEffect to invoke validation for page two when activeStep changes to 1
+  useEffect(() => {
+    if (activeStep === 1) {
+      const errors = validatePageTwo();
+      if (Object.keys(errors).length === 0) {
+        setFormErrors({});
+      } else {
+        setFormErrors(errors);
+      }
+    }
+  }, [activeStep]);
+
   const prevStep = () => {
     setActiveStep(activeStep - 1);
     setFormErrors({});
@@ -106,9 +199,9 @@ const MultiStepForm = () => {
         </Stepper>
       </div>
 
-      <form className={styles['cl-form']} onSubmit={handleSubmit} encType="multipart/form-data">
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         {activeStep === 0 && (
-          <PageOne formData={formData} handleChange={handleFormChange} />
+          <PageOne formData={formData} handleChange={handleFormChange} uploadPhoto={handlePhotoUpload} ppupload={handleppu} />
         )}
         {activeStep === 1 && (
           <PageTwo formData={formData} handleChange={handleFormChange} />

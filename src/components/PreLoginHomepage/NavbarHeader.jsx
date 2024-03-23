@@ -26,8 +26,8 @@ function NavbarHeader() {
         <div className="App">
             <header className="App-header">
                 <nav className={`${styles.navbar}`}>
-                    <a href='#home' className={`${styles.logo}`}><img src={investlogogo} /></a>
-                    <ul className={`${styles.navMenu} ${isActive ? styles.active : ''}`}>
+                    {/* <a href='#home' className={`${styles.logo}`}><img src={investlogogo} /></a> */}
+                    <ul id="navlinks" className={`${styles.navMenu} ${isActive ? styles.active : ''}`}>
                         <li onClick={(event) => handleNavLinkClick('home', event)}>
                             <a href='#home' className={`${styles.navLink}`}>Home</a>
                         </li>

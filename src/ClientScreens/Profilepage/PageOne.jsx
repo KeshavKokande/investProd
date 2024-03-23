@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import styles from "./Page.module.css";
 import PersonaDetails from "./../../assets/images/personal_details.svg";
+import styles from "./Page.module.css";
 
-const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
-  const [genderError, setGenderError] = useState('');
+const PageOne = ({ formData, handleChange }) => {
+  const [photo, setPhoto] = useState(null);
 
-  const handleGenderChange = (event) => {
-    handleChange(event); // Forwarding gender change event to parent component
-    const { value } = event.target;
-    setGenderError(value.trim() === '' ? 'Please select your gender' : '');
+  const handlePhotoUpload = (event) => {
+    const selectedPhoto = event.target.files[0];
+    setPhoto(selectedPhoto);
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.imagecl}>
+      <div className={styles.image}>
         <img src={PersonaDetails} alt="image" />
       </div>
       <div className={styles['form-container']}>
@@ -27,7 +26,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
             disabled
           />
-        </div >
+        </div>
         <div className={styles['question-container']}>
           <label htmlFor="age">Age:</label>
           <input
@@ -45,15 +44,13 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
             id="gender"
             name="gender"
             value={formData.gender}
-            onChange={handleGenderChange}
+            onChange={handleChange}
             className={styles['form-control']}
           >
-            <option value="">Select the option</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
-          {genderError && <p className={styles['error-message']}>{genderError}</p>}
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="qualification">Qualification:</label>
@@ -80,7 +77,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
         <div className={styles['question-container']}>
           <label htmlFor="address">Location:</label>
           <input
-            type="text"
+            type='text'
             id="address"
             name="address"
             value={formData.address}
@@ -99,44 +96,32 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
         </div>
-        <div className={styles['question-container']}>
-          <label htmlFor="jobRole">Phone</label>
-          <input
-            type="text"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
-          />
-        </div>
-        <div className={`${styles['form-group']} ${styles['question-container']}`}>
+        {/* <div className={`${styles['form-group']} ${styles['question-container']}`}>
           <label htmlFor="photoId">Upload Photo ID:</label>
           <input
             type="file"
             id="photoId"
             name="photoId"
             accept="image/*"
-            onChange={uploadPhoto}
+            onChange={handlePhotoUpload}
             className={styles['form-control-file']}
           />
-        </div>
-
-        <div className={`${styles['form-group']} ${styles['question-container']}`}>
-          <label htmlFor="photoId">Upload Display Picture:</label>
-          <input
-            type="file"
-            id="photoId"
-            name="photoId"
-            accept="image/*"
-            onChange={ppupload}
-            className={styles['form-control-file']}
-          />
-
-        </div>
+        </div> */}
+        {/* {photo && (
+          <div className={styles['preview-container']}>
+            <p>Preview:</p>
+            <img
+              src={URL.createObjectURL(photo)}
+              alt="Uploaded Photo ID"
+              className={styles['preview-image']}
+            />
+          </div>
+        )} */}
       </div>
     </div>
   );
 };
 
 export default PageOne;
+
+

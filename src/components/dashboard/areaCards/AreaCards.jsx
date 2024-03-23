@@ -2,6 +2,7 @@ import AreaCard from "./AreaCard";
 import { useState,useEffect } from "react";
 import "./AreaCards.scss";
 
+
 const AreaCards = () => {
 
   const [totalClients, setTotalClients] = useState();

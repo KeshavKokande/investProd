@@ -27,6 +27,7 @@ body {
 .logogo {
   width: 25%;
   float: left;
+  margin-left: 21px;
 }
  .logogo img{
   width: 90px;
@@ -76,23 +77,36 @@ body {
   width: 100%;
   float: left;
   padding-left: 100px;
+  height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .banner_taital {
   width: 100%;
   float: left;
-  font-size: 60px !important;
-  color: #2e2d2e;
+  font-size: 6rem !important;
+  color: #3c3d44;
   padding-top: 80px;
-  text-transform: uppercase;
+  
+  /* text-transform: uppercase; */
+  text-decoration-color:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%);
   font-weight: bold;
 }
-
+.banner_text{
+  font-size: 1.25rem !important;
+}
+.navbar{
+  padding-left: 3vw;
+}
 .banner_text {
   width: 90%;
   float: left;
   font-size: 16px;
   color: #2e2d2e;
   margin-left: 0px;
+  font-size: 1.5rem !important;
+    text-align: justify;
 }
 .btn_main {
   width: 100%;
@@ -361,6 +375,7 @@ body {
 }
 
 .heading_container {
+  font-size: 1.25rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -377,6 +392,20 @@ body {
   position: relative;
   font-weight: bold;
   margin-bottom: 20px !important;
+  
+}
+.whychoose h2{
+  font-weight: 700;
+    color: #525f7b !important;
+}
+.why_container .detail-box{
+  font-size: 1.25rem;
+}
+.why_section > div{
+  background-color: #f8f8f9;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100vw !important;
 }
 
 .heading_container h2 span {
@@ -412,6 +441,9 @@ a:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+.box{
+  height: 300px;
+}
 
 /*header section*/
 .hero_area {
@@ -424,6 +456,9 @@ a:focus {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+.h2about{
+  font-size: 3rem !important;
 }
 
 .hero_area .hero_bg_box {
@@ -463,9 +498,17 @@ a:focus {
 .sub_page .hero_area .hero_bg_box {
   display: none;
 }
+#navlinks li a:hover{
+  color: gray;
+  text-decoration: none;
+  padding: 5px;
+  border-bottom: 3px solid gray;
+}
 
 .header_section {
-  padding: 15px 0;
+  /* padding: 15px 0; */
+  max-height: 100vh;
+    overflow: hidden;
 }
 
 .header_section .container-fluid {
@@ -618,7 +661,10 @@ a:focus {
   color: #fefefe;
   font-size: 14px;
 }
-
+.h2about{
+  font-size: 2.5rem !important;
+    color: #6ccdd8 !important;
+}
 .slider_section .detail-box .btn-box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -856,7 +902,7 @@ a:focus {
 }
 
 .why_section .box {
-  margin-top: 45px;
+  margin-top: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -869,7 +915,11 @@ a:focus {
           align-items: center;
   text-align: center;
 }
-
+.service_container>div{
+  background-color: #f8f8f9;
+    padding: 50px;
+    border-radius: 10px;
+}
 .why_section .box .img-box {
   margin-bottom: 20px;
   width: 120px;
@@ -887,6 +937,35 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+.service_box{
+  background-color: hsl(240, 8%, 88%) !important;
+}
+.teamsh2{
+  color:#6ccdd8 !important;
+}
+#landing_signup{
+  font-size: 1.25rem;
+  height: 3rem;
+  width: 100%;
+  color: white;
+  border-radius: 5px;
+}
+#landing_signup:hover{
+  background-color: white;
+  color:blue;
+  border:2px solid blue;
+  transform: scale3d(1.01);
+}
+#googlebutton{
+  border: 2px solid rgb(19, 119, 219) !important;
+  display: flex;
+  width: 100%;
+  height: 3rem;
+}
+#googlebutton>h2{
+  font-size: 1.2rem !important;
+
 }
 
 .why_section .box .img-box img {

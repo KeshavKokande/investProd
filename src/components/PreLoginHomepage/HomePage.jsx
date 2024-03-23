@@ -12,7 +12,7 @@ import NavBar from "./NavBar";
 
 
 // import '../../assest/css/bootstrap.css';
-import './../PreLoginHomepage/css/bootstrap.css'
+// import './../PreLoginHomepage/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './../PreLoginHomepage/css/responsive.css';
 import './../PreLoginHomepage/css/style.css.map';
@@ -20,7 +20,8 @@ import './../PreLoginHomepage/css/style.css';
 import './../PreLoginHomepage/css/style.scss';
 import "/node_modules/bootstrap/dist/js/bootstrap";
 
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 
