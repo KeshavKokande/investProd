@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from "./Page.module.css";
 import PersonaDetails from "./../../assets/images/personal_details.svg";
 
-const PageOne = ({ formData, handleChange, uploadPhoto }) => {
+const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
   const [genderError, setGenderError] = useState('');
 
   const handleGenderChange = (event) => {
@@ -99,6 +99,17 @@ const PageOne = ({ formData, handleChange, uploadPhoto }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
         </div>
+        <div className={styles['question-container']}>
+          <label htmlFor="jobRole">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
+          />
+        </div>
         <div className={`${styles['form-group']} ${styles['question-container']}`}>
           <label htmlFor="photoId">Upload Photo ID:</label>
           <input
@@ -109,6 +120,19 @@ const PageOne = ({ formData, handleChange, uploadPhoto }) => {
             onChange={uploadPhoto}
             className={styles['form-control-file']}
           />
+        </div>
+
+        <div className={`${styles['form-group']} ${styles['question-container']}`}>
+          <label htmlFor="photoId">Upload Display Picture:</label>
+          <input
+            type="file"
+            id="photoId"
+            name="photoId"
+            accept="image/*"
+            onChange={ppupload}
+            className={styles['form-control-file']}
+          />
+
         </div>
       </div>
     </div>
