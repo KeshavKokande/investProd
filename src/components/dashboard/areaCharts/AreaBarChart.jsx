@@ -158,7 +158,7 @@ const AreaBarChart = () => {
 export default AreaBarChart;
 
 
-// AreaBarChart.jsx
+
 
 // import { useContext, useState, useEffect } from "react";
 // import {

@@ -27,6 +27,7 @@ body {
 .logogo {
   width: 25%;
   float: left;
+  margin-left: 21px;
 }
  .logogo img{
   width: 90px;
