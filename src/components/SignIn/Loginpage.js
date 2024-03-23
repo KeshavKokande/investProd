@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 const LoginPage = () => {
   const navigate = useNavigate();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -96,6 +97,7 @@ const LoginPage = () => {
               >
                 {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
               </button>
+          
         </div>
         {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>}
         <div className={styles['input-wrapper']}>
