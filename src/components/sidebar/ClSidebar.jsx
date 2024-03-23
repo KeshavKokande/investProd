@@ -13,7 +13,9 @@ import {
   MdOutlinePeople,
   MdOutlineSettings,
   MdOutlineShoppingBag,
+ 
 } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.scss";
 import { useLocation } from "react-router-dom";
@@ -148,7 +150,7 @@ const ClSidebar = () => {
             <li className={`menu-item ${location.pathname === "/profile" ? "active" : ""}`}>
               <Link to="/profile" className="menu-link">
                 <span className="menu-link-icon">
-                  <MdOutlineCurrencyExchange size={18} />
+                  <CgProfile size={18} />
                 </span>
                 <span className="menu-link-text">Profile</span>
               </Link>

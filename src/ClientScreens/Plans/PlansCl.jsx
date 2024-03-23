@@ -43,11 +43,6 @@ function PlansCl() {
   return (
     <>
     
-    
-    
-  
-   
-    
       <Arraay plans={plansData} />
       <br/>
       <hr/>
