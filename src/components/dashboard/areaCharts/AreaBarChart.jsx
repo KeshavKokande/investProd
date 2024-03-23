@@ -156,3 +156,168 @@ const AreaBarChart = () => {
 };
 
 export default AreaBarChart;
+
+
+// AreaBarChart.jsx
+
+// import { useContext, useState, useEffect } from "react";
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   Tooltip,
+//   Legend,
+//   ResponsiveContainer,
+// } from "recharts";
+// import { ThemeContext } from "../../../context/ThemeContext";
+// import { FaArrowUpLong } from "react-icons/fa6";
+// import { LIGHT_THEME } from "../../../constants/themeConstants";
+// import "./AreaCharts.scss";
+
+// const AreaBarChart = () => {
+//   const { theme } = useContext(ThemeContext);
+//   const [totalInvestedAmount, setTotalInvestedAmount] = useState();
+//   const [totalCurrentProfit, setTotalCurrentProfit] = useState();
+
+//   useEffect(() => {
+//     const fetchTotalInvestedAmount = async () => {
+//       try {
+//         const response = await fetch(
+//           "http://localhost:8000/api/v1/advisor/get-total-invested-amount",
+//           {
+//             method: "GET",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             credentials: "include",
+//           }
+//         );
+
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch user data");
+//         }
+//         const data = await response.json();
+//         setTotalInvestedAmount(data.totalInvestedAmount);
+//       } catch (error) {
+//         console.error("Error fetching user data:", error.message);
+//       }
+//     };
+
+//     fetchTotalInvestedAmount();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchTotalCurrentProfit = async () => {
+//       try {
+//         const response = await fetch(
+//           "http://localhost:8000/api/v1/advisor/get-total-current-profit",
+//           {
+//             method: "GET",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             credentials: "include",
+//           }
+//         );
+
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch user data");
+//         }
+//         const data = await response.json();
+//         setTotalCurrentProfit(data.totalCumulativeProfit);
+//       } catch (error) {
+//         console.error("Error fetching user data:", error.message);
+//       }
+//     };
+
+//     fetchTotalCurrentProfit();
+//   }, []);
+
+//   const data = [
+//     {
+//       month: "Total Revenue",
+//       value: totalInvestedAmount,
+//     },
+//     {
+//       month: "Current Profit",
+//       value: totalCurrentProfit,
+//     },
+//   ];
+
+//   const formatTooltipValue = (value) => {
+//     return `${value}k`;
+//   };
+
+//   const formatYAxisLabel = (value) => {
+//     return `${value}k`;
+//   };
+
+//   const formatLegendValue = (value) => {
+//     return value.charAt(0).toUpperCase() + value.slice(1);
+//   };
+
+//   return (
+//     <div className="bar-chart">
+//       <div className="bar-chart-wrapper">
+//       <h5 className="bar-chart-title">Total Revenue</h5>
+//         <ResponsiveContainer width="100%" height="100%">
+//           <BarChart
+//             width={500}
+//             height={200}
+//             data={data}
+//             margin={{
+//               top: 5,
+//               right: 5,
+//               left: 0,
+//               bottom: 5,
+//             }}
+//           >
+//             <XAxis
+//               padding={{ left: 10 }}
+//               dataKey="month"
+//               tickSize={0}
+//               axisLine={false}
+//               tick={{
+//                 fill: `${theme === LIGHT_THEME ? "#676767" : "#f3f3f3"}`,
+//                 fontSize: 14,
+//               }}
+//             />
+//             <YAxis
+//               padding={{ bottom: 10, top: 10 }}
+//               tickFormatter={formatYAxisLabel}
+//               tickCount={6}
+//               axisLine={false}
+//               tickSize={0}
+//               tick={{
+//                 fill: `${theme === LIGHT_THEME ? "#676767" : "#f3f3f3"}`,
+//               }}
+//             />
+//             <Tooltip
+//               formatter={formatTooltipValue}
+//               cursor={{ fill: "transparent" }}
+//             />
+//             <Legend
+//               iconType="circle"
+//               iconSize={10}
+//               verticalAlign="top"
+//               align="right"
+//               formatter={formatLegendValue}
+//             />
+//             <Bar
+//               dataKey="value"
+//               fill="#475be8"
+//               activeBar={false}
+//               isAnimationActive={false}
+//               barSize={24}
+//               radius={[4, 4, 4, 4]}
+//             />
+//           </BarChart>
+//         </ResponsiveContainer>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AreaBarChart;
+

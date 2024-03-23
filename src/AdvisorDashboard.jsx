@@ -22,7 +22,7 @@ import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 
 
-
+import News from "./News/News";
 
 
 import{
@@ -64,6 +64,7 @@ function App() {
             <Route path="/viewadvi" element={<AdvClView/>} /> 
             <Route path="/plan" element={<Plans/>} />
             <Route path="/profedit" element={<MultiFormEdit/>}/>
+            <Route path="/news" element={<News/>}/>
           </Route>
         </Routes>
       </Router>

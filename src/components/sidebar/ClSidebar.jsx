@@ -134,17 +134,25 @@ const ClSidebar = () => {
                 <span className="menu-link-text">Advisors</span>
               </Link>
             </li>
+            <li className={`menu-item ${location.pathname === "/news" ? "active" : ""}`}>
+              <Link to="/news" className="menu-link">
+                <span className="menu-link-icon">
+                  <MdOutlinePeople size={20} />
+                </span>
+                <span className="menu-link-text">News</span>
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
             {/* <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link to="/news" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineSettings size={20} />
                 </span>
-                <span className="menu-link-text">Settings</span>
+                <span className="menu-link-text">NEWS</span>
               </Link>
             </li> */}
             <li className={`menu-item ${location.pathname === "/profile" ? "active" : ""}`}>
