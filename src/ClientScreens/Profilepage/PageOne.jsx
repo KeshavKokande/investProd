@@ -75,14 +75,15 @@ const PageOne = ({ formData, handleChange }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="address">Address:</label>
-          <textarea
+          <label htmlFor="address">Location:</label>
+          <input
+            type='text'
             id="address"
             name="address"
             value={formData.address}
             onChange={handleChange}
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
-          ></textarea>
+          />
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="jobRole">Job Role:</label>
@@ -95,7 +96,7 @@ const PageOne = ({ formData, handleChange }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
         </div>
-        <div className={`${styles['form-group']} ${styles['question-container']}`}>
+        {/* <div className={`${styles['form-group']} ${styles['question-container']}`}>
           <label htmlFor="photoId">Upload Photo ID:</label>
           <input
             type="file"
@@ -105,8 +106,8 @@ const PageOne = ({ formData, handleChange }) => {
             onChange={handlePhotoUpload}
             className={styles['form-control-file']}
           />
-        </div>
-        {photo && (
+        </div> */}
+        {/* {photo && (
           <div className={styles['preview-container']}>
             <p>Preview:</p>
             <img
@@ -115,10 +116,12 @@ const PageOne = ({ formData, handleChange }) => {
               className={styles['preview-image']}
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
 };
 
 export default PageOne;
+
+
