@@ -96,6 +96,17 @@ const PageOne = ({ formData, handleChange }) => {
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
         </div>
+        <div className={styles['question-container']}>
+          <label htmlFor="phone">Phone:</label>
+          <input
+            type='text'
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
+          />
+        </div>
         {/* <div className={`${styles['form-group']} ${styles['question-container']}`}>
           <label htmlFor="photoId">Upload Photo ID:</label>
           <input

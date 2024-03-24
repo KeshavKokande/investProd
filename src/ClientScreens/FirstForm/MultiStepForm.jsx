@@ -22,7 +22,8 @@ const MultiStepForm = () => {
     jobRole: '',
     agreement: false,
     photoId: { data: '', contentType: '' },
-    ppfoto: { data: '', contentType: '' },
+    profilePhoto
+      : { data: '', contentType: '' },
     phone: ''
   });
 
@@ -73,7 +74,9 @@ const MultiStepForm = () => {
 
       setFormData({
         ...formData,
-        ppfoto: {
+
+        profilePhoto
+          : {
           data: base64String.split(',')[1],
           contentType: file.type,
         },
@@ -97,9 +100,9 @@ const MultiStepForm = () => {
 
   const validatePageTwo = () => {
     const errors = {};
-    
+
     Object.keys(formData).forEach(key => {
-      
+
       if (key.includes('question_') && formData[key] === '' && !key.includes('What is your annual income?')) {
         errors[key] = 'Please select an option';
       }

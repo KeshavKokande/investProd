@@ -22,6 +22,7 @@ const PlanCard = ({ plan, deletePlan }) => {
       }
       console.log(response);
       console.log('Plan deleted successfully');
+      window.location.reload();
       // Optionally, you can update the state or perform any other actions here
     } catch (error) {
       console.error('Error deleting plan:', error);
