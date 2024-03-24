@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import LoginImage from './../../assets/images/loginImage.jpg';
 import Swal from 'sweetalert2';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+
 const LoginPage = () => {
   const navigate = useNavigate();
   
@@ -13,7 +14,7 @@ const LoginPage = () => {
     email: "",
     password: ""
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const [selectedRole, setSelectedRole] = useState("client"); // State to track selected user role
 
   const handleChange = (event) => {
@@ -44,7 +45,7 @@ const LoginPage = () => {
         body: JSON.stringify(formData),
         credentials: 'include'
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         Swal.fire({
@@ -57,11 +58,18 @@ const LoginPage = () => {
    
       const data = await response.json();
       console.log(data);
-  
-      if (data.user.role === 'client') {
+
+      // Check the selected role to redirect appropriately
+      if (selectedRole === 'client' && data.user.role === 'client') {
         navigate('/cldash');
-      } else {
+      } else if (selectedRole === 'advisor' && data.user.role === 'advisor') {
         navigate('/advisor_dashboard');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'You are not authorized to access this dashboard.'
+        });
       }
     } catch (error) {
       console.error('Error:', error);
@@ -97,12 +105,10 @@ const LoginPage = () => {
               >
                 {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
               </button>
-          
         </div>
-        {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>}
+        {/* {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>} */}
         <div className={styles['input-wrapper']}>
-          
-          <select  className="role-based-toggle"value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
+          <select className="role-based-toggle" value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
             <option value="client">Client</option>
             <option value="advisor">Advisor</option>
           </select>
@@ -111,7 +117,7 @@ const LoginPage = () => {
           <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
         </div>
         <hr />
-        {selectedRole === 'client' && ( // Render "Continue with Google" button only if selected role is client
+        {selectedRole === 'client' && (
           <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
             <h2>Continue with</h2>
             <span className={styles['google-icon']}><FcGoogle /></span>
@@ -121,7 +127,5 @@ const LoginPage = () => {
     </div>
   );
 };
-
-
 
 export default LoginPage;

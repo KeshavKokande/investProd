@@ -37,7 +37,9 @@ body {
   background-color: #ffffff;
   overflow-x: hidden;
 }
-
+.bg-light-nv{
+  background-color: transparent !important;
+}
 .layout_padding {
   padding: 90px 0;
 }

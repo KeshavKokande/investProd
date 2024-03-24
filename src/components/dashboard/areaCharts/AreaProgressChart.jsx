@@ -49,7 +49,7 @@ const AreaProgressChart = () => {
                  <div
                    className="adv-bar-item-filled"
                    style={{
-                     width: `${progressData.noOfSubscription*10}%`,
+                     width: `${progressData.noOfSubscription*5}%`,
                    }}
                  ></div>
                </div>

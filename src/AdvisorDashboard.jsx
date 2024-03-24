@@ -1,7 +1,6 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MoonIcon from "./assets/icons/moon.svg";
-import SunIcon from "./assets/icons/sun.svg";
+
 import BaseLayout from "./layout/BaseLayout";
 import ClBaseLayout from "./layout/ClBaseLayout";
 import { Dashboard } from "./screens";
@@ -20,9 +19,10 @@ import AdvClProfile from "./ClientScreens/AdvisersClientView/AdvClProfile";
 import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
+import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
+// import ProtectedRoute from "./ProtectedRoute";
 
-
-
+import News from "./News/News";
 
 
 import{
@@ -46,6 +46,9 @@ function App() {
           <Route path="/services" element={<Service />} />
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/clform" element={<MultiStepForm />} />
+
+          
+    
           
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
@@ -64,6 +67,8 @@ function App() {
             <Route path="/viewadvi" element={<AdvClView/>} /> 
             <Route path="/plan" element={<Plans/>} />
             <Route path="/profedit" element={<MultiFormEdit/>}/>
+            <Route path="/news" element={<News/>}/>
+            <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
           </Route>
         </Routes>
       </Router>
