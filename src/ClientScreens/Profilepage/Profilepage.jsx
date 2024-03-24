@@ -28,10 +28,11 @@ const ProfilePage = () => {
 
         if (response.status === 200) {
           const data = response.data.client;
-          const imageDataArray = data.ppfoto?.data?.data || []; // Get the image data array
+          const imageDataArray = data.profilePhoto?.data?.data || []; // Get the image data array
           const imageDataUrl = arrayToDataURL(imageDataArray); // Convert array to data URL
           
           setProfileInfo({
+            cota:data.profilePhoto.contentType,
             img: imageDataUrl,
             name: data.name || '',
             email: data.email || '',
@@ -61,7 +62,7 @@ const ProfilePage = () => {
 
   // Function to convert array to data URL
   const arrayToDataURL = (array) => {
-    const blob = new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
+    const blob = new Blob([new Uint8Array(array)], { type:profileInfo.cota});
     const urlCreator = window.URL || window.webkitURL;
     return urlCreator.createObjectURL(blob);
   };

@@ -7,8 +7,16 @@ const ProfileCard = ({ plan }) => {
         <>
             <div className={styles.containerProfile}>
                 <div className={styles.cardProfile}>
-                    <div className={`${styles.image} ${styles.gridPosition}` }>
-                        <img src="https://imgur.com/VcypK5c.png" alt="Profile" />
+                    <div className={`${styles.image} ${styles.gridPosition}`}>
+                        <img
+                            src={plan.decPhoto}
+                            alt='Profile'
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = 'https://imgur.com/VcypK5c.png';
+                            }}
+                            className={styles['profile-image']}
+                        />
                     </div>
                     <div className={`${styles.vitamin} ${styles.gridPosition}`}>
                         <h2 className={styles.vitaminH2}>{plan.planName}</h2>
