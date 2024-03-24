@@ -96,7 +96,15 @@
         opacity: 0.8;
     }
   }
-
+.box-profile{
+  padding: 14px, 20px;
+  display: flex;
+  align-items: center;
+    // padding: theme.spacing(2, 2.5),
+    border-Radius: 4px;
+    background-Color: grey;
+    width: 50px;
+}
   .menu-item{
     margin-bottom: 8px;
 

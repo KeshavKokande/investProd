@@ -24,3 +24,6 @@
     align-content: center;
     align-items: center;
   }
+  .profile-landing-name{
+    font-weight: 900 !important;
+  }

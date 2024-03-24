@@ -23,7 +23,7 @@ import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfi
 // import ProtectedRoute from "./ProtectedRoute";
 
 import News from "./News/News";
-
+import Stoks from './Stocks/Stoks'
 
 import{
   HomepageAbout,
@@ -46,6 +46,8 @@ function App() {
           <Route path="/services" element={<Service />} />
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/clform" element={<MultiStepForm />} />
+
+          <Route path="/stocks" element={<Stoks />} />
 
           
     

@@ -5,6 +5,9 @@ import { LIGHT_THEME } from "../../constants/themeConstants";
 import LogoBlue from "../../assets/images/logo_blue.svg";
 import LogoWhite from "../../assets/images/logo_white.svg";
 import Swal from "sweetalert2";
+// import axios from 'axios';
+
+
 import {
   MdOutlineClose,
 
@@ -22,6 +25,10 @@ import "./Sidebar.scss";
 import { useLocation } from "react-router-dom";
 import { SidebarContext } from "../../context/SidebarContext";
 
+
+// import { Box,  Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
+// import { styled } from '@mui/material/styles';
+
 const ClSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,6 +36,7 @@ const ClSidebar = () => {
   const { theme } = useContext(ThemeContext);
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   const navbarRef = useRef(null);
+
 
   // Logout function
   const handleLogout = () => {
@@ -89,7 +97,10 @@ const ClSidebar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+    
   }, []);
+
+
 
   return (
     <nav
@@ -107,6 +118,25 @@ const ClSidebar = () => {
           <MdOutlineClose size={24} />
         </button>
       </div>
+
+{/* 
+      <Box  sx={{ mb: 5, mx: 2.5 }}>
+        <Link to="/" >
+          <div className="box-profile">
+            <Avatar  src="https://avatar.iran.liara.run/public/boy" alt="photoURL" />
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                {profileInfo.name}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {profileInfo.jobRole}
+              </Typography>
+            </Box>
+          </div>
+        </Link>
+      </Box> */}
+
+
       <div className="sidebar-body">
         <div className="sidebar-menu">
           <ul className="menu-list">
@@ -179,3 +209,79 @@ const ClSidebar = () => {
 };
 
 export default ClSidebar;
+
+
+
+
+
+
+
+
+  //------> geting profile Name
+
+  // const [profileInfo, setProfileInfo] = useState({
+  //   img: '', // Add the img property to store the image data
+  //   name: '',
+  //   email: '',
+  //   age: '',
+  //   address: '',
+  //   gender: '',
+  //   jobRole: ''
+   
+  // });
+ 
+
+  // useEffect(() => {
+  //   const fetchProfileData = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         withCredentials: true
+  //       });
+
+  //       if (response.status === 200) {
+  //         const data = response.data.client;
+  //         const imageDataArray = data.ppfoto?.data?.data || []; // Get the image data array
+  //         const imageDataUrl = arrayToDataURL(imageDataArray); 
+          
+          
+  //         setProfileInfo({
+  //           img: imageDataUrl,
+  //           name: data.name || '',
+  //           email: data.email || '',
+  //           age: data.age || '',
+  //           address: data.address || '',
+  //           gender: data.gender || '',
+  //           jobRole: data.jobRole || ''
+           
+  //         });
+          
+  //         console.log(data)
+  //         console.log("data name", data.name)
+  //       } else {
+  //         throw new Error('Failed to fetch profile data');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching profile data:', error.message);
+  //     }
+  //   };
+
+  //   fetchProfileData();
+  // }, []);
+
+
+  //  // Function to convert array to data URL
+  //  const arrayToDataURL = (array) => {
+  //   const blob = new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
+  //   const urlCreator = window.URL || window.webkitURL;
+  //   return urlCreator.createObjectURL(blob);
+  // };
+
+
+
+
+
+  
+  // --------------->end
