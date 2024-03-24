@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Range } from 'react-range';
-import PlanCard from './FlipingCard';
-import '../Plans/Plans.css';
+import styles from './Plans.module.css';
 import { Link } from 'react-router-dom';
 import ProfileCard from './ProfileCard';
 
@@ -73,8 +72,8 @@ const PlanCardList = ({ plans }) => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div className="cl_container">
+    <div style={{ marginTop: '4vh' }}>
+      <div className={styles.clContainer}>
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           <div style={{ marginRight: '0.1rem' }}>
             Search:
@@ -90,17 +89,14 @@ const PlanCardList = ({ plans }) => {
             <div style={{ position: 'relative' }}>
               <button onClick={() => setShowFilterDropdown(!showFilterDropdown)}>Filters</button>
               {showFilterDropdown && (
-                <div style={{ position: 'absolute', top: '100%', left: 0, backgroundColor: '#fff', border: '1px solid #ccc', zIndex: 1 }}>
+                <div className={styles.filterDropdown}>
                   <select name="cat_risk" value={filters.cat_risk} onChange={handleFilterChange}>
                     <option value="">Risk</option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                   </select>
-                  {/* Add other filter options as needed */}
-                  
                   <br />
-                  
                   <label></label>
                   <select value={sortOption} onChange={handleSortChange}>
                     <option value="">Sort by:</option>
