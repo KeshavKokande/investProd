@@ -1,79 +1,119 @@
+
 import React, { useState, useEffect } from 'react';
 import InvestmentSummary from './Summary';
-import { AreaCards, AreaCharts, AreaTable} from "../../components";
+import { Typography } from '@mui/material';
 import "./dashboard.css";
-
+import axios from 'axios';
 function DashboardCl() {
-    const [transactions, setTransactions] = useState([]);
-    const [returns, setReturns] = useState([])
-    const [advisorNames, setAdvisorNames] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  const [returns, setReturns] = useState([])
+  const [advisorNames, setAdvisorNames] = useState([]);
 
-    useEffect(() => {
-      (function(d, t) {
-        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-        v.onload = function() {
-          window.voiceflow.chat.load({
-            verify: { projectID: '65e3fdf05671df3be500cc99' },
-            url: 'https://general-runtime.voiceflow.com',
-            versionID: 'production'
-          });
-        }
-        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
-  v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-    })(document, 'script');
-    }, []);
+  const [error, setError] = useState(null);
 
-
-    useEffect(() => {
-      const fetchTransactions = async () => {
-        try {
+  const [profileInfo, setProfileInfo] = useState({
+    img: '', // Add the img property to store the image data
+    name: '',
+    email: '',
+    age: '',
+    address: '',
+    gender: '',
+    jobRole: ''
    
-          const response = await fetch('http://localhost:8000/api/v1/Client/get-subscribed-plans', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-          })
+  });
+ 
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        });
+
+        if (response.status === 200) {
+          const data = response.data.client;
           
-          const ponse = await fetch('http://localhost:8000/api/v1/Client/get-returns-of-subscribed-plans', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-          })
-   
-          if (!response.ok || !ponse.ok) {
-            throw new Error('Failed to fetch user data');
-          }
-          const data = await response.json();
-          const redat = await ponse.json();
-          setTransactions(data.transactions);
-          setReturns(redat.profits);
-          setAdvisorNames(data.advisorNames)
-          // console.log("WHOLE DATA:", redat);
-          // console.log(redat)
-      } catch (error) {
-          console.error('Error fetching user data:', error.message);
+          
+          setProfileInfo({
+           
+            name: data.name || '',
+            email: data.email || '',
+            age: data.age || '',
+            address: data.address || '',
+            gender: data.gender || '',
+            jobRole: data.jobRole || ''
+           
+          });
+          
+          console.log(data)
+          console.log("data name", data.name)
+        } else {
+          throw new Error('Failed to fetch profile data');
         }
-      };
-   
-      fetchTransactions();
-    }, []);
-return (
-        <div className="App">
-            {/* <h1>Welocme Back {advisorNames[0]}</h1> */}
+      } catch (error) {
+        console.error('Error fetching profile data:', error.message);
+      }
+    };
 
-          <center><h1 style={{color:"black", fontSize:"30px", fontWeight: "bold"}}> Portfolio Summary</h1></center>
-        
-            {/* <center><h1> Portfolio Summary</h1></center> */}
-            <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns}/>
-            <script>
-          console.log(document.queryselector(".alert"));
-        </script>
-        </div>
-    );
+    fetchProfileData();
+  }, []);
+
+
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-subscribed-plans', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+
+        const ponse = await fetch('http://localhost:8000/api/v1/Client/get-returns-of-subscribed-plans', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+
+        if (!response.ok || !ponse.ok) {
+          throw new Error('Failed to fetch transactions data');
+        }
+        const data = await response.json();
+        const redat = await ponse.json();
+        setTransactions(data.transactions);
+        setReturns(redat.profits);
+        setAdvisorNames(data.advisorNames);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+
+
+  return (
+    <div className="App">
+      <Typography className="profile-landing-name"variant="h4" sx={{ mb: 5 }}>
+        Hi, Welcome back {profileInfo.name} {/* Display user name here */}
+      </Typography>
+
+      <center><h1 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}> Portfolio Summary</h1></center>
+
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} />
+      <script>
+        console.log(document.queryselector(".alert"));
+      </script>
+    </div>
+  );
 }
 
 export default DashboardCl;
