@@ -38,9 +38,11 @@ function PlansCl() {
 <>
 <Arraay plans={plansData} />
 <br/>
+<br />
 <hr/>
 <br/>
-<h2 className={styles.explorePlans}>Explore Plans</h2>
+<br />
+<h2 className={styles.heading}>Explore Plans</h2>
 <PlanCardList plans={plansData} />
 </>
   );

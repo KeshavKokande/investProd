@@ -1,12 +1,24 @@
 .CarouselBox{
-  display: grid;
-  grid-gap: 6vh;
+  display: flex;
+    flex-direction: column;
+    gap: 14vh;
+}
+
+.InnerBox{
+  display: flex;
+  gap: 4vh;
+  flex-direction: column;
+}
+
+.heading{
+  font-family: 'DM serif text';
+    font-size: 2.5vw;
 }
 
 .Carousel{
   height: 60vh;
   background-color: #ffffff;
-  box-shadow:  rgba(100, 100, 111, 0.1) 4px 4px 4px 4px, rgba(100, 100, 111, 0.1) -4px -4px 4px 4px;
+  box-shadow:  rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
   border-radius: 12px;
 }
 
@@ -98,7 +110,7 @@
   }
   
   select {
-    width: 10rem;
+    width: 8rem;
   }
   
   input[type="number"] {
@@ -179,4 +191,26 @@
 
   .cl-p-stars-plans{
     text-align: center;
+  }
+
+
+  .CardList{
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
+    border-radius: 12px;
+  }
+
+  .flex{
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+  }
+
+  .flex label{
+    position: static;
+    margin: 0;
+  }
+
+  .flex input{
+    width: 8rem;
   }

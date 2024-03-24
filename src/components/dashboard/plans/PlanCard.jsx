@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import "./AdNewPlans.css";
+import styles from "./AdNewPlans.module.css";
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks,advise} = plan;
+  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks, advise } = plan;
   const [isDeleting, setIsDeleting] = useState(false);
-  const [tobeDelted, setTobeDelted] = useState(plan._id);
+  const [toBeDeleted, setToBeDeleted] = useState(plan._id);
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/advisor/deletePlan/${tobeDelted}`, {
+      const response = await fetch(`http://localhost:8000/api/v1/advisor/deletePlan/${toBeDeleted}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const PlanCard = ({ plan, deletePlan }) => {
       if (!response.ok) {
         throw new Error('Error deleting plan');
       }
-      console.log(response)
+      console.log(response);
       console.log('Plan deleted successfully');
       // Optionally, you can update the state or perform any other actions here
     } catch (error) {
@@ -31,41 +31,39 @@ const PlanCard = ({ plan, deletePlan }) => {
 
   const isActiveString = plan.isActive ? 'Active' : 'In Active';
   
-
   const renderStocks = () => {
-  
     return stocks.map((stock, index) => (
       <tr key={index}>
-        <td className="adnewplan-td">{stock.stockName}</td>
-        <td className="adnewplan-td">{stock.contri}%</td>
-        <td className={`adnewplan-td ${parseFloat(stock.currentDayValue) >= 0 ? "adnewplan-profit-positive" : "adnewplan-profit-negative"}`}>{stock.currentDayValue}%</td>
+        <td className={styles.adnewplan_td}>{stock.stockName}</td>
+        <td className={styles.adnewplan_td}>{stock.contri}%</td>
+        <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td>
       </tr>
     ));
   };
 
   return (
-    <div className="outerMax">
-      <h4 style={{ marginLeft: "3rem" }}>{plan.planName}</h4>
-      <div className="adnewplan-plan-container">
-        <div className="adnewplan-left-section">
-          <table className="adnewplan-table">
+    <div className={styles.outerMax}>
+      <h4>{plan.planName}</h4>
+      <div className={styles.adnewplan_plan_container}>
+        <div className={styles.adnewplan_left_section}>
+          <table className={styles.adnewplan_table}>
             <thead>
               <tr>
-                <th className="adnewplan-th">Name</th>
-                <th className="adnewplan-th">Contribution</th>
-                <th className="adnewplan-th">Profit</th>
+                <th className={styles.adnewplan_th}>Name</th>
+                <th className={styles.adnewplan_th}>Contribution</th>
+                <th className={styles.adnewplan_th}>Profit</th>
               </tr>
             </thead>
             <tbody>{renderStocks()}</tbody>
           </table>
         </div>
 
-        <div className="adnewplan-separator"></div>
+        <div className={styles.adnewplan_separator}></div>
 
-        <div className="adnewplan-right-section">
-          <div className="text">
-            <div><strong>Risk: </strong><span className={`adnewplan-risk-dot adnewplan-risk-${risk}`}></span>{risk}</div>
-            <div>Status: <span className={`adnewplan-risk-dot adnewplan-risk-${plan.isActive}`}></span>{isActiveString}</div>
+        <div className={styles.adnewplan_right_section}>
+          <div className={styles.text}>
+            <div><strong>Risk: </strong><span className={`${styles.adnewplan_risk_dot} ${styles.adnewplan_risk}-${risk}`}></span>{risk}</div>
+            <div>Status: <span className={`${styles.adnewplan_risk_dot} ${styles.adnewplan_risk}-${plan.isActive}`}></span>{isActiveString}</div>
 
             <div>Minimum Investment Amount: ₹{minInvestmentAmount}</div>
             <div>Number of Subscriptions: {noOfSubscription}</div>
@@ -73,8 +71,8 @@ const PlanCard = ({ plan, deletePlan }) => {
             <div>Advise:  {advise}</div>
           </div>
 
-          <div className="btn">
-            <div className="adnewplan-delete-icon" onClick={handleDelete}>Delete</div>
+          <div className={styles.btn}>
+            <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>Delete</div>
           </div>
         </div>
       </div>

@@ -72,45 +72,46 @@ const PlanCardList = ({ plans }) => {
   };
 
   return (
-    <div style={{ marginTop: '4vh' }}>
+    <div style={{ marginTop: '4vh' }} >
       <div className={styles.clContainer}>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          <div style={{ marginRight: '0.1rem' }}>
-            Search:
+        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 1vw' }}>
+          <div className={styles.flex}>
+            <label> Search: </label>
             <input
               type="text"
               name="searchText"
               value={filters.searchText}
               onChange={handleFilterChange}
-              style={{ width: '50%' }}
+             
             />
           </div>
-          <div style={{ marginRight: '0.1rem' }}>
-            <div style={{ position: 'relative' }}>
-              <button onClick={() => setShowFilterDropdown(!showFilterDropdown)}>Filters</button>
-              {showFilterDropdown && (
-                <div className={styles.filterDropdown}>
-                  <select name="cat_risk" value={filters.cat_risk} onChange={handleFilterChange}>
-                    <option value="">Risk</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
-                  <br />
-                  <label></label>
-                  <select value={sortOption} onChange={handleSortChange}>
-                    <option value="">Sort by:</option>
-                    <option value="rating">Rating</option>
-                    <option value="total_orders">Total Orders</option>
-                  </select>
-                </div>
-              )}
+          <div >
+            <div className={styles.flex}>
+              <label>Filters:</label>
+              {/* {showFilterDropdown && ( */}
+              {/* <div className={styles.filterDropdown}> */}
+              <select name="cat_risk" value={filters.cat_risk} onChange={handleFilterChange}>
+                <option value="">Risk</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              {/* <br /> */}
+              {/* <label></label> */}
+              <select value={sortOption} onChange={handleSortChange}>
+                <option value="">Sort by:</option>
+                <option value="rating">Rating</option>
+                <option value="total_orders">Total Orders</option>
+              </select>
+              {/* </div> */}
+              {/* )} */}
             </div>
           </div>
 
-          <div style={{ marginRight: '0.1rem', marginBottom: '0.5rem' }}>
-            Price Range:
-            <Range
+          <div className={styles.flex} style={{width: '22vw'}}>
+            <label htmlFor='range' style={{whiteSpace: 'nowrap'}}>Price Range:</label>
+            {/* Price Range: */}
+            <Range _id='range'
               step={500}
               min={0}
               max={10000}
@@ -144,13 +145,14 @@ const PlanCardList = ({ plans }) => {
                 />
               )}
             />
+            <input type="text" />
           </div>
         </div>
       </div>
 
       <br />
 
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} className={styles.CardList}>
         {sortPlans().map((plan, index) => (
           <div key={index} style={{ width: '33%', padding: '10px' }}>
             <Link to={`/plan_id/${plan._id}`}>
