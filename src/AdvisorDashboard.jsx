@@ -1,6 +1,6 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import BaseLayout from "./layout/BaseLayout";
 import ClBaseLayout from "./layout/ClBaseLayout";
 import { Dashboard } from "./screens";
@@ -34,6 +34,22 @@ import{
 
 function App() {
  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  useEffect(() => {
+    // Check if the cookie is set
+    const cookieExists = document.cookie.includes('jwt');
+    
+    if (cookieExists) {
+      setIsAuthenticated(true); // Update isAuthenticated state to true
+    } else {
+      // Cookie is not set
+      // Perform any action you want if the cookie is not set, such as redirecting to the login page
+      if (!window.location.href.includes('/login')) {
+        window.location.href = '/login';
+      }
+    }
+  }, []); 
 
   return (
     <>
@@ -46,12 +62,8 @@ function App() {
           <Route path="/services" element={<Service />} />
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/clform" element={<MultiStepForm />} />
-
           <Route path="/stocks" element={<Stoks />} />
 
-          
-    
-          
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
             <Route path="/clientlist" element={<Clientlist/>} />
