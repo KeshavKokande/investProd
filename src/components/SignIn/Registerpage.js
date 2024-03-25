@@ -96,6 +96,9 @@ const Register = () => {
       </div>
       <div className={styles['register-right']}>
         <h2>Welcome Client!!!</h2>
+        <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
+          <h4>Already An User<a href='/login'>  Login Here</a></h4>
+        </div>
         <div className={styles['input-wrapper']}>
           <label>Name</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} />

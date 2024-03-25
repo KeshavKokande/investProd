@@ -79,7 +79,6 @@ const AreaCards = () => {
         }
         const data = await response.json();
         setTotalCurrentProfit(data);
-        console.log("Ye Le BHadwe :  ", data);
     } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
