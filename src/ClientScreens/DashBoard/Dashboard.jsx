@@ -90,9 +90,18 @@ function DashboardCl() {
  
   return (
 <div className={styles.App}>
-<Typography className={styles["profile-landing-name"]} variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back {profileInfo.name} {/* Display user name here */}
-</Typography>
+{/* <Typography className={styles["profile-landing-name"]} variant="h4" sx={{ mb: 5 }}>
+        Hi, Welcome back {profileInfo.name} 
+</Typography> */}
+
+<div className={styles.UserInfo}>
+  <button>
+    <img src="" alt="" />
+  </button>
+  <h4>{profileInfo.name}</h4>
+  <img src="" alt="" />
+</div>
+
  
      <h2 className={styles.heading}> Portfolio Summary</h2>
  
