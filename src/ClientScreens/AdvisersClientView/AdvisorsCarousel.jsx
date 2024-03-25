@@ -42,7 +42,7 @@ const AdvisorsCarousel = ({ advisors }) => {
 
                 <div className="flex flex-col items-center justify-center gap-1 p-4">
                   <p className="text-xl font-semibold">{advisor.name}</p>
-                  <p style={{ textAlign: "justify" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+                  <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
                   <div className='rating'>
                     <div>
                       <span class="fa fa-star checked"></span>
@@ -81,7 +81,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                     <p className="text-xl font-semibold">{advisor.name}</p>
 
                     {/* <p className="text-center">{d.review}</p> */}
-                    <p style={{ textAlign: "justify" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+                    <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
                     <div className='rating'>
                       <div style={{width:"max-content"}}>
 
@@ -120,7 +120,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                   <div className="flex flex-col items-center justify-center gap-1 p-4">
                     <p className="text-xl font-semibold">{advisor.name}</p>
                     {/* <p className="text-center">{d.review}</p> */}
-                    <p style={{ textAlign: "justify" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+                    <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
                     <div className='rating'>
                       <div>
 
