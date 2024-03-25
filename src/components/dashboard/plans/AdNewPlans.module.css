@@ -19,6 +19,13 @@ body {
   background-color: #fff;
 
 }
+.active {
+  color: green;
+}
+
+.inactive {
+  color: red;
+}
 
 .adnewplan_left_section {
 
