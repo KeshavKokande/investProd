@@ -4,18 +4,18 @@ import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './../../components/AdvisorCardsPage/TestpageAdv.css'
 
 
 const settings = {
-      dots: true,
-      infinite: false, //keep it false for advisers less than 3 if more than three change to true
-      speed: 500,
-      slidesToShow:3,
-      slidesToScroll: 1
-    };
+  dots: true,
+  infinite: false, //keep it false for advisers less than 3 if more than three change to true
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1
+};
 
 const AdvisorsCarousel = ({ advisors }) => {
   const associateAdvisors = advisors.filter(advisor => advisor.category === "Standard");
@@ -23,128 +23,127 @@ const AdvisorsCarousel = ({ advisors }) => {
   const expertAdvisors = advisors.filter(advisor => advisor.category === "Premium");
 
 
-  
 
-  
+
+
 
   return (
     <>
-    <h2 style={{ marginBottom: "-4rem" }}>Standard Advisors</h2>
-    <div className='w-4/4 m-auto '>
-      <div className="mt-20 ">
-      <Slider {...settings}>
-        {associateAdvisors.map((advisor, index) => (
-          <div key={index} className="bg-white h-[450px] text-black infocard rounded-xl ">
-           
-            <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
-              <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full"/>
-             </div>
-
-            <div className="flex flex-col items-center justify-center gap-4 p-4">
-              <p className="text-xl font-semibold">{advisor.name}</p>
-              <p style={{    textAlign: "justify"}}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
-               <div className='rating'>
-                <div>
-                    
-               <span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star"></span>
-</div>
-              <Link to={`/advisor_id/${advisor._id}`}>
-               <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
-               </Link>
-             </div>
-             </div>
-           </div>
-        ))}
-      </Slider>
-
-      </div>
-      
-    </div>
-    <div>
-      
-
-      <h2 style={{ marginBottom: "-4rem" }}>Exeutive Advisors</h2>
+      <h2 style={{ marginBottom: "-4rem" }}>Standard Advisors</h2>
       <div className='w-4/4 m-auto '>
-      <div className="mt-20 ">
-      <Slider {...settings}>
-      {advanceAdvisors.map((advisor, index) => ( 
-          <div key={index} className="bg-white h-[450px] text-black infocard rounded-xl ">
-           
-            <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
-              <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full"/>
-             </div>
+        <div className="mt-20 ">
+          <Slider {...settings}>
+            {associateAdvisors.map((advisor, index) => (
+              <div key={index} className="bg-white  text-black infocard rounded-xl " style={{height: "fit-content"}}>
 
-            <div className="flex flex-col items-center justify-center gap-4 p-4">
-              <p className="text-xl font-semibold">{advisor.name}</p>
+                <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
+                  <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+                </div>
 
-              {/* <p className="text-center">{d.review}</p> */}
-                           <p style={{    textAlign: "justify"}}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
-               <div className='rating'>
-                <div>
-                    
-               <span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star"></span>
-            
-                </div>   
-                <Link to={`/advisor_id/${advisor._id}`}>
-               <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
-               </Link>
-             </div>
-             </div>
-           </div>
-        ))}
-      </Slider>
+                <div className="flex flex-col items-center justify-center gap-1 p-4">
+                  <p className="text-xl font-semibold">{advisor.name}</p>
+                  <p style={{ textAlign: "justify" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+                  <div className='rating'>
+                    <div>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                    </div>
+                    <Link to={`/advisor_id/${advisor._id}`}>
+                      <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+
+        </div>
+
       </div>
-      
-    </div>
-      
+      <div>
 
-      <h2 style={{ marginBottom: "-4rem" }}>Premium Advisors</h2>
-      
-      <div className='w-4/4 m-auto '>
-      <div className="mt-20">
-      <Slider {...settings}>
-        {expertAdvisors.map((advisor, index) => (
-          <div key={index} className="bg-white h-[450px] text-black infocard rounded-xl">
-            
-            <div className='h-56 bg-indigo-500 flex justify-center items-center rounded-t-xl'>
-              <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full"/>
-             </div>
 
-            <div className="flex flex-col items-center justify-center gap-4 p-4">
-              <p className="text-xl font-semibold">{advisor.name}</p>
-              {/* <p className="text-center">{d.review}</p> */}
-              <p style={{    textAlign: "justify"}}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
-              <div className='rating'>
-                <div>
-                    
-               <span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star"></span>
-            
-                </div>   
-                <Link to={`/advisor_id/${advisor._id}`}>
-               <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
-               </Link>
-             </div>
-            </div>
-           </div>
-        ))}
-      </Slider>
+        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }}>Exeutive Advisors</h2>
+        <div className='w-4/4 m-auto '>
+          <div className="mt-20 ">
+            <Slider {...settings}>
+              {advanceAdvisors.map((advisor, index) => (
+                <div key={index} className="bg-white text-black infocard rounded-xl " style={{height: "fit-content"}}>
+
+                  <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
+                    <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center gap-1 p-4">
+                    <p className="text-xl font-semibold">{advisor.name}</p>
+
+                    {/* <p className="text-center">{d.review}</p> */}
+                    <p style={{ textAlign: "justify" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+                    <div className='rating'>
+                      <div style={{width:"max-content"}}>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+
+                      </div>
+                      <Link to={`/advisor_id/${advisor._id}`}>
+                        <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+        </div>
+
+
+        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }} >Premium Advisors</h2>
+
+        <div className='w-4/4 m-auto '>
+          <div className="mt-20">
+            <Slider {...settings}>
+              {expertAdvisors.map((advisor, index) => (
+                <div key={index} className="bg-white  text-black infocard rounded-xl" style={{height: "fit-content"}}>
+
+                  <div className='h-56 bg-indigo-500 flex justify-center items-center rounded-t-xl'>
+                    <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center gap-1 p-4">
+                    <p className="text-xl font-semibold">{advisor.name}</p>
+                    {/* <p className="text-center">{d.review}</p> */}
+                    <p style={{ textAlign: "justify" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio ex odio eaque similique commodi.</p>
+                    <div className='rating'>
+                      <div>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+
+                      </div>
+                      <Link to={`/advisor_id/${advisor._id}`}>
+                        <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+        </div>
+
       </div>
-      
-    </div>
-      
-    </div>
     </>
   );
 };
