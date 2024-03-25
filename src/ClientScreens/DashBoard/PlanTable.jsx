@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import styles from './dashboard.module.css';
  
+import moment from 'moment';
 const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
   const columns = [
     {
