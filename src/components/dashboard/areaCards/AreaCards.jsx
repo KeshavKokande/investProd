@@ -100,7 +100,7 @@ const AreaCards = () => {
         cardInfo={{
           title: "Total Clients",
           value: totalClients?.noOfClients, 
-          text: `You have ${totalClients?.noOfClients} clients.`,
+          // text: `You have ${totalClients?.noOfClients} clients.`,
         }}
       />
       <AreaCard
@@ -109,7 +109,7 @@ const AreaCards = () => {
         cardInfo={{
           title: "Total Revenue",
           value: formatCurrency(totalInvestedAmount?.totalInvestedAmount),
-          text: `Total investment ${formatCurrency(totalInvestedAmount?.totalInvestedAmount)}`,
+          // text: `Total investment ${formatCurrency(totalInvestedAmount?.totalInvestedAmount)}`,
         }}
       />
       <AreaCard
@@ -118,7 +118,7 @@ const AreaCards = () => {
         cardInfo={{
           title: "Current Profit",
           value: formatCurrency(totalCurrentProfit?.totalCumulativeProfit),
-          text: `Total Current Profit ${formatCurrency(totalCurrentProfit?.totalCumulativeProfit)}`,
+          // text: `Total Current Profit ${formatCurrency(totalCurrentProfit?.totalCumulativeProfit)}`,
         }}
       />
     </section>
