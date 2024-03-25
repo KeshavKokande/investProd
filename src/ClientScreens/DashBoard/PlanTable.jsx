@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Table } from 'antd';
-
+import moment from 'moment';
 const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
     const columns = [
         {
@@ -11,13 +11,18 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
         },
         {
             title: 'Advisor Name',
-            dataIndex: 'advisorName', // Changed to 'advisorName' to match dataIndex
+            dataIndex: 'advisorName',
             key: 'advisorName',
         },
         {
             title: 'Total Amount Invested',
             dataIndex: 'totalInvestment',
             key: 'totalInvestment',
+        },
+        {
+            title: 'Date of Buying Plan',
+            dataIndex: 'dateOfBuying',
+            key: 'dateOfBuying',
         },
     ];
 
@@ -26,6 +31,7 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
         planName: plan.planName,
         advisorName: advisorNames[index],
         totalInvestment: totalInvestments.get(plan.planId),
+        dateOfBuying: moment(plan.createdAt).format('DD-MM-YYYY'), // Extracting date from createdAt
     }));
 
     return (
