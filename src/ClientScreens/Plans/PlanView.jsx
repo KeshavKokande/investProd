@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import dummy from './13429911_5242374.jpg';
 import styles from './Plans.module.css';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
  
 function PlanView() {
+  const navigate = useNavigate();
   const { plan_id } = useParams();
   const [plansData, setPlansData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -75,8 +77,12 @@ function PlanView() {
  
           const data = await response.json();
           console.log('Buy plan response:', data);
+       
  
           Swal.fire('Success', 'Plan bought successfully!', 'success');
+          if (data.status === 'success') {
+            navigate('/profile');// Update success state
+          }
         } catch (error) {
           console.error('Error buying plan:', error.message);
           Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
@@ -99,10 +105,53 @@ function PlanView() {
 <div className={styles.lefa}>
 <div className={styles.advright}>
 <h2 style={{ marginTop: "0.5rem" }}>{plan.planName}</h2>
-<center><hr style={{ width: '70%' }} /></center>
-<div>📧: {plan.minInvestmentAmount} </div>
-<div>🚀: {new Date(plan.createdAt).toLocaleDateString()}</div>
-<div>More details to be added</div>
+ 
+<div>
+      <h2>Plan Information</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th>Advise</th>
+            <td>{plan.advise}</td>
+          </tr>
+          <tr>
+            <th>Cap Value</th>
+            <td>{plan.capValue}</td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td>{new Date(plan.createdAt).toLocaleString()}</td>
+          </tr>
+          <tr>
+            <th>Max Value</th>
+            <td>{plan.maxVal}</td>
+          </tr>
+          <tr>
+            <th>Min Investment Amount</th>
+            <td>{plan.minInvestmentAmount}</td>
+          </tr>
+          <tr>
+            <th>No of Subscription</th>
+            <td>{plan.noOfSubscription}</td>
+          </tr>
+          <tr>
+            <th>Risk</th>
+            <td>{plan.risk}</td>
+          </tr>
+          <tr>
+            <th>Stocks</th>
+            <td>
+              <ul>
+                {plan.stocks.map(stock => (
+                  <li key={stock._id}>{stock.stockName}</li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
 <br />
 <br />
 <input
