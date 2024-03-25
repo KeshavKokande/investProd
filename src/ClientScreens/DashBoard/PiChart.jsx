@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import styles from "./dashboard.module.css"
 
 const PiChart = ({ data, title }) => {
   const options = {
@@ -45,25 +46,25 @@ const PiChart = ({ data, title }) => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h5 className="text-xl font-semibold text-black dark:text-white">
-            {title}
-      </h5>
+    <div style={{display:'flex'}}>
+      {/* <h5 className="text-xl font-semibold text-black dark:text-white">
+        {title}
+      </h5> */}
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
           <ReactApexChart options={options} series={data.map(item => item.value)} type="donut" />
         </div>
       </div>
-      <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
+      <div className={styles.pieChartLabels}>
         {data.map((item, index) => (
-          <div className="sm:w-1/2 w-full px-8" key={index}>
+          <div  key={index}>
             <div className="flex w-full items-center">
               <span className={`mr-2 block h-3 w-full max-w-3 rounded-full bg-${item.color}`}></span>
               <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
                 <span> {item.name}</span>
                 {/* <span> {item.percentage}% </span> */}
                 {/* <span> {item.value} </span> */}
- 
+
               </p>
             </div>
           </div>

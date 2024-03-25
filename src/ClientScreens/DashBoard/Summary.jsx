@@ -1,7 +1,7 @@
 import React from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
-
+import styles from './dashboard.module.css'
 
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
@@ -39,7 +39,7 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
 
     // Extracting unique plan IDs
     const uniquePlanIds = [...new Set(returns.map(returns => returns.planId))];
-    
+
     const totalProfitAmount = returns.reduce((acc, curr) => acc + curr.profit, 0);
 
     // Calculating total profit for each unique plan ID
@@ -59,11 +59,11 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
         return data;
     }
 
-    
+
     const formatCurrency = (value) => {
         const roundedValue = parseFloat(value).toFixed(2);
         return `₹${roundedValue}`;
-      };
+    };
 
     return (
         <div>
@@ -102,17 +102,14 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
 
             <hr />
 
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
-                
-                <p id="piechart"><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)}  /></p>
-                
-               
-                <p  id="piechart"><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
+            <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
+
+                <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
+                <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
             </div>
 
 
-
-            <center><h3 style={{ color: "black", marginTop: "20px",fontSize: "2rem",    fontWeight: "400",marginBottom: "25px"}}>Plan Information:</h3></center>
+            <h2 className={styles.heading}>Plan Information</h2>
 
 
             <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />

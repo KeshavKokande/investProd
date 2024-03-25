@@ -1,16 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import InvestmentSummary from './Summary';
 import { Typography } from '@mui/material';
-import "./dashboard.css";
+import styles from "./dashboard.module.css";
 import axios from 'axios';
+ 
 function DashboardCl() {
   const [transactions, setTransactions] = useState([]);
-  const [returns, setReturns] = useState([])
+  const [returns, setReturns] = useState([]);
   const [advisorNames, setAdvisorNames] = useState([]);
-
   const [error, setError] = useState(null);
-
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
     name: '',
@@ -19,10 +17,8 @@ function DashboardCl() {
     address: '',
     gender: '',
     jobRole: ''
-   
   });
  
-
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -32,24 +28,19 @@ function DashboardCl() {
           },
           withCredentials: true
         });
-
+ 
         if (response.status === 200) {
           const data = response.data.client;
-          
-          
           setProfileInfo({
-           
             name: data.name || '',
             email: data.email || '',
             age: data.age || '',
             address: data.address || '',
             gender: data.gender || '',
             jobRole: data.jobRole || ''
-           
           });
-          
-          console.log(data)
-          console.log("data name", data.name)
+          console.log(data);
+          console.log("data name", data.name);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -57,13 +48,11 @@ function DashboardCl() {
         console.error('Error fetching profile data:', error.message);
       }
     };
-
+ 
     fetchProfileData();
     sessionStorage.setItem('role', 'client');
   }, []);
-
-
-
+ 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -74,7 +63,7 @@ function DashboardCl() {
           },
           credentials: 'include'
         });
-
+ 
         const ponse = await fetch('http://localhost:8000/api/v1/Client/get-returns-of-subscribed-plans', {
           method: 'GET',
           headers: {
@@ -82,7 +71,7 @@ function DashboardCl() {
           },
           credentials: 'include'
         });
-
+ 
         if (!response.ok || !ponse.ok) {
           throw new Error('Failed to fetch transactions data');
         }
@@ -95,26 +84,24 @@ function DashboardCl() {
         setError(error.message);
       }
     };
-
+ 
     fetchTransactions();
   }, []);
-
-
-
+ 
   return (
-    <div className="App">
-      <Typography className="profile-landing-name"variant="h4" sx={{ mb: 5 }}>
+<div className={styles.App}>
+<Typography className={styles["profile-landing-name"]} variant="h4" sx={{ mb: 5 }}>
         Hi, Welcome back {profileInfo.name} {/* Display user name here */}
-      </Typography>
-
-      <center><h1 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}> Portfolio Summary</h1></center>
-
+</Typography>
+ 
+     <h2 className={styles.heading}> Portfolio Summary</h2>
+ 
       <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} />
-      <script>
+<script>
         console.log(document.queryselector(".alert"));
-      </script>
-    </div>
+</script>
+</div>
   );
 }
-
+ 
 export default DashboardCl;
