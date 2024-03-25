@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import styles from './pp.module.css';
-
+ 
 const ProfilePage = () => {
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -15,7 +15,7 @@ const ProfilePage = () => {
     qualification: ''
   });
   const [isLoading, setIsLoading] = useState(true);
-
+ 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -25,12 +25,12 @@ const ProfilePage = () => {
           },
           withCredentials: true
         });
-
+ 
         if (response.status === 200) {
           const data = response.data.client;
           const imageDataArray = data.profilePhoto?.data?.data || []; // Get the image data array
           const imageDataUrl = arrayToDataURL(imageDataArray); // Convert array to data URL
-          
+         
           setProfileInfo({
             cota:data.profilePhoto.contentType,
             img: imageDataUrl,
@@ -48,7 +48,7 @@ const ProfilePage = () => {
             question_4: data.question_4 ||''
           });
           setIsLoading(false);
-          console.log(data)
+          // console.log(data);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -56,21 +56,21 @@ const ProfilePage = () => {
         console.error('Error fetching profile data:', error.message);
       }
     };
-
+ 
     fetchProfileData();
   }, []);
-
+ 
   // Function to convert array to data URL
   const arrayToDataURL = (array) => {
     const blob = new Blob([new Uint8Array(array)], { type:profileInfo.cota});
     const urlCreator = window.URL || window.webkitURL;
     return urlCreator.createObjectURL(blob);
   };
-
+ 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+ 
   return (
     <div className={styles.ppfull}>
       <div className={styles.pp}>
@@ -103,13 +103,13 @@ const ProfilePage = () => {
             </div>
             <hr />
             <div className={styles.pp212}>
-
+ 
             <p className={styles.ppp}><strong>Primary Investment Objectives:</strong>&nbsp;{profileInfo.question_0}</p>
             <p className={styles.ppp}><strong>Risk Tolerance:</strong>&nbsp;{profileInfo. question_1}</p>
             <p className={styles.ppp}><strong>Investment Experience:</strong>&nbsp;{profileInfo. question_2}</p>
             <p className={styles.ppp}><strong>Time Horizon:</strong>&nbsp;{profileInfo. question_3}</p>
             <p className={styles.ppp}><strong>Income Level:</strong>&nbsp;{profileInfo.question_4}</p>
-              
+             
             </div>
             <div className={styles.pp213}>
               <Link to='/profedit'>
@@ -134,5 +134,6 @@ const ProfilePage = () => {
     </div>
   );
 };
-
+ 
 export default ProfilePage;
+ 

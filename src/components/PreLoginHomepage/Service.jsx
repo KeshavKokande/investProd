@@ -26,7 +26,7 @@ function Service(){
                       Diverse Portfolio Options
                     </h5>
                     <p>
-                    Explore a wide range of investment opportunities curated by seasoned professionals, tailored to your unique financial goals and risk tolerance."
+                    Explore a wide range of investment opportunities curated by seasoned professionals, tailored to your unique financial goals and risk tolerance.
                     </p>
                    
                   </div>

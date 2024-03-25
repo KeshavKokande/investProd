@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import styles from "./AdNewPlans.module.css";
-
+ 
 const AddPlan = () => {
   const navigate = useNavigate();
-
+ 
   const [formData, setFormData] = useState({
     planName: '',
     capValue: '',
@@ -17,7 +17,7 @@ const AddPlan = () => {
     stocks: [{ stockName: '', contri: '' }],
     photo: null
   });
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -25,17 +25,17 @@ const AddPlan = () => {
       [name]: value
     });
   };
-
+ 
   const [photoBase64, setPhotoBase64] = useState(null);
-
+ 
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-
+ 
     reader.onloadend = () => {
       const base64String = reader.result;
       setPhotoBase64(base64String);
-
+ 
       setFormData({
         ...formData,
         photo: {
@@ -44,32 +44,49 @@ const AddPlan = () => {
         },
       });
     };
-
+ 
     if (file) {
       reader.readAsDataURL(file);
     }
   };
-
+ 
+ 
+  const [error, setError] = useState('');
+ 
   const handleStockChange = (e, index, field) => {
     const { value } = e.target;
-    const updatedStocks = [...formData.stocks];
+    let updatedStocks = [...formData.stocks];
     updatedStocks[index][field] = value;
-    setFormData({
-      ...formData,
-      stocks: updatedStocks
-    });
+ 
+    const totalContributions = updatedStocks.reduce((total, stock) => total + Number(stock.contri || 0), 0);
+ 
+    if (totalContributions <= 100) {
+      setFormData({
+        ...formData,
+        stocks: updatedStocks
+      });
+      setError(''); // Clear error if total contribution is within limit
+    } else {
+      setError('Total contribution cannot exceed 100%');
+      // Reset the changed value to prevent exceeding 100%
+      updatedStocks[index][field] = '';
+      setFormData({
+        ...formData,
+        stocks: updatedStocks
+      });
+    }
   };
-
+ 
   const handleAddStock = () => {
     setFormData({
       ...formData,
       stocks: [...formData.stocks, { stockName: '', contri: '' }]
     });
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+ 
     Swal.fire({
       title: 'Are you sure?',
       text: 'You are about to create a new plan.',
@@ -100,7 +117,7 @@ const AddPlan = () => {
       }
     });
   };
-
+ 
   return (
     <div className={styles.addPlan_form_container}>
       <div className={styles.addPlan_image_container}>
@@ -108,26 +125,26 @@ const AddPlan = () => {
       </div>
       <div className={styles.addPlan_form_section}>
         <form id={styles.new_plan_form} onSubmit={handleSubmit}>
-          <div className={styles.formGrp}>
+        <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="planName">Plan Name:</label>
             <input className={styles.addPlan_input} type="text" id="planName" name="planName" value={formData.planName} onChange={handleChange} required />
           </div>
-
+ 
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="capValue">Cap Value:</label>
             <input className={styles.addPlan_input} type="text" id="capValue" name="capValue" value={formData.capValue} onChange={handleChange} required />
           </div>
-
+ 
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="maxVal">Max Value:</label>
             <input className={styles.addPlan_input} type="text" id="maxVal" name="maxVal" value={formData.maxVal} onChange={handleChange} required />
           </div>
-
+ 
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="returnProfit">Return Profit:</label>
             <input className={styles.addPlan_input} type="text" id="returnProfit" name="returnProfit" value={formData.returnProfit} onChange={handleChange} required />
           </div>
-
+ 
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="risk">Risk:</label>
             <select className={styles.addPlan_select} id="risk" name="risk" value={formData.risk} onChange={handleChange} required>
@@ -136,8 +153,8 @@ const AddPlan = () => {
               <option value="high">High</option>
             </select>
           </div>
-
-
+ 
+ 
           {/* <div className={`${styles['form-grp']} ${styles['question-container']}`}> */}
           <div x className={styles.formGrp}>
             <label htmlFor="photoId" className={styles.addPlan_label}>Upload Photo</label>
@@ -150,23 +167,21 @@ const AddPlan = () => {
             // className={styles['form-control-file']}
             />
           </div>
-
+ 
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
             <input className={styles.addPlan_input} type="number" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} required />
           </div>
-
+ 
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="advise">Advise:</label>
             <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
           </div>
-
           <div className={styles.formGrp2}>
             <div className={styles.addPlan_stocks_label}>
               <label htmlFor="stocks" className={styles.addPlan_label}>Stocks:</label>
               <button type="button" className={(styles.addPlan_add_stock_btn, styles.align)} onClick={handleAddStock}>+ Add Stock</button>
             </div>
-            {/* <div > */}
             {formData.stocks.map((stock, index) => (
               <div key={index} id={styles.stocks}>
                 <input
@@ -189,13 +204,13 @@ const AddPlan = () => {
                 />
               </div>
             ))}
-            {/* </div> */}
           </div>
+          {error && <div className={styles.error}><strong>{error}</strong></div>}
           <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
         </form>
       </div>
     </div>
   );
 };
-
+ 
 export default AddPlan;

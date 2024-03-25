@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
@@ -81,15 +81,35 @@ const LoginPage = () => {
     }
   };
 
+  useEffect(() => {
+    // Check if the cookie is set
+    const cookieExists = document.cookie.includes('jwt');
+    
+    if (cookieExists) {
+      if(sessionStorage.getItem('role') == 'advisor'){
+        window.location.href = '/advisor_dashboard';
+      }
+      else if(sessionStorage.getItem('role') == 'client'){
+        window.location.href = '/cldash';
+      }
+    } else {
+      // Cookie is not set
+      // Perform any action you want if the cookie is not set, such as redirecting to the login page
+      if (!['/login'].includes(window.location.pathname)) {
+        window.location.href = '/login';
+      }
+    }
+  }, []); 
+
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
         <img src={LoginImage} alt='' />
       </div>
       <div className={styles['register-right']}>
-        <h2> Welcome Back</h2>
+        <h2 className={styles['h2-label']}> Welcome Back</h2>
         <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
-          <h4>New User!!!<a href='/register'>Register Here</a></h4>
+          <h4 className={styles['h4-register-label']}>New User!!!<a href='/register' className={styles['register-link']}>Register Here</a></h4>
         </div>
         <div className={styles['input-wrapper']}>
           <label>Email</label>

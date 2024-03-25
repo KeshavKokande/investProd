@@ -59,6 +59,7 @@ function DashboardCl() {
     };
 
     fetchProfileData();
+    sessionStorage.setItem('role', 'client');
   }, []);
 
 
