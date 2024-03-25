@@ -1,6 +1,7 @@
 import Arraay from './Arraay';
 import PlanCardList from './PlanCardList';
 import React, { useState, useEffect } from 'react';
+import styles from "./Plans.module.css"
 
 function PlansCl() {
   const [plansData, setPlansData] = useState([]);
@@ -56,7 +57,7 @@ function PlansCl() {
       <br />
       <hr />
       <br />
-      <h2 style={{ marginBottom: "1rem" }}>Explore Plans</h2>
+      <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
       <PlanCardList plans={plansWithDecodedImages} />
     </>
   );

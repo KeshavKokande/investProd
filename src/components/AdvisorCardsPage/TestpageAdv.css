@@ -27,3 +27,8 @@
 .slick-track{
   display: contents;
 }
+
+.rating{
+  display: grid;
+  justify-items: center;
+}
