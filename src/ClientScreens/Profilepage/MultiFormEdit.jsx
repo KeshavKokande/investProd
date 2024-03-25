@@ -71,9 +71,7 @@ const MultiFormEdit = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log('Form submitted:', formData);
-  
+    event.preventDefault();  
     try {
       const response = await fetch('http://localhost:8000/api/v1/client/edit-profile', {
         method: 'PATCH', // Corrected method to PATCH

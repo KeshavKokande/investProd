@@ -397,3 +397,9 @@ body {
   grid-gap: 2vh;
 
 }
+
+.error{
+
+  color: #ff0400;
+  text-decoration: double;
+}
