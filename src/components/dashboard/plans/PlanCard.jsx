@@ -85,7 +85,9 @@ const PlanCard = ({ plan, deletePlan }) => {
           </div>
 
           <div className={styles.btn}>
-            <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
+            {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
+
+            <div className={`${isActive ? styles.activeButton : styles.inactiveButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
           </div>
         </div>
       </div>

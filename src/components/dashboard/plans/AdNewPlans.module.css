@@ -19,12 +19,46 @@ body {
   background-color: #fff;
 
 }
-.active {
-  color: green;
+.activeButton {
+  cursor: pointer;
+
+  color: #fff;
+  /* White text color */
+
+  background-color: green;
+  /* Blue background color */
+
+  padding: 5px 10px;
+  /* Compact padding */
+
+  border-radius: 5px;
+
+  font-weight: bold;
+
+  text-transform: uppercase;
+
+  align-self: center;
 }
 
-.inactive {
-  color: red;
+.inactiveButton {
+  cursor: pointer;
+
+  color: #fff;
+  /* White text color */
+
+  background-color: red;
+  /* Blue background color */
+
+  padding: 5px 10px;
+  /* Compact padding */
+
+  border-radius: 5px;
+
+  font-weight: bold;
+
+  text-transform: uppercase;
+
+  align-self: center;
 }
 
 .adnewplan_left_section {
