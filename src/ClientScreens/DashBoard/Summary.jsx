@@ -77,7 +77,7 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     cardInfo={{
                         title: "Total Amount Invested",
                         value: formatCurrency(totalInvestedAmount),
-                        text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
+                        // text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -86,7 +86,7 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     cardInfo={{
                         title: "Total Profit",
                         value: formatCurrency(totalProfitAmount),
-                        text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
+                        // text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -95,7 +95,7 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     cardInfo={{
                         title: "Current Value",
                         value: formatCurrency(totalInvestedAmount + totalProfitAmount),
-                        text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
+                        // text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
                     }}
                 />
             </section>

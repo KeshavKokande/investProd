@@ -1,5 +1,5 @@
 import { AreaCards, AreaCharts, AreaTable} from "../../components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   useEffect(() => {
