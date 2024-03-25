@@ -1,8 +1,24 @@
 .UserInfo{
+  display: flex;
   position: relative;
   left: -58px;
-  width: 140%;
-  
+  width: 110%;
+  background-color: white;
+  margin-bottom: 5vh;
+  height: 10vh;
+  align-items: center;
+  justify-content: end;
+  padding-right: 1vw;
+  gap: 2vw;
+}
+
+.UserInfo button{
+  width: 2vw;
+}
+
+.userProfileImg{
+  border-radius: 50%;
+  width: 3vw;
 }
 
 .heading{
