@@ -3,6 +3,8 @@ import InvestmentSummary from './Summary';
 import { Typography } from '@mui/material';
 import styles from "./dashboard.module.css";
 import axios from 'axios';
+import notification from "./../../assets/icons/notification.png";
+import user from "./../../assets/icons/moon.svg"
  
 function DashboardCl() {
   const [transactions, setTransactions] = useState([]);
@@ -96,10 +98,10 @@ function DashboardCl() {
 
 <div className={styles.UserInfo}>
   <button>
-    <img src="" alt="" />
+    <img src={notification} alt="" />
   </button>
   <h4>{profileInfo.name}</h4>
-  <img src="" alt="" />
+  <img src={user} alt="" className={styles.userProfileImg} />
 </div>
 
  
