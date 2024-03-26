@@ -35,16 +35,16 @@ Haryana, 122015
             </div>
           </div>
           <div className="info_social">
-            <a href="">
+            <a href="https://www.facebook.com/IncedoInc">
               <i className="fa fa-facebook" aria-hidden="true"></i>
             </a>
-            <a href="">
+            <a href="https://twitter.com/IncedoInc">
               <i className="fa fa-twitter" aria-hidden="true"></i>
             </a>
-            <a href="">
+            <a href="https://in.linkedin.com/company/incedo-inc">
               <i className="fa fa-linkedin" aria-hidden="true"></i>
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/incedoinc/">
               <i className="fa fa-instagram" aria-hidden="true"></i>
             </a>
           </div>
@@ -63,7 +63,7 @@ Haryana, 122015
           
         </div>
         <div className="col-md-6 col-lg-3 info_col ">
-          <h4>
+          {/* <h4>
             Subscribe
           </h4>
           <form action="#">
@@ -71,7 +71,7 @@ Haryana, 122015
             <button type="submit">
               Subscribe
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
     </div>

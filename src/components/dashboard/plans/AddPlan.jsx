@@ -91,13 +91,10 @@ const AddPlan = () => {
     e.preventDefault();
   
     const totalContributions = formData.stocks.reduce((total, stock) => total + Number(stock.contri || 0), 0);
-    
-    if (totalContributions > 100) {
-      setError('Sum of all stock contributions should not be more than 100%');
-    } else if (totalContributions < 100) {
-      setError('Total contribution cannot be less than 100%');
+  
+    if (totalContributions < 100) {
+      setError('Sum of all stock contributions should not be less than 100%');
     } else {
-      // Clear error state if no error
       setError('');
   
       Swal.fire({

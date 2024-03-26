@@ -33,7 +33,11 @@ function DashboardCl() {
  
         if (response.status === 200) {
           const data = response.data.client;
+          const imageDataArray = data.profilePhoto?.data?.data || []; // Get the image data array
+          const imageDataUrl = arrayToDataURL(imageDataArray); // Convert array to data URL
           setProfileInfo({
+            cota:data.profilePhoto.contentType,
+            img: imageDataUrl,
             name: data.name || '',
             email: data.email || '',
             age: data.age || '',
@@ -54,6 +58,11 @@ function DashboardCl() {
     fetchProfileData();
     sessionStorage.setItem('role', 'client');
   }, []);
+
+  const arrayToDataURL = (array) => {
+    const blob = new Blob([new Uint8Array(array)], { type:profileInfo.cota});
+    const urlCreator = window.URL || window.webkitURL;
+    return urlCreator.createObjectURL(blob);}
  
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -96,13 +105,13 @@ function DashboardCl() {
         Hi, Welcome back {profileInfo.name} 
 </Typography> */}
 
-<div className={styles.UserInfo}>
+{/* <div className={styles.UserInfo}>
   <button>
     <img src={notification} alt="" />
   </button>
   <h4>{profileInfo.name}</h4>
-  <img src={user} alt="" className={styles.userProfileImg} />
-</div>
+  <img src={profileInfo.img} alt="" className={styles.userProfileImg} />
+</div> */}
 
  
      <h2 className={styles.heading}> Portfolio Summary</h2>

@@ -1,7 +1,7 @@
 .UserInfo{
   display: flex;
   position: relative;
-  left: -58px;
+  left: -22vh;
   width: 110%;
   background-color: white;
   margin-bottom: 5vh;
@@ -19,6 +19,7 @@
 .userProfileImg{
   border-radius: 50%;
   width: 3vw;
+  height:3vw
 }
 
 .heading{
@@ -108,7 +109,7 @@
   }
 
   table {
-    min-width: 900px;
+    /* min-width: 900px; */
     width: 100%;
     border-collapse: collapse;
     color: var(--text-color-inverted);

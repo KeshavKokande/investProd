@@ -10,7 +10,7 @@ const PageTwo = ({ formData, handleChange }) => {
       </div>
       <div className={`${styles['form-container']} ${styles['form-container1']}`}>
         <div className={styles['question-container']}>
-          <label htmlFor="primaryObjective">What are your primary investment objectives? Please select all that apply:</label>
+          <label htmlFor="primaryObjective">What are your primary investment objectives?:</label>
           <select
             id="primaryObjective"
             name="question_0"

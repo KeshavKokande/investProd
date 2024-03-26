@@ -1,7 +1,7 @@
 
 [
   {
-    "ques": "What are your primary investment objectives? Please select all that apply:",
+    "ques": "What are your primary investment objectives?:",
     "type":"mcq",
     "opt": ["Retirement planning", "Wealth accumulation","Saving for education", "Buying a home", "Starting a business","Other "]
   },

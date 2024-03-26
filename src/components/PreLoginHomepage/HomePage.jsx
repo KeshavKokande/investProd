@@ -35,7 +35,7 @@ function HomePage(){
             <Service />
             <HomepageAbout  />
             <HomepageWhy />
-            <HomepageTeam />
+            {/* <HomepageTeam /> */}
             
             <HomepageInfo />
             <Footer />

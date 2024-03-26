@@ -53,12 +53,13 @@ function PlansCl() {
 
   return (
     <>
-      <Arraay plans={plansWithDecodedImages} />
+      <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
+      <PlanCardList plans={plansWithDecodedImages} />
       <br />
       <hr />
       <br />
-      <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
-      <PlanCardList plans={plansWithDecodedImages} />
+      <br />
+      <Arraay plans={plansWithDecodedImages} />
     </>
   );
 }
