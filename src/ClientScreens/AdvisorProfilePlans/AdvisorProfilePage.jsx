@@ -83,9 +83,7 @@ const AdvisorProfilePage = () => {
               About Me
             </h4>
             <p className="mt-4.5">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque posuere fermentum urna, eu condimentum mauris
-              tempus ut. Donec fermentum blandit aliquet.
+            Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.
             </p>
           </div>
 

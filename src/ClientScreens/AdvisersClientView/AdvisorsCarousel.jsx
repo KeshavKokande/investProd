@@ -43,7 +43,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                 <div className="flex flex-col items-center justify-center gap-1 p-4">
                   <p className="text-xl font-semibold">{advisor.name}</p>
                   <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
-                  <div className='rating'>
+                  <div className='rating'style={{color: "gold"}}>
                     <div>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
@@ -82,7 +82,7 @@ const AdvisorsCarousel = ({ advisors }) => {
 
                     {/* <p className="text-center">{d.review}</p> */}
                     <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
-                    <div className='rating'>
+                    <div className='rating'style={{color: "gold"}}>
                       <div style={{width:"max-content"}}>
 
                         <span class="fa fa-star checked"></span>
@@ -121,7 +121,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                     <p className="text-xl font-semibold">{advisor.name}</p>
                     {/* <p className="text-center">{d.review}</p> */}
                     <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
-                    <div className='rating'>
+                    <div className='rating' style={{color: "gold"}}>
                       <div>
 
                         <span class="fa fa-star checked"></span>
