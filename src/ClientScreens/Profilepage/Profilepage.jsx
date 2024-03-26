@@ -40,6 +40,7 @@ const ProfilePage = () => {
             address: data.address || '',
             gender: data.gender || '',
             jobRole: data.jobRole || '',
+            phone: data.phone || '',
             qualification: data.qualification || '',
             question_0: data.question_0 ||'',
             question_1: data.question_1 ||'',

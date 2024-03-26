@@ -16,6 +16,7 @@ const MultiFormEdit = () => {
     gender: '',
     jobRole: '',
     qualification: '',
+    phone: '',
     question_0: '',
     question_1: '',
     question_2: '',
