@@ -95,7 +95,7 @@ const Register = () => {
         <img src={RegistrationImage} alt="Registration" />
       </div>
       <div className={styles['register-right']}>
-        <h2>Welcome Client!!!</h2>
+        <h2>Welcome Client</h2>
         <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
           <h4>Already An User<a href='/login'>  Login Here</a></h4>
         </div>

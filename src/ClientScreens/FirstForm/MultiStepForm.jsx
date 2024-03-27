@@ -5,11 +5,12 @@ import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
 import { useLocation, useNavigate } from 'react-router-dom';
+import "./Page.css";
 
 const MultiStepForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
+  const [isCompleted, setIsCompleted] = useState(false); 
   const initialName = sessionStorage.getItem('name') || '';
   const initialEmail = sessionStorage.getItem('email') || '';
   const [formData, setFormData] = useState({
@@ -95,7 +96,7 @@ const MultiStepForm = () => {
     if (ageValue <18 || ageValue > 120) errors.age = 'Age Should be >18';
     if (isNaN(formData.age.trim())) errors.age = "invalid age"
     if (!formData.qualification) errors.qualification = 'Qualification is required';
-    if (!formData.address) errors.address = 'Address is required';
+    if (!formData.address) errors.address = 'Location is required';
     if (!formData.jobRole) errors.jobRole = 'Job Role is required';
     if (!formData.gender) errors.gender = 'Please select your gender'; // New validation
     if (formData.phone.trim() === '') errors.phone = 'Phone number is required';

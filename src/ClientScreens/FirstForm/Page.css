@@ -4,6 +4,15 @@ form{
   justify-items: center;
 }
 
+.completed{
+  background-color: rgb(7, 160, 15) !important;
+}
+
+.active{
+  background-color: rgb(222, 218, 100) !important;
+}
+
+
 .container {
   padding: 20px;
   background-color: #fbf9f9;

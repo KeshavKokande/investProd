@@ -44,6 +44,7 @@
   display: grid;
   grid-template-columns: auto !important;
   grid-gap: 6%;
+  /* overflow: auto; */
 }
 
 /* .form-container2 input{
