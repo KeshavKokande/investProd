@@ -32,7 +32,7 @@ const PageTwo = ({ formData, handleChange }) => {
       <div className={`${styles['form-container']} ${styles['form-container1']}`}>
         {questions.map((question, index) => (
           <div key={index} className={styles['question-container']}>
-            <label htmlFor={`question_${index}`}>{question.ques}</label>
+            <label htmlFor={`question_${index}`}>{question.ques}:<span className={styles.required}>*</span></label>
             {question.type === 'subjective' && (
               <textarea
                 id={`question_${index}`}
