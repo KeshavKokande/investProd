@@ -2,9 +2,11 @@ import Arraay from './Arraay';
 import PlanCardList from './PlanCardList';
 import React, { useState, useEffect } from 'react';
 import styles from "./Plans.module.css"
+import axios from 'axios';
 
 function PlansCl() {
   const [plansData, setPlansData] = useState([]);
+  const [riks, setRiks] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,11 +20,26 @@ function PlansCl() {
           credentials: 'include'
         });
 
-        if (!response.ok) {
+        const ponse = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+ 
+
+        if (!response.ok && !ponse.ok) {
           throw new Error('Failed to fetch plans data');
         }
 
         const data = await response.json();
+        const rik = await ponse.json();
+
+        console.log('ris  ',rik);
+
+        setRiks(rik.client.question_1)
+
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
       } catch (error) {
@@ -52,6 +69,8 @@ function PlansCl() {
     return { ...plan, decPhoto: decodedImageUrl };
   });
 
+console.log(riks);
+
   return (
     <>
       <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
@@ -60,7 +79,7 @@ function PlansCl() {
       <hr />
       <br />
       <br />
-      <Arraay plans={plansWithDecodedImages} />
+      <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} />
     </>
   );
 }

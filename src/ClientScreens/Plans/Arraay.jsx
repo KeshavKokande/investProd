@@ -12,9 +12,10 @@ const responsive = {
   mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
 };
 
-const Arraay = ({ plans }) => {
-  // console.log('PLANS DATA: ', plans);
-  const topRatedPlans = plans.sort((a, b) => parseFloat(b.noOfSubscription) - parseFloat(a.noOfSubscription)).slice(0, 5);
+const Arraay = ({ plans, risk }) => {
+  console.log('PLANS DATA: ', risk);
+  // const topRatedPlans = plans.sort((a, b) => parseFloat(b.noOfSubscription) - parseFloat(a.noOfSubscription)).slice(0, 5);
+  const topRatedPlans = plans.filter(plan => plan.risk == risk);
 
   const mostOrderedPlans = plans.sort((a, b) => parseInt(b.noOfSubscription) - parseInt(a.noOfSubscription)).slice(0, 5);
 
@@ -22,7 +23,7 @@ const Arraay = ({ plans }) => {
     <div className={styles.CarouselBox}>
 
       <div className={styles.InnerBox}>
-        <h2 className={styles.heading}>Top Rated Plans</h2>
+        <h2 className={styles.heading}>Plans For You</h2>
         <Carousel responsive={responsive} infinite={true} className={styles.Carousel}>
           {topRatedPlans.map((plan, index) => (
             <div key={index}>

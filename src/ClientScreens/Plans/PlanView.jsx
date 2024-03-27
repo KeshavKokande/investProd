@@ -54,6 +54,10 @@ function PlanView() {
       Swal.fire('Error', 'Invested amount cannot be less than minimum investment amount.', 'error');
       return;
     }
+    if (investedAmount > plan.maxVal) {
+      Swal.fire('Error', 'Invested amount cannot be more than maximum investment amount.', 'error');
+      return;
+    }
 
     Swal.fire({
       title: 'Are you sure?',
