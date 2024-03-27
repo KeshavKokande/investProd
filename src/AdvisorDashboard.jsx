@@ -23,7 +23,7 @@ import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfi
 // import ProtectedRoute from "./ProtectedRoute";
 
 import News from "./News/News";
-
+import ApprovedPage from "./PremiumAdvisor/ApprovedPage";
 
 import{
   HomepageAbout,
@@ -62,8 +62,7 @@ function App() {
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/clform" element={<MultiStepForm />} />
 
-       
-          
+          <Route path="/ApprovedPage" element={<ApprovedPage />} />
           
 
           <Route element={<BaseLayout />}>

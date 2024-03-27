@@ -69,7 +69,7 @@ const NotificationTest = () => {
   const iconBackColor = 'grey.100';
 
   return (
-    <Box sx={{ flexShrink: 0, ml: 0.75 }}>
+    <Box sx={{ flexShrink: 0, ml: 0.75, zIndex: 1000}}>
       <IconButton
         disableRipple
         color="secondary"

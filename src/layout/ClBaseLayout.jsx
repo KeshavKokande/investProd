@@ -6,6 +6,7 @@ import styles from "./../ClientScreens/DashBoard/dashboard.module.css";
 import notification from "./../assets/icons/notification.png"
 import NotificationSection from './../Notification'
 import NotificationTest from "../Notification/testing/NotificationTest";
+import NotificationTesting2 from './../Notification/working/NotificationTesting2'
 const ClBaseLayout = () => {
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -69,6 +70,7 @@ const ClBaseLayout = () => {
         </button> */}
         {/* <NotificationSection /> */}
         <NotificationTest />
+        {/* <NotificationTesting2 /> */}
         <h4>{profileInfo.name}</h4>
         <img src={profileInfo.img} alt="" className={styles.userProfileImg} />
       </div>
