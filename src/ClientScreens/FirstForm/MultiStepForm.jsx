@@ -21,7 +21,7 @@ const MultiStepForm = () => {
     address: '',
     jobRole: '',
     agreement: false,
-    photoId: { data: '', contentType: '' },
+    photoId: null,
     profilePhoto
       : { data: '', contentType: '' },
     phone: ''
@@ -91,10 +91,17 @@ const MultiStepForm = () => {
   const validatePageOne = () => {
     const errors = {};
     if (!formData.age) errors.age = 'Age is required';
+    const ageValue = parseInt(formData.age.trim(), 10);
+    if (ageValue <18 || ageValue > 120) errors.age = 'Age Should be >18';
+    if (isNaN(formData.age.trim())) errors.age = "invalid age"
     if (!formData.qualification) errors.qualification = 'Qualification is required';
     if (!formData.address) errors.address = 'Address is required';
     if (!formData.jobRole) errors.jobRole = 'Job Role is required';
     if (!formData.gender) errors.gender = 'Please select your gender'; // New validation
+    if (formData.phone.trim() === '') errors.phone = 'Phone number is required';
+    const phoneRegex = /^\d{10}$/; 
+    if (!phoneRegex.test(formData.phone.trim())) errors.phone = 'Enter a Valid 10-Digit Phone No.';
+    if (formData.photoId===null || formData==="") errors.photo = 'Photo Id is needed';
     return errors;
   };
 

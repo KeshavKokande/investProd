@@ -37,6 +37,7 @@ const ProfilePage = () => {
             name: data.name || '',
             email: data.email || '',
             age: data.age || '',
+            phone: data.phone || '',
             address: data.address || '',
             gender: data.gender || '',
             jobRole: data.jobRole || '',

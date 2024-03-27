@@ -78,17 +78,42 @@ function AdvClProfile() {
   
       fetchData();
     }, []);
+
+    
   
     if (isLoading) {
       return <div>Loading...</div>;
     }
   
     const advisor = advisors.find((adv) => adv._id === advisor_id);
-    const advisorPlans = plans.filter((plan) => plan.advisorId === advisor_id);
+    const advisorPlans = plans.filter((plan) => plan.advisorId === advisor_id && plan.isActive);
   
     if (!advisor) {
       return <div>No data available for this advisor</div>;
     }
+
+    const decodeImageData = (plan) => {
+      if (plan.photo && plan.photo.contentType) {
+        const imageDataArray = plan.photo.data.data;
+        const cota = plan.photo.contentType;
+        const blob = new Blob([new Uint8Array(imageDataArray)], { type: cota });
+        const urlCreator = window.URL || window.webkitURL;
+        const imageDataUrl = urlCreator.createObjectURL(blob);
+        return imageDataUrl;
+      } else {
+        console.warn('Missing photo or contentType in plan:', plan);
+        return null;
+      }
+    };
+
+  
+
+    const plansWithDecodedImages = advisorPlans.map(plan => {
+      const decodedImageUrl = decodeImageData(plan);
+      return { ...plan, decPhoto: decodedImageUrl };
+    });
+
+
   
     return (
       <div>
@@ -98,7 +123,7 @@ function AdvClProfile() {
         <br />
         <h2 style={{marginBottom:"1rem"}}>{advisor.name.split(" ")[0]}&#39;s Plans</h2>
         <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000}>
-          {advisorPlans.map((plan, index) => (
+          {plansWithDecodedImages.map((plan, index) => (
             <div key={index}>
             <Link to={`/plan_id/${plan._id}`}>
             <ProfileCard plan={plan} />
