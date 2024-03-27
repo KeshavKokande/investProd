@@ -41,12 +41,12 @@ const ClSidebar = () => {
   // Logout function
   const handleLogout = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will be logged out',
+      title: 'Are You Sure?',
+      text: 'You Will Be Logged Out',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, logout!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: 'Yes, Logout!',
+      cancelButtonText: 'No, Cancel!',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -65,7 +65,7 @@ const ClSidebar = () => {
         credentials: "include", // include cookies in the request
       });
       if (response.ok) {
-        
+
         console.log("logout success",response);
         localStorage.removeItem("token");
 
