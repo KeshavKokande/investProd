@@ -137,32 +137,29 @@ const AddPlan = () => {
       <div className={styles.addPlan_form_section}>
         <form id={styles.new_plan_form} onSubmit={handleSubmit}>
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="planName">Plan Name:</label>
+            <label className={styles.addPlan_label} htmlFor="planName">Plan Name<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="planName" name="planName" value={formData.planName} onChange={handleChange} required />
           </div>
 
-        
-
-
-
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="capValue">Cap Value:</label>
+            <label className={styles.addPlan_label} htmlFor="capValue">Cap Value<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="capValue" name="capValue" value={formData.capValue} onChange={handleChange} required />
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="maxVal">Max Value:</label>
+            <label className={styles.addPlan_label} htmlFor="maxVal">Max Value<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="maxVal" name="maxVal" value={formData.maxVal} onChange={handleChange} required />
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="returnProfit">Return Profit:</label>
+            <label className={styles.addPlan_label} htmlFor="returnProfit">Return Profit<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="returnProfit" name="returnProfit" value={formData.returnProfit} onChange={handleChange} required />
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="risk">Risk:</label>
+            <label className={styles.addPlan_label} htmlFor="risk">Risk<span className={styles.required}>*</span>:</label>
             <select className={styles.addPlan_select} id="risk" name="risk" value={formData.risk} onChange={handleChange} required>
+              <option value="">Select Appropriate Risk</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -172,7 +169,7 @@ const AddPlan = () => {
  
           {/* <div className={`${styles['form-grp']} ${styles['question-container']}`}> */}
           <div x className={styles.formGrp}>
-            <label htmlFor="photoId" className={styles.addPlan_label}>Upload Photo</label>
+            <label htmlFor="photoId" className={styles.addPlan_label}>Upload Photo<span className={styles.required}>*</span>:</label>
             <input
               type="file"
               id="photoId"
@@ -184,12 +181,12 @@ const AddPlan = () => {
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
+            <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="number" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} required />
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="advise">Advise:</label>
+            <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
           </div>
 
@@ -197,7 +194,7 @@ const AddPlan = () => {
 
           <div className={styles.formGrp2}>
             <div className={styles.addPlan_stocks_label}>
-              <label htmlFor="stocks" className={styles.addPlan_label}>Stocks:</label>
+              <label htmlFor="stocks" className={styles.addPlan_label}>Stocks<span className={styles.required}>*</span>:</label>
               <button type="button" className={(styles.addPlan_add_stock_btn, styles.align)} onClick={handleAddStock}>+ Add Stock</button>
             </div>
             {formData.stocks.map((stock, index) => (
@@ -209,7 +206,7 @@ const AddPlan = () => {
                   name={`stockName${index}`}
                   value={stock.stockName}
                   onChange={(e) => handleStockChange(e, index, 'stockName')}
-                  placeholder="Enter stock name"
+                  placeholder="Enter Stock Name"
                 />
                 <input
                   style={{ width: '50%' }}
@@ -218,7 +215,7 @@ const AddPlan = () => {
                   name={`contri${index}`}
                   value={stock.contri}
                   onChange={(e) => handleStockChange(e, index, 'contri')}
-                  placeholder="Enter contribution"
+                  placeholder="Enter Contribution"
                 />
               </div>
             ))}

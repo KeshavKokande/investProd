@@ -12,6 +12,11 @@ function PlanView() {
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
 
+  const formatCurrency = (amount) => {
+    const formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return `₹ ${formattedAmount}`;
+  };
+
   useEffect(() => {
     const fetchPlansData = async () => {
       console.log("Started fetching plans data");
@@ -122,7 +127,7 @@ function PlanView() {
                   Cap Value
                 </p>
                 <p className={styles.rowValue}>
-                  {plan.capValue}
+                ₹ {Number(plan.capValue).toLocaleString('en-IN')}
                 </p>
               </div>
               <div className={styles.row}>
@@ -130,7 +135,7 @@ function PlanView() {
                   Created At
                 </p>
                 <p className={styles.rowValue}>
-                  {new Date(plan.createdAt).toLocaleString()}
+                  {new Date(plan.createdAt).toLocaleDateString()}
                 </p>
               </div>
               <div className={styles.row}>
@@ -138,7 +143,7 @@ function PlanView() {
                   Max Value
                 </p>
                 <p className={styles.rowValue}>
-                  {plan.maxVal}
+                ₹ {Number(plan.maxVal).toLocaleString('en-IN')}
                 </p>
               </div>
               <div className={styles.row}>
@@ -146,7 +151,7 @@ function PlanView() {
                   Min Investment Amount
                 </p>
                 <p className={styles.rowValue}>
-                  {plan.minInvestmentAmount}
+                ₹ {Number(plan.minInvestmentAmount).toLocaleString('en-IN')}
                 </p>
               </div>
               <div className={styles.row}>
@@ -179,15 +184,18 @@ function PlanView() {
             </div>
 
             <div>
-            <label htmlFor="amt">Amount to be invested</label>
-            <input
-            id='amt'
-              type="number"
-              value={investedAmount}
-              onChange={(e) => setInvestedAmount(e.target.value)}
-              placeholder="Enter invested amount"
-              style={{ marginRight: '10px' }}
-            />
+              <label htmlFor="amt">Amount to be invested</label>
+              <input
+                id='amt'
+                type="text"
+                value={formatCurrency(investedAmount)}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                  setInvestedAmount(value);
+                }}
+                placeholder="Enter invested amount"
+                style={{ marginRight: '10px' }}
+              />
             </div>
 
             <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>

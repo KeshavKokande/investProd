@@ -3,14 +3,15 @@
   position: relative;
   left: -22vh;
   width: 110%;
-  background-color: white;
+  background-color: #ffffff;
   margin-bottom: 5vh;
   height: 10vh;
   align-items: center;
   justify-content: end;
-  padding-right: 1vw;
+  padding-right: 4vw;
   gap: 2vw;
   /* position: fixed; */
+  /* z-index: 3; */
 
 }
 

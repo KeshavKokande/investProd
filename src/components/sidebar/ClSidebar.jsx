@@ -140,7 +140,7 @@ const ClSidebar = () => {
       <div className="sidebar-body">
         <div className="sidebar-menu">
           <ul className="menu-list">
-            <li className={`menu-item ${location.pathname === "/cldash" ? "active" : ""}`}>
+            <li className={`menu-item ${location.pathname.includes("/cldash") ? "active" : ""}`}>
               <Link to="/cldash" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
@@ -149,7 +149,7 @@ const ClSidebar = () => {
               </Link>
             </li>
             
-            <li className={`menu-item ${location.pathname === "/planscl" ? "active" : ""}`}>
+            <li className={`menu-item ${location.pathname.includes("/planscl") || location.pathname.includes("/plan_id") ? "active" : ""}`}>
               <Link to="/planscl" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineShoppingBag size={20} />
@@ -157,7 +157,7 @@ const ClSidebar = () => {
                 <span className="menu-link-text">Plans</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname === "/viewadvi" ? "active" : ""}`}>
+            <li className={`menu-item ${location.pathname.includes("/viewadvi") || location.pathname.includes("/advisor_id") ? "active" : ""}`}>
               <Link to="/viewadvi" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
@@ -166,7 +166,7 @@ const ClSidebar = () => {
               </Link>
             </li>
             
-            <li className={`menu-item ${location.pathname === "/news" ? "active" : ""}`}>
+            <li className={`menu-item ${location.pathname.includes("/news") ? "active" : ""}`}>
               <Link to="/news" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
@@ -180,7 +180,7 @@ const ClSidebar = () => {
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
             
-            <li className={`menu-item ${location.pathname === "/profile" ? "active" : ""}`}>
+            <li className={`menu-item ${location.pathname.includes("/profile") || location.pathname.includes("/profedit") ? "active" : ""}`}>
               <Link to="/profile" className="menu-link">
                 <span className="menu-link-icon">
                   <CgProfile size={18} />

@@ -459,3 +459,8 @@ body {
   color: #ff0400;
   text-decoration: double;
 }
+
+.required{
+  color: red;
+  font-weight: bold;
+}
