@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from "./Page.module.css";
 import PersonaDetails from "./../../assets/images/personal_details.svg";
 
 const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
   const [genderError, setGenderError] = useState('');
+  const fileInputRef1 = useRef(null); // Reference for first file input
+  const fileInputRef2 = useRef(null); // Reference for second file input
+
+
 
   const handleGenderChange = (event) => {
     handleChange(event); // Forwarding gender change event to parent component
     const { value } = event.target;
     setGenderError(value.trim() === '' ? 'Please select your gender' : '');
+  };
+
+  const clearFileInput1 = () => {
+    if (fileInputRef1.current) {
+      fileInputRef1.current.value = null;
+    }
+  };
+
+  const clearFileInput2 = () => {
+    if (fileInputRef2.current) {
+      fileInputRef2.current.value = null;
+    }
   };
 
   return (
@@ -18,7 +34,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
       </div>
       <div className={styles['form-container']}>
         <div className={styles['question-container']}>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name:<span className={styles.required}>*</span></label>
           <input
             type="text"
             id="name"
@@ -29,7 +45,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div >
         <div className={styles['question-container']}>
-          <label htmlFor="age">Age:</label>
+          <label htmlFor="age">Age:<span className={styles.required}>*</span></label>
           <input
             type="text"
             id="age"
@@ -40,7 +56,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="gender">Gender:</label>
+          <label htmlFor="gender">Gender:<span className={styles.required}>*</span></label>
           <select
             id="gender"
             name="gender"
@@ -56,7 +72,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           {genderError && <p className={styles['error-message']}>{genderError}</p>}
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="qualification">Qualification:</label>
+          <label htmlFor="qualification">Qualification:<span className={styles.required}>*</span></label>
           <input
             type="text"
             id="qualification"
@@ -67,7 +83,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email:<span className={styles.required}>*</span></label>
           <input
             type="email"
             id="email"
@@ -78,7 +94,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="address">Location:</label>
+          <label htmlFor="address">Location:<span className={styles.required}>*</span></label>
           <input
             type="text"
             id="address"
@@ -89,7 +105,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="jobRole">Job Role:</label>
+          <label htmlFor="jobRole">Job Role:<span className={styles.required}>*</span></label>
           <input
             type="text"
             id="jobRole"
@@ -100,7 +116,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="jobRole">Phone</label>
+          <label htmlFor="jobRole">Phone:<span className={styles.required}>*</span></label>
           <input
             type="text"
             id="phone"
@@ -111,28 +127,31 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={`${styles['form-group']} ${styles['question-container']}`}>
-          <label htmlFor="photoId">Upload Photo ID:</label>
+          <label htmlFor="photoId">Upload Photo ID:<span className={styles.required}>*</span></label>
           <input
             type="file"
             id="photoId"
             name="photoId"
             accept="image/*"
             onChange={uploadPhoto}
+            ref={fileInputRef1} // Attach ref to the first file input
             className={styles['form-control-file']}
           />
+          <button className={styles.remove} onClick={clearFileInput1}><strong>Remove</strong> </button>
         </div>
 
         <div className={`${styles['form-group']} ${styles['question-container']}`}>
-          <label htmlFor="photoId">Upload Display Picture:</label>
+          <label htmlFor="profilePhoto">Upload Display Picture:</label>
           <input
             type="file"
-            id="photoId"
-            name="photoId"
+            id="profilePhoto"
+            name="profilePhoto"
             accept="image/*"
             onChange={ppupload}
+            ref={fileInputRef2} // Attach ref to the second file input
             className={styles['form-control-file']}
           />
-
+          <button className={styles.remove} onClick={clearFileInput2}><strong>Remove</strong></button>
         </div>
       </div>
     </div>

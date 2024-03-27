@@ -16,6 +16,7 @@ const MultiFormEdit = () => {
     gender: '',
     jobRole: '',
     qualification: '',
+    phone: '',
     question_0: '',
     question_1: '',
     question_2: '',
@@ -23,6 +24,7 @@ const MultiFormEdit = () => {
     question_4: ''
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [errors, setErrors] = useState({}); // State for tracking form validation errors
   const [success, setSuccess] = useState(false); // State for tracking success status
 
   useEffect(() => {
@@ -68,45 +70,91 @@ const MultiFormEdit = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    // Clear errors for the field being changed
+    setErrors({ ...errors, [name]: '' });
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();  
+    event.preventDefault();
+
+    // Validation logic
+    const newErrors = {};
+
+    // Validate Age
+    if (formData.age.trim() === '') {
+      newErrors.age = 'Age is required';
+    } else if (isNaN(formData.age.trim())) {
+      newErrors.age = 'Age must be a number';
+    } else {
+      const ageValue = parseInt(formData.age.trim(), 10);
+      if (ageValue <= 0 || ageValue > 120) {
+        newErrors.age = 'Age must be between 1 and 120';
+      }
+    }
+
+    //phone
+    const phoneRegex = /^\d{10}$/; // Assumes a 10-digit phone number format
+    if (formData.phone.trim() === '') {
+      newErrors.phone = 'Phone number is required';
+    } else if (!phoneRegex.test(formData.phone.trim())) {
+      newErrors.phone = 'Invalid phone number format';
+    }
+  
+    // Validate gender
+    if (formData.gender.trim() === '') {
+      newErrors.gender = 'Gender is required';
+    }
+
+    // Validate jobrole
+    if (formData.jobRole.trim() === '') {
+      newErrors.jobRole = 'JobRole is required';
+    }
+
+    // Validate address
+    if (formData.address.trim() === '') {
+      newErrors.address = 'Location is required';
+    }
+
+    // Validate Qual
+    if (formData.qualification.trim() === '') {
+      newErrors.qualification = 'Qualification is required';
+    }
+
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return; // Exit early if there are validation errors
+    }
+
     try {
       const response = await fetch('http://localhost:8000/api/v1/client/edit-profile', {
-        method: 'PATCH', // Corrected method to PATCH
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          // Add any other headers if needed, such as authorization headers
         },
         credentials: 'include',
         body: JSON.stringify(formData)
       });
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
-      const data = await response.json(); // Parse JSON response data
-  
+
+      const data = await response.json();
+
       console.log('PATCH request successful:', data);
-  
-      // Assuming the server returns JSON data with a 'status' property
+
       if (data.status === 'success') {
-        setSuccess(true); // Update success state
+        setSuccess(true);
       } else {
-        setSuccess(false); // Update success state if needed
+        setSuccess(false);
       }
     } catch (error) {
       console.error('Error during PATCH request:', error);
-      // Add error handling logic here
     }
   };
-  
-  
 
   useEffect(() => {
-    // Use the success state to conditionally navigate
     if (success) {
       navigate('/profile');
     }
@@ -119,9 +167,9 @@ const MultiFormEdit = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <PageOne formData={formData} handleChange={handleChange} />
+        <PageOne formData={formData} handleChange={handleChange} errors={errors} />
         <PageTwo formData={formData} handleChange={handleChange} />
-        <div style={{display:"flex",flexDirection:"row", justifyContent:"center", gap:"2rem"}}>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "2rem" }}>
           <button type="submit" className={`${styles['register-submit-btn']} ${styles['next-button']}`}>Submit</button>
           <Link to="/profile"><button type="button" className={styles['prev-button']} >Back</button></Link>
         </div>

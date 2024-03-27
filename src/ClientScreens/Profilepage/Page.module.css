@@ -186,3 +186,9 @@ form{
 .register-submit-btn invisible{
   display: hidden;
 }
+
+.error{
+
+  font-weight: bold;
+  color: red;
+}
