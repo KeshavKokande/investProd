@@ -22,6 +22,7 @@ function DashboardCl() {
   });
  
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
@@ -57,6 +58,7 @@ function DashboardCl() {
  
     fetchProfileData();
     sessionStorage.setItem('role', 'client');
+    
   }, []);
 
   const arrayToDataURL = (array) => {

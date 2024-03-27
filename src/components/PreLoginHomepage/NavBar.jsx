@@ -1,5 +1,5 @@
 // import React from "react";
-import robot from './../../assest/images/robot.png';
+import robot from './../../assest/images/robot.jpg';
 import investlogogo from './../../assest/images/investlogogo.png';
 import { Link } from 'react-router-dom';
 import './css/style.scss'

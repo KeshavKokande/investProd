@@ -8,6 +8,7 @@ function AdvClView() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchData = async () => {
             try {
                 const response = await fetch('http://localhost:8000/api/v1/Client/get-all-advisors', {
@@ -33,6 +34,7 @@ function AdvClView() {
         };
    
         fetchData();
+        window.scrollTo(0, 0);
     }, []);
 
     if (isLoading) {

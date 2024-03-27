@@ -66,11 +66,10 @@ const ClSidebar = () => {
       });
       if (response.ok) {
 
-        console.log("logout success",response);
         localStorage.removeItem("token");
 
         // Redirect to login page
-        navigate("/login");
+          window.location.href = "/login";
       } else {
         console.error("Logout failed:", response.statusText);
         // Handle logout failure, if needed

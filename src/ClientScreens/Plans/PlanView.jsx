@@ -18,6 +18,7 @@ function PlanView() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchPlansData = async () => {
       console.log("Started fetching plans data");
       try {
@@ -116,14 +117,6 @@ function PlanView() {
               {/* <h2>Plan Information</h2> */}
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
-                  Advise
-                </p>
-                <p className={styles.rowValue}>
-                  {plan.advise}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
                   Cap Value
                 </p>
                 <p className={styles.rowValue}>
@@ -168,6 +161,14 @@ function PlanView() {
                 </p>
                 <p className={styles.rowValue}>
                   {plan.risk}
+                </p>
+              </div>
+              <div className={styles.row}>
+                <p className={styles.rowLabel}>
+                  Advise
+                </p>
+                <p className={styles.rowValue}>
+                  {plan.advise}
                 </p>
               </div>
               {/* <div className={styles.row}>

@@ -7,6 +7,7 @@ function PlansCl() {
   const [plansData, setPlansData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchPlansData = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {

@@ -43,6 +43,7 @@ function AdvClProfile() {
     const [plans, setPlans] = useState([]);
  
     useEffect(() => {
+      window.scrollTo(0, 0);
       const fetchData = async () => {
         try {
           const advisorsResponse = await fetch(`http://localhost:8000/api/v1/Client/get-all-advisors`, {

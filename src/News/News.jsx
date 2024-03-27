@@ -10,6 +10,7 @@ function News() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchNews = async () => {
             try {
                 const response = await axios.get('https://api.nytimes.com/svc/topstories/v2/business.json?api-key=JdjDRJVla0Pkg1dPJTqO6nf43oIBNf6W');
