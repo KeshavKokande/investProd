@@ -107,9 +107,9 @@ const LoginPage = () => {
         <img src={LoginImage} alt='' />
       </div>
       <div className={styles['register-right']}>
-        <h2 className={styles['h2-label']}> Welcome Back</h2>
+        <h2 className={styles.h2_label}> Welcome Back</h2>
         <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
-          <h4 className={styles['h4-register-label']}>New User!!!<a href='/register' className={styles['register-link']}>Register Here</a></h4>
+          <h4 className={styles['h4-register-label']}>New User &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='/register' className={styles.register_link}>Register Here</a></h4>
         </div>
         <div className={styles['input-wrapper']}>
           <label>Email</label>
@@ -134,7 +134,7 @@ const LoginPage = () => {
           </select>
         </div>
         <div style={{width:"100%"}}>
-          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>SignIn</button>
+          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>Sign In</button>
         </div>
         <hr />
         {selectedRole === 'client' && (
