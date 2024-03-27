@@ -165,7 +165,7 @@ function PlanView() {
                   {plan.risk}
                 </p>
               </div>
-              <div className={styles.row}>
+              {/* <div className={styles.row}>
                 <p className={styles.rowLabel}>
                   Stocks
                 </p>
@@ -174,7 +174,7 @@ function PlanView() {
                     <li key={stock._id}>{stock.stockName}</li>
                   ))}
                 </p>
-              </div>
+              </div> */}
 
             </div>
 
