@@ -81,7 +81,7 @@ const AreaBarChart = () => {
       <div className="bar-chart-info">
         <h5 className="bar-chart-title">Total Revenue</h5>
         <div className="chart-info-data">
-          <div className="info-data-value">$50.4K</div>
+          <div className="info-data-value">₹100.4K</div>
           <div className="info-data-text">
             <FaArrowUpLong />
             <p>5% than last month.</p>

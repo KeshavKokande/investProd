@@ -44,6 +44,10 @@ const PlanCard = ({ plan, deletePlan }) => {
     }
   };
 
+  const riskClassName = risk === 'low' ? styles.adnewplan_risk_low :  risk === 'medium' ? styles.adnewplan_risk_medium : styles.adnewplan_risk_high;
+  
+  const isActiveClassName = isActive === 'true' ? styles.adnewplan_risk_true : styles.adnewplan_risk_false;
+
   const renderStocks = () => {
     return stocks.map((stock, index) => (
       <tr key={index}>
@@ -75,8 +79,8 @@ const PlanCard = ({ plan, deletePlan }) => {
 
         <div className={styles.adnewplan_right_section}>
           <div className={styles.text}>
-            <div><strong>Risk: </strong><span className={`${styles.adnewplan_risk_dot} ${styles.adnewplan_risk}-${risk}`}></span>{risk}</div>
-            <div>Status: {isActive ? 'Active' : 'Inactive'}</div>
+            <div><strong>Risk: </strong><span className={`${styles.adnewplan_risk_dot} ${riskClassName}`}></span>{risk}</div>
+            <div>Status: <span className={`${styles.isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
 
             <div>Minimum Investment Amount: ₹{minInvestmentAmount}</div>
             <div>Number of Subscriptions: {noOfSubscription}</div>
@@ -87,7 +91,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           <div className={styles.btn}>
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
 
-            <div className={`${isActive ? styles.activeButton : styles.inactiveButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
+            <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
           </div>
         </div>
       </div>
