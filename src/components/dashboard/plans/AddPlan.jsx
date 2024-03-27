@@ -146,17 +146,17 @@ const AddPlan = () => {
 
 
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="capValue">Cap Value:</label>
+            <label className={styles.addPlan_label} htmlFor="capValue">Subscription Fees:</label>
             <input className={styles.addPlan_input} type="text" id="capValue" name="capValue" value={formData.capValue} onChange={handleChange} required />
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="maxVal">Max Value:</label>
+            <label className={styles.addPlan_label} htmlFor="maxVal">Recommended Investment Amount:</label>
             <input className={styles.addPlan_input} type="text" id="maxVal" name="maxVal" value={formData.maxVal} onChange={handleChange} required />
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="returnProfit">Return Profit:</label>
+            <label className={styles.addPlan_label} htmlFor="returnProfit">Expected ROI:</label>
             <input className={styles.addPlan_input} type="text" id="returnProfit" name="returnProfit" value={formData.returnProfit} onChange={handleChange} required />
           </div>
  

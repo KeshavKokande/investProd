@@ -1,0 +1,67 @@
+[
+    {
+      "avatarColor": "success.main",
+      "avatarBgColor": "success.lighter",
+      "avatarIcon": "GiftOutlined",
+      "primaryText": "Kashif Ahmad Joined Platform",
+      "secondaryText": "2 min ago",
+      "time": "3:00 AM"
+    },
+    {
+      "avatarColor": "primary.main",
+      "avatarBgColor": "primary.lighter",
+      "avatarIcon": "MessageOutlined",
+      "primaryText": "Shubham commented your post.",
+      "secondaryText": "5 August",
+      "time": "6:00 PM"
+    },
+    {
+      "avatarColor": "error.main",
+      "avatarBgColor": "error.lighter",
+      "avatarIcon": "SettingOutlined",
+      "primaryText": "Your Profile is Complete 60%",
+      "secondaryText": "7 hours ago",
+      "time": "2:45 PM"
+    },
+    {
+      "avatarColor": "primary.main",
+      "avatarBgColor": "primary.lighter",
+      "avatarIcon": "C",
+      "primaryText": "Aditya Kumar invited to join Meeting.",
+      "secondaryText": "Daily scrum meeting time",
+      "time": "9:10 PM"
+    },
+    {
+        "avatarColor": "primary.main",
+        "avatarBgColor": "primary.lighter",
+        "avatarIcon": "C",
+        "primaryText": "Aditya Kumar invited to join Meeting.",
+        "secondaryText": "Daily scrum meeting time",
+        "time": "9:10 PM"
+      },
+      {
+        "avatarColor": "primary.main",
+        "avatarBgColor": "primary.lighter",
+        "avatarIcon": "C",
+        "primaryText": "Aditya Kumar invited to join Meeting.",
+        "secondaryText": "Daily scrum meeting time",
+        "time": "9:10 PM"
+      },
+      {
+        "avatarColor": "primary.main",
+        "avatarBgColor": "primary.lighter",
+        "avatarIcon": "C",
+        "primaryText": "Aditya Kumar invited to join Meeting.",
+        "secondaryText": "Daily scrum meeting time",
+        "time": "9:10 PM"
+      },
+      {
+        "avatarColor": "primary.main",
+        "avatarBgColor": "primary.lighter",
+        "avatarIcon": "C",
+        "primaryText": "Aditya Kumar invited to join Meeting.",
+        "secondaryText": "Daily scrum meeting time",
+        "time": "9:10 PM"
+      }
+  ]
+  

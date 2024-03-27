@@ -1,0 +1,27 @@
+[
+    {
+      "avatarSrc": "user-01.png",
+      "avatarAlt": "John Doe",
+      "primaryText": "John Doe",
+      "time": "2 min ago",
+      "subtitle": "It is a long established fact that a reader will be distracted",
+      "chips": ["Unread", "New"]
+    },
+    {
+      "avatarSrc": "user-01.png",
+      "avatarAlt": "John Doe",
+      "primaryText": "John Doe",
+      "time": "2 min ago",
+      "subtitle": "Uploaded two file on 21 Jan 2020",
+      "chips": []
+    },
+    {
+      "avatarSrc": "user-01.png",
+      "avatarAlt": "John Doe",
+      "primaryText": "John Doe",
+      "time": "2 min ago",
+      "subtitle": "It is a long established fact that a reader will be distracted",
+      "chips": ["Confirmation of Account"]
+    }
+  ]
+  
