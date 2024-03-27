@@ -18,7 +18,6 @@ const PageTwo = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={styles['form-control']}
           >
-              <option value="">Select an option</option>
               <option value="Retirement planning">Retirement planning</option>
               <option value="Wealth accumulation">Wealth accumulation</option>
               <option value="Saving for education">Saving for education</option>
@@ -35,7 +34,6 @@ const PageTwo = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={styles['form-control']}
           >
-            <option value="">Select an option</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
@@ -50,7 +48,6 @@ const PageTwo = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={styles['form-control']}
           >
-            <option value="">Select an option</option>
             <option value="No prior investment experience.">No prior investment experience.</option>
             <option value="I've some basic knowledge but limited experience.">I've some basic knowledge but limited experience.</option>
             <option value="I've moderate experience and have invested in various financial instruments.">I've moderate experience and have invested in various financial instruments.</option>
@@ -81,7 +78,6 @@ const PageTwo = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={styles['form-control']}
           >
-            <option value="">Select an option</option>
             <option value="Short-term (1-3 years)">Short-term (1-3 years)</option>
             <option value="Medium-term (3-10 years)">Medium-term (3-10 years)</option>
             <option value="Long-term (10+ years)">Long-term (10+ years)</option>

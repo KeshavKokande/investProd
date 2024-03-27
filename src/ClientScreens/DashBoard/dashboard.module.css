@@ -10,7 +10,8 @@
   justify-content: end;
   padding-right: 1vw;
   gap: 2vw;
-  /* position: fixed; */
+  position: fixed;
+
 }
 
 .UserInfo button{

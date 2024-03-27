@@ -77,20 +77,20 @@ function AdvClProfile() {
  
       fetchData();
     }, []);
- 
-   
- 
+
+    
+  
     if (isLoading) {
       return <div>Loading...</div>;
     }
  
     const advisor = advisors.find((adv) => adv._id === advisor_id);
     const advisorPlans = plans.filter((plan) => plan.advisorId === advisor_id && plan.isActive);
- 
+  
     if (!advisor) {
       return <div>No data available for this advisor</div>;
     }
- 
+
     const decodeImageData = (plan) => {
       if (plan.photo && plan.photo.contentType) {
         const imageDataArray = plan.photo.data.data;
@@ -104,16 +104,16 @@ function AdvClProfile() {
         return null;
       }
     };
- 
- 
- 
+
+  
+
     const plansWithDecodedImages = advisorPlans.map(plan => {
       const decodedImageUrl = decodeImageData(plan);
       return { ...plan, decPhoto: decodedImageUrl };
     });
- 
- 
- 
+
+
+  
     return (
       <div>
        
