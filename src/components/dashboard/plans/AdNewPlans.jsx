@@ -27,6 +27,7 @@ const AdNewPlans = () => {
     };
  
     fetchPlansData();
+    window.scrollTo(0, 0);
   }, []);
  
   const handleAddPlanClick = () => {

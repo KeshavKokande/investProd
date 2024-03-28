@@ -85,7 +85,6 @@ const PlanCardList = ({ plans }) => {
              
             />
           </div>
-          <div >
             <div className={styles.flex}>
               <label>Filters:</label>
               {/* {showFilterDropdown && ( */}
@@ -106,47 +105,52 @@ const PlanCardList = ({ plans }) => {
               {/* </div> */}
               {/* )} */}
             </div>
-          </div>
 
-          <div className={styles.flex} style={{width: '22vw'}}>
-            <label htmlFor='range' style={{whiteSpace: 'nowrap'}}>Price Range:</label>
-            {/* Price Range: */}
-            <Range _id='range'
-              step={500}
-              min={0}
-              max={10000}
-              values={filters.priceRange}
-              onChange={(values) => handlePriceRangeChange(values)}
-              renderTrack={({ props, children }) => (
-                <div
-                  {...props}
-                  style={{
-                    ...props.style,
-                    height: '6px',
-                    width: '100%',
-                    backgroundColor: '#ccc',
-                    borderRadius: '4px',
-                  }}
-                >
-                  {children}
-                </div>
-              )}
-              renderThumb={({ props }) => (
-                <div
-                  {...props}
-                  style={{
-                    ...props.style,
-                    height: '16px',
-                    width: '16px',
-                    backgroundColor: '#007bff',
-                    borderRadius: '50%',
-                    boxShadow: '0px 2px 6px #AAA',
-                  }}
-                />
-              )}
-            />
-            <input type="text" />
-          </div>
+          <div>
+          <div className={styles.flex} style={{ width: '22vw'}}>
+          Min: {filters.priceRange[0]}
+  <Range
+    _id='range'
+    step={500}
+    min={0}
+    max={10000}
+    values={filters.priceRange}
+    onChange={(values) => handlePriceRangeChange(values)}
+    renderTrack={({ props, children }) => (
+      <div
+        {...props}
+        style={{
+          ...props.style,
+          height: '6px',
+          width: '100%',
+          backgroundColor: '#ccc',
+          borderRadius: '4px',
+        }}
+      >
+        {children}
+      </div>
+    )}
+    renderThumb={({ props }) => (
+      <div
+        {...props}
+        style={{
+          ...props.style,
+          height: '16px',
+          width: '16px',
+          backgroundColor: '#007bff',
+          borderRadius: '50%',
+          boxShadow: '0px 2px 6px #AAA',
+        }}
+      />
+    )}
+  />
+  <br/>
+  <div style={{ marginTop: '10px' }}>
+    Max: {filters.priceRange[1]}
+  </div>
+  </div>
+</div>
+
         </div>
       </div>
 

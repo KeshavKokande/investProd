@@ -51,7 +51,7 @@ const AddPlan = () => {
   };
 
 
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleStockChange = (e, index, field) => {
     const { value } = e.target;
@@ -65,9 +65,9 @@ const AddPlan = () => {
         ...formData,
         stocks: updatedStocks
       });
-      setError(''); // Clear error if total contribution is within limit
+      setErrors({}); // Clear errors if total contribution is within limit
     } else {
-      setError('Total contribution cannot exceed 100%');
+      setErrors({ totalContributions: 'Total contribution cannot exceed 100%' });
       // Reset the changed value to prevent exceeding 100%
       updatedStocks[index][field] = '';
       setFormData({
@@ -84,19 +84,52 @@ const AddPlan = () => {
     });
   };
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
+    const newErrors = {};
     const totalContributions = formData.stocks.reduce((total, stock) => total + Number(stock.contri || 0), 0);
-  
+
     if (totalContributions < 100) {
-      setError('Sum of all stock contributions should not be less than 100%');
-    } else {
-      setError('');
-  
+      newErrors.totalContributions = 'Sum of all stock contributions should not be less than 100%';
+    }
+    if (!formData.planName) {
+      newErrors.planName = 'Plan name is required';
+    }
+    if (!formData.capValue) {
+      newErrors.capValue = 'Cap value is required';
+    }
+    if (!formData.maxVal) {
+      newErrors.maxVal = 'Max value is required';
+    }
+    if (!formData.risk) {
+      newErrors.risk = 'Risk is required';
+    }
+    if (!formData.returnProfit) {
+      newErrors.returnProfit = 'Return profit is required';
+    }
+    if (!formData.minInvestmentAmount) {
+      newErrors.minInvestmentAmount = 'Minimum investment amount is required';
+    }
+    if (formData.stocks.length === 0) {
+      newErrors.stocks = 'Add Atleast One Stock';
+    }
+    if (formData.photo === null) {
+      newErrors.photo = 'Photo upload is required';
+    }
+
+    if (parseInt(formData.maxVal) <= parseInt(formData.minInvestmentAmount)) {
+      newErrors.minInvestmentAmount = 'cannot be more than Max Value';
+      newErrors.maxVal = 'cannot be less than Min Value';
+    }
+
+    if (formData.returnProfit > 100 || formData.returnProfit < 0) {
+      newErrors.returnProfit = 'Should be between 0-100%';
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
       Swal.fire({
         title: 'Are you sure?',
         text: 'You are about to create a new plan.',
@@ -128,6 +161,7 @@ const AddPlan = () => {
       });
     }
   };
+
   
   return (
     <div className={styles.addPlan_form_container}>
@@ -139,31 +173,37 @@ const AddPlan = () => {
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="planName">Plan Name<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="planName" name="planName" value={formData.planName} onChange={handleChange} required />
+            {errors.planName && <div className={styles.error}><strong>{errors.planName}</strong></div>}
           </div>
 
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="capValue">Cap Value<span className={styles.required}>*</span>:</label>
+            <label className={styles.addPlan_label} htmlFor="capValue">Subscription Charges<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="capValue" name="capValue" value={formData.capValue} onChange={handleChange} required />
+            {errors.capValue && <div className={styles.error}><strong>{errors.capValue}</strong></div>}
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="maxVal">Max Value<span className={styles.required}>*</span>:</label>
+            <label className={styles.addPlan_label} htmlFor="maxVal">Recommended Investment Amount<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="maxVal" name="maxVal" value={formData.maxVal} onChange={handleChange} required />
+            {errors.maxVal && <div className={styles.error}><strong>{errors.maxVal}</strong></div>}
           </div>
  
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="returnProfit">Return Profit<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="returnProfit" name="returnProfit" value={formData.returnProfit} onChange={handleChange} required />
+            {errors.returnProfit && <div className={styles.error}><strong>{errors.returnProfit}</strong></div>}
           </div>
  
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="risk">Risk<span className={styles.required}>*</span>:</label>
             <select className={styles.addPlan_select} id="risk" name="risk" value={formData.risk} onChange={handleChange} required>
-              <option value="">Select Appropriate Risk</option>
+            <option value="">Select</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+            {errors.risk && <div className={styles.error}><strong>{errors.risk}</strong></div>}
+            
           </div>
  
  
@@ -178,16 +218,19 @@ const AddPlan = () => {
               onChange={handlePhotoUpload}
             // className={styles['form-control-file']}
             />
+            {errors.photo && <div className={styles.error}><strong>{errors.photo}</strong></div>}
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount<span className={styles.required}>*</span>:</label>
-            <input className={styles.addPlan_input} type="number" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} required />
+            <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
+            <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} required />
+            {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
           </div>
  
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
+            {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
           </div>
 
 
@@ -220,7 +263,8 @@ const AddPlan = () => {
               </div>
             ))}
           </div>
-          {error && <div className={styles.error}><strong>{error}</strong></div>}
+          {errors.stock && <div className={styles.error}><strong>{errors.stock}</strong></div>}
+          {errors.totalContributions && <div className={styles.error}><strong>{errors.totalContributions}</strong></div>}
           <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
         </form>
       </div>

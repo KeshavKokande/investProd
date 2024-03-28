@@ -18,6 +18,7 @@ function PlanView() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchPlansData = async () => {
       console.log("Started fetching plans data");
       try {
@@ -51,6 +52,10 @@ function PlanView() {
   const handleBuyPlan = async () => {
     if (investedAmount < plan.minInvestmentAmount) {
       Swal.fire('Error', 'Invested amount cannot be less than minimum investment amount.', 'error');
+      return;
+    }
+    if (investedAmount > plan.maxVal) {
+      Swal.fire('Error', 'Invested amount cannot be more than maximum investment amount.', 'error');
       return;
     }
 
@@ -116,15 +121,7 @@ function PlanView() {
               {/* <h2>Plan Information</h2> */}
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
-                  Advise
-                </p>
-                <p className={styles.rowValue}>
-                  {plan.advise}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Cap Value
+                  Subscription Charge
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}
@@ -140,7 +137,7 @@ function PlanView() {
               </div>
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
-                  Max Value
+                  Recommended Investment Amount
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.maxVal).toLocaleString('en-IN')}
@@ -168,6 +165,14 @@ function PlanView() {
                 </p>
                 <p className={styles.rowValue}>
                   {plan.risk}
+                </p>
+              </div>
+              <div className={styles.row}>
+                <p className={styles.rowLabel}>
+                  Advise
+                </p>
+                <p className={styles.rowValue}>
+                  {plan.advise}
                 </p>
               </div>
               {/* <div className={styles.row}>
