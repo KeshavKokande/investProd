@@ -79,7 +79,7 @@ const PlanCard = ({ plan, deletePlan }) => {
         <div className={styles.adnewplan_right_section}>
           <div className={styles.text}>
             <div><strong>Risk: </strong><span className={`${styles.adnewplan_risk_dot} ${riskClassName}`}></span>{risk}</div>
-            <div>Status: <span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'In Active'}</div>
+            <div>Status: <span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
             <div>Minimum Investment Amount: ₹{minInvestmentAmount}</div>
             <div>Number of Subscriptions: {noOfSubscription}</div>
             <div>Cap Value: ₹{capValue}</div>

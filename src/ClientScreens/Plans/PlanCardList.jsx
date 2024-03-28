@@ -85,7 +85,6 @@ const PlanCardList = ({ plans }) => {
              
             />
           </div>
-          <div >
             <div className={styles.flex}>
               <label>Filters:</label>
               {/* {showFilterDropdown && ( */}
@@ -106,7 +105,6 @@ const PlanCardList = ({ plans }) => {
               {/* </div> */}
               {/* )} */}
             </div>
-          </div>
 
           <div>
           <div className={styles.flex} style={{ width: '22vw'}}>
