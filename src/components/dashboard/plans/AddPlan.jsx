@@ -177,13 +177,13 @@ const AddPlan = () => {
           </div>
 
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="capValue">Cap Value<span className={styles.required}>*</span>:</label>
+            <label className={styles.addPlan_label} htmlFor="capValue">Subscription Charges<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="capValue" name="capValue" value={formData.capValue} onChange={handleChange} required />
             {errors.capValue && <div className={styles.error}><strong>{errors.capValue}</strong></div>}
           </div>
  
           <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="maxVal">Max Value<span className={styles.required}>*</span>:</label>
+            <label className={styles.addPlan_label} htmlFor="maxVal">Recommended Investment Amount<span className={styles.required}>*</span>:</label>
             <input className={styles.addPlan_input} type="text" id="maxVal" name="maxVal" value={formData.maxVal} onChange={handleChange} required />
             {errors.maxVal && <div className={styles.error}><strong>{errors.maxVal}</strong></div>}
           </div>

@@ -121,7 +121,7 @@ function PlanView() {
               {/* <h2>Plan Information</h2> */}
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
-                  Cap Value
+                  Subscription Charge
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}
@@ -137,7 +137,7 @@ function PlanView() {
               </div>
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
-                  Max Value
+                  Recommended Investment Amount
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.maxVal).toLocaleString('en-IN')}
