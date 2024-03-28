@@ -101,7 +101,8 @@
 .vitamin {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    text-transform: capitalize;
 }
 .vitamin-h2{
     font-size: 1.5rem !important;
@@ -155,7 +156,8 @@ h2{
 .reviews {
     display: flex;
     /* margin-top: 5px; */
-    justify-content: space-between
+    justify-content: space-between;
+    text-transform: capitalize;
 }
 
 .reviews p {

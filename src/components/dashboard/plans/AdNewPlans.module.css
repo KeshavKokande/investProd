@@ -89,6 +89,7 @@ body {
   /* justify-content: center; */
 
   /* align-items: center; */
+  text-transform: capitalize;
 
 }
 
@@ -203,6 +204,20 @@ body {
 
   background-color: #66bb6a;
   /* Light green */
+
+}
+
+.adnewplan_risk_active {
+
+  display: inline-block;
+
+  width: 12px;
+
+  height: 12px;
+
+  border-radius: 50%;
+
+  margin-right: 5px;
 
 }
 
@@ -443,4 +458,9 @@ body {
 
   color: #ff0400;
   text-decoration: double;
+}
+
+.required{
+  color: red;
+  font-weight: bold;
 }

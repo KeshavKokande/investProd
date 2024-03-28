@@ -12,7 +12,6 @@ const PlanCard = ({ plan, deletePlan }) => {
     return storedStatus ? JSON.parse(storedStatus) : plan.isActive;
   };
 
-  const [isDeleting, setIsDeleting] = useState(false);
   const [toBeDeleted, setToBeDeleted] = useState(plan._id);
   const [isActive, setIsActive] = useState(getInitialIsActive()); // Initialize with stored value or default from props
 
@@ -46,7 +45,7 @@ const PlanCard = ({ plan, deletePlan }) => {
 
   const riskClassName = risk === 'low' ? styles.adnewplan_risk_low :  risk === 'medium' ? styles.adnewplan_risk_medium : styles.adnewplan_risk_high;
   
-  const isActiveClassName = isActive === 'true' ? styles.adnewplan_risk_true : styles.adnewplan_risk_false;
+  const isActiveClassName = isActive ? styles.adnewplan_risk_true : styles.adnewplan_risk_false;
 
   const renderStocks = () => {
     return stocks.map((stock, index) => (
@@ -80,8 +79,7 @@ const PlanCard = ({ plan, deletePlan }) => {
         <div className={styles.adnewplan_right_section}>
           <div className={styles.text}>
             <div><strong>Risk: </strong><span className={`${styles.adnewplan_risk_dot} ${riskClassName}`}></span>{risk}</div>
-            <div>Status: <span className={`${styles.isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
-
+            <div>Status: <span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'In Active'}</div>
             <div>Minimum Investment Amount: ₹{minInvestmentAmount}</div>
             <div>Number of Subscriptions: {noOfSubscription}</div>
             <div>Cap Value: ₹{capValue}</div>

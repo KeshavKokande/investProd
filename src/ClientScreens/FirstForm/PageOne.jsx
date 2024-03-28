@@ -34,7 +34,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
       </div>
       <div className={styles['form-container']}>
         <div className={styles['question-container']}>
-          <label htmlFor="name">Name:<span className={styles.required}>*</span></label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
@@ -83,7 +83,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="email">Email:<span className={styles.required}>*</span></label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"

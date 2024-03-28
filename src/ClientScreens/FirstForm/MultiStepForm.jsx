@@ -5,11 +5,12 @@ import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
 import { useLocation, useNavigate } from 'react-router-dom';
+import "./Page.css";
 
 const MultiStepForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
+  const [isCompleted, setIsCompleted] = useState(false); 
   const initialName = sessionStorage.getItem('name') || '';
   const initialEmail = sessionStorage.getItem('email') || '';
   const [formData, setFormData] = useState({
@@ -24,7 +25,13 @@ const MultiStepForm = () => {
     photoId: null,
     profilePhoto
       : { data: '', contentType: '' },
-    phone: ''
+    phone: '',
+    question_0:'',
+    question_1:'',
+    question_2:'',
+    question_3:'',
+    question_4:'',
+
   });
 
   const [activeStep, setActiveStep] = useState(0);
@@ -95,7 +102,7 @@ const MultiStepForm = () => {
     if (ageValue <18 || ageValue > 120) errors.age = 'Age Should be >18';
     if (isNaN(formData.age.trim())) errors.age = "invalid age"
     if (!formData.qualification) errors.qualification = 'Qualification is required';
-    if (!formData.address) errors.address = 'Address is required';
+    if (!formData.address) errors.address = 'Location is required';
     if (!formData.jobRole) errors.jobRole = 'Job Role is required';
     if (!formData.gender) errors.gender = 'Please select your gender'; // New validation
     if (formData.phone.trim() === '') errors.phone = 'Phone number is required';
@@ -107,13 +114,11 @@ const MultiStepForm = () => {
 
   const validatePageTwo = () => {
     const errors = {};
-
-    Object.keys(formData).forEach(key => {
-
-      if (key.includes('question_') && formData[key] === '' && !key.includes('What is your annual income?')) {
-        errors[key] = 'Please select an option';
-      }
-    });
+    if (!formData.question_0) errors.question_0 = 'primary investment objectives required';
+    if (!formData.question_1) errors.question_1 = 'Risk Tolerance required';
+    if (!formData.question_2) errors.question_2 = 'investment experience required';
+    if (!formData.question_3) errors.question_3 = 'annual income required';
+    if (!formData.question_4) errors.question_4 = 'investment time horizon required';
     return errors;
   };
 
@@ -125,6 +130,7 @@ const MultiStepForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if(formData.agreement){}
     try {
       const response = await fetch(`http://localhost:8000/api/v1/client/register-client`, {
         method: 'POST',

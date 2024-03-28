@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
  
-import "../Plans/Plans.css";
+// import "../Plans/Plans.css";
+import styles from "./../Plans/Plans.module.css";
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import ProfileCard from '../Plans/ProfileCard';
@@ -121,7 +122,7 @@ function AdvClProfile() {
  
         <br />
         <h2 style={{marginBottom:"1rem"}}>{advisor.name.split(" ")[0]}&#39;s Plans</h2>
-        <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000}>
+        <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000} className={styles.Carousel}>
           {plansWithDecodedImages.map((plan, index) => (
             <div key={index}>
             <Link to={`/plan_id/${plan._id}`}>

@@ -142,6 +142,7 @@
   .advleft, .advright{
     display: grid;
     justify-items: center;
+    text-transform: capitalize;
   }
 
   .advleft img{

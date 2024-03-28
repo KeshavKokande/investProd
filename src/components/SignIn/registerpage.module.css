@@ -25,10 +25,7 @@
     width: 30vw;
   }
 
-  .h2-label{
-    font-family: 'Manrope', sans-serif;
-    font-size: 4rem;
-  }
+ 
   
   .register-right {
     display: grid;
@@ -40,14 +37,34 @@
     grid-gap: 3vh;
   }
 
-  .register-link:hover{
+  .register_link:hover{
     color: rgb(19, 119, 219);
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  .register_link{
+    font-size: 1.5rem;
+    text-decoration: underline;
   }
   
+  .h4-register-label{
+    font-size: 1.5rem;
+  }
+  .register-label{
+    font-size: 1.5rem;
+  }
 
+  .h4-welcome-label{
+    font-size: 2.50rem;
+  }
+
+  .h2_label{
+    font-size: 2.85rem;
+  }
   .register-right h2 {
-    font-size: 24px;
+    font-family: 'Manrope', sans-serif;
+    /* font-size: 2rem; */
   }
   .input-wrapper {
     width: 100%;

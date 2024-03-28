@@ -57,6 +57,10 @@ const Register = () => {
     }
   };
 
+  const handleGoogleSignIn = () => {
+    window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google';
+  };
+
   const handleSubmit = () => {
     fetch('http://localhost:8000/api/v1/check-auth/signup', {
       method: 'POST',
@@ -95,9 +99,9 @@ const Register = () => {
         <img src={RegistrationImage} alt="Registration" />
       </div>
       <div className={styles['register-right']}>
-        <h2>Welcome Client!!!</h2>
+        <h2 className={styles['h4-welcome-label']}>Welcome Client</h2>
         <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
-          <h4>Already An User<a href='/login'>  Login Here</a></h4>
+          <h4 className={styles['register-label']}>Already An User &nbsp;|&nbsp;&nbsp;<a href='/login' className={styles.register_link}>Login Here</a></h4>
         </div>
         <div className={styles['input-wrapper']}>
           <label>Name</label>
@@ -153,16 +157,20 @@ const Register = () => {
         {errors.general && <span className={styles['error-message']}>{errors.general}</span>}
         {registrationError && <span className={styles['error-message']}>{registrationError}</span>}
 
-        <div>
-          <button className={styles['register-btn']} onClick={handleSubmit}>Register</button>
+        <div style={{width:"100%"}}>
+          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>Register</button>
         </div>
 
         <hr />
 
-        <div className={styles['gAuth']}>
+        {/* <div className={styles['gAuth']}>
           <h2>Continue with </h2>
           <span className={styles['google-icon']}><FcGoogle /></span>
-        </div>
+        </div> */}
+        <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
+            <h2>Continue with</h2>
+            <span className={styles['google-icon']}><FcGoogle /></span>
+          </div>
       </div>
     </div>
   );

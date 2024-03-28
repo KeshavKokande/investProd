@@ -72,7 +72,15 @@ const ClBaseLayout = () => {
         <NotificationTest />
         {/* <NotificationTesting2 /> */}
         <h4>{profileInfo.name}</h4>
-        <img src={profileInfo.img} alt="" className={styles.userProfileImg} />
+        <img
+            src={profileInfo.img}
+            alt='Profile'
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://avatar.iran.liara.run/public/boy';
+            }}
+            className={styles.userProfileImg}
+          />
       </div>
       <ClSidebar />
       {/* right side/content of the page */}
