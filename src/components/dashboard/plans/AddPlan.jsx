@@ -1,20 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import styles from "./AdNewPlans.module.css";
+import axios from 'axios';
+import StockList from './StockList';
+import historicalData from './symbols_data.json';
 
 const AddPlan = () => {
   const navigate = useNavigate();
+  const [date, setDate] = useState("2022-03-07")
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:8000/api/v1/advisor/get-all-stocks', {
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         withCredentials: true,
+  //         body:{
+  //           date: "2022-03-07"
+  //         }
+  //       });
+      
+  //       // Handle the response here
+  //       setData(response.data.stocks); // Update state with fetched data
+  //       console.log(data);
+  //     } catch (error) {
+  //       // Handle errors here
+  //       console.error('Error fetching data:', error.message);
+  //     }
+  //   };
+
+  //   fetchData(); // Call the fetchData function
+
+  // }, []);
+
+
 
   const [formData, setFormData] = useState({
     planName: '',
-    capValue: '',
-    maxVal: '',
-    returnProfit: '',
     risk: '',
     minInvestmentAmount: '',
     advise: '',
-    stocks: [{ stockName: '', contri: '' }],
+    stocks: [],
+    cash:0,
     photo: null
   });
 
@@ -53,46 +83,126 @@ const AddPlan = () => {
 
   const [errors, setErrors] = useState({});
 
-  const handleStockChange = (e, index, field) => {
-    const { value } = e.target;
-    let updatedStocks = [...formData.stocks];
-    updatedStocks[index][field] = value;
 
-    const totalContributions = updatedStocks.reduce((total, stock) => total + Number(stock.contri || 0), 0);
 
-    if (totalContributions <= 100) {
-      setFormData({
-        ...formData,
-        stocks: updatedStocks
-      });
-      setErrors({}); // Clear errors if total contribution is within limit
+  const [newSymbol, setNewSymbol] = useState('');
+  const [newQty, setNewQty] = useState(0);
+  const [selectedPrices, setSelectedPrices] = useState({}); // State to hold fetched stock prices
+ 
+
+  // Function to handle date selection
+//   const handleDateChange = event => {
+//     setSelectedDate(event.target.value);
+//      // Fetch prices for the selected date
+//   };
+
+  // Function to handle adding a new stock to the plan
+  const handleAddStock = () => {
+    if (newSymbol && newQty > 0) {
+      const price = selectedPrices[newSymbol];
+      if (price) {
+        let updatedStocks = [...formData.stocks];
+        const existingStockIndex = updatedStocks.findIndex(stock => stock.symbol === newSymbol);
+        if (existingStockIndex !== -1) {
+          updatedStocks[existingStockIndex].qty += newQty;
+        } else {
+          updatedStocks.push({ symbol: newSymbol, qty: newQty });
+        }
+        // Remove stocks with zero quantity
+        updatedStocks = updatedStocks.filter(stock => stock.qty > 0);
+        setFormData({ ...formData, stocks: updatedStocks });
+        setNewSymbol('');
+        setNewQty(0);
+      } else {
+        alert('Data Not Available');
+      }
     } else {
-      setErrors({ totalContributions: 'Total contribution cannot exceed 100%' });
-      // Reset the changed value to prevent exceeding 100%
-      updatedStocks[index][field] = '';
-      setFormData({
-        ...formData,
-        stocks: updatedStocks
-      });
+      alert('Please enter a valid symbol and quantity.');
+    }
+  };
+  
+
+  // Function to fetch stock prices for the selected date
+  const fetchStockPrices = (date) => {
+    const prices = {};
+    Object.keys(historicalData).forEach(symbol => {
+      const symbolData = historicalData[symbol];
+      if (symbolData && typeof symbolData === 'object' && symbolData.historical) {
+        const priceData = symbolData.historical.find(item => item.date === date);
+        if (priceData) {
+          prices[symbol] = Math.round(parseFloat(priceData.close));
+        }
+      }
+    });
+    setSelectedPrices(prices);
+  };
+
+  useEffect(() => {
+    fetchStockPrices(date); // Fetch prices for today's date
+  }, []);
+
+  // Function to handle selling stocks
+  const handleSellStock = (symbol, qty, price) => {
+    const existingStockIndex = formData.stocks.findIndex(stock => stock.symbol === symbol);
+    if (existingStockIndex !== -1 && formData.stocks[existingStockIndex].qty >= qty) {
+      const updatedStocks = [...formData.stocks];
+      updatedStocks[existingStockIndex].qty -= qty;
+      // Remove stocks with zero quantity
+      const filteredStocks = updatedStocks.filter(stock => stock.qty > 0);
+      setFormData({ ...formData, stocks: filteredStocks });
+    } else {
+      alert('Cannot sell stocks with insufficient quantity.');
     }
   };
 
-  const handleAddStock = () => {
-    setFormData({
-      ...formData,
-      stocks: [...formData.stocks, { stockName: '', contri: '' }]
-    });
+  // Function to handle buying stocks
+  // Function to handle buying stocks
+const handleBuyStock = (symbol, qty, price) => {
+    const existingStockIndex = formData.stocks.findIndex(stock => stock.symbol === symbol);
+    if (existingStockIndex !== -1) {
+      const updatedStocks = [...formData.stocks];
+      updatedStocks[existingStockIndex].qty += qty;
+      setFormData({ ...formData, stocks: updatedStocks });
+    } else {
+      const updatedStocks = [...formData.stocks, { symbol, qty }];
+      setFormData({ ...formData, stocks: updatedStocks });
+    }
   };
+  
+
+  // Function to calculate the price percentage relative to total value
+  const getPricePercentage = (price) => {
+    const totalValue = calculateTotalValue();
+    if (totalValue === 0) return 0; // Avoid division by zero
+    return ((price / totalValue) * 100).toFixed(2); // Calculate percentage and round to 2 decimal places
+  };
+
+  // Function to calculate the total value of the plan including cash balance
+  const calculateTotalValue = () => {
+    let total = formData.cash; // Start with the cash balance
+
+    // Add the value of each stock based on its quantity and price
+    formData.stocks.forEach(stock => {
+      const price = selectedPrices[stock.symbol];
+      if (price) {
+        total += stock.qty * price;
+      }
+    });
+
+    return total;
+  };
+
+
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newErrors = {};
-    const totalContributions = formData.stocks.reduce((total, stock) => total + Number(stock.contri || 0), 0);
+   
 
-    if (totalContributions < 100) {
-      newErrors.totalContributions = 'Sum of all stock contributions should not be less than 100%';
-    }
     if (!formData.planName) {
       newErrors.planName = 'Plan name is required';
     }
@@ -162,8 +272,16 @@ const AddPlan = () => {
     }
   };
 
+
   
   return (
+    <div style={{display:"flex", flexDirection:"row"}}>
+
+      <StockList selectedDate={date}/>
+
+
+
+
     <div className={styles.addPlan_form_container}>
       <div className={styles.addPlan_image_container}>
         <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />
@@ -176,23 +294,6 @@ const AddPlan = () => {
             {errors.planName && <div className={styles.error}><strong>{errors.planName}</strong></div>}
           </div>
 
-          <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="capValue">Cap Value<span className={styles.required}>*</span>:</label>
-            <input className={styles.addPlan_input} type="text" id="capValue" name="capValue" value={formData.capValue} onChange={handleChange} required />
-            {errors.capValue && <div className={styles.error}><strong>{errors.capValue}</strong></div>}
-          </div>
- 
-          <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="maxVal">Max Value<span className={styles.required}>*</span>:</label>
-            <input className={styles.addPlan_input} type="text" id="maxVal" name="maxVal" value={formData.maxVal} onChange={handleChange} required />
-            {errors.maxVal && <div className={styles.error}><strong>{errors.maxVal}</strong></div>}
-          </div>
- 
-          <div className={styles.formGrp}>
-            <label className={styles.addPlan_label} htmlFor="returnProfit">Return Profit<span className={styles.required}>*</span>:</label>
-            <input className={styles.addPlan_input} type="text" id="returnProfit" name="returnProfit" value={formData.returnProfit} onChange={handleChange} required />
-            {errors.returnProfit && <div className={styles.error}><strong>{errors.returnProfit}</strong></div>}
-          </div>
  
           <div className={styles.formGrp}>
             <label className={styles.addPlan_label} htmlFor="risk">Risk<span className={styles.required}>*</span>:</label>
@@ -234,40 +335,31 @@ const AddPlan = () => {
           </div>
 
 
+          <h2>Add New Stock</h2>
+          <label htmlFor="newSymbol">Symbol:</label>
+          <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} />
+          <label htmlFor="newQty">Quantity:</label>
+          <input type="number" id="newQty" value={newQty}  onChange={e => setNewQty(parseInt(e.target.value))} />
+          <button type="button" onClick={handleAddStock}>Add Stock</button>
 
-          <div className={styles.formGrp2}>
-            <div className={styles.addPlan_stocks_label}>
-              <label htmlFor="stocks" className={styles.addPlan_label}>Stocks<span className={styles.required}>*</span>:</label>
-              <button type="button" className={(styles.addPlan_add_stock_btn, styles.align)} onClick={handleAddStock}>+ Add Stock</button>
+          {formData.stocks.map(stock => (
+            <div key={stock.symbol}>
+              <p>
+                {stock.symbol}: Quantity - {stock.qty} | Price - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
+              </p>
+              <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Sell (-)</button>
+              <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Buy (+)</button>
             </div>
-            {formData.stocks.map((stock, index) => (
-              <div key={index} id={styles.stocks}>
-                <input
-                  style={{ width: '50%' }}
-                  type="text"
-                  id={`stockName${index}`}
-                  name={`stockName${index}`}
-                  value={stock.stockName}
-                  onChange={(e) => handleStockChange(e, index, 'stockName')}
-                  placeholder="Enter Stock Name"
-                />
-                <input
-                  style={{ width: '50%' }}
-                  type="number"
-                  id={`contri${index}`}
-                  name={`contri${index}`}
-                  value={stock.contri}
-                  onChange={(e) => handleStockChange(e, index, 'contri')}
-                  placeholder="Enter Contribution"
-                />
-              </div>
-            ))}
-          </div>
-          {errors.stock && <div className={styles.error}><strong>{errors.stock}</strong></div>}
-          {errors.totalContributions && <div className={styles.error}><strong>{errors.totalContributions}</strong></div>}
+          ))}
+
+
+
+
+
           <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

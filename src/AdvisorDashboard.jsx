@@ -20,6 +20,7 @@ import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
+import InvestmentForm from "./components/dashboard/plans/PlanEdit";
 // import ProtectedRoute from "./ProtectedRoute";
 
 import News from "./News/News";
@@ -69,6 +70,8 @@ function App() {
             <Route path="/plan" element={<AdNewPlans/>} />
             <Route path="/details" element={<UserDetails/>}/>
             <Route path="/addplan" element={<AddPlan />} />
+            <Route path="/editpal" element={<InvestmentForm />} />
+            
           </Route>
 
           <Route element={<ClBaseLayout />}>
@@ -82,6 +85,7 @@ function App() {
             <Route path="/profedit" element={<MultiFormEdit/>}/>
             <Route path="/news" element={<News/>}/>
             <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
+
           </Route>
         </Routes>
       </Router>

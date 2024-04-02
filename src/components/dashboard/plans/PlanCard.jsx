@@ -50,8 +50,8 @@ const PlanCard = ({ plan, deletePlan }) => {
   const renderStocks = () => {
     return stocks.map((stock, index) => (
       <tr key={index}>
-        <td className={styles.adnewplan_td}>{stock.stockName}</td>
-        <td className={styles.adnewplan_td}>{stock.contri}%</td>
+        <td className={styles.adnewplan_td}>{stock.symbol}</td>
+        <td className={styles.adnewplan_td}>{stock.qty}%</td>
         <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td>
       </tr>
     ));
