@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from "./Page.module.css";
 import PersonaDetails from "./../../assets/images/personal_details.svg";
 
@@ -137,7 +137,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
             ref={fileInputRef1} // Attach ref to the first file input
             className={styles['form-control-file']}
           />
-          <button className={styles.remove} onClick={clearFileInput1}><strong>Remove</strong> </button>
+          {/* <button className={styles.remove} onClick={clearFileInput1}><strong>Remove</strong> </button> */}
         </div>
 
         <div className={`${styles['form-group']} ${styles['question-container']}`}>
@@ -151,7 +151,7 @@ const PageOne = ({ formData, handleChange, uploadPhoto, ppupload }) => {
             ref={fileInputRef2} // Attach ref to the second file input
             className={styles['form-control-file']}
           />
-          <button className={styles.remove} onClick={clearFileInput2}><strong>Remove</strong></button>
+          {/* <button className={styles.remove} onClick={clearFileInput2}><strong>Remove</strong></button> */}
         </div>
       </div>
     </div>

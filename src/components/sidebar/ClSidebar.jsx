@@ -67,6 +67,9 @@ const ClSidebar = () => {
       if (response.ok) {
 
         localStorage.removeItem("token");
+        document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        sessionStorage.clear();
 
         // Redirect to login page
           window.location.href = "/login";
@@ -107,7 +110,7 @@ const ClSidebar = () => {
       ref={navbarRef}
     >
       <div className="sidebar-top">
-        <Link to='/'>
+        <Link to='/cldash'>
           <div className="sidebar-brand">
             <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
             <span className="sidebar-brand-text">inVEST</span>

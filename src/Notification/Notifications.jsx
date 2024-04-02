@@ -45,73 +45,119 @@ const MenuItemTimeStampStyle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const notificationList = [
-  {
-    id: "n1",
-    status: "unseen",
-    avatar: <FiBox fontSize="small" />,
-    mainText: "Kashif Just Subscribed",
-    subText: "waiting for approval",
-    time: "about 12 hours",
-  },
-  {
-    id: "n2",
-    status: "seen",
-    avatar: <BsFillChatDotsFill fontSize="small" />,
-    mainText: "You have new message",
-    subText: "5 unread messages",
-    time: "1 day",
-  },
-  {
-    id: "n3",
-    status: "unseen",
-    avatar: <FaUser fontSize="small" />,
-    mainText: "Aditya",
-    subText: "answered to your comment",
-    time: "about 4 hours",
-  },
-  {
-    id: "n4",
-    status: "seen",
-    avatar: <IoMailOpenSharp fontSize="small" />,
-    mainText: "You have new mail",
-    subText: "sent from shubham",
-    time: "2 days",
-  },
-  {
-    id: "n5",
-    status: "seen",
-    avatar: <FaTruck fontSize="small" />,
-    mainText: "plan buy success",
-    subText: "your plan is being processed",
-    time: "3 days",
-  },
-];
-
-const seenNotifications = notificationList.filter((el) => el.status === "seen");
-const unSeenNotifications = notificationList.filter(
-  (el) => el.status === "unseen"
-);
-// const totalUnseenNotifications = unSeenNotifications.length;
+// const notificationList = [
+//   {
+//     id: "n1",
+//     status: "unseen",
+//     avatar: <FiBox fontSize="small" />,
+//     mainText: "Kashif Just Subscribed",
+//     subText: "waiting for approval",
+//     time: "about 12 hours",
+//   },
+//   {
+//     id: "n2",
+//     status: "seen",
+//     avatar: <BsFillChatDotsFill fontSize="small" />,
+//     mainText: "You have new message",
+//     subText: "5 unread messages",
+//     time: "1 day",
+//   },
+//   {
+//     id: "n3",
+//     status: "unseen",
+//     avatar: <FaUser fontSize="small" />,
+//     mainText: "Aditya",
+//     subText: "answered to your comment",
+//     time: "about 4 hours",
+//   },
+//   {
+//     id: "n4",
+//     status: "seen",
+//     avatar: <IoMailOpenSharp fontSize="small" />,
+//     mainText: "You have new mail",
+//     subText: "sent from shubham",
+//     time: "2 days",
+//   },
+//   {
+//     id: "n5",
+//     status: "seen",
+//     avatar: <FaTruck fontSize="small" />,
+//     mainText: "plan buy success",
+//     subText: "your plan is being processed",
+//     time: "3 days",
+//   },
+// ];
 
 const Notifications = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [totalUnseenNotifications, setTotalUnseenNotifications] = useState(0);
-
-    useEffect(() => {
-        // Update totalUnseenNotifications whenever notificationList changes
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [totalUnseenNotifications, setTotalUnseenNotifications] = useState(0);
+  const [notificationList, setNotificationList] = useState([]);
+  
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/advisor/get-all-notifications', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to fetch notifications data');
+        }
+    
+        const data = await response.json();
+        console.log("DATA IS:", data.notifications);
+    
+        // Update the notificationList state with the fetched data
+        setNotificationList(data.notifications);
+        
+        // Update the total unseen notifications count based on the fetched data
         setTotalUnseenNotifications(
-          notificationList.filter((el) => el.status === "unseen").length
+          data.notifications.filter((notification) => !notification.seen).length
         );
-      }, [notificationList]);
-
-    const handleOpen = (event) => {
-      setAnchorEl(event.currentTarget);
+      } catch (error) {
+        console.error('Error fetching notifications:', error.message);
+      }
     };
   
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+    fetchNotifications();
+  }, []);
+  
+  const seenNotifications = notificationList.filter((el) => el.seen);
+  const unSeenNotifications = notificationList.filter((el) => !el.seen);
+
+  const handleOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const getTimeDifference = (timestamp) => {
+    const currentTime = new Date();
+    const notificationTime = new Date(timestamp);
+    const differenceInSeconds = Math.floor(
+      (currentTime - notificationTime) / 1000
+    );
+
+    if (differenceInSeconds < 60) {
+      return `${differenceInSeconds} seconds ago`;
+    } else if (differenceInSeconds < 3600) {
+      const minutes = Math.floor(differenceInSeconds / 60);
+      return `${minutes} minutes ago`;
+    } else if (differenceInSeconds < 86400) {
+      const hours = Math.floor(differenceInSeconds / 3600);
+      return `${hours} hours ago`;
+    } else {
+      const days = Math.floor(differenceInSeconds / 86400);
+      return `${days} days ago`;
+    }
+  };
+
   return (
     <>
       <IconButton
@@ -121,7 +167,7 @@ const Notifications = () => {
         onClick={handleOpen}
       >
         <BadgeStyle badgeContent={totalUnseenNotifications}>
-          <HiBell fontSize="small" />
+          <HiBell fontSize="extra large" />
         </BadgeStyle>
       </IconButton>
 
@@ -143,39 +189,51 @@ const Notifications = () => {
 
         <Divider />
 
-        <MenuItem disabled>NEW</MenuItem>
-        {unSeenNotifications.map((el) => (
-          <MenuItem key={el.id}>
-            <MenuItemIconButtonStyle>{el.avatar}</MenuItemIconButtonStyle>
-            <Box>
-              <Typography variant="body2" component="p">
-                <strong>{el.mainText}</strong>{" "}
-                <span>{el.subText}</span>
-              </Typography>
-              <MenuItemTimeStampStyle variant="caption" component="p">
-                <HiClock fontSize="small" />
-                <span>{el.time}</span>
-              </MenuItemTimeStampStyle>
-            </Box>
-          </MenuItem>
-        ))}
+        {unSeenNotifications.length > 0 && (
+          [
+            <MenuItem key="new" disabled>
+              NEW
+            </MenuItem>,
+            unSeenNotifications.map((el) => (
+              <MenuItem key={el.id}>
+                <MenuItemIconButtonStyle>{el.avatar}</MenuItemIconButtonStyle>
+                <Box>
+                  <Typography variant="body2" component="p">
+                    <strong>{el.message}</strong>{" "}
+                    <span>{el.subText}</span>
+                  </Typography>
+                  <MenuItemTimeStampStyle variant="caption" component="p">
+                    <HiClock fontSize="small" />
+                    <span>{getTimeDifference(el.timestamp)}</span>
+                  </MenuItemTimeStampStyle>
+                </Box>
+              </MenuItem>
+            )),
+          ]
+        )}
 
-        <MenuItem disabled>BEFORE THAT</MenuItem>
-        {seenNotifications.map((el) => (
-          <MenuItem key={el.id}>
-            <MenuItemIconButtonStyle>{el.avatar}</MenuItemIconButtonStyle>
-            <Box>
-              <Typography variant="body2" component="p">
-                <strong>{el.mainText}</strong>{" "}
-                <span>{el.subText}</span>
-              </Typography>
-              <MenuItemTimeStampStyle variant="caption" component="p">
-                <HiClock fontSize="small" />
-                <span>{el.time}</span>
-              </MenuItemTimeStampStyle>
-            </Box>
-          </MenuItem>
-        ))}
+        {seenNotifications.length > 0 && (
+          [
+            <MenuItem key="before" disabled>
+              BEFORE THAT
+            </MenuItem>,
+            seenNotifications.map((el) => (
+              <MenuItem key={el.id}>
+                <MenuItemIconButtonStyle>{el.avatar}</MenuItemIconButtonStyle>
+                <Box>
+                  <Typography variant="body2" component="p">
+                    <strong>{el.message}</strong>{" "}
+                    <span>{el.subText}</span>
+                  </Typography>
+                  <MenuItemTimeStampStyle variant="caption" component="p">
+                    <HiClock fontSize="small" />
+                    <span>{getTimeDifference(el.timestamp)}</span>
+                  </MenuItemTimeStampStyle>
+                </Box>
+              </MenuItem>
+            )),
+          ]
+        )}
 
         <Divider />
 
@@ -187,6 +245,7 @@ const Notifications = () => {
       </Menu>
     </>
   );
+
 };
 
 export default Notifications;

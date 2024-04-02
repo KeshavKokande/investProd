@@ -42,19 +42,20 @@ const MultiFormEdit = () => {
           const data = response.data.client;
           setFormData({
             img: "",
-            name: data.name || '',
+            name: capitalize(data.name) || '',
             email: data.email || '',
-            age: data.age || '',
-            address: data.address || '',
-            gender: data.gender || '',
-            jobRole: data.jobRole || '',
-            phone: data.phone || '',
-            qualification: data.qualification || '',
-            question_0: data.question_0 || '',
-            question_1: data.question_1 || '',
-            question_2: data.question_2 || '',
-            question_3: data.question_3 || '',
-            question_4: data.question_4 || ''
+            age: capitalize(data.age) || '',
+            phone: capitalize(data.phone) || '',
+            address: capitalize(data.address) || '',
+            gender: capitalize(data.gender) || '',
+            jobRole: capitalize(data.jobRole) || '',
+            phone: capitalize(data.phone) || '',
+            qualification: capitalize(data.qualification) || '',
+            question_0: capitalize(data.question_0) ||'',
+            question_1: capitalize(data.question_1) ||'',
+            question_2: capitalize(data.question_2) ||'',
+            question_3: capitalize(data.question_3) ||'',
+            question_4: capitalize(data.question_4) ||''
           });
           setIsLoading(false);
         } else {
@@ -67,6 +68,10 @@ const MultiFormEdit = () => {
 
     fetchProfileData();
   }, []);
+
+  const capitalize = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;

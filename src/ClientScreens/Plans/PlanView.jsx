@@ -121,7 +121,7 @@ function PlanView() {
               {/* <h2>Plan Information</h2> */}
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
-                  Subscription Charge
+                  CAGR
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}

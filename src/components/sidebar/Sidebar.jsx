@@ -28,8 +28,8 @@ const Sidebar = () => {
   const navbarRef = useRef(null);
 
 
-   // Logout function
-   const handleLogout = () => {
+  // Logout function
+  const handleLogout = () => {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will be logged out',
@@ -57,7 +57,7 @@ const Sidebar = () => {
       });
       if (response.ok) {
         // Clear user authentication data (if any)
-        console.log("logout",response);
+        console.log("logout", response);
         localStorage.removeItem("token");
 
         // Redirect to login page
@@ -96,10 +96,12 @@ const Sidebar = () => {
       ref={navbarRef}
     >
       <div className="sidebar-top">
-        <div className="sidebar-brand">
-          <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
-          <span className="sidebar-brand-text">inVEST</span>
-        </div>
+        <Link to='/advisor_dashboard'>
+          <div className="sidebar-brand">
+            <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
+            <span className="sidebar-brand-text">inVEST</span>
+          </div>
+        </Link>
         <button className="sidebar-close-btn" onClick={closeSidebar}>
           <MdOutlineClose size={24} />
         </button>

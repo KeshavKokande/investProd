@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import styles from './registerpage.module.css';
 import RegistrationImage from './../../assets/images/RegFinancialAdvisor.jpg';
+import { isElementOfType } from 'react-dom/test-utils';
 
 const Register = () => {
+  const [userData, setUserData] = useState(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,8 +61,8 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
-    window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google';
-  };
+      window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google'; 
+    };
 
   const handleSubmit = () => {
     fetch('http://localhost:8000/api/v1/check-auth/signup', {
@@ -101,7 +104,7 @@ const Register = () => {
       <div className={styles['register-right']}>
         <h2 className={styles['h4-welcome-label']}>Welcome Client</h2>
         <div className={styles['input-wrapper']} style={{ width: "fit-content" }} >
-          <h4 className={styles['register-label']}>Already An User &nbsp;|&nbsp;&nbsp;<a href='/login' className={styles.register_link}>Login Here</a></h4>
+          <h4 className={styles['register-label']}>Already a user &nbsp;|&nbsp;&nbsp;<a href='/login' className={styles.register_link}>Login Here</a></h4>
         </div>
         <div className={styles['input-wrapper']}>
           <label>Name</label>
