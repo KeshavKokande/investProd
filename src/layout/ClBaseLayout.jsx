@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./../ClientScreens/DashBoard/dashboard.module.css";
 import notification from "./../assets/icons/notification.png"
-
+import Notifications from "../Notification/Notifications";
 const ClBaseLayout = () => {
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -63,9 +63,10 @@ const ClBaseLayout = () => {
     <main className="page-wrapper">
       {/* left of page */}
       <div className={styles.UserInfo}>
-        <button>
+        {/* <button>
           <img src={notification} alt="" />
-        </button>
+        </button> */}
+        <Notifications />
         <h4>{profileInfo.name}</h4>
         <img
             src={profileInfo.img}

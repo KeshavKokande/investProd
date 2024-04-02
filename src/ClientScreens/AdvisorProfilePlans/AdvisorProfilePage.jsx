@@ -15,6 +15,7 @@ const AdvisorProfilePage = () => {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
         const advisorsResponse = await fetch(`http://localhost:8000/api/v1/Client/get-all-advisors`, {
@@ -74,7 +75,8 @@ const AdvisorProfilePage = () => {
             {advisor.name}
           </h3>
           <p className="font-medium">{advisor.email}</p>
-          <div>🚀: {new Date(advisor.createdAt).toLocaleDateString()}</div>
+          {/* <div>🚀: {new Date(advisor.createdAt).toLocaleDateString()}</div> */}
+          <div>Date of Joining: {new Date(advisor.createdAt).toLocaleDateString()}</div>
 
           <div className="mx-auto max-w-180">
             <br />
@@ -87,7 +89,7 @@ const AdvisorProfilePage = () => {
             </p>
           </div>
 
-          <div className="mt-6.5">
+          {/* <div className="mt-6.5">
             <h4 className="mb-3.5 font-medium text-black dark:text-white">
               Follow me on
             </h4>
@@ -238,7 +240,7 @@ const AdvisorProfilePage = () => {
                 </svg>
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

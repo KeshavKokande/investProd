@@ -10,9 +10,30 @@ import "./Page.css";
 const MultiStepForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isCompleted, setIsCompleted] = useState(false); 
-  const initialName = sessionStorage.getItem('name') || '';
-  const initialEmail = sessionStorage.getItem('email') || '';
+  const [isCompleted, setIsCompleted] = useState(false);
+  
+  const getCookieValue = (cookieName) => {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(`${cookieName}=`)) {
+        const encodedValue = cookie.substring(cookieName.length + 1); // Remove `${cookieName}=`
+        return decodeURIComponent(encodedValue);
+      }
+    }
+    return null;
+  };
+  
+  const getNameAndEmailFromCookie = () => {
+    const name = getCookieValue('name');
+    const email = getCookieValue('email');
+    return { name, email };
+  };
+  
+  const { name: initialName, email: initialEmail } = sessionStorage.getItem('name') 
+    ? sessionStorage
+    : getNameAndEmailFromCookie() || '';
+  
   const [formData, setFormData] = useState({
     name: initialName,
     email: initialEmail,
@@ -26,11 +47,11 @@ const MultiStepForm = () => {
     profilePhoto
       : { data: '', contentType: '' },
     phone: '',
-    question_0:'',
-    question_1:'',
-    question_2:'',
-    question_3:'',
-    question_4:'',
+    question_0: '',
+    question_1: '',
+    question_2: '',
+    question_3: '',
+    question_4: '',
 
   });
 
@@ -99,16 +120,16 @@ const MultiStepForm = () => {
     const errors = {};
     if (!formData.age) errors.age = 'Age is required';
     const ageValue = parseInt(formData.age.trim(), 10);
-    if (ageValue <18 || ageValue > 120) errors.age = 'Age Should be >18';
+    if (ageValue < 18 || ageValue > 120) errors.age = 'Age Should be >18';
     if (isNaN(formData.age.trim())) errors.age = "invalid age"
     if (!formData.qualification) errors.qualification = 'Qualification is required';
     if (!formData.address) errors.address = 'Location is required';
     if (!formData.jobRole) errors.jobRole = 'Job Role is required';
     if (!formData.gender) errors.gender = 'Please select your gender'; // New validation
     if (formData.phone.trim() === '') errors.phone = 'Phone number is required';
-    const phoneRegex = /^\d{10}$/; 
+    const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(formData.phone.trim())) errors.phone = 'Enter a Valid 10-Digit Phone No.';
-    if (formData.photoId===null || formData==="") errors.photo = 'Photo Id is needed';
+    if (formData.photoId === null || formData === "") errors.photo = 'Photo Id is needed';
     return errors;
   };
 
@@ -130,7 +151,7 @@ const MultiStepForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(formData.agreement){}
+    if (formData.agreement) { }
     try {
       const response = await fetch(`http://localhost:8000/api/v1/client/register-client`, {
         method: 'POST',
@@ -152,6 +173,8 @@ const MultiStepForm = () => {
       console.log('response:', data);
 
       navigate('/cldash'); // Navigate to '/cldash' if registration is successful
+      document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
     } catch (error) {
       console.error('Error.', error.message);

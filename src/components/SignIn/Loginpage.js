@@ -15,7 +15,7 @@ const LoginPage = () => {
     password: ""
   });
   // const [errorMessage, setErrorMessage] = useState("");
-  const [selectedRole, setSelectedRole] = useState("client"); // State to track selected user role
+  // const [selectedRole, setSelectedRole] = useState("client"); // State to track selected user role
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -57,12 +57,12 @@ const LoginPage = () => {
       }
    
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       // Check the selected role to redirect appropriately
-      if (selectedRole === 'client' && data.user.role === 'client') {
+      if (data.user.role === 'client') {
         navigate('/cldash');
-      } else if (selectedRole === 'advisor' && data.user.role === 'advisor') {
+      } else if (data.user.role === 'advisor') {
         navigate('/advisor_dashboard');
       } else {
         Swal.fire({
@@ -127,22 +127,20 @@ const LoginPage = () => {
               </button>
         </div>
         {/* {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>} */}
-        <div className={styles['input-wrapper']}>
+        {/* <div className={styles['input-wrapper']}>
           <select className="role-based-toggle" value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
             <option value="client">Client</option>
             <option value="advisor">Advisor</option>
           </select>
-        </div>
+        </div> */}
         <div style={{width:"100%"}}>
           <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>Sign In</button>
         </div>
         <hr />
-        {selectedRole === 'client' && (
-          <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
-            <h2>Continue with</h2>
-            <span className={styles['google-icon']}><FcGoogle /></span>
-          </div>
-        )}
+        <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
+          <h2>Continue with</h2>
+          <span className={styles['google-icon']}><FcGoogle /></span>
+        </div>
       </div>
     </div>
   );

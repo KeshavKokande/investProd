@@ -27,6 +27,12 @@ const ProfileCard = ({ plan }) => {
                     <div className={styles.reviews}>
                         <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
                     </div>
+                    <div className={styles.reviews}>
+                        <p><strong style={{ color: "black", fontSize: "15px" }}>CAGR</strong> {plan.risk}</p>
+                    </div>
+                    <div className={styles.reviews}>
+                        <p><strong style={{ color: "black", fontSize: "15px" }}>Fee</strong> {plan.risk}</p>
+                    </div>
                     <div className={`${styles.size} ${styles.position}`}>
                         <p style={{ color: "black", fontSize: "15px" }}>👥 : {plan.noOfSubscription}</p>
                     </div>
