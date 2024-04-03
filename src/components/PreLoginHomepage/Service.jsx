@@ -32,7 +32,7 @@ function Service(){
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 ">
+              {/* <div className="col-md-4 ">
                 <div className="box service_box">
                   <div className="img-box">
                     <img src={s2} alt="" />
@@ -47,7 +47,7 @@ function Service(){
                     
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-md-4 ">
                 <div className="box service_box">
                   <div className="img-box">
