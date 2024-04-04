@@ -3,6 +3,7 @@ import historicalData from './symbols_data.json'; // Import historical data JSON
 import StockList from './StockList';
 
 class InvestmentForm extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -173,7 +174,7 @@ class InvestmentForm extends Component {
           {updatedPlan && (
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="cash">Cash Balance:</label>
-              <input type="text" id="cash" value={(updatedPlan.cash)} readOnly />
+              <input type="text" id="cash" value={(this.getPricePercentage(updatedPlan.cash))} readOnly />
 
               <h2>Sell/Buy Stocks</h2>
               {updatedPlan.stocks.map(stock => (

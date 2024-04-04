@@ -36,7 +36,7 @@ function PlansCl() {
         const data = await response.json();
         const rik = await ponse.json();
 
-        console.log('ris  ',rik);
+        console.log('ris  ',data);
 
         setRiks(rik.client.question_1)
 

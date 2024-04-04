@@ -1,7 +1,7 @@
 import React from 'react';
 import historicalData from './symbols_data.json';
 
-const StockList = ({ selectedDate }) => {
+const StockList = ({ selectedDate, tv}) => {
   const getPriceForDate = (symbol, date) => {
     const symbolData = historicalData[symbol];
     if (symbolData && symbolData.historical) {

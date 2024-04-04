@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ProfileCard from './ProfileCard';
 
 const PlanCardList = ({ plans }) => {
+
+  console.log(plans);
   const [filteredPlans, setFilteredPlans] = useState(plans);
   const [filters, setFilters] = useState({
     cat_risk: '',
