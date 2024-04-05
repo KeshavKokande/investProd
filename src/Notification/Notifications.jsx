@@ -96,7 +96,7 @@ const Notifications = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/advisor/get-all-notifications', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/get-all-notifications', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'

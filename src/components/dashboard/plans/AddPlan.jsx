@@ -141,7 +141,7 @@ const AddPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           console.log('Form data:', formData);
-          fetch('http://localhost:8000/api/v1/advisor/add-plans', {
+          fetch('https://team4api.azurewebsites.net/api/v1/advisor/add-plans', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -382,7 +382,7 @@ export default AddPlan;
 //     }).then((result) => {
 //       if (result.isConfirmed) {
 //         console.log('Form data:', formData);
-//         fetch('http://localhost:8000/api/v1/advisor/add-plans', {
+//         fetch('https://team4api.azurewebsites.net/api/v1/advisor/add-plans', {
 //           method: 'POST',
 //           headers: {
 //             'Content-Type': 'application/json'
