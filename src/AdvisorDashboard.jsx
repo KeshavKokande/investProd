@@ -31,6 +31,7 @@ import{
   HomepageInfo,
   HomePage
 } from './components';
+import EditPlan from "./components/dashboard/plans/EditPlan";
 
 function App() {
  
@@ -69,6 +70,7 @@ function App() {
             <Route path="/plan" element={<AdNewPlans/>} />
             <Route path="/details" element={<UserDetails/>}/>
             <Route path="/addplan" element={<AddPlan />} />
+            <Route path="/edit/:edit" element={<EditPlan />} />
           </Route>
 
           <Route element={<ClBaseLayout />}>

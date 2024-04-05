@@ -2,9 +2,10 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import styles from "./AdNewPlans.module.css";
+import { Link } from 'react-router-dom';
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks, advise } = plan;
+  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks, advise, _id } = plan;
 
   // Function to get initial isActive status from local storage
   const getInitialIsActive = () => {
@@ -90,6 +91,9 @@ const PlanCard = ({ plan, deletePlan }) => {
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
 
             <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
+            <Link to={`/edit/${_id}`}>
+                <button className='button'>edit</button>
+            </Link>
           </div>
         </div>
       </div>
