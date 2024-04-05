@@ -77,7 +77,8 @@ const AddPlan = () => {
         }
         // Remove stocks with zero quantity
         updatedStocks = updatedStocks.filter(stock => stock.qty > 0);
-        setFormData({ ...formData, stocks: updatedStocks });
+        formData.stocks =[...updatedStocks];
+        calculateMini();
         setNewSymbol('');
         setNewQty(0);
       } else {
@@ -95,7 +96,9 @@ const AddPlan = () => {
       updatedStocks[existingStockIndex].qty -= qty;
       // Remove stocks with zero quantity
       const filteredStocks = updatedStocks.filter(stock => stock.qty > 0);
-      setFormData({ ...formData, stocks: filteredStocks });
+      
+      formData.stocks = [...filteredStocks];
+      calculateMini();
     } else {
       alert('Cannot sell stocks with insufficient quantity.');
     }
@@ -107,9 +110,11 @@ const AddPlan = () => {
       const updatedStocks = [...formData.stocks];
       updatedStocks[existingStockIndex].qty += qty;
       setFormData({ ...formData, stocks: updatedStocks });
+      calculateMini();
     } else {
       const updatedStocks = [...formData.stocks, { symbol, qty }];
       setFormData({ ...formData, stocks: updatedStocks });
+      calculateMini();
     }
   };
 
@@ -135,6 +140,8 @@ const AddPlan = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    handleSimplifyStocks();
 
     const newErrors = {};
 
@@ -188,7 +195,7 @@ const AddPlan = () => {
       ...stock,
       qty: stock.qty / gcd
     }));
-    setFormData({ ...formData, stocks: simplifiedStocks });
+    formData.stocks =[...simplifiedStocks];
   };
   
   const findGCDArray = (arr) => {
@@ -198,6 +205,26 @@ const AddPlan = () => {
     };
     return arr.reduce((acc, curr) => gcd(acc, curr), arr[0]);
   };
+
+  const calculateMini = () => {
+    const ocks = [...formData.stocks];
+    const quantities = ocks.map(stock => stock.qty);
+    const gcd = findGCDArray(quantities);
+    const simplifiedStocks = ocks.map(stock => ({
+      ...stock,
+      qty: stock.qty / gcd
+    }));
+
+    let mini = 0;
+
+    for (const item of simplifiedStocks) {
+      const { symbol, qty } = item;
+      if (selectedPrices[symbol]) {
+        mini += qty * selectedPrices[symbol];
+      }
+    }
+    setFormData({...formData, minInvestmentAmount: mini});
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
@@ -236,7 +263,7 @@ const AddPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
-              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} required />
+              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} readOnly />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
@@ -264,7 +291,7 @@ const AddPlan = () => {
               </div>
             ))}
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
-            <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button>
+            {/* <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button> */}
           </form>
         </div>
       </div>
