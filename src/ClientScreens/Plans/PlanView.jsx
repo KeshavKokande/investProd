@@ -11,11 +11,44 @@ function PlanView() {
   const [plansData, setPlansData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
+  
 
   const formatCurrency = (amount) => {
     const formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return `₹ ${formattedAmount}`;
   };
+
+  const [tab, setTab] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = {
+          stocks: plan.stocks.map(stock => ({
+            symbol: stock.symbol,
+            qty: stock.qty,
+            avg_price: stock.price, // Assuming price is the average price
+          }))
+        };
+
+        const response = await fetch('http://127.0.0.1:5000/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+        setTab(responseData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Call fetchData when the component mounts
+  }, [isLoading]); // Add stocks to the dependency array to fetch data when stocks change
 
   useEffect(() => {
     window.scrollTo(0, 0);

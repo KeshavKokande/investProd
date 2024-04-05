@@ -4,7 +4,42 @@ import { useState, useEffect } from "react";
 import styles from "./AdNewPlans.module.css";
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const { capValue, risk, minInvestmentAmount, noOfSubscription, stocks, advise } = plan;
+  const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise } = plan;
+
+  const [tab, setTab] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = {
+          stocks: stocks.map(stock => ({
+            symbol: stock.symbol,
+            qty: stock.qty,
+            avg_price: stock.price, // Assuming price is the average price
+          }))
+        };
+
+        const response = await fetch('http://127.0.0.1:5000/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+        setTab(responseData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Call fetchData when the component mounts
+  }, [stocks]); // Add stocks to the dependency array to fetch data when stocks change
+
+
 
   // Function to get initial isActive status from local storage
   const getInitialIsActive = () => {
@@ -47,16 +82,25 @@ const PlanCard = ({ plan, deletePlan }) => {
   
   const isActiveClassName = isActive ? styles.adnewplan_risk_true : styles.adnewplan_risk_false;
 
+  if (isLoading){ return (<div>Loading............</div>);}
+
+
   const renderStocks = () => {
-    return stocks.map((stock, index) => (
+    if (!tab || !tab.individual_stocks) {
+      return <tr><td colSpan="5">No data available</td></tr>;
+    }
+  
+    return tab.individual_stocks.map((stock, index) => (
       <tr key={index}>
         <td className={styles.adnewplan_td}>{stock.symbol}</td>
-        <td className={styles.adnewplan_td}>{stock.qty}%</td>
-        <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td>
+        <td className={styles.adnewplan_td}>{((stock.current_value/tab.total_current_value)*100).toFixed(2)}%</td>
+        <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.total_change_percent) < 0 ? 'red' : 'green' }}>{stock.total_change_percent.toFixed(2)}%</td>
+        <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.today_change_percent) < 0 ? 'red' : 'green' }}>{stock.today_change_percent.toFixed(2)}%</td>
+        {/* <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td> */}
       </tr>
     ));
   };
-
+ 
   return (
     <div className={styles.outerMax}>
       <h4>{plan.planName}</h4>
@@ -66,8 +110,9 @@ const PlanCard = ({ plan, deletePlan }) => {
             <thead>
               <tr>
                 <th className={styles.adnewplan_th}>Name</th>
-                <th className={styles.adnewplan_th}>Contribution</th>
-                <th className={styles.adnewplan_th}>Profit</th>
+                <th className={styles.adnewplan_th}>Weightage</th>
+                <th className={styles.adnewplan_th}>Todays Change</th>
+                <th className={styles.adnewplan_th}>Percent Change</th>
               </tr>
             </thead>
             <tbody>{renderStocks()}</tbody>
@@ -80,9 +125,9 @@ const PlanCard = ({ plan, deletePlan }) => {
           <div className={styles.text}>
             <div><strong>Risk </strong>:<span className={`${styles.adnewplan_risk_dot} ${riskClassName}`}></span>{risk}</div>
             <div><strong>Status </strong>:<span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
-            <div><strong>Minimum Investment Amount</strong>: ₹{minInvestmentAmount}</div>
+            <div><strong>Minimum Investment Amount</strong>: ₹{tab.total_current_value}</div>
             <div><strong>Number of Subscriptions</strong>: {noOfSubscription}</div>
-            <div><strong>Cap Value</strong>: ₹{capValue}</div>
+            <div><strong>Percent P&L</strong>: {(((tab.total_current_value-minInvestmentAmount)/minInvestmentAmount)*100).toFixed(2)}%</div>
             <div><strong>Advise</strong>: {advise}</div>
           </div>
 

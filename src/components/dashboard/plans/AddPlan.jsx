@@ -138,8 +138,18 @@ const AddPlan = () => {
     return total;
   };
 
+
+  const addPrci = () => {
+    formData.stocks.forEach(stock => {
+      const { symbol, qty } = stock;
+      stock.price = selectedPrices[symbol];
+    });
+
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    addPrci();
 
     handleSimplifyStocks();
 
