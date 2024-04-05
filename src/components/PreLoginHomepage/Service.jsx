@@ -15,7 +15,7 @@ function Service(){
               Unlock personalized investment strategies tailored to your financial objectives, guided by expert advisors, and diversified for maximum returns
               </p>
             </div>
-            <div className="row">
+            <div className="row justify-content-center"> 
               <div className="col-md-4 ">
                 <div className="box service_box">
                   <div className="img-box">
