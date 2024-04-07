@@ -5,7 +5,7 @@ import styles from "./AdNewPlans.module.css";
 import axios from 'axios';
 import StockList from './StockList';
 
-const AddPlan = () => {
+const EditPlan = () => {
   const { edit } = useParams();
   const navigate = useNavigate();
   const [tab,setTab]=useState();
@@ -143,10 +143,8 @@ const AddPlan = () => {
       // Remove stocks with zero quantity
       const filteredStocks = updatedStocks.filter(stock => stock.qty > 0);
       
-      setFormData({
-        stocks: [...filteredStocks], // Update stocks with filteredStocks
-        cash: updatedCash,           // Update cash with updatedCash
-      });
+      setFormData({ ...formData, stocks: filteredStocks, cash: updatedCash });
+
       //calculateMini();
     } else {
       alert('Cannot sell stocks with insufficient quantity.');
@@ -222,15 +220,8 @@ const AddPlan = () => {
 
     const newErrors = {};
 
-    if (!formData.planName) {
-      newErrors.planName = 'Plan name is required';
-    }
-    if (!formData.risk) {
-      newErrors.risk = 'Risk is required';
-    }
-    if (!formData.minInvestmentAmount) {
-      newErrors.minInvestmentAmount = 'Minimum investment amount is required';
-    }
+
+    
     if (formData.stocks.length === 0) {
       newErrors.stocks = 'Add Atleast One Stock';
     }
@@ -383,4 +374,4 @@ const AddPlan = () => {
   );
 };
 
-export default AddPlan;
+export default EditPlan;
