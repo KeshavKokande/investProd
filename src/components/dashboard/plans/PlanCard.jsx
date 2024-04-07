@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import styles from "./AdNewPlans.module.css";
 import { Link } from "react-router-dom";
+import StockChart from "./StockChart";
 
 const PlanCard = ({ plan, deletePlan }) => {
   const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise, _id } = plan;
@@ -142,6 +143,8 @@ const PlanCard = ({ plan, deletePlan }) => {
           </div>
         </div>
       </div>
+      <StockChart stocks={stocks} days={10}/>
+
     </div>
   );
 };
