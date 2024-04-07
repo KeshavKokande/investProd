@@ -7,7 +7,7 @@ const UserDetails = () => {
     const fetchUserData = async () => {
       try {
 
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/get-own-details', {
+        const response = await fetch('http://localhost:8000/api/v1/advisor/get-own-details', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'

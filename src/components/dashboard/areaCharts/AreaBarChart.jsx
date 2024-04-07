@@ -184,7 +184,7 @@ export default AreaBarChart;
 //     const fetchTotalInvestedAmount = async () => {
 //       try {
 //         const response = await fetch(
-//           "https://team4api.azurewebsites.net/api/v1/advisor/get-total-invested-amount",
+//           "http://localhost:8000/api/v1/advisor/get-total-invested-amount",
 //           {
 //             method: "GET",
 //             headers: {
@@ -211,7 +211,7 @@ export default AreaBarChart;
 //     const fetchTotalCurrentProfit = async () => {
 //       try {
 //         const response = await fetch(
-//           "https://team4api.azurewebsites.net/api/v1/advisor/get-total-current-profit",
+//           "http://localhost:8000/api/v1/advisor/get-total-current-profit",
 //           {
 //             method: "GET",
 //             headers: {
