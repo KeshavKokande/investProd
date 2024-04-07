@@ -2,9 +2,10 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import styles from "./AdNewPlans.module.css";
+import { Link } from "react-router-dom";
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise } = plan;
+  const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise, _id } = plan;
 
   const [tab, setTab] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -135,6 +136,9 @@ const PlanCard = ({ plan, deletePlan }) => {
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
 
             <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
+            <Link to={`/edit/${_id}`}>
+                <button className='button'>edit</button>
+            </Link>
           </div>
         </div>
       </div>

@@ -238,7 +238,7 @@ const AddPlan = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <StockList selectedDate={date} />
+      <StockList selectedDate={date} prices={selectedPrices} />
       <div className={styles.addPlan_form_container}>
         <div className={styles.addPlan_image_container}>
           <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />

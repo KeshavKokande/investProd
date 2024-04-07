@@ -2,22 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const StockList = ({ selectedDate }) => {
-  const [prices, setPrices] = useState({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/stocks_curr');
-        setPrices(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+const StockList = ({ selectedDate, prices }) => {
+  
   return (
     <div>
       <h2>Stock Prices for {selectedDate}</h2>

@@ -48,7 +48,7 @@ function PlanView() {
     };
 
     fetchData(); // Call fetchData when the component mounts
-  }, [isLoading]); // Add stocks to the dependency array to fetch data when stocks change
+  }, [plansData]); // Add stocks to the dependency array to fetch data when stocks change
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,7 +70,7 @@ function PlanView() {
         const data = await response.json();
         setPlansData(data.plans);
         console.log(data);
-        setIsLoading(false);
+      
 
       } catch (error) {
         console.error('Error fetching plans data:', error.message);

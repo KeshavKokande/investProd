@@ -20,7 +20,6 @@ import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
-import InvestmentForm from "./components/dashboard/plans/PlanEdit";
 // import ProtectedRoute from "./ProtectedRoute";
 
 import News from "./News/News";
@@ -32,6 +31,7 @@ import{
   HomepageInfo,
   HomePage
 } from './components';
+import EditPlan from "./components/dashboard/plans/PlanEdit";
 
 function App() {
  
@@ -70,7 +70,7 @@ function App() {
             <Route path="/plan" element={<AdNewPlans/>} />
             <Route path="/details" element={<UserDetails/>}/>
             <Route path="/addplan" element={<AddPlan />} />
-            <Route path="/editpal" element={<InvestmentForm />} />
+            <Route path="/edit/:edit" element={<EditPlan />} />
             
           </Route>
 
