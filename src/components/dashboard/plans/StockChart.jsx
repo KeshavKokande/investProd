@@ -1,69 +1,60 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-class StockChart extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            series: [],
-            options: {
-                chart: {
-                    type: 'line',
-                    height: 350
-                },
-                xaxis: {
-                    type: 'datetime'
-                }
-            }
-        };
-    }
+const StockChart = ({ stocks, days }) => {
+    const [series, setSeries] = useState([]);
+    const [options] = useState({
+        chart: {
+            type: 'line',
+            height: 350
+        },
+        xaxis: {
+            type: 'datetime'
+        }
+    });
 
-    componentDidMount() {
-        this.fetchStockData();
-    }
+    const mapStockData = (data) => {
+        const stockData = {};
+        data.forEach(item => {
+            stockData[item.symbol] = item.qty;
+        });
+        return stockData;
+    };
 
-    fetchStockData = async () => {
-        const { stocks, days } = this.props;
+    const fetchStockData = async () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ stocks, num_days: days })
+            body: JSON.stringify({ stocks: mapStockData(stocks), num_days: days })
         };
 
         try {
             const response = await fetch('http://localhost:5000/daysandgraph', requestOptions);
             const data = await response.json();
-            this.processChartData(data);
+            processChartData(data);
         } catch (error) {
             console.error('Error fetching stock data:', error);
         }
     };
 
-    processChartData = (data) => {
-        const seriesData = data.map((item) => {
-            return {
-                x: new Date(item.date).getTime(),
-                y: item.total_value
-            };
-        });
+    const processChartData = (data) => {
+        const seriesData = data.map((item) => ({
+            x: new Date(item.date).getTime(),
+            y: item.total_value
+        }));
 
-        const series = [{
-            name: 'Total Value',
-            data: seriesData
-        }];
-
-        this.setState({ series });
+        setSeries([{ name: 'Total Value', data: seriesData }]);
     };
 
-    render() {
-        const { series, options } = this.state;
+    useEffect(() => {
+        fetchStockData();
+    }, [stocks, days]);
 
-        return (
-            <div className="stock-chart">
-                <ReactApexChart options={options} series={series} type="line" height={350} />
-            </div>
-        );
-    }
-}
+    return (
+        <div className="stock-chart">
+            <ReactApexChart options={options} series={series} type="line" height={350} />
+        </div>
+    );
+};
 
 export default StockChart;
