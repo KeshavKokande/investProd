@@ -4,6 +4,7 @@ import dummy from './13429911_5242374.jpg';
 import styles from './Plans.module.css';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import StockChart from '../../components/dashboard/plans/StockChart';
 
 function PlanView() {
   const navigate = useNavigate();
@@ -139,6 +140,7 @@ function PlanView() {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
+        <div>
         <div className={styles.bigadv}>
           <h2 style={{ marginTop: "2vh" }} className={styles.heading}>{plan.planName}</h2>
           {/* <div className={styles.riga}> */}
@@ -238,9 +240,12 @@ function PlanView() {
 
             <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
           </div>
-          {/* </div> */}
+          </div>
+          <StockChart stocks={plan.stocks} days={30}/>
         </div>
       )}
+
+      
     </div>
   );
 }

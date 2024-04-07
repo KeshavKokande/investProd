@@ -143,7 +143,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           </div>
         </div>
       </div>
-      <StockChart stocks={stocks} days={10}/>
+      <StockChart stocks={stocks} days={30}/>
 
     </div>
   );
