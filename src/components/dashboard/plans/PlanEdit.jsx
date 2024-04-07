@@ -307,12 +307,12 @@ const EditPlan = () => {
           <form id={styles.new_plan_form} onSubmit={handleSubmit}>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="planName">Plan Name<span className={styles.required}>*</span>:</label>
-              <input className={styles.addPlan_input} type="text" id="planName" name="planName" value={formData.planName} onChange={handleChange} required />
+              <input className={styles.addPlan_input} type="text" id="planName" name="planName" value={formData.planName} onChange={handleChange} readOnly />
               {errors.planName && <div className={styles.error}><strong>{errors.planName}</strong></div>}
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="risk">Risk<span className={styles.required}>*</span>:</label>
-              <select className={styles.addPlan_select} id="risk" name="risk" value={formData.risk} onChange={handleChange} required>
+              <select className={styles.addPlan_select} id="risk" name="risk" value={formData.risk} onChange={handleChange} readOnly>
                 <option value="">Select</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
