@@ -40,7 +40,7 @@ const StockChart = ({ stocks, days }) => {
     const processChartData = (data) => {
         const seriesData = data.map((item) => ({
             x: new Date(item.date).getTime(),
-            y: item.total_value
+            y: parseFloat(item.total_value.toFixed(2))
         }));
 
         setSeries([{ name: 'Total Value', data: seriesData }]);
