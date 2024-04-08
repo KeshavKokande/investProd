@@ -234,7 +234,7 @@ function PlanView() {
                   {plan.advise}
                 </p>
               </div>
-              {profileData.planIds.includes(plan_id) && (
+              {profileData.planIds && profileData.planIds.includes(plan_id) && (
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
                     Stocks
