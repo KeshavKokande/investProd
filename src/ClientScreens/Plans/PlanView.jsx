@@ -5,11 +5,13 @@ import styles from './Plans.module.css';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import StockChart from '../../components/dashboard/plans/StockChart';
+import axios from 'axios';
 
 function PlanView() {
   const navigate = useNavigate();
   const { plan_id } = useParams();
   const [plansData, setPlansData] = useState([]);
+  const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
   
@@ -22,6 +24,7 @@ function PlanView() {
   const [tab, setTab] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
         const data = {
@@ -53,8 +56,27 @@ function PlanView() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const fetchProfileData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        });
+  
+        if (response.status === 200) {
+          const data = response.data.client;
+          setProfileData(data);
+          console.log("DATA OF USER", profileData);
+        } else {
+          throw new Error('Failed to fetch profile data');
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error.message);
+      }
+    };  
     const fetchPlansData = async () => {
-      console.log("Started fetching plans data");
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
           method: 'GET',
@@ -78,10 +100,12 @@ function PlanView() {
       }
     };
 
+    fetchProfileData();
     fetchPlansData();
   }, []);
 
   const plan = plansData.find(plan => plan._id === plan_id);
+  console.log("PLAN DATA IS:", plan);
 
   const handleBuyPlan = async () => {
     if (investedAmount < plan.minInvestmentAmount) {
@@ -154,14 +178,14 @@ function PlanView() {
 
             <div className={styles.rowContainer}>
               {/* <h2>Plan Information</h2> */}
-              <div className={styles.row}>
+              {/* <div className={styles.row}>
                 <p className={styles.rowLabel}>
                   CAGR
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}
                 </p>
-              </div>
+              </div> */}
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
                   Created At
@@ -210,35 +234,37 @@ function PlanView() {
                   {plan.advise}
                 </p>
               </div>
-              {/* <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Stocks
-                </p>
-                <p className={styles.rowValue}>
-                  {plan.stocks.map(stock => (
-                    <li key={stock._id}>{stock.stockName}</li>
-                  ))}
-                </p>
-              </div> */}
+              {profileData.planIds && profileData.planIds.includes(plan_id) && (
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
+                    Stocks
+                  </p>
+                  <p className={styles.rowValue}>
+                    {plan.stocks.map(stock => (
+                      <li key={stock._id}>{stock.symbol}</li>
+                    ))}
+                  </p>
+                </div>
+              )}
 
             </div>
 
-            <div>
-              <label htmlFor="amt">Amount to be invested</label>
-              <input
-                id='amt'
-                type="text"
-                value={formatCurrency(investedAmount)}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-                  setInvestedAmount(value);
-                }}
-                placeholder="Enter invested amount"
-                style={{ marginRight: '10px' }}
-              />
-            </div>
+              <div>
+                <label htmlFor="amt">Amount to be invested</label>
+                <input
+                  id='amt'
+                  type="text"
+                  value={formatCurrency(investedAmount)}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                    setInvestedAmount(value);
+                  }}
+                  placeholder="Enter invested amount"
+                  style={{ marginRight: '10px' }}
+                />
+              </div>
+                <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
 
-            <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
           </div>
           <StockChart stocks={plan.stocks} days={90}/>
           </div>
