@@ -140,6 +140,50 @@ def calculate_total_value():
     except Exception as e:
         error_message = {'error': str(e)}
         return jsonify(error_message), 400
+    
+@app.route('/calculate_sts', methods=['POST'])
+def calculate_sts():
+    try:
+        plans_data = request.json['plans_data']  # Assuming 'plans_data' is the key for plans_data list
+        response_data = []
+
+        for plan in plans_data:
+            data = plan['stocks']
+            results = []
+            for stock in data:
+                symbol = stock['symbol']
+                qty = stock['qty']
+                avg_price = stock['price']  # Assuming avg_price is the same as the buying price
+
+                stock_info = yf.Ticker(symbol + ".BO")
+                current_price = stock_info.history(period='1d')['Close'].iloc[-1]
+                previous_close = stock_info.info.get('previousClose')
+                if previous_close is None:
+                    raise ValueError("Previous close price not available.")
+
+                today_change_percent = ((current_price - previous_close) / previous_close) * 100
+                total_change_percent = ((current_price - avg_price) / avg_price) * 100
+
+                results.append({
+                    'symbol': symbol,
+                    'today_change_percent': round(today_change_percent, 2),
+                    'total_change_percent': round(total_change_percent, 2),
+                    'current_value': round(qty * current_price, 2)
+                })
+
+            total_current_value = sum(stock['current_value'] for stock in results)
+
+            response_data.append({
+                'planName': plan['planName'],
+                'individual_stocks': results,
+                'total_current_gains': round(((total_current_value+plan["cash"]-plan['startVal'])/plan['startVal'])*100, 2)
+            })
+
+        return jsonify({'plans_data': response_data}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)

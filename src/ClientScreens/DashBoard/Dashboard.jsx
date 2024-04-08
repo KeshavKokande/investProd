@@ -11,6 +11,8 @@ function DashboardCl() {
   const [returns, setReturns] = useState([]);
   const [advisorNames, setAdvisorNames] = useState([]);
   const [error, setError] = useState(null);
+  const [plansData, setPlansData] = useState([]);  
+  const [mapu, setMapu] = useState([]);
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
     name: '',
@@ -18,7 +20,8 @@ function DashboardCl() {
     age: '',
     address: '',
     gender: '',
-    jobRole: ''
+    jobRole: '',
+    planIds:[]
   });
  
   useEffect(() => {
@@ -44,7 +47,8 @@ function DashboardCl() {
             age: data.age || '',
             address: data.address || '',
             gender: data.gender || '',
-            jobRole: data.jobRole || ''
+            jobRole: data.jobRole || '',
+            planIds:data.planIds || []
           });
           console.log(data);
           console.log("data name", data.name);
@@ -77,21 +81,14 @@ function DashboardCl() {
           credentials: 'include'
         });
  
-        const ponse = await fetch('http://localhost:8000/api/v1/Client/get-returns-of-subscribed-plans', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          credentials: 'include'
-        });
  
-        if (!response.ok || !ponse.ok) {
+        if (!response.ok ) {
           throw new Error('Failed to fetch transactions data');
         }
         const data = await response.json();
-        const redat = await ponse.json();
+
+        console.log("plans ",data);
         setTransactions(data.transactions);
-        setReturns(redat.profits);
         setAdvisorNames(data.advisorNames);
       } catch (error) {
         setError(error.message);
@@ -101,6 +98,50 @@ function DashboardCl() {
     fetchTransactions();
   }, []);
 
+
+  useEffect(() => {
+    const fetchPlansData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch plans data');
+        }
+
+        const data = await response.json();
+        const filteredPlans = data.plans.filter(plan => profileInfo.planIds.includes(plan._id));
+        setPlansData(filteredPlans);
+
+        const mappedData = filteredPlans.map(item => ({
+          planName: item.planName,
+          stocks: item.stocks,
+          startVal: item.minInvestmentAmount,
+          cash: item.cash
+        }));
+
+        const ponse = await axios.post('http://localhost:5000/calculate_sts', { plans_data:  mappedData });
+        const ata = await ponse.json();
+
+        console.log(ata);
+
+
+       
+      } catch (error) {
+        console.error('Error fetching plans data:', error.message);
+      }
+    };
+
+    fetchPlansData();
+  }, [profileInfo]);
+  
+
+  
   useEffect(() => {
     (function(d, t) {
       var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
