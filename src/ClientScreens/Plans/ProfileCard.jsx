@@ -78,9 +78,9 @@ const ProfileCard = ({ plan }) => {
                     <div className={styles.reviews}>
                         <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
                     </div>
-                    <div className={styles.reviews}>
+                    {/* <div className={styles.reviews}>
                         <p><strong style={{ color: "black", fontSize: "15px" }}>CAGR</strong> {plan.risk}</p>
-                    </div>
+                    </div> */}
                     <div className={styles.reviews}>
                     {plan.planFees>0 ? <p>Paisa Lagega</p> : <p>lelo bhai free hai</p>}
                     </div>

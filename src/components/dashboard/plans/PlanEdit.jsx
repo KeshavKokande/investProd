@@ -8,8 +8,9 @@ import StockList from './StockList';
 const EditPlan = () => {
   const { edit } = useParams();
   const navigate = useNavigate();
-  const [tab,setTab]=useState();
+  const [tab, setTab] = useState();
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [newSymbol, setNewSymbol] = useState('');
   const [formData, setFormData] = useState({
     planName: '',
     risk: '',
@@ -20,7 +21,6 @@ const EditPlan = () => {
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
-  const [newSymbol, setNewSymbol] = useState('');
   const [newQty, setNewQty] = useState(0);
   const [dataLoading, setDataLoading] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -28,26 +28,27 @@ const EditPlan = () => {
 
   useEffect(() => {
     const fetchPlan = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-      });
-      const data = await response.json();
-      console.log("data = ",data);
-      cc=data.plan.cash;
-      setFormData({
-        planName: data.plan.planName,
-        risk: data.plan.risk,
-        advise: data.plan.advise,
-        stocks: data.plan.stocks,
-        cash: data.plan.cash,
-        planFees: data.plan.planFees
-      });
-    } catch (error) {
-      console.log('Error fetching plan details:', error);
-    }};
+      try {
+        const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        });
+        const data = await response.json();
+        console.log("data = ", data);
+        cc = data.plan.cash;
+        setFormData({
+          planName: data.plan.planName,
+          risk: data.plan.risk,
+          advise: data.plan.advise,
+          stocks: data.plan.stocks,
+          cash: data.plan.cash,
+          planFees: data.plan.planFees
+        });
+      } catch (error) {
+        console.log('Error fetching plan details:', error);
+      }
+    };
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:5000/stocks_curr');
@@ -58,11 +59,11 @@ const EditPlan = () => {
       }
     };
 
-   
+
 
     fetchPlan();
     fetchData();
-    
+
   }, []);
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const EditPlan = () => {
 
     fetchLate();
 
-  },[dataLoading])
+  }, [dataLoading])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,7 +106,7 @@ const EditPlan = () => {
     });
   };
 
-  
+
   const handleAddStock = () => {
     if (newSymbol && newQty > 0) {
       const price = selectedPrices[newSymbol];
@@ -142,7 +143,7 @@ const EditPlan = () => {
       updatedStocks[existingStockIndex].qty -= qty;
       // Remove stocks with zero quantity
       const filteredStocks = updatedStocks.filter(stock => stock.qty > 0);
-      
+
       setFormData({ ...formData, stocks: filteredStocks, cash: updatedCash });
 
       //calculateMini();
@@ -157,7 +158,7 @@ const EditPlan = () => {
       if (totalCost <= prevState.cash) {
         const updatedCash = prevState.cash - totalCost;
         const existingStockIndex = prevState.stocks.findIndex(stock => stock.symbol === symbol);
-  
+
         if (existingStockIndex !== -1) {
           // Stock exists, update qty
           const updatedStocks = [...prevState.stocks];
@@ -181,7 +182,7 @@ const EditPlan = () => {
       }
     });
   };
-  
+
 
   const getPricePercentage = (price) => {
     const totalValue = calculateTotalValue();
@@ -221,7 +222,7 @@ const EditPlan = () => {
     const newErrors = {};
 
 
-    
+
     if (formData.stocks.length === 0) {
       newErrors.stocks = 'Add Atleast One Stock';
     }
@@ -243,16 +244,16 @@ const EditPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-        axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
-          .then(response => {
-            console.log('Response:', response.data);
-            navigate('/plan');
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      }
-    });
+          axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
+            .then(response => {
+              console.log('Response:', response.data);
+              navigate('/plan');
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+      });
     }
   };
 
@@ -263,9 +264,9 @@ const EditPlan = () => {
       ...stock,
       qty: stock.qty / gcd
     }));
-    formData.stocks =[...simplifiedStocks];
+    formData.stocks = [...simplifiedStocks];
   };
-  
+
   const findGCDArray = (arr) => {
     const gcd = (a, b) => {
       if (b === 0) return a;
@@ -291,14 +292,17 @@ const EditPlan = () => {
         mini += qty * selectedPrices[symbol];
       }
     }
-    setFormData({...formData, minInvestmentAmount: mini});
+    setFormData({ ...formData, minInvestmentAmount: mini });
   }
 
-  
-  if (loading){return(<div>Loading.....</div>);}
+  const handleSymbolClick = (symbol) => {
+    setNewSymbol(symbol);
+  };
+
+  if (loading) { return (<div>Loading.....</div>); }
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <StockList selectedDate={date} prices={selectedPrices} />
+      <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
       <div className={styles.addPlan_form_container}>
         <div className={styles.addPlan_image_container}>
           <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />
@@ -322,7 +326,7 @@ const EditPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
-              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value+cc} readOnly />
+              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value + cc} readOnly />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
@@ -335,42 +339,49 @@ const EditPlan = () => {
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
-            <div>
-          
-      </div>
+            <div className={styles.formGrp}>
+              <label className={styles.addPlan_label} htmlFor="cash">Diluted Weightage:</label>
+              <input className={styles.addPlan_input} type="text" id="cash" value={getPricePercentage(formData.cash)} readOnly />
+            </div>
 
-      <h1>Edit Investment Plan</h1>
-        
-         
-          
-        <label htmlFor="cash">Cash Balance:</label>
-        <input type="text" id="cash" value={getPricePercentage(formData.cash)} readOnly />
 
-        <h2>Sell/Buy Stocks</h2>
-        {formData.stocks.map(stock => (
-          <div key={stock.symbol}>
-            <p>
-              {stock.symbol}: Quantity - {stock.qty} | Price - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
-            </p>
-            <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Sell (-)</button>
-            <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Buy (+)</button>
-          </div>
-        ))}
+            {formData.stocks.map(stock => (
+            <div className={styles.formGrp}>
+              <div key={stock.symbol}>
+                {/* <p>
+                  {stock.symbol}: Quantity - {stock.qty} | Weightage - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
+                </p> */}
+                <p>
+                  {stock.symbol}: Weightage - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
+                </p>
+                <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Decrease (-)</button>
+                <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Increase (+)</button>
+              </div>
+            </div>
+            ))}
 
-        <h2>Add New Stock</h2>
-        <label htmlFor="newSymbol">Symbol:</label>
-        <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} />
-        <label htmlFor="newQty">Quantity:</label>
-        <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} />
-        <button type="button" onClick={handleAddStock}>Add Stock</button>
+            <div className={styles.formGrp}>
+              <label className={styles.addPlan_label}> Add New Stock</label>
+            </div>
+            <div className={styles.formGrp}>
+              <label className={styles.addPlan_label} htmlFor="newSymbol">Symbol:</label>
+              <input className={styles.addPlan_input} type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly/>
 
-           
+        {/* <input type="text" id="newSymbol" value={newSymbol} readOnly /> */}
+            </div>
+            <div className={styles.formGrp}>
+              <label className={styles.addPlan_label} htmlFor="newQty">Quantity:</label>
+              <input className={styles.addPlan_input} type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} />
+            </div>
+            <button type="button" onClick={handleAddStock}>Add Stock</button>
+
+
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
             {/* <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button> */}
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

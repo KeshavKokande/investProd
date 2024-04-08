@@ -178,14 +178,14 @@ function PlanView() {
 
             <div className={styles.rowContainer}>
               {/* <h2>Plan Information</h2> */}
-              <div className={styles.row}>
+              {/* <div className={styles.row}>
                 <p className={styles.rowLabel}>
                   CAGR
                 </p>
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}
                 </p>
-              </div>
+              </div> */}
               <div className={styles.row}>
                 <p className={styles.rowLabel}>
                   Created At
