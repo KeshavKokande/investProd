@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import StockChart from "./StockChart";
 
 const PlanCard = ({ plan, deletePlan }) => {
-  const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise, _id } = plan;
+  const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise, _id, pcash } = plan;
 
   const [tab, setTab] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -95,7 +95,7 @@ const PlanCard = ({ plan, deletePlan }) => {
     return tab.individual_stocks.map((stock, index) => (
       <tr key={index}>
         <td className={styles.adnewplan_td}>{stock.symbol}</td>
-        <td className={styles.adnewplan_td}>{((stock.current_value/tab.total_current_value)*100).toFixed(2)}%</td>
+        <td className={styles.adnewplan_td}>{((stock.current_value/(tab.total_current_value+plan.cash))*100).toFixed(2)}%</td>
         <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.total_change_percent) < 0 ? 'red' : 'green' }}>{stock.total_change_percent.toFixed(2)}%</td>
         <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.today_change_percent) < 0 ? 'red' : 'green' }}>{stock.today_change_percent.toFixed(2)}%</td>
         {/* <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td> */}

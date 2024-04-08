@@ -24,7 +24,7 @@ const EditPlan = () => {
   const [newQty, setNewQty] = useState(0);
   const [dataLoading, setDataLoading] = useState(0);
   const [loading, setLoading] = useState(true);
-  let cc = null;
+  const [cc, setCc]=useState(0);
 
   useEffect(() => {
     const fetchPlan = async () => {
@@ -36,7 +36,7 @@ const EditPlan = () => {
       });
       const data = await response.json();
       console.log("data = ",data);
-      cc=data.plan.cash;
+    
       setFormData({
         planName: data.plan.planName,
         risk: data.plan.risk,
@@ -45,6 +45,7 @@ const EditPlan = () => {
         cash: data.plan.cash,
         planFees: data.plan.planFees
       });
+      setCc(data.plan.cash);
     } catch (error) {
       console.log('Error fetching plan details:', error);
     }};

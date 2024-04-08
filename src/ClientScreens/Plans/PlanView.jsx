@@ -240,8 +240,9 @@ function PlanView() {
 
             <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
           </div>
+          <StockChart stocks={plan.stocks} days={90}/>
           </div>
-          <StockChart stocks={plan.stocks} days={30}/>
+          
         </div>
       )}
 
