@@ -17,6 +17,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  height: 80vh;
 
 }
 .activeButton {
@@ -287,10 +288,12 @@ body {
 .addPlan_form_container {
   background-color: #fff;
   border-radius: 10px;
-  padding: 20px;
+  padding: 25px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 76vw;
   display: flex;
+  height: 80vh;
+  justify-content: space-around;
 }
 
 .addPlan_image_container {
@@ -307,13 +310,15 @@ body {
 .addPlan_form_section {
   flex: 1;
   /* padding-left: 20px; */
+  height: 100%;
 }
 
 #new_plan_form {
   display: grid;
   grid-template-columns: 18vw 18vw;
-  grid-row-gap: 2vh;
+  grid-row-gap: 1vh;
   grid-column-gap: 1vw;
+  height: 100%;
 }
 
 .formGrp {
@@ -346,8 +351,31 @@ body {
     border-radius: 8px;
 }
 
+.addPlan_stocks{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1vh;
+}
 
+.addPlan_stocks .addPlan_input{
+  margin-bottom: 0 !important;
+}
 
+.addPlan_stocks .addPlan_label{
+  margin: 0 !important;
+  width: fit-content;
+  padding: 0 !important;
+}
+
+.addPlan_stocks button{
+  width: fit-content;
+  justify-self: end;
+}
+  
 .position_input {
   width: 95% !important;
 }
@@ -419,7 +447,28 @@ body {
   margin-right: 10%;
 }
 
+.addPlan_stock_cards{
+  height: 22vh;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 100%;
+  display: grid;
+  gap: 2vh;
+  overflow-y: auto;
+  padding-right: 1vw;
+}
 
+.addPlan_card{
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid #d1d1d1b5 1px;
+}
+
+.addPlan_card_button{
+  display: grid;
+  height: fit-content;
+}
 
 .banner {
   position: fixed;
@@ -463,4 +512,74 @@ body {
 .required{
   color: red;
   font-weight: bold;
+}
+
+.addPlan_hr{
+  width: 72vh;
+  /* height: 80vh; */
+  z-index: 10;
+  transform: rotate(90deg);
+  position: absolute;
+  left: 31%;
+  top: 55%;
+}
+
+.stock_list{
+  display: grid;
+  gap: 2vh;
+}
+
+.stock_list h3{
+  font-weight: bold;
+  justify-self: center;
+}
+
+.stock_list input{
+  font-size: 12px;
+  width: 100%;
+}
+
+.stock_list_head{
+  display: grid;
+  gap: 1vh;
+}
+
+.stock_list_ul{
+  overflow-y: scroll;
+  height: 60vh;
+  gap: 1vh;
+  display: grid;
+}
+
+.stock_list_li{
+  width: 16vw;
+  display: grid;
+  grid-template-columns: 10vw 4vw auto;
+}
+
+.stock_list_li:hover{
+  cursor: pointer;
+}
+
+.stock_list_li .inline{
+  display: inline;
+}
+
+.stock_list_li input[type="radio"]{
+  /* width: 50%;
+  height: 50%;
+  align-self: center; */
+  /* border: none; */
+  /* outline: none; */
+  visibility: hidden;
+}
+
+.stock_list_li input[type="radio"]:checked{
+  width: 50%;
+  height: 50%;
+  align-self: center;
+  background-color: #66bb6a;
+  /* border: none; */
+  /* outline: none; */
+  /* visibility: hidden; */
 }
