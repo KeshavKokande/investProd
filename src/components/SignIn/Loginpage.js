@@ -61,7 +61,7 @@ const LoginPage = () => {
 
       // Check the selected role to redirect appropriately
       if (data.user.role === 'client') {
-        navigate('/cldash');
+        navigate('/client_dashboard');
       } else if (data.user.role === 'advisor') {
         navigate('/advisor_dashboard');
       } else {

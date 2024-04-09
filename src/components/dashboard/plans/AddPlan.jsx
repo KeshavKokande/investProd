@@ -21,7 +21,7 @@ const AddPlan = () => {
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
   const [newSymbol, setNewSymbol] = useState('');
-  const [newQty, setNewQty] = useState(0);
+  const [newQty, setNewQty] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -288,8 +288,8 @@ const AddPlan = () => {
             <h2>Add New Stock</h2>
             <label htmlFor="newSymbol">Symbol:</label>
             <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} />
-            <label htmlFor="newQty">Quantity:</label>
-            <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} />
+            {/* <label htmlFor="newQty">Quantity:</label>
+            <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} /> */}
             <button type="button" onClick={handleAddStock}>Add Stock</button>
             {formData.stocks.map(stock => (
               <div key={stock.symbol}>

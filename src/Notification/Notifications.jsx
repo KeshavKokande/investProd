@@ -110,6 +110,7 @@ const Notifications = () => {
     
         const data = await response.json();
         console.log("DATA IS:", data.notifications);
+        console.log("DATA COULD HAVE BEEN:", data.notifications._id);
     
         // Update the notificationList state with the fetched data
         setNotificationList(data.notifications);
@@ -155,6 +156,41 @@ const Notifications = () => {
     } else {
       const days = Math.floor(differenceInSeconds / 86400);
       return `${days} days ago`;
+    }
+  };
+
+  const handleNotificationClick = async (notificationId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/view-notification/${notificationId}`, {
+        method: 'PUT', // Assuming you're updating the notification on the backend
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to mark notification as seen');
+      }
+
+      // Assuming your backend returns updated notification data
+      const data = await response.json();
+      // Update the notificationList state to reflect the updated notification
+      setNotificationList(notificationList.map(notification => {
+        if (notification.id === notificationId) {
+          return data.notification;
+        } else {
+          return notification;
+        }
+      }));
+      
+      // Decrease the count of total unseen notifications
+      setTotalUnseenNotifications(prevCount => prevCount - 1);
+
+      // Redirect to the relevant page or handle any other actions
+      // Example: history.push('/notification-details');
+    } catch (error) {
+      console.error('Error marking notification as seen:', error.message);
     }
   };
 

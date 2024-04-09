@@ -31,7 +31,7 @@ const AdNewPlans = () => {
   }, []);
  
   const handleAddPlanClick = () => {
-    window.location.href = "/addplan";
+    window.location.href = "/advisor/addNewPlan";
   };
  
   return (

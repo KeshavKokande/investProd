@@ -21,7 +21,7 @@ const EditPlan = () => {
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
-  const [newQty, setNewQty] = useState(0);
+  const [newQty, setNewQty] = useState(1);
   const [dataLoading, setDataLoading] = useState(0);
   const [loading, setLoading] = useState(true);
   const [cc, setCc]=useState(0);
@@ -247,7 +247,7 @@ const EditPlan = () => {
           axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
             .then(response => {
               console.log('Response:', response.data);
-              navigate('/plan');
+              navigate('/advisor/planList');
             })
             .catch(error => {
               console.error('Error:', error);
@@ -369,10 +369,10 @@ const EditPlan = () => {
 
         {/* <input type="text" id="newSymbol" value={newSymbol} readOnly /> */}
             </div>
-            <div className={styles.formGrp}>
+            {/* <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="newQty">Quantity:</label>
               <input className={styles.addPlan_input} type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} />
-            </div>
+            </div> */}
             <button type="button" onClick={handleAddStock}>Add Stock</button>
 
 

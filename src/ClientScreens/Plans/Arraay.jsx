@@ -27,7 +27,7 @@ const Arraay = ({ plans, risk }) => {
         <Carousel responsive={responsive} infinite={true} className={styles.Carousel}>
           {topRatedPlans.map((plan, index) => (
             <div key={index}>
-              <Link to={`/plan_id/${plan._id}`}></Link>
+              <Link to={`/planDetail/${plan._id}`}></Link>
               <ProfileCard plan={plan} />
             </div>
           ))}
@@ -39,7 +39,7 @@ const Arraay = ({ plans, risk }) => {
       <Carousel responsive={responsive} infinite={true} className={styles.Carousel} >
         {mostOrderedPlans.map((plan, index) => (
           <div key={index}>
-            <Link to={`/plan_id/${plan._id}`}>
+            <Link to={`/planDetail/${plan._id}`}>
               <ProfileCard plan={plan} />
             </Link>
           </div>

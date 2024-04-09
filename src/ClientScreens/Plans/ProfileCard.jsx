@@ -89,7 +89,7 @@ const ProfileCard = ({ plan }) => {
                     </div>
                     <div className={`${styles.buttonsProfile} ${styles.gridPosition}`}>
                         <button>
-                            <Link to={`/plan_id/${plan._id}`} style={{ display: 'block', width: '100%', height: '100%', margin: '4px 4px 4px -4px' }}>
+                            <Link to={`/planDetail/${plan._id}`} style={{ display: 'block', width: '100%', height: '100%', margin: '4px 4px 4px -4px' }}>
                                 Open
                             </Link>
                         </button>

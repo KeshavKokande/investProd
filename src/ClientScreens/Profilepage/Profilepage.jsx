@@ -119,7 +119,7 @@ const capitalize = (str) => {
              
             </div>
             <div className={styles.pp213}>
-              <Link to='/profedit'>
+              <Link to='/profile/Edit'>
                 <button
                   style={{
                     backgroundColor: '#475BE8',

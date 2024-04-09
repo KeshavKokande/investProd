@@ -117,16 +117,18 @@ const Sidebar = () => {
                 <span className="menu-link-text">Dashboard</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname === "/plan" ? "active" : ""}`}>
-              <Link to="/plan" className="menu-link">
+            <li className={`menu-item ${location.pathname.includes("/advisor/planList") ? "active" : ""}`}>
+              <Link to="/advisor/planList" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineShoppingBag size={20} />
                 </span>
                 <span className="menu-link-text">Plans</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname === "/Clientlist" ? "active" : ""}`}>
-              <Link to="/Clientlist" className="menu-link">
+            advisor/addNewPlan
+            <li className={`menu-item ${location.pathname.includes("/profile") || location.pathname.includes("/profile/Edit") ? "active" : ""}`}></li>
+            <li className={`menu-item ${location.pathname === "/advisor/clientList" ? "active" : ""}`}>
+              <Link to="/advisor/clientList" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>

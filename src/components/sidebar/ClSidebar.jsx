@@ -110,7 +110,7 @@ const ClSidebar = () => {
       ref={navbarRef}
     >
       <div className="sidebar-top">
-        <Link to='/cldash'>
+        <Link to='/client_dashboard'>
           <div className="sidebar-brand">
             <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
             <span className="sidebar-brand-text">inVEST</span>
@@ -142,8 +142,8 @@ const ClSidebar = () => {
       <div className="sidebar-body">
         <div className="sidebar-menu">
           <ul className="menu-list">
-            <li className={`menu-item ${location.pathname.includes("/cldash") ? "active" : ""}`}>
-              <Link to="/cldash" className="menu-link">
+            <li className={`menu-item ${location.pathname.includes("/client_dashboard") ? "active" : ""}`}>
+              <Link to="/client_dashboard" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
                 </span>
@@ -151,16 +151,16 @@ const ClSidebar = () => {
               </Link>
             </li>
             
-            <li className={`menu-item ${location.pathname.includes("/planscl") || location.pathname.includes("/plan_id") ? "active" : ""}`}>
-              <Link to="/planscl" className="menu-link">
+            <li className={`menu-item ${location.pathname.includes("/plansList") || location.pathname.includes("/planDetail") ? "active" : ""}`}>
+              <Link to="/plansList" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineShoppingBag size={20} />
                 </span>
                 <span className="menu-link-text">Plans</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname.includes("/viewadvi") || location.pathname.includes("/advisor_id") ? "active" : ""}`}>
-              <Link to="/viewadvi" className="menu-link">
+            <li className={`menu-item ${location.pathname.includes("/viewAdvisor") || location.pathname.includes("/advisor") ? "active" : ""}`}>
+              <Link to="/viewAdvisor" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>
@@ -182,7 +182,7 @@ const ClSidebar = () => {
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
             
-            <li className={`menu-item ${location.pathname.includes("/profile") || location.pathname.includes("/profedit") ? "active" : ""}`}>
+            <li className={`menu-item ${location.pathname.includes("/profile") || location.pathname.includes("/profile/Edit") ? "active" : ""}`}>
               <Link to="/profile" className="menu-link">
                 <span className="menu-link-icon">
                   <CgProfile size={18} />

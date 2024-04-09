@@ -161,7 +161,7 @@ const PlanCardList = ({ plans }) => {
       <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} className={styles.CardList}>
         {sortPlans().map((plan, index) => (
           <div key={index} style={{ width: '33%', padding: '10px' }}>
-            <Link to={`/plan_id/${plan._id}`}>
+            <Link to={`/planDetail/${plan._id}`}>
               <ProfileCard plan={plan} />
             </Link>
           </div>

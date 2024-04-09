@@ -137,7 +137,7 @@ const PlanCard = ({ plan, deletePlan }) => {
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
 
             <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
-            <Link to={`/edit/${_id}`}>
+            <Link to={`/advisor/editPlan/${_id}`}>
                 <button className='button'>edit</button>
             </Link>
           </div>

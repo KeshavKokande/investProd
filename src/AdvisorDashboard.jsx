@@ -66,23 +66,23 @@ function App() {
 
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
-            <Route path="/clientlist" element={<Clientlist/>} />
-            <Route path="/plan" element={<AdNewPlans/>} />
-            <Route path="/details" element={<UserDetails/>}/>
-            <Route path="/addplan" element={<AddPlan />} />
-            <Route path="/edit/:edit" element={<EditPlan />} />
+            <Route path="/advisor/clientList" element={<Clientlist/>} />
+            <Route path="/advisor/planList" element={<AdNewPlans/>} />
+            <Route path="/advisor/clientDetails" element={<UserDetails/>}/>
+            <Route path="/advisor/addNewPlan" element={<AddPlan />} />
+            <Route path="/advisor/editPlan/:edit" element={<EditPlan />} />
             
           </Route>
 
           <Route element={<ClBaseLayout />}>
-            <Route path="/cldash" element={<DashboardClient />} />
-            <Route path="/advisor_id/:advisor_id" element={<AdvClProfile />} />
-            <Route path="/plan_id/:plan_id" element={<PlanView />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/planscl" element={<PlansCl/>} />
-            <Route path="/viewadvi" element={<AdvClView/>} /> 
+            <Route path="/client_dashboard" element={<DashboardClient />} />
+            <Route path="/advisor/:advisor_id" element={<AdvClProfile />} />
+            <Route path="/planDetail/:plan_id" element={<PlanView />} />
+            <Route path="/plansList" element={<PlansCl/>} />
+            <Route path="/viewAdvisor" element={<AdvClView/>} /> 
             <Route path="/plan" element={<Plans/>} />
-            <Route path="/profedit" element={<MultiFormEdit/>}/>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/Edit" element={<MultiFormEdit/>}/>
             <Route path="/news" element={<News/>}/>
             <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
 
