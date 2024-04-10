@@ -352,7 +352,7 @@ const EditPlan = () => {
 
               {/* <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="newSymbol">Symbol:</label> */}
-              <input className={styles.addPlan_input} type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
+              <input className={styles.addPlan_input} placeholder='Select stock from the list' type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
 
               {/* <input type="text" id="newSymbol" value={newSymbol} readOnly /> */}
               {/* </div> */}
