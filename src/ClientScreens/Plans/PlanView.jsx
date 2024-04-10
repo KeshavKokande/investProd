@@ -58,11 +58,12 @@ function PlanView() {
     window.scrollTo(0, 0);
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           },
-          withCredentials: true
+          credentials: 'include'
         });
 
         if (response.status === 200) {
@@ -112,10 +113,6 @@ function PlanView() {
       Swal.fire('Error', 'Invested amount cannot be less than minimum investment amount.', 'error');
       return;
     }
-    if (investedAmount > plan.maxVal) {
-      Swal.fire('Error', 'Invested amount cannot be more than maximum investment amount.', 'error');
-      return;
-    }
 
     Swal.fire({
       title: 'Are you sure?',
@@ -147,7 +144,7 @@ function PlanView() {
           console.log('Buy plan response:', data);
 
 
-          Swal.fire('Success', 'Plan bought successfully!', 'success');
+          Swal.fire('Success', 'Plan Bought Successfully!', 'success');
           if (data.status === 'success') {
             navigate('/client_dashboard');// Update success state
           }
@@ -157,6 +154,18 @@ function PlanView() {
         }
       }
     });
+  };
+
+  // Function to handle incrementing the invested amount
+  const incrementAmount = () => {
+    setInvestedAmount(prevAmount => prevAmount + tab.total_current_value);
+  };
+
+  // Function to handle decrementing the invested amount
+  const decrementAmount = () => {
+    if (investedAmount > 0) {
+      setInvestedAmount(prevAmount => prevAmount - tab.total_current_value);
+    }
   };
 
   return (
@@ -251,23 +260,28 @@ function PlanView() {
 
               <div >
                 <label htmlFor="amt">Amount to be invested</label>
-                <input
-                  id='amt'
-                  type="text"
-                  value={formatCurrency(investedAmount)}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-                    setInvestedAmount(value);
-                  }}
-                  placeholder="Enter invested amount"
-                  style={{ marginRight: '10px' }}
-                />
+                <div>
+                  <button onClick={decrementAmount}>-</button>
+                  <input
+                    id='amt'
+                    type="text"
+                    value={formatCurrency(investedAmount)}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                      setInvestedAmount(value);
+                    }}
+                    placeholder="Enter invested amount"
+                    style={{ marginRight: '10px' }}
+                    readOnly
+                  />
+                  <button onClick={incrementAmount}>+</button>
+                </div>
               </div>
               <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
 
             </div>
             <div className={styles.chart}>
-            <StockChart stocks={plan.stocks} days={90} />
+              <StockChart stocks={plan.stocks} days={90} />
             </div>
           </div>
 
