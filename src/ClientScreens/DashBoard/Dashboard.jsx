@@ -23,6 +23,8 @@ function DashboardCl() {
     jobRole: '',
     planIds:[]
   });
+
+ const [datu, setDatu] = useState(null);
  
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -109,34 +111,34 @@ function DashboardCl() {
           },
           credentials: 'include'
         });
-
+  
         if (!response.ok) {
           throw new Error('Failed to fetch plans data');
         }
-
+  
         const data = await response.json();
         const filteredPlans = data.plans.filter(plan => profileInfo.planIds.includes(plan._id));
         setPlansData(filteredPlans);
-
+  
         const mappedData = filteredPlans.map(item => ({
           planName: item.planName,
           stocks: item.stocks,
           startVal: item.minInvestmentAmount,
           cash: item.cash
         }));
-
-        const ponse = await axios.post('http://localhost:5000/calculate_sts', { plans_data:  mappedData });
-        const ata = await ponse.json();
-
-        console.log(ata);
-
-
-       
+  
+        const axiosResponse = await axios.post('http://localhost:5000/calculate_sts', { plans_data: mappedData });
+        const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
+  
+      
+        setDatu(calculatedData.plans_data);
+      
+  
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
       }
     };
-
+  
     fetchPlansData();
   }, [profileInfo]);
   
@@ -156,6 +158,31 @@ function DashboardCl() {
 v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
   })(document, 'script');
   }, []);
+
+  if (!datu){return(<div>Loading.....</div>);}
+
+  function calculateAverageGainPercentage(plansData) {
+    let totalGainPercentage = 0;
+    let totalStocks = 0;
+  
+    plansData.forEach((plan) => {
+      plan.individual_stocks.forEach((stock) => {
+        totalGainPercentage += stock.total_change_percent;
+        totalStocks++;
+      });
+    });
+  
+    if (totalStocks === 0) {
+      return 0; // Avoid division by zero
+    }
+  
+    const averageGainPercentage = totalGainPercentage / totalStocks;
+    return averageGainPercentage;
+  }
+
+  const averageGainPercentage = calculateAverageGainPercentage(datu);
+  console.log("Average Gain Percentage:", averageGainPercentage);
+  
  
   return (
 <div className={styles.App}>
@@ -174,7 +201,7 @@ v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
  
      <h2 className={styles.heading}> Portfolio Summary</h2>
  
-      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} />
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage}/>
 <script>
         console.log(document.queryselector(".alert"));
 </script>

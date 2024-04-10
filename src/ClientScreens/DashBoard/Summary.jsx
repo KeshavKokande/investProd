@@ -7,8 +7,13 @@ import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
+import ApexChart from './BarChart';
 
-function InvestmentSummary({ transactions, advisorNames, returns }) {
+function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg}) {
+
+    if (!transactions || !advisorNames || !returns) {
+        return null; // Render nothing if any of the props are missing
+    }
     // Function to calculate total amount invested in each plan
     const calculateTotalInvestment = (transactions) => {
         const investmentMap = new Map();
@@ -84,8 +89,8 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     colors={["#e4e8ef", "#4ce13f"]}
                     percentFillValue={50}
                     cardInfo={{
-                        title: "Total Profit",
-                        value: formatCurrency(totalProfitAmount),
+                        title: "Total Profit/Loss",
+                        value: formatCurrency(avggg*totalInvestedAmount/100),
                         // text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
                     }}
                 />
@@ -94,7 +99,7 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     percentFillValue={40}
                     cardInfo={{
                         title: "Current Value",
-                        value: formatCurrency(totalInvestedAmount + totalProfitAmount),
+                        value: formatCurrency(totalInvestedAmount + avggg*totalInvestedAmount/100),
                         // text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
                     }}
                 />
@@ -105,7 +110,8 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
 
                 <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
-                <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
+                {/* <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p> */}
+                <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><ApexChart plans_data={etta} /> </p>
             </div>
 
 
