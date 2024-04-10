@@ -528,7 +528,7 @@ body {
   z-index: 10;
   transform: rotate(90deg);
   position: absolute;
-  left: 31%;
+  left: 33%;
   top: 55%;
 }
 
@@ -560,7 +560,7 @@ body {
 }
 
 .stock_list_li{
-  width: 16vw;
+  width: 20vw;
   display: grid;
   grid-template-columns: 10vw 4vw auto;
 }
