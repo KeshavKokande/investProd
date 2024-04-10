@@ -207,7 +207,7 @@ function PlanView() {
                   Min Investment Amount
                 </p>
                 <p className={styles.rowValue}>
-                ₹ {Number(plan.minInvestmentAmount).toLocaleString('en-IN')}
+                ₹ {Number(tab.total_current_value+plan.cash).toLocaleString('en-IN')}
                 </p>
               </div>
               <div className={styles.row}>

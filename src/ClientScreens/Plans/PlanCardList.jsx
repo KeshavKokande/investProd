@@ -11,7 +11,7 @@ const PlanCardList = ({ plans }) => {
   const [filters, setFilters] = useState({
     cat_risk: '',
     cat_type: '',
-    priceRange: [0, 10000], // Initial price range
+    priceRange: [0, 100000], // Initial price range
     searchText: '',
   });
   const [sortOption, setSortOption] = useState('');
@@ -22,6 +22,18 @@ const PlanCardList = ({ plans }) => {
   }, [filters]);
 
   const applyFilters = () => {
+    if (
+      !filters.cat_risk &&
+      !filters.cat_type &&
+      filters.priceRange[0] === 0 &&
+      filters.priceRange[1] === 100000 &&
+      !filters.searchText
+    ) {
+      // All filters are null or default, return an empty array
+      setFilteredPlans([]);
+      return;
+    }
+  
     let filtered = plans.filter((plan) => {
       if (filters.cat_risk && plan.risk !== filters.cat_risk) return false;
       if (
@@ -115,7 +127,7 @@ const PlanCardList = ({ plans }) => {
     _id='range'
     step={500}
     min={0}
-    max={10000}
+    max={100000}
     values={filters.priceRange}
     onChange={(values) => handlePriceRangeChange(values)}
     renderTrack={({ props, children }) => (

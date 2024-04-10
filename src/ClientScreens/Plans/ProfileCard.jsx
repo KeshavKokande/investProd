@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import { Link } from 'react-router-dom';
 import styles from "./ProfileCard.module.css";
 import historicalData from '../../components/dashboard/plans/symbols_data.json';
+import axios from 'axios';
 
 const ProfileCard = ({ plan }) => {
+    const [tab, setTab] = useState(null);
 
     let totalValue = 0;
     let selectedPrices = {};
@@ -34,26 +36,40 @@ const ProfileCard = ({ plan }) => {
       setTotalValue(total);
     };
     
-    const fetchStockPrices = (date, historicalData, plan) => {
-      const prices = {};
-    
-      Object.keys(historicalData).forEach((symbol) => {
-        const symbolData = historicalData[symbol];
-        if (symbolData && typeof symbolData === "object" && symbolData.historical) {
-          const priceData = symbolData.historical.find((item) => item.date === date);
-          if (priceData) {
-            prices[symbol] = Math.round(parseFloat(priceData.close));
-          }
+    const fetchStockPrices = async () => {
+      try {
+        const data = {
+          stocks: plan.stocks.map(stock => ({
+            symbol: stock.symbol,
+            qty: stock.qty,
+            avg_price: stock.price, // Assuming price is the average price
+          }))
+        };
+        const response = await fetch('http://127.0.0.1:5000/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
         }
-      });
-    
-      setSelectedPrices(prices);
-      calculateTotalValue(plan);
+  
+        const responseData = await response.json();
+        setTab(responseData);
+      } catch (error) {
+        console.error('Error fetching stock prices:', error);
+      }
     };
-    
-    
-    fetchStockPrices(selectedDate, historicalData, plan);
-    
+  
+    useEffect(() => {
+      fetchStockPrices();
+    }, []);
+
+    if (!tab){return(<div>Loading........</div>);}
+
     return (
         <>
             <div className={styles.containerProfile}>
@@ -73,7 +89,7 @@ const ProfileCard = ({ plan }) => {
                         <h2 className={styles.vitaminH2}>{plan.planName}</h2>
                     </div>
                     <div className={`${styles.reviews} ${styles.gridPosition}`}>
-                        <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {totalValue}</p>
+                        <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {(tab.total_current_value+plan.cash).toFixed(2)}</p>
                     </div>
                     <div className={styles.reviews}>
                         <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
