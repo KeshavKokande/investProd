@@ -7,7 +7,7 @@ import premium from '../../assets/images/premium.png'
 import ribbon from '../../assets/images/ribbon.png'
 import tick from '../../assets/images/tick.png'
 
-const ProfileCard = ({ plan }) => {
+const ProfileCard = ({ plan, ids }) => {
   const [tab, setTab] = useState(null);
 
   let totalValue = 0;
@@ -76,12 +76,17 @@ const ProfileCard = ({ plan }) => {
   return (
     <>
       <div className={styles.containerProfile}>
+      {plan.planFees > 0 && ( // Render the div only if plan.planfees is greater than 0
         <div className={styles.premium}>
           <img src={premium} alt="" />
         </div>
-        <div className={styles.purchased}>
-          <img src={tick} alt="" /> <p>Bought</p>
-        </div>
+      )}
+
+        {ids && ids.includes(plan._id) && (
+          <div className={styles.purchased}>
+            <img src={tick} alt="" /> <p>Bought</p>
+          </div>
+        )}
         {/* <div className={styles.ribbon}>
             <img src={ribbon} alt="" />
         </div> */}

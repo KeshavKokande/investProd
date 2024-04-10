@@ -4,7 +4,7 @@ import styles from './Plans.module.css';
 import { Link } from 'react-router-dom';
 import ProfileCard from './ProfileCard';
 
-const PlanCardList = ({ plans }) => {
+const PlanCardList = ({ plans, ids }) => {
 
   console.log(plans);
   const [filteredPlans, setFilteredPlans] = useState(plans);
@@ -174,7 +174,7 @@ const PlanCardList = ({ plans }) => {
         {sortPlans().map((plan, index) => (
           <div key={index} style={{ width: '33%', padding: '10px' }}>
             <Link to={`/planDetail/${plan._id}`}>
-              <ProfileCard plan={plan} />
+              <ProfileCard plan={plan} ids={ids} />
             </Link>
           </div>
         ))}

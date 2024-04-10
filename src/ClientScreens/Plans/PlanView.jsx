@@ -149,7 +149,7 @@ function PlanView() {
 
           Swal.fire('Success', 'Plan bought successfully!', 'success');
           if (data.status === 'success') {
-            navigate('/cldash');// Update success state
+            navigate('/client_dashboard');// Update success state
           }
         } catch (error) {
           console.error('Error buying plan:', error.message);
@@ -194,14 +194,14 @@ function PlanView() {
                     {new Date(plan.createdAt).toLocaleDateString()}
                   </p>
                 </div>
-                <div className={styles.row}>
+                {/* <div className={styles.row}>
                   <p className={styles.rowLabel}>
                     Recommended Investment Amount
                   </p>
                   <p className={styles.rowValue}>
                     ₹ {Number(plan.maxVal).toLocaleString('en-IN')}
                   </p>
-                </div>
+                </div> */}
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
                     Min Investment Amount

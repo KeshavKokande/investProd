@@ -7,6 +7,7 @@ import axios from 'axios';
 function PlansCl() {
   const [plansData, setPlansData] = useState([]);
   const [riks, setRiks] = useState([]);
+  const [kiks, setKiks] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,8 +38,10 @@ function PlansCl() {
         const rik = await ponse.json();
 
         console.log('ris  ',data);
+        
 
         setRiks(rik.client.question_1)
+        setKiks(rik.client.planIds)
 
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
@@ -69,17 +72,22 @@ function PlansCl() {
     return { ...plan, decPhoto: decodedImageUrl };
   });
 
-console.log(riks);
+console.log("riks",riks);
+console.log("kiks",kiks);
+
+if (!kiks){return (<div></div>);}
+
+ 
 
   return (
     <>
       <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
-      <PlanCardList plans={plansWithDecodedImages} />
+      <PlanCardList plans={plansWithDecodedImages} ids={kiks} />
       <br />
       <hr />
       <br />
       <br />
-      <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} />
+      <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} ids={kiks}/>
     </>
   );
 }

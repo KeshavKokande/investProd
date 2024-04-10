@@ -12,7 +12,7 @@ const responsive = {
   mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
 };
 
-const Arraay = ({ plans, risk }) => {
+const Arraay = ({ plans, risk, ids }) => {
   console.log('PLANS DATA: ', risk);
   // const topRatedPlans = plans.sort((a, b) => parseFloat(b.noOfSubscription) - parseFloat(a.noOfSubscription)).slice(0, 5);
   const topRatedPlans = plans.filter(plan => plan.risk == risk);
@@ -40,7 +40,7 @@ const Arraay = ({ plans, risk }) => {
         {mostOrderedPlans.map((plan, index) => (
           <div key={index}>
             <Link to={`/planDetail/${plan._id}`}>
-              <ProfileCard plan={plan} />
+              <ProfileCard plan={plan} ids={ids} />
             </Link>
           </div>
         ))}
