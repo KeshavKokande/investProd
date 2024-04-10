@@ -15,6 +15,7 @@ function PlanView() {
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
 
+  console.log("kuch",profileData.subscribedPlanIds);
 
   const formatCurrency = (amount) => {
     const formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -108,8 +109,38 @@ function PlanView() {
   console.log("PLAN DATA IS:", plan);
 
   const handleSubscribe = async() => {
-//Need to be written
+
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/client/subscribe/${plan_id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          investedAmount: parseInt(investedAmount, 10)
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed To Buy Plan');
+      }
+
+      const data = await response.json();
+      console.log('Buy plan response:', data);
+
+
+      Swal.fire('Success', 'Plan Bought Successfully!', 'success');
+      if (data.status === 'success') {
+        navigate('/client_dashboard');// Update success state
+      }
+    } catch (error) {
+      console.error('Error buying plan:', error.message);
+      Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
+    }
   };
+
+
 
   const handleBuyPlan = async () => {
     if (investedAmount < plan.minInvestmentAmount) {
@@ -246,7 +277,7 @@ function PlanView() {
                     {plan.advise}
                   </p>
                 </div>
-                {profileData.planIds && profileData.planIds.includes(plan_id) && (
+                {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) && (
                   <div className={styles.row}>
                     <p className={styles.rowLabel}>
                       Stocks
@@ -262,7 +293,7 @@ function PlanView() {
                 )}
 
               </div>
-              {profileData.planIds && profileData.planIds.includes(plan_id) ? (
+              {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) ? (
               <div>
                 <div >
                   <label htmlFor="amt">Amount to be invested</label>

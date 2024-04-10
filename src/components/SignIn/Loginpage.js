@@ -90,7 +90,7 @@ const LoginPage = () => {
         window.location.href = '/advisor_dashboard';
       }
       else if(sessionStorage.getItem('role') == 'client'){
-        window.location.href = '/cldash';
+        window.location.href = '/client_dashboard';
       }
     } else {
       // Cookie is not set

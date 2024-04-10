@@ -84,7 +84,7 @@ const Register = () => {
         // Storing name and email in session storage
         sessionStorage.setItem('name', formData.name);
         sessionStorage.setItem('email', formData.email);
-        navigate('/clform');
+        navigate('/client_registration_form');
       })
       .catch((error) => {
         console.error('Error:', error);
