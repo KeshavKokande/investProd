@@ -27,12 +27,16 @@ const StockList = ({  prices, handleSymbolClick, tv }) => {
       </div>
       <ul className={styles.stock_list_ul}>
         <li className={styles.stock_list_li}>
-      <p className={styles.inline}>symbol:</p> <p className={styles.inline}>Price</p> <p className={styles.inline}>Equivalent Weightage</p>
+        <p className={`${styles.inline} ${styles.bold}`}>Symbol</p>
+      <p className={`${styles.inline} ${styles.bold}`}>Price</p>
+      {tv? (<p className={`${styles.inline} ${styles.bold}`}>Equivalent Weightage</p>):null}
+      
       </li>
+      <hr styles={{width:"100%"}} />
       {filteredSymbols.map(symbol => (
           <li key={symbol} onClick={() => handleSymbolClick(symbol)} className={styles.stock_list_li}>
             <p className={styles.inline}>{symbol}:</p> <p className={styles.inline}>{prices[symbol]}</p>
-            {tv ? <p className={styles.inline}>{'('}{tv(prices[symbol])}{'%)'}</p> : null}
+            {tv ? <p className={styles.inline}>{tv(prices[symbol])}%</p> : null}
             <input type="radio" name="" id="" />
           </li>
         ))}
