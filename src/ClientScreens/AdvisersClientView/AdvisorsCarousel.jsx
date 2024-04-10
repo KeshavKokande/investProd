@@ -51,7 +51,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star"></span>
                     </div>
-                    <Link to={`/advisor_id/${advisor._id}`}>
+                    <Link to={`/advisor/${advisor._id}`}>
                       <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                     </Link>
                   </div>
@@ -92,7 +92,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                         <span class="fa fa-star"></span>
 
                       </div>
-                      <Link to={`/advisor_id/${advisor._id}`}>
+                      <Link to={`/advisor/${advisor._id}`}>
                         <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                       </Link>
                     </div>
@@ -131,7 +131,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                         <span class="fa fa-star"></span>
 
                       </div>
-                      <Link to={`/advisor_id/${advisor._id}`}>
+                      <Link to={`/advisor/${advisor._id}`}>
                         <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                       </Link>
                     </div>

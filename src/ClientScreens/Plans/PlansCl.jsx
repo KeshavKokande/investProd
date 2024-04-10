@@ -72,8 +72,8 @@ function PlansCl() {
     return { ...plan, decPhoto: decodedImageUrl };
   });
 
-console.log("riks",riks);
-console.log("kiks",kiks);
+// console.log("riks",riks);
+// console.log("kiks",kiks);
 
 if (!kiks){return (<div></div>);}
 

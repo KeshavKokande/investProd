@@ -123,7 +123,7 @@ const EditPlan = () => {
           }
           formData.cash = updatedCash;
           setNewSymbol('');
-          setNewQty(0);
+          setNewQty(1);
         } else {
           alert('Not enough cash to buy stocks.');
         }
@@ -373,7 +373,7 @@ const EditPlan = () => {
                     <div className={styles.addPlan_card_detail}>
                       <p style={{fontWeight:'600'}}>{stock.symbol}</p>
                       <p>
-                        Weightage - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
+                        Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
                       </p>
                       <p>Price:</p>
                     </div>

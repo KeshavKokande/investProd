@@ -41,6 +41,7 @@ function AdvClProfile() {
     const [isLoading, setIsLoading] = useState(true);
     const [advisors, setAdvisors] = useState([]);
     const [plans, setPlans] = useState([]);
+    const [clientDetails, setClientDetails] = useState([]);
  
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -61,6 +62,13 @@ function AdvClProfile() {
             },
             credentials: 'include',
           });
+          const clientDetailsResponse = await fetch(`http://localhost:8000/api/v1/Client/get-own-details`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
  
           if (!advisorsResponse.ok || !plansResponse.ok) {
             throw new Error('Failed to fetch data');
@@ -68,9 +76,11 @@ function AdvClProfile() {
  
           const advisorsData = await advisorsResponse.json();
           const plansData = await plansResponse.json();
+          const clientDetailsData = await clientDetailsResponse.json();
  
           setAdvisors(advisorsData.listOfNamesOfAdvisors);
           setPlans(plansData.plans);
+          setClientDetails(clientDetailsData.client.planIds);
           setIsLoading(false);
         } catch (error) {
           console.error('Error fetching data:', error.message);
@@ -127,7 +137,7 @@ function AdvClProfile() {
           {plansWithDecodedImages.map((plan, index) => (
             <div key={index}>
             <Link to={`/plan_id/${plan._id}`}>
-            <ProfileCard plan={plan} />
+            <ProfileCard plan={plan} ids={clientDetails}/>
             </Link>
             </div>
           ))}

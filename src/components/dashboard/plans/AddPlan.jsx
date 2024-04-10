@@ -80,7 +80,7 @@ const AddPlan = () => {
         formData.stocks = [...updatedStocks];
         calculateMini();
         setNewSymbol('');
-        setNewQty(0);
+        setNewQty(1);
       } else {
         alert('Data Not Available');
       }
@@ -236,9 +236,13 @@ const AddPlan = () => {
     setFormData({ ...formData, minInvestmentAmount: mini });
   }
 
+  const handleSymbolClick = (symbol) => {
+    setNewSymbol(symbol);
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
-        <StockList selectedDate={date} prices={selectedPrices} />
+        <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
         <hr className={styles.addPlan_hr} />
       <div >
         {/* <div className={styles.addPlan_image_container}>
@@ -291,7 +295,7 @@ const AddPlan = () => {
               {/* <h2>Add New Stock</h2> */}
               <label className={styles.addPlan_label}>Stock</label>
               <label htmlFor="newSymbol">Symbol:</label>
-              <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} />
+              <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly/>
               {/* <label htmlFor="newQty">Quantity:</label>
             <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} /> */}
               <button type="button" onClick={handleAddStock}>Add Stock</button>
@@ -301,14 +305,16 @@ const AddPlan = () => {
               {formData.stocks.map(stock => (
                 <div key={stock.symbol} className={styles.addPlan_card}>
                   <div className={styles.addPlan_card_detail}>
-                    <p>
-                      {stock.symbol}: Quantity - {stock.qty} | Price - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
-                    </p>
-                  </div>
+                      <p style={{fontWeight:'600'}}>{stock.symbol}</p>
+                      <p>
+                        Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
+                      </p>
+                      <p>Price:</p>
+                    </div>
                   <div className={styles.addPlan_card_button}>
-                    <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Sell (-)</button>
-                    <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Buy (+)</button>
-                  </div>
+                      <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{color:'green'}}>+</button>
+                      <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{color:'red'}}>-</button>
+                    </div>
                 </div>
               ))}
             </div>

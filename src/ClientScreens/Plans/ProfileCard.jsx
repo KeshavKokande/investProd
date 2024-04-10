@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import styles from "./ProfileCard.module.css";
-import historicalData from '../../components/dashboard/plans/symbols_data.json';
-import axios from 'axios';
 import premium from '../../assets/images/premium.png'
-import ribbon from '../../assets/images/ribbon.png'
 import tick from '../../assets/images/tick.png'
 
 const ProfileCard = ({ plan, ids }) => {
@@ -84,7 +81,7 @@ const ProfileCard = ({ plan, ids }) => {
 
         {ids && ids.includes(plan._id) && (
           <div className={styles.purchased}>
-            <img src={tick} alt="" /> <p>Bought</p>
+            <img src={tick} alt="" /> &nbsp; <p>Bought</p>
           </div>
         )}
         {/* <div className={styles.ribbon}>
@@ -112,12 +109,6 @@ const ProfileCard = ({ plan, ids }) => {
           <div className={styles.reviews}>
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
           </div>
-          {/* <div className={styles.reviews}>
-                        <p><strong style={{ color: "black", fontSize: "15px" }}>CAGR</strong> {plan.risk}</p>
-                    </div> */}
-          {/* <div className={styles.reviews}>
-                    {plan.planFees>0 ? <p>Paisa Lagega</p> : <p>lelo bhai free hai</p>}
-                    </div> */}
           <div className={`${styles.size} ${styles.position}`}>
             <p style={{ color: "black", fontSize: "15px" }}>👥 : {plan.noOfSubscription}</p>
           </div>

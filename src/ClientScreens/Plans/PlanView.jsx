@@ -55,7 +55,6 @@ function PlanView() {
   }, [plansData]); // Add stocks to the dependency array to fetch data when stocks change
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const fetchProfileData = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
@@ -66,10 +65,9 @@ function PlanView() {
           credentials: 'include'
         });
 
-        if (response.status === 200) {
-          const data = response.data.client;
-          setProfileData(data);
-          console.log("DATA OF USER", profileData);
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data.client);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -77,6 +75,7 @@ function PlanView() {
         console.error('Error fetching profile data:', error.message);
       }
     };
+
     const fetchPlansData = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
@@ -108,6 +107,10 @@ function PlanView() {
   const plan = plansData.find(plan => plan._id === plan_id);
   console.log("PLAN DATA IS:", plan);
 
+  const handleSubscribe = async() => {
+//Need to be written
+  };
+
   const handleBuyPlan = async () => {
     if (investedAmount < plan.minInvestmentAmount) {
       Swal.fire('Error', 'Invested amount cannot be less than minimum investment amount.', 'error');
@@ -115,13 +118,13 @@ function PlanView() {
     }
 
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to buy this plan?',
+      title: 'Are You Sure?',
+      text: 'Do You Want To Buy This Plan?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, buy it!'
+      confirmButtonText: 'Yes, Buy It!'
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -137,7 +140,7 @@ function PlanView() {
           });
 
           if (!response.ok) {
-            throw new Error('Failed to buy plan');
+            throw new Error('Failed To Buy Plan');
           }
 
           const data = await response.json();
@@ -164,7 +167,7 @@ function PlanView() {
   // Function to handle decrementing the invested amount
   const decrementAmount = () => {
     if (investedAmount > 0) {
-      setInvestedAmount(prevAmount =>Math.round((prevAmount - tab.total_current_value - plan.cash) * 100) / 100);
+      setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value - plan.cash) * 100) / 100);
     }
   };
 
@@ -194,7 +197,7 @@ function PlanView() {
                 <p className={styles.rowValue}>
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}
                 </p>
-              </div> */}
+                </div> */}
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
                     Created At
@@ -250,35 +253,45 @@ function PlanView() {
                     </p>
                     <p className={styles.rowValue}>
                       {plan.stocks.map(stock => (
-                        <li key={stock._id}>{stock.symbol}</li>
+                        <li key={stock._id}>
+                          {stock.symbol} ({((stock.qty / plan.stocks.reduce((acc, curr) => acc + curr.qty, 0)) * 100).toFixed(2)}%)
+                        </li>
                       ))}
                     </p>
                   </div>
                 )}
 
               </div>
-
-              <div >
-                <label htmlFor="amt">Amount to be invested</label>
-                <div>
-                  <button onClick={decrementAmount}>-</button>
-                  <input
-                    id='amt'
-                    type="text"
-                    value={formatCurrency(investedAmount)}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-                      setInvestedAmount(value);
-                    }}
-                    placeholder="Enter invested amount"
-                    style={{ marginRight: '10px' }}
-                    readOnly
-                  />
-                  <button onClick={incrementAmount}>+</button>
+              {profileData.planIds && profileData.planIds.includes(plan_id) ? (
+              <div>
+                <div >
+                  <label htmlFor="amt">Amount to be invested</label>
+                  <div>
+                    <button onClick={decrementAmount}>-</button>
+                    <input
+                      id='amt'
+                      type="text"
+                      value={formatCurrency(investedAmount)}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                        setInvestedAmount(value);
+                      }}
+                      placeholder="Enter invested amount"
+                      style={{ marginRight: '10px' }}
+                      readOnly
+                    />
+                    <button onClick={incrementAmount}>+</button>
+                  </div>
                 </div>
+                <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
               </div>
-              <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
-
+              ) : (
+                <div>
+                  <button className={styles.subscribeButton} onClick={handleSubscribe}>
+                    Subscribe
+                  </button>
+                </div>
+              )}
             </div>
             <div className={styles.chart}>
               <StockChart stocks={plan.stocks} days={90} />
@@ -287,8 +300,6 @@ function PlanView() {
 
         </div>
       )}
-
-
     </div>
   );
 }
