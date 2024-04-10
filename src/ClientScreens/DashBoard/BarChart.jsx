@@ -5,12 +5,12 @@ const ApexChart = ({ plans_data }) => {
   const [seriesData, setSeriesData] = useState([]);
   const [options, setOptions] = useState({
     chart: {
-      height: 350,
+      height: 200,
       type: 'bar',
     },
     plotOptions: {
       bar: {
-        borderRadius: 10,
+        borderRadius: 0,
         columnWidth: '50%',
       }
     },
@@ -69,7 +69,7 @@ const ApexChart = ({ plans_data }) => {
   return (
     <div>
       <div id="chart">
-        <ReactApexChart options={options} series={seriesData} type="bar" height={350} />
+        <ReactApexChart options={options} series={seriesData} type="bar" height={250} />
       </div>
     </div>
   );

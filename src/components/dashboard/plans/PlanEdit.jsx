@@ -303,7 +303,7 @@ const EditPlan = () => {
   if (loading) { return (<div>Loading.....</div>); }
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
-      <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
+      <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} tv = {getPricePercentage}/>
 
       <hr className={styles.addPlan_hr} />
       <div >

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useState, useEffect,  useContext} from 'react';
 import {
   BarChart,
   Bar,
@@ -12,56 +12,118 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import { FaArrowUpLong } from "react-icons/fa6";
 import { LIGHT_THEME } from "../../../constants/themeConstants";
 import "./AreaCharts.scss";
+import axios from 'axios';
+import ApexChart from '../../../ClientScreens/DashBoard/BarChart';
 
-const data = [
-  {
-    month: "Jan",
-    loss: 70,
-    profit: 100,
-  },
-  {
-    month: "Feb",
-    loss: 55,
-    profit: 85,
-  },
-  {
-    month: "Mar",
-    loss: 35,
-    profit: 90,
-  },
-  {
-    month: "April",
-    loss: 90,
-    profit: 70,
-  },
-  {
-    month: "May",
-    loss: 55,
-    profit: 80,
-  },
-  {
-    month: "Jun",
-    loss: 30,
-    profit: 50,
-  },
-  {
-    month: "Jul",
-    loss: 32,
-    profit: 75,
-  },
-  {
-    month: "Aug",
-    loss: 62,
-    profit: 86,
-  },
-  {
-    month: "Sep",
-    loss: 55,
-    profit: 78,
-  },
-];
+
+
+
+
+
+
+
+ 
+// const data = [
+//   {
+//     month: planName,
+//     loss: 70,
+//     profit: 100,
+//   },
+//   {
+//     month: "Feb",
+//     loss: 55,
+//     profit: 85,
+//   },
+//   {
+//     month: "Mar",
+//     loss: 35,
+//     profit: 90,
+//   },
+//   {
+//     month: "April",
+//     loss: 90,
+//     profit: 70,
+//   },
+//   {
+//     month: "May",
+//     loss: 55,
+//     profit: 80,
+//   },
+//   {
+//     month: "Jun",
+//     loss: 30,
+//     profit: 50,
+//   },
+//   {
+//     month: "Jul",
+//     loss: 32,
+//     profit: 75,
+//   },
+//   {
+//     month: "Aug",
+//     loss: 62,
+//     profit: 86,
+//   },
+//   {
+//     month: "Sep",
+//     loss: 55,
+//     profit: 78,
+//   },
+// ];
 
 const AreaBarChart = () => {
+
+
+  const [plansData, setPlansData] = useState(null);
+const [datu, setDatu] = useState(null);
+
+ 
+  useEffect(() => {
+    const fetchPlansData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/v1/advisor/list-of-plans", {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+        const data = await response.json();
+        console.log(data);
+        setPlansData(data);
+
+        const mappedData = data.plans.map(item => ({
+          planName: item.planName,
+          stocks: item.stocks,
+          startVal: item.minInvestmentAmount,
+          cash: item.cash
+        }));
+  
+        const axiosResponse = await axios.post('http://localhost:5000/calculate_sts', { plans_data: mappedData });
+        const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
+  
+        const mapData = calculatedData.plans_data.map((plan) => ({
+          Name: plan.planName,
+          gains: plan.total_current_gains,
+        }));
+        setDatu(calculatedData.plans_data);
+      
+  
+      } catch (error) {
+        console.error('Error fetching plans data:', error.message);
+      }
+
+
+    };
+ 
+    fetchPlansData();
+    window.scrollTo(0, 0);
+  }, []);
+
+
+
+
+
   const { theme } = useContext(ThemeContext);
 
   const formatTooltipValue = (value) => {
@@ -89,11 +151,14 @@ const AreaBarChart = () => {
         </div>
       </div>
       <div className="bar-chart-wrapper">
+      {datu ?(
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
+
+          <ApexChart plans_data={datu}/>
+          {/* <BarChart
             width={500}
             height={200}
-            data={data}
+            data={datu}
             margin={{
               top: 5,
               right: 5,
@@ -103,11 +168,11 @@ const AreaBarChart = () => {
           >
             <XAxis
               padding={{ left: 10 }}
-              dataKey="month"
+              dataKey="Name"
               tickSize={0}
               axisLine={false}
               tick={{
-                fill: `${theme === LIGHT_THEME ? "#676767" : "#f3f3f3"}`,
+                fill:  "#676767",
                 fontSize: 14,
               }}
             />
@@ -118,7 +183,7 @@ const AreaBarChart = () => {
               axisLine={false}
               tickSize={0}
               tick={{
-                fill: `${theme === LIGHT_THEME ? "#676767" : "#f3f3f3"}`,
+                fill:  "#676767"
               }}
             />
             <Tooltip
@@ -133,23 +198,25 @@ const AreaBarChart = () => {
               formatter={formatLegendValue}
             />
             <Bar
-              dataKey="profit"
+              dataKey="gains"
               fill="#475be8"
               activeBar={false}
               isAnimationActive={false}
               barSize={24}
               radius={[4, 4, 4, 4]}
             />
-            <Bar
+            </BarChart> */}
+            {/* <Bar
               dataKey="loss"
               fill="#e3e7fc"
               activeBar={false}
               isAnimationActive={false}
               barSize={24}
               radius={[4, 4, 4, 4]}
-            />
-          </BarChart>
+            /> */}
+          
         </ResponsiveContainer>
+        ):(<div></div>)}
       </div>
     </div>
   );
