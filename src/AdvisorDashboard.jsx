@@ -61,7 +61,7 @@ function App() {
           <Route path="/about" element={<HomepageAbout />} />
           <Route path="/services" element={<Service />} />
           <Route path="/contact" element={<HomepageInfo />} />
-          <Route path="/clform" element={<MultiStepForm />} />
+          <Route path="/client_registration_form" element={<MultiStepForm />} />
           <Route path="/stocks" element={<Stoks />} />
 
           <Route element={<BaseLayout />}>

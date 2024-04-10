@@ -158,13 +158,13 @@ function PlanView() {
 
   // Function to handle incrementing the invested amount
   const incrementAmount = () => {
-    setInvestedAmount(prevAmount => prevAmount + tab.total_current_value);
+    setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value + plan.cash) * 100) / 100);
   };
 
   // Function to handle decrementing the invested amount
   const decrementAmount = () => {
     if (investedAmount > 0) {
-      setInvestedAmount(prevAmount => prevAmount - tab.total_current_value);
+      setInvestedAmount(prevAmount =>Math.round((prevAmount - tab.total_current_value - plan.cash) * 100) / 100);
     }
   };
 
