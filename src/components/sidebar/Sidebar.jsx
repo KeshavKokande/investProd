@@ -56,11 +56,12 @@ const Sidebar = () => {
         credentials: "include", // include cookies in the request
       });
       if (response.ok) {
-        // Clear user authentication data (if any)
-        console.log("logout", response);
+        // Clear user authentication data
         localStorage.removeItem("token");
+        document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        sessionStorage.clear();
 
-        // Redirect to login page
         navigate("/login");
       } else {
         console.error("Logout failed:", response.statusText);

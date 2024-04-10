@@ -523,7 +523,7 @@ body {
 }
 
 .addPlan_hr{
-  width: 72vh;
+  width: 77vh;
   /* height: 80vh; */
   z-index: 10;
   transform: rotate(90deg);
@@ -562,7 +562,7 @@ body {
 .stock_list_li{
   width: 16vw;
   display: grid;
-  grid-template-columns: 10vw 4vw auto;
+  grid-template-columns: 10vw 10vw auto;
 }
 
 .stock_list_li:hover{

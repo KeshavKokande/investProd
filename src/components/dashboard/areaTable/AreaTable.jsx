@@ -58,7 +58,8 @@ const AreaTable = () => {
 
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
-  const currentItems = tableData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = tableData ? tableData.slice(indexOfFirstItem, indexOfLastItem) : [];
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -76,7 +77,7 @@ const AreaTable = () => {
           pagination={{
             current: currentPage,
             pageSize: perPage,
-            total: tableData.length,
+            total: tableData ? tableData.length : 0, // Ensure tableData is defined before accessing its length
             onChange: handlePageChange,
           }}
         />
