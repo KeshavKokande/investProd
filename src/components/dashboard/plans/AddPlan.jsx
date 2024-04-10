@@ -77,7 +77,7 @@ const AddPlan = () => {
         }
         // Remove stocks with zero quantity
         updatedStocks = updatedStocks.filter(stock => stock.qty > 0);
-        formData.stocks =[...updatedStocks];
+        formData.stocks = [...updatedStocks];
         calculateMini();
         setNewSymbol('');
         setNewQty(0);
@@ -96,7 +96,7 @@ const AddPlan = () => {
       updatedStocks[existingStockIndex].qty -= qty;
       // Remove stocks with zero quantity
       const filteredStocks = updatedStocks.filter(stock => stock.qty > 0);
-      
+
       formData.stocks = [...filteredStocks];
       calculateMini();
     } else {
@@ -205,9 +205,9 @@ const AddPlan = () => {
       ...stock,
       qty: stock.qty / gcd
     }));
-    formData.stocks =[...simplifiedStocks];
+    formData.stocks = [...simplifiedStocks];
   };
-  
+
   const findGCDArray = (arr) => {
     const gcd = (a, b) => {
       if (b === 0) return a;
@@ -233,16 +233,17 @@ const AddPlan = () => {
         mini += qty * selectedPrices[symbol];
       }
     }
-    setFormData({...formData, minInvestmentAmount: mini});
+    setFormData({ ...formData, minInvestmentAmount: mini });
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <StockList selectedDate={date} prices={selectedPrices} />
-      <div className={styles.addPlan_form_container}>
-        <div className={styles.addPlan_image_container}>
+    <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
+        <StockList selectedDate={date} prices={selectedPrices} />
+        <hr className={styles.addPlan_hr} />
+      <div >
+        {/* <div className={styles.addPlan_image_container}>
           <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />
-        </div>
+        </div> */}
         <div className={styles.addPlan_form_section}>
           <form id={styles.new_plan_form} onSubmit={handleSubmit}>
             <div className={styles.formGrp}>
@@ -285,23 +286,35 @@ const AddPlan = () => {
               <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
-            <h2>Add New Stock</h2>
-            <label htmlFor="newSymbol">Symbol:</label>
-            <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} />
-            {/* <label htmlFor="newQty">Quantity:</label>
+
+            <div className={styles.addPlan_stocks}>
+              {/* <h2>Add New Stock</h2> */}
+              <label className={styles.addPlan_label}>Stock</label>
+              <label htmlFor="newSymbol">Symbol:</label>
+              <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} />
+              {/* <label htmlFor="newQty">Quantity:</label>
             <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} /> */}
-            <button type="button" onClick={handleAddStock}>Add Stock</button>
-            {formData.stocks.map(stock => (
-              <div key={stock.symbol}>
-                <p>
-                  {stock.symbol}: Quantity - {stock.qty} | Price - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
-                </p>
-                <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Sell (-)</button>
-                <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Buy (+)</button>
-              </div>
-            ))}
+              <button type="button" onClick={handleAddStock}>Add Stock</button>
+            </div>
+
+            <div className={styles.addPlan_stock_cards}>
+              {formData.stocks.map(stock => (
+                <div key={stock.symbol} className={styles.addPlan_card}>
+                  <div className={styles.addPlan_card_detail}>
+                    <p>
+                      {stock.symbol}: Quantity - {stock.qty} | Price - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
+                    </p>
+                  </div>
+                  <div className={styles.addPlan_card_button}>
+                    <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Sell (-)</button>
+                    <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])}>Buy (+)</button>
+                  </div>
+                </div>
+              ))}
+            </div>
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
             {/* <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button> */}
+
           </form>
         </div>
       </div>

@@ -1197,6 +1197,7 @@ a:focus {
 
 .info_section .info_col {
   margin-bottom: 30px;
+  height: fit-content;
 }
 
 .info_section .info_contact .contact_link_box {

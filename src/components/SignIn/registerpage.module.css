@@ -44,15 +44,15 @@
   }
 
   .register_link{
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-decoration: underline;
   }
   
   .h4-register-label{
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .register-label{
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .h4-welcome-label{
@@ -115,12 +115,12 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border: 2px solid black !important;
+    /* border: 2px solid black !important; */
   }
   
   .gAuth:hover {
     background-color: #000 !important;
-    border-color: #000 !important;
+    border: 2px solid black !important;
   }
   
   .gAuth:hover h2 {
