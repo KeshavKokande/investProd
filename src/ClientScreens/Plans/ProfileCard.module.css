@@ -315,3 +315,37 @@ h2{
 .money_bag button i {
     margin-right: 5px
 }
+
+.premium{
+    position: absolute;
+    top: 12%;
+    right: 15%;
+    width: 2vw;
+}
+
+.premium img{
+    width: 100%;
+}
+
+.purchased{
+    position: absolute;
+    top: 13%;
+    left: 15%;
+    border: 1px solid green;
+    padding: 0px 8px;
+    border-radius: 30px;
+    align-items: center;
+    display: flex;
+    /* width: 2vw; */
+}
+
+.purchased img{
+    display: inline;
+    width: 1vw;
+}
+
+.purchased p{
+    display: inline;
+    font-size: small;
+}
+

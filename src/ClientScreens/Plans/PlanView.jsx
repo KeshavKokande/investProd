@@ -14,7 +14,7 @@ function PlanView() {
   const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
-  
+
 
   const formatCurrency = (amount) => {
     const formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -64,7 +64,7 @@ function PlanView() {
           },
           withCredentials: true
         });
-  
+
         if (response.status === 200) {
           const data = response.data.client;
           setProfileData(data);
@@ -75,7 +75,7 @@ function PlanView() {
       } catch (error) {
         console.error('Error fetching profile data:', error.message);
       }
-    };  
+    };
     const fetchPlansData = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
@@ -93,7 +93,7 @@ function PlanView() {
         const data = await response.json();
         setPlansData(data.plans);
         console.log(data);
-      
+
 
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
@@ -165,20 +165,20 @@ function PlanView() {
         <p>Loading...</p>
       ) : (
         <div>
-        <div className={styles.bigadv}>
-          <h2 style={{ marginTop: "2vh" }} className={styles.heading}>{plan.planName}</h2>
-          {/* <div className={styles.riga}> */}
-          <div className={styles.advleft}>
-            <img src={dummy} className={styles.planImage} />
-          </div>
-          {/* </div> */}
+          <div className={styles.bigadv}>
+            <h2 style={{ marginTop: "2vh" }} className={styles.heading}>{plan.planName}</h2>
+            {/* <div className={styles.riga}> */}
+            <div className={styles.advleft}>
+              <img src={dummy} className={styles.planImage} />
+            </div>
+            {/* </div> */}
 
-          {/* <div className={styles.lefa}> */}
-          <div className={styles.advright}>
+            {/* <div className={styles.lefa}> */}
+            <div className={styles.advright}>
 
-            <div className={styles.rowContainer}>
-              {/* <h2>Plan Information</h2> */}
-              {/* <div className={styles.row}>
+              <div className={styles.rowContainer}>
+                {/* <h2>Plan Information</h2> */}
+                {/* <div className={styles.row}>
                 <p className={styles.rowLabel}>
                   CAGR
                 </p>
@@ -186,70 +186,70 @@ function PlanView() {
                 ₹ {Number(plan.capValue).toLocaleString('en-IN')}
                 </p>
               </div> */}
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Created At
-                </p>
-                <p className={styles.rowValue}>
-                  {new Date(plan.createdAt).toLocaleDateString()}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Recommended Investment Amount
-                </p>
-                <p className={styles.rowValue}>
-                ₹ {Number(plan.maxVal).toLocaleString('en-IN')}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Min Investment Amount
-                </p>
-                <p className={styles.rowValue}>
-                ₹ {Number(tab.total_current_value+plan.cash).toLocaleString('en-IN')}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  No of Subscription
-                </p>
-                <p className={styles.rowValue}>
-                  {plan.noOfSubscription}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Risk
-                </p>
-                <p className={styles.rowValue}>
-                  {plan.risk}
-                </p>
-              </div>
-              <div className={styles.row}>
-                <p className={styles.rowLabel}>
-                  Advise
-                </p>
-                <p className={styles.rowValue}>
-                  {plan.advise}
-                </p>
-              </div>
-              {profileData.planIds && profileData.planIds.includes(plan_id) && (
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
-                    Stocks
+                    Created At
                   </p>
                   <p className={styles.rowValue}>
-                    {plan.stocks.map(stock => (
-                      <li key={stock._id}>{stock.symbol}</li>
-                    ))}
+                    {new Date(plan.createdAt).toLocaleDateString()}
                   </p>
                 </div>
-              )}
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
+                    Recommended Investment Amount
+                  </p>
+                  <p className={styles.rowValue}>
+                    ₹ {Number(plan.maxVal).toLocaleString('en-IN')}
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
+                    Min Investment Amount
+                  </p>
+                  <p className={styles.rowValue}>
+                    ₹ {Number(tab.total_current_value + plan.cash).toLocaleString('en-IN')}
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
+                    No of Subscription
+                  </p>
+                  <p className={styles.rowValue}>
+                    {plan.noOfSubscription}
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
+                    Risk
+                  </p>
+                  <p className={styles.rowValue}>
+                    {plan.risk}
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
+                    Advise
+                  </p>
+                  <p className={styles.rowValue}>
+                    {plan.advise}
+                  </p>
+                </div>
+                {profileData.planIds && profileData.planIds.includes(plan_id) && (
+                  <div className={styles.row}>
+                    <p className={styles.rowLabel}>
+                      Stocks
+                    </p>
+                    <p className={styles.rowValue}>
+                      {plan.stocks.map(stock => (
+                        <li key={stock._id}>{stock.symbol}</li>
+                      ))}
+                    </p>
+                  </div>
+                )}
 
-            </div>
+              </div>
 
-              <div>
+              <div >
                 <label htmlFor="amt">Amount to be invested</label>
                 <input
                   id='amt'
@@ -263,16 +263,18 @@ function PlanView() {
                   style={{ marginRight: '10px' }}
                 />
               </div>
-                <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
+              <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
 
+            </div>
+            <div className={styles.chart}>
+            <StockChart stocks={plan.stocks} days={90} />
+            </div>
           </div>
-          <StockChart stocks={plan.stocks} days={90}/>
-          </div>
-          
+
         </div>
       )}
 
-      
+
     </div>
   );
 }

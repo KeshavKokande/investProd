@@ -165,20 +165,50 @@
 
 .rowContainer{
   display: grid;
-  grid-gap: 2vh;
+  /* grid-gap: 2vh; */
+}
+
+.rowContainer div:nth-child(even) {
+  background-color: rgb(237, 237, 237);
 }
 
 .row{
   display: flex;
+  position: relative;
+  height: 6vh;
+  align-items: center;
   /* gap: 1vh; */
 }
 
+/* .row::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 1px; 
+  background-color: #000;
+} */
+
 .rowLabel, .rowValue{
   width: 14vw;
+  padding-left: 8px;
+  position: relative;
+}
+
+.row::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left:  50%;
+  width: 1px;
+  height: 100%; 
+  background-color: #000;
 }
 
 .rowLabel{
   font-weight: 600;
+  
 }
 
 .advright label{
@@ -248,4 +278,9 @@
 
   .flex input{
     width: 8rem;
+  }
+
+  .chart{
+    grid-column-start: 1;
+    grid-column-end: 3;
   }
