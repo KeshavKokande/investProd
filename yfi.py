@@ -92,13 +92,14 @@ def calculate_stocks():
         return jsonify({'error': str(e)}), 400
 
 def fetch_stockt(stock_symbols, num_days):
-    utc_now = datetime.now(pytz.utc)
+    # utc_now = datetime.now(pytz.utc)
 
-    # Print UTC date and time in the desired format
-    end_date_str = utc_now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-    end_date = datetime.strptime(end_date_str, "%Y-%m-%d %H:%M:%S.%f")
+    # # Print UTC date and time in the desired format
+    # end_date_str = utc_now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+    # end_date = datetime.strptime(end_date_str, "%Y-%m-%d %H:%M:%S.%f")
 
-    # Calculate start date by subtracting num_days from end_date
+    # # Calculate start date by subtracting num_days from end_date
+    end_date=datetime.now()
     start_date = end_date - timedelta(days=num_days - 1)
 
     stock_data = []
