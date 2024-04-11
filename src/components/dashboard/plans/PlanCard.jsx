@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import styles from "./AdNewPlans.module.css";
 import { Link } from "react-router-dom";
 import StockChart from "./StockChart";
+// import gimicon from "../../../../public/chart-line-solid.svg"
+import { ReactComponent as IconName } from "../../../assest/chart-line-solid.svg";
+
 
 const PlanCard = ({ plan, deletePlan }) => {
   const {  risk, minInvestmentAmount, noOfSubscription, stocks, advise, _id, pcash } = plan;
 
   const [tab, setTab] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showSecondDiv, setShowSecondDiv] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,7 +88,7 @@ const PlanCard = ({ plan, deletePlan }) => {
   
   const isActiveClassName = isActive ? styles.adnewplan_risk_true : styles.adnewplan_risk_false;
 
-  if (isLoading){ return (<div>Loading............</div>);}
+  if (isLoading){ return (<div></div>);}
 
 
   const renderStocks = () => {
@@ -143,7 +147,7 @@ const PlanCard = ({ plan, deletePlan }) => {
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
             <Link to={`/advisor/editPlan/${_id}`}>
             <button className={styles.inactiveButton} style={{ backgroundColor: "#475BE8" }}>
-              edit
+            Rebalance
             </button>
             <br/>
             </Link>
@@ -153,8 +157,15 @@ const PlanCard = ({ plan, deletePlan }) => {
           </div>
         </div>
       </div>
-      <StockChart stocks={stocks} days={30}/>
-
+      <div
+          onClick={() => setShowSecondDiv((prevShow) => !prevShow)}
+          style={{ marginBottom: '10px', cursor: 'pointer' }} // Added cursor style
+        >
+          <IconName style={{ width: '1.5rem', height: '1.5rem' }} />
+        </div>
+      <div style={{ display: showSecondDiv ? 'block' : 'none' }}>
+      <StockChart stocks={stocks} days={90}/>
+      </div>
     </div>
   );
 };

@@ -236,7 +236,7 @@ const EditPlan = () => {
     if (Object.keys(newErrors).length === 0) {
       Swal.fire({
         title: 'Are you sure?',
-        text: 'You are about to create a new plan.',
+        text: 'You are about to Save the Changes.',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -392,7 +392,7 @@ const EditPlan = () => {
               ))}
             </div>
 
-            <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
+            <button type="submit" className={styles.addPlan_add_stock_btn}>Save</button>
             {/* <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button> */}
           </form>
         </div>

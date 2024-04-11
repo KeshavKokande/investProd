@@ -68,7 +68,7 @@ const ProfileCard = ({ plan, ids }) => {
     fetchStockPrices();
   }, []);
 
-  if (!tab) { return (<div>Loading........</div>); }
+  if (!tab) { return (<div></div>); }
 
   return (
     <>
