@@ -40,11 +40,12 @@ const StockList = ({ prices, handleSymbolClick, tv }) => {
         <li className={styles.stock_list_li}>
           <p className={`${styles.inline} ${styles.bold}`}>Symbol</p>
           <p className={`${styles.inline} ${styles.bold}`}>Price</p>
-          {tv && (<p className={`${styles.inline} ${styles.bold}`}>Equivalent Weightage</p>)}
+          {tv && (<p className={`${styles.inline} ${styles.bold}`}>Eq. Weightage</p>)}
         </li>
         {filteredSymbols.length > 0 && (
           <hr className={styles.stock_list_hr} />
         )}
+        <div className={styles.stock_list_stocks}>
         {filteredSymbols.map(symbol => (
           <li key={symbol} onClick={() => handleClick(symbol)} className={styles.stock_list_li}>
             <p className={styles.inline}>{symbol}</p>
@@ -53,9 +54,10 @@ const StockList = ({ prices, handleSymbolClick, tv }) => {
               <p className={styles.inline}>{tv(prices[symbol])}%
               </p>
             }
-            <input type="radio" name="selectedSymbol" checked={selectedSymbol === symbol} />
+            {/* <input type="radio" name="selectedSymbol" checked={selectedSymbol === symbol} /> */}
           </li>
         ))}
+        </div>
       </ul>
     </div>
   );
