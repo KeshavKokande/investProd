@@ -159,7 +159,7 @@ v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
   })(document, 'script');
   }, []);
 
-  if (!datu){return(<div>Loading.....</div>);}
+  if (!datu){return(<div></div>);}
 
   function calculateAverageGainPercentage(plansData) {
     let totalGainPercentage = 0;

@@ -141,12 +141,12 @@ const [datu, setDatu] = useState(null);
   return (
     <div className="bar-chart">
       <div className="bar-chart-info">
-        <h5 className="bar-chart-title">Your History</h5>
+        <h5 className="bar-chart-title">Returns</h5>
         <div className="chart-info-data">
-          <div className="info-data-value">₹100.4K</div>
+          {/* <div className="info-data-value">₹100.4K</div> */}
           <div className="info-data-text">
-            <FaArrowUpLong />
-            <p>5% than last month.</p>
+            {/* <FaArrowUpLong /> */}
+            {/* <p>5% than last month.</p> */}
           </div>
         </div>
       </div>

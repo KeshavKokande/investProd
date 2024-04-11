@@ -40,7 +40,7 @@ function PlansCl() {
         console.log('ris  ',data);
         
 
-        setRiks(rik.client.question_1)
+        setRiks(rik.client.question_4)
         setKiks(rik.client.planIds)
 
         const filteredPlans = data.plans.filter(plan => plan.isActive);

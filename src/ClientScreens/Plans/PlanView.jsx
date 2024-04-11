@@ -283,7 +283,7 @@ function PlanView() {
                     {capitalize(plan.advise)}
                   </p>
                 </div>
-                {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) && (
+                {plan.planFees==0 || (profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id)) && (
                   <div className={styles.row}>
                     <p className={styles.rowLabel}>
                       Stocks
@@ -299,7 +299,7 @@ function PlanView() {
                 )}
 
               </div>
-              {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) ? (
+              {(profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id))||plan.planFees==0 ? (
               <div>
                 <div >
                   <label htmlFor="amt">Amount to be invested</label>

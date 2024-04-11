@@ -41,19 +41,34 @@ def fetch_stock_data(stock_symbols):
             })
     return stock_data
 
-stock_symbols = ['ABB.BO', 'ADANIGREEN.BO', 'ADANIPORTS.BO', 'ADANIPOWER.BO', 'ATGL.BO', 'AMBUJACEM.BO', 'APOLLOHOSP.BO', 'ASIANPAINT.BO', 'DMART.BO', 'AXISBANK.BO', 'BAJAJ-AUTO.BO', 'BAJFINANCE.BO', 'BAJAJFINSV.BO', 'BAJAJHLDNG.BO', 'BANKBARODA.BO', 'BERGEPAINT.BO', 'BEL.BO', 'BPCL.BO', 'BHARTIARTL.BO', 'BOSCHLTD.BO', 'BRITANNIA.BO', 'CANBK.BO', 'CHOLAFIN.BO', 'CIPLA.BO', 'COALINDIA.BO', 'COLPAL.BO', 'DLF.BO', 'DABUR.BO', 'DIVISLAB.BO', 'DRREDDY.BO', 'EICHERMOT.BO', 'GAIL.BO', 'GODREJCP.BO', 'GRASIM.BO', 'HCLTECH.BO', 'HDFCBANK.BO', 'HDFCLIFE.BO', 'HAVELLS.BO', 'HEROMOTOCO.BO', 'HINDALCO.BO', 'HAL.BO', 'HINDUNILVR.BO', 'ICICIBANK.BO', 'ICICIGI.BO', 'ICICIPRULI.BO', 'ITC.BO', 'IOC.BO', 'IRCTC.BO', 'IRFC.BO', 'INDUSINDBK.BO', 'NAUKRI.BO', 'INFY.BO', 'INDIGO.BO', 'JSWSTEEL.BO', 'JINDALSTEL.BO', 'JIOFIN.BO', 'KOTAKBANK.BO', 'LTIM.BO', 'LT.BO', 'LICI.BO', 'M&M.BO', 'MARICO.BO', 'MARUTI.BO', 'NTPC.BO', 'NESTLEIND.BO', 'ONGC.BO', 'PIDILITIND.BO', 'PFC.BO', 'POWERGRID.BO', 'PNB.BO', 'RECLTD.BO', 'RELIANCE.BO', 'SBICARD.BO', 'SBILIFE.BO', 'SRF.BO', 'MOTHERSON.BO', 'SHREECEM.BO', 'SHRIRAMFIN.BO', 'SIEMENS.BO', 'SBIN.BO', 'SUNPHARMA.BO', 'TVSMOTOR.BO', 'TCS.BO', 'TATACONSUM.BO', 'TATAMTRDVR.BO', 'TATAMOTORS.BO', 'TATAPOWER.BO', 'TATASTEEL.BO', 'TECHM.BO', 'TITAN.BO', 'TORNTPHARM.BO', 'TRENT.BO', 'ULTRACEMCO.BO', 'VBL.BO', 'VEDL.BO', 'WIPRO.BO', 'ZOMATO.BO', 'ZYDUSLIFE.BO']
+stock_symbols = [
+    'ADANIGREEN.BO', 'ADANIPORTS.BO', 'ADANIPOWER.BO', 'ATGL.BO', 'AMBUJACEM.BO', 'APOLLOHOSP.BO', 'ASIANPAINT.BO',
+    'DMART.BO', 'AXISBANK.BO', 'BAJAJ-AUTO.BO', 'BAJFINANCE.BO', 'BAJAJFINSV.BO', 'BAJAJHLDNG.BO', 'BANKBARODA.BO',
+    'BERGEPAINT.BO', 'BEL.BO', 'BPCL.BO', 'BHARTIARTL.BO', 'BOSCHLTD.BO', 'BRITANNIA.BO', 'CANBK.BO', 'CHOLAFIN.BO',
+    'CIPLA.BO', 'COALINDIA.BO', 'COLPAL.BO', 'DLF.BO', 'DABUR.BO', 'DIVISLAB.BO', 'DRREDDY.BO', 'EICHERMOT.BO',
+    'GAIL.BO', 'GODREJCP.BO', 'GRASIM.BO', 'HCLTECH.BO', 'HDFCBANK.BO', 'HDFCLIFE.BO', 'HAVELLS.BO', 'HEROMOTOCO.BO',
+    'HINDALCO.BO', 'HAL.BO', 'HINDUNILVR.BO', 'ICICIBANK.BO', 'ICICIGI.BO', 'ICICIPRULI.BO', 'ITC.BO', 'IOC.BO',
+    'IRCTC.BO', 'IRFC.BO', 'INDUSINDBK.BO', 'NAUKRI.BO', 'INFY.BO', 'INDIGO.BO', 'JSWSTEEL.BO', 'JINDALSTEL.BO',
+    'JIOFIN.BO', 'KOTAKBANK.BO', 'LTIM.BO', 'LT.BO', 'LICI.BO', 'M&M.BO', 'MARICO.BO', 'MARUTI.BO', 'NTPC.BO',
+    'NESTLEIND.BO', 'ONGC.BO', 'PIDILITIND.BO', 'PFC.BO', 'POWERGRID.BO', 'PNB.BO', 'RECLTD.BO', 'RELIANCE.BO',
+    'SBICARD.BO', 'SBILIFE.BO', 'SRF.BO', 'MOTHERSON.BO', 'SHREECEM.BO', 'SHRIRAMFIN.BO', 'SIEMENS.BO', 'SBIN.BO',
+    'SUNPHARMA.BO', 'TVSMOTOR.BO', 'TCS.BO', 'TATACONSUM.BO', 'TATAMTRDVR.BO', 'TATAMOTORS.BO', 'TATAPOWER.BO',
+    'TATASTEEL.BO', 'TECHM.BO', 'TITAN.BO', 'TORNTPHARM.BO', 'TRENT.BO', 'ULTRACEMCO.BO', 'VBL.BO', 'VEDL.BO',
+    'WIPRO.BO', 'ZOMATO.BO', 'ZYDUSLIFE.BO'
+]
 
 @app.route('/stocks_curr')
 def get_stock_prices():
     stock_data = {}
     for symbol in stock_symbols:
-        stock = yf.Ticker(symbol)
         try:
-            price = stock.history(period='1d')['Close'][0]
-            stock_data[symbol.split('.')[0]] = round(price, 2)
+            stock = yf.Ticker(symbol)
+            price = round(stock.history(period='1d')['Close'].iloc[0], 2)
+            stock_data[symbol.split('.')[0]] = price
         except Exception as e:
             stock_data[symbol] = str(e)
     return jsonify(stock_data)
+
 
 @app.route('/calculate', methods=['POST'])
 def calculate_stocks():
