@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import styles from './../../../ClientScreens/Plans/Plans.module.css';
 
 const StockChart = ({ stocks, days }) => {
     const [series, setSeries] = useState([]);
@@ -51,7 +52,7 @@ const StockChart = ({ stocks, days }) => {
     }, [stocks, days]);
 
     return (
-        <div className="stock-chart">
+        <div className={styles.stock_chart}>
             <ReactApexChart options={options} series={series} type="line" height={350} />
         </div>
     );
