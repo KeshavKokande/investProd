@@ -300,10 +300,14 @@ const EditPlan = () => {
     setNewSymbol(symbol);
   };
 
+  const capitalize = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   if (loading) { return (<div>Loading.....</div>); }
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
-      <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} tv = {getPricePercentage}/>
+      <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} tv={getPricePercentage} />
 
       <hr className={styles.addPlan_hr} />
       <div >
@@ -338,7 +342,7 @@ const EditPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
+              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
@@ -362,25 +366,23 @@ const EditPlan = () => {
             </div> */}
               <button type="button" onClick={handleAddStock}>Add Stock</button>
             </div>
-
+            <div style={{ position: 'relative', width: '100%' }}>
+              <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw'}} />
+            </div>
             <div className={styles.addPlan_stock_cards}>
               {formData.stocks.map(stock => (
-                  <div key={stock.symbol} className={styles.addPlan_card}>
-                    {/* <p>
-                    {stock.symbol}: Quantity - {stock.qty} | Weightage - {stock.qty * getPricePercentage(selectedPrices[stock.symbol])}% of Total Value
-                    </p> */}
-
-                    <div className={styles.addPlan_card_detail}>
-                      <p style={{fontWeight:'600'}}>{stock.symbol}</p>
-                      <p>
-                        Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
-                      </p>
-                      <p>Price:</p>
-                    </div>
-                    <div className={styles.addPlan_card_button}>
-                      <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{color:'green'}}>+</button>
-                      <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{color:'red'}}>-</button>
-                    </div>
+                <div key={stock.symbol} className={styles.addPlan_card}>
+                  <div className={styles.addPlan_card_detail}>
+                    <p style={{ fontWeight: '600' }}>{stock.symbol}</p>
+                    <p>
+                      Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
+                    </p>
+                    <p>Price:</p>
+                  </div>
+                  <div className={styles.addPlan_card_button}>
+                    <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'green' }}>+</button>
+                    <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'red' }}>-</button>
+                  </div>
                 </div>
               ))}
             </div>

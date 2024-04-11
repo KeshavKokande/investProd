@@ -44,6 +44,22 @@ const AddPlan = () => {
     });
   };
 
+  const formatCurrency = (amount) => {
+    // Convert amount to a number
+    const parsedAmount = parseFloat(amount);
+  
+    // Check if parsedAmount is a valid number
+    if (!isNaN(parsedAmount)) {
+      // Use toFixed to limit the decimal places to 3 and convert it back to string
+      const roundedAmount = parsedAmount.toFixed(2);
+      const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return `₹ ${formattedAmount}`;
+    } else {
+      // If amount is not a valid number, return empty string or handle accordingly
+      return '';
+    }
+  };
+  
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -188,7 +204,7 @@ const AddPlan = () => {
           axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, { withCredentials: true })
             .then(response => {
               console.log('Response:', response.data);
-              navigate('/plan');
+              navigate("/advisor/planList");
             })
             .catch(error => {
               console.error('Error:', error);
@@ -240,10 +256,14 @@ const AddPlan = () => {
     setNewSymbol(symbol);
   };
 
+  const capitalize = (str) => {
+    return str.replace(/(^\w|\.\s\w)/g, (match) => match.toUpperCase());
+  };
+  
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
-        <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
-        <hr className={styles.addPlan_hr} />
+      <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
+      <hr className={styles.addPlan_hr} />
       <div >
         {/* <div className={styles.addPlan_image_container}>
           <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />
@@ -278,7 +298,15 @@ const AddPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
-              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={formData.minInvestmentAmount} onChange={handleChange} readOnly />
+              <input
+                className={styles.addPlan_input}
+                type="text"
+                id="minInvestmentAmount"
+                name="minInvestmentAmount"
+                value={formatCurrency(formData.minInvestmentAmount)}
+                onChange={(e) => { handleChange(e); }} // No need to call formatCurrency here
+                readOnly
+              />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
@@ -287,7 +315,7 @@ const AddPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
+              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
@@ -295,26 +323,28 @@ const AddPlan = () => {
               {/* <h2>Add New Stock</h2> */}
               <label className={styles.addPlan_label}>Stock</label>
               <label htmlFor="newSymbol">Symbol:</label>
-              <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly/>
+              <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
               {/* <label htmlFor="newQty">Quantity:</label>
             <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} /> */}
               <button type="button" onClick={handleAddStock}>Add Stock</button>
             </div>
-
+            <div style={{ position: 'relative', width: '100%' }}>
+              <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw'}} />
+            </div>
             <div className={styles.addPlan_stock_cards}>
               {formData.stocks.map(stock => (
                 <div key={stock.symbol} className={styles.addPlan_card}>
                   <div className={styles.addPlan_card_detail}>
-                      <p style={{fontWeight:'600'}}>{stock.symbol}</p>
-                      <p>
-                        Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
-                      </p>
-                      <p>Price:</p>
-                    </div>
+                    <p style={{ fontWeight: '600' }}>{stock.symbol}</p>
+                    <p>
+                      Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
+                    </p>
+                    <p>Price:</p>
+                  </div>
                   <div className={styles.addPlan_card_button}>
-                      <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{color:'green'}}>+</button>
-                      <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{color:'red'}}>-</button>
-                    </div>
+                    <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'green' }}>+</button>
+                    <button type="button" onClick={() => handleSellStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'red' }}>-</button>
+                  </div>
                 </div>
               ))}
             </div>

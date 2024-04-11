@@ -18,7 +18,8 @@ function PlanView() {
   console.log("kuch",profileData.subscribedPlanIds);
 
   const formatCurrency = (amount) => {
-    const formattedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const roundedAmount = amount.toFixed(2);
+      const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return `₹ ${formattedAmount}`;
   };
 
@@ -132,7 +133,7 @@ function PlanView() {
 
       Swal.fire('Success', 'Plan Bought Successfully!', 'success');
       if (data.status === 'success') {
-        navigate('/client_dashboard');// Update success state
+        navigate('/planDetail/${plan_id}');// Update success state
       }
     } catch (error) {
       console.error('Error buying plan:', error.message);
@@ -201,6 +202,11 @@ function PlanView() {
       setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value - plan.cash) * 100) / 100);
     }
   };
+
+  const capitalize = (str) => {
+    return str.replace(/(^\w|\.\s\w)/g, (match) => match.toUpperCase());
+  };
+  
 
   return (
     <div>
@@ -274,7 +280,7 @@ function PlanView() {
                     Advise
                   </p>
                   <p className={styles.rowValue}>
-                    {plan.advise}
+                    {capitalize(plan.advise)}
                   </p>
                 </div>
                 {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) && (
@@ -325,7 +331,7 @@ function PlanView() {
               )}
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={90} />
+              <StockChart stocks={plan.stocks} days={10} />
             </div>
           </div>
 

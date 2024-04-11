@@ -103,6 +103,12 @@ const PlanCard = ({ plan, deletePlan }) => {
     ));
   };
  
+  const formatCurrency = (amount) => {
+    const roundedAmount = amount.toFixed(2);
+      const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return `₹ ${formattedAmount}`;
+  };
+
   return (
     <div className={styles.outerMax}>
       <h4>{plan.planName}</h4>
@@ -113,8 +119,8 @@ const PlanCard = ({ plan, deletePlan }) => {
               <tr>
                 <th className={styles.adnewplan_th}>Name</th>
                 <th className={styles.adnewplan_th}>Weightage</th>
-                <th className={styles.adnewplan_th}>Todays Change</th>
                 <th className={styles.adnewplan_th}>Percent Change</th>
+                <th className={styles.adnewplan_th}>Today's Change</th>
               </tr>
             </thead>
             <tbody>{renderStocks()}</tbody>
@@ -127,22 +133,23 @@ const PlanCard = ({ plan, deletePlan }) => {
           <div className={styles.text}>
             <div><strong>Risk </strong>:<span className={`${styles.adnewplan_risk_dot} ${riskClassName}`}></span>{risk}</div>
             <div><strong>Status </strong>:<span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
-            <div><strong>Minimum Investment Amount</strong>: ₹{tab.total_current_value}</div>
+            <div><strong>Minimum Investment Amount</strong>: {formatCurrency(tab.total_current_value)}</div>
             <div><strong>Number of Subscriptions</strong>: {noOfSubscription}</div>
             <div><strong>Percent P&L</strong>: {(((tab.total_current_value-minInvestmentAmount)/minInvestmentAmount)*100).toFixed(2)}%</div>
-            <div><strong>Advise</strong>: {advise}</div>
+            <div><strong>Advise</strong>: {advise.toUpperCase()}</div>
           </div>
 
           <div className={styles.btn}>
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
-
-            <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
-            <br/>
             <Link to={`/advisor/editPlan/${_id}`}>
             <button className={styles.inactiveButton} style={{ backgroundColor: "#475BE8" }}>
               edit
             </button>
+            <br/>
             </Link>
+            <br/>
+
+            <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
           </div>
         </div>
       </div>

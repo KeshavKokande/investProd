@@ -542,10 +542,10 @@ body {
   justify-self: center;
 }
 
-.stock_list input{
+/* .stock_list input{
   font-size: 12px;
   width: 100%;
-}
+} */
 
 .stock_list_head{
   display: grid;
@@ -556,7 +556,7 @@ body {
   overflow-y: scroll;
   height: 60vh;
   gap: 1vh;
-  display: grid;
+  /* display: grid; */
 }
 
 .stock_list_li{
@@ -595,4 +595,27 @@ body {
 
 .bold {
   font-weight: bold;
+}
+
+.heading_stock_prices{
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.search_stock_input{
+  font-size: 1rem;
+  width: 100%;
+  height: 5vh;
+}
+
+/* Update the CSS code */
+.stock_list_hr {
+  width: 90%;
+  margin: 1rem 1rem 1rem 0rem; /* Adjust the margin as needed */
+}
+
+/* Add this CSS code */
+.addPlan_card_button button {
+  font-size: 1.5rem;
+  padding: 0.2rem;
 }
