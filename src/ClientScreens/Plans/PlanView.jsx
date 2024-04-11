@@ -298,7 +298,7 @@ function PlanView() {
                   </div>
                 )}
 
-                {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) ? (
+                {plan.planFees==0||(profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id)) ? (
                   <div style={{display: 'grid'}} className={styles.investment_panel_box}>
                     <div className={styles.investment_panel}>
                       <label htmlFor="amt">Amount to be invested</label>
