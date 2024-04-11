@@ -340,23 +340,29 @@ const EditPlan = () => {
               <label className={styles.addPlan_label} htmlFor="planFees">Plan Fees:</label>
               <input className={styles.addPlan_input} type="number" id="planFees" name="planFees" value={formData.planFees} onChange={handleChange} required />
             </div>
-            <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
-              {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
-            </div>
 
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="cash">Diluted Weightage:</label>
               <input className={styles.addPlan_input} type="text" id="cash" value={getPricePercentage(formData.cash)} readOnly />
             </div>
 
-            <div className={styles.addPlan_stocks}>
+            <div className={`${styles.formGrp} ${styles.formGrp3}`} >
+              <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
+              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
+              {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
+            </div>
+
+            <div className={`${styles.formGrp} ${styles.addPlan_stocks}`}>
               <label className={styles.addPlan_label}>Stock</label>
+              <input className={styles.addPlan_input} placeholder='Select stock from the list' type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
+              <button type="button" onClick={handleAddStock}>&#x2713;</button>
+            </div>
+
+            {/* <div className={styles.addPlan_stocks}> */}
+              
 
               {/* <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="newSymbol">Symbol:</label> */}
-              <input className={styles.addPlan_input} placeholder='Select stock from the list' type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
 
               {/* <input type="text" id="newSymbol" value={newSymbol} readOnly /> */}
               {/* </div> */}
@@ -364,8 +370,7 @@ const EditPlan = () => {
               <label className={styles.addPlan_label} htmlFor="newQty">Quantity:</label>
               <input className={styles.addPlan_input} type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} />
             </div> */}
-              <button type="button" onClick={handleAddStock}>Add Stock</button>
-            </div>
+            {/* </div> */}
             <div style={{ position: 'relative', width: '100%' }}>
               <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw'}} />
             </div>
