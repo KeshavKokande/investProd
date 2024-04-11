@@ -130,6 +130,7 @@
     grid-template-columns: 50% 50%;
     /* grid-row-gap: 2vh; */
     align-items: center;
+    margin-bottom: 5vh;
   }
 
   .bigadv h2{
@@ -165,38 +166,34 @@
 
 .rowContainer{
   display: grid;
+  background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 12px;
   /* grid-gap: 2vh; */
 }
 
 .rowContainer div:nth-child(even) {
-  background-color: rgb(237, 237, 237);
+  background-color: rgb(244 244 244);;
 }
 
 .row{
   display: flex;
   position: relative;
-  height: 6vh;
+  /* height: 6vh; */
   align-items: center;
   /* gap: 1vh; */
 }
 
-/* .row::after{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 80%;
-  height: 1px; 
-  background-color: #000;
-} */
-
 .rowLabel, .rowValue{
-  width: 14vw;
-  padding-left: 8px;
+  width: 50%;
+  /* padding-left: 8px; */
   position: relative;
+  padding: 8px;
 }
 
-.row::after{
+/* .row::after{
   content: '';
   position: absolute;
   bottom: 0;
@@ -204,7 +201,7 @@
   width: 1px;
   height: 100%; 
   background-color: #000;
-}
+} */
 
 .rowLabel{
   font-weight: 600;
@@ -214,6 +211,26 @@
 .advright label{
   font-weight: 600;
   position: static;
+}
+
+.investment_panel_box{
+  margin-top: 2vh;
+  display: grid;
+  gap: 1vh;
+}
+
+.investment_panel{
+  display: flex;
+}
+
+.investment_panel label{
+  width: 50%;
+}
+
+.modify_qty{
+  width: 50%;
+  background: white !important;
+  position: relative;
 }
 
 .advright button{
@@ -226,6 +243,26 @@
   border-radius: 10px;
     transition: all 0.5s;
     justify-self: center;
+}
+
+.modify_qty_input{
+  width: 60%;
+}
+
+.modify_qty_btns{
+  position:absolute;
+  display: flex;
+  right: 4%;
+  top: 6%;
+  background-color: white !important;
+}
+
+.modify_qty_btn{
+  width: fit-content !important;
+  background-color: white !important;
+  color: #000 !important;
+  padding: 0 !important;
+  margin-left: 5px;
 }
 
   .cl-h2-plans{
@@ -283,4 +320,12 @@
   .chart{
     grid-column-start: 1;
     grid-column-end: 3;
+    margin-top: 4vh;
+    display: grid;
+    justify-items: center;
+  }
+
+  .stock_chart{
+    width: 90%;
+    justify-self: center;
   }

@@ -15,11 +15,11 @@ function PlanView() {
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
 
-  console.log("kuch",profileData.subscribedPlanIds);
+  console.log("kuch", profileData.subscribedPlanIds);
 
   const formatCurrency = (amount) => {
     const roundedAmount = amount.toFixed(2);
-      const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return `₹ ${formattedAmount}`;
   };
 
@@ -109,7 +109,7 @@ function PlanView() {
   const plan = plansData.find(plan => plan._id === plan_id);
   console.log("PLAN DATA IS:", plan);
 
-  const handleSubscribe = async() => {
+  const handleSubscribe = async () => {
 
     try {
       const response = await fetch(`http://localhost:8000/api/v1/client/subscribe/${plan_id}`, {
@@ -206,7 +206,7 @@ function PlanView() {
   const capitalize = (str) => {
     return str.replace(/(^\w|\.\s\w)/g, (match) => match.toUpperCase());
   };
-  
+
 
   return (
     <div>
@@ -298,40 +298,42 @@ function PlanView() {
                   </div>
                 )}
 
-              </div>
-              {(profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id))||plan.planFees==0 ? (
-              <div>
-                <div >
-                  <label htmlFor="amt">Amount to be invested</label>
-                  <div>
-                    <button onClick={decrementAmount}>-</button>
-                    <input
-                      id='amt'
-                      type="text"
-                      value={formatCurrency(investedAmount)}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-                        setInvestedAmount(value);
-                      }}
-                      placeholder="Enter invested amount"
-                      style={{ marginRight: '10px' }}
-                      readOnly
-                    />
-                    <button onClick={incrementAmount}>+</button>
+                {profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id) ? (
+                  <div style={{display: 'grid'}} className={styles.investment_panel_box}>
+                    <div className={styles.investment_panel}>
+                      <label htmlFor="amt">Amount to be invested</label>
+                      <div className={styles.modify_qty}>
+                        <input className={styles.modify_qty_input}
+                          id='amt'
+                          type="text"
+                          value={formatCurrency(investedAmount)}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                            setInvestedAmount(value);
+                          }}
+                          placeholder="Enter invested amount"
+                          
+                          readOnly
+                        />
+                        <div className={styles.modify_qty_btns}>
+                        <button onClick={decrementAmount} className={styles.modify_qty_btn}>-</button>
+                        <button onClick={incrementAmount} className={styles.modify_qty_btn} >+</button>
+                        </div>
+                      </div>
+                    </div>
+                    <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
                   </div>
-                </div>
-                <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
+                ) : (
+                  <div>
+                    <button className={styles.subscribeButton} onClick={handleSubscribe}>
+                      Subscribe
+                    </button>
+                  </div>
+                )}
               </div>
-              ) : (
-                <div>
-                  <button className={styles.subscribeButton} onClick={handleSubscribe}>
-                    Subscribe
-                  </button>
-                </div>
-              )}
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={10} />
+              <StockChart stocks={plan.stocks} days={10}/>
             </div>
           </div>
 
