@@ -313,20 +313,20 @@ const AddPlan = () => {
               <label className={styles.addPlan_label} htmlFor="planFees">Plan Fees:</label>
               <input className={styles.addPlan_input} type="number" id="planFees" name="planFees" value={formData.planFees} onChange={handleChange} required />
             </div>
-            <div className={styles.formGrp}>
+            <div className={`${styles.formGrp} ${styles.formGrp3}`}>
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
               <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
-            <div className={styles.addPlan_stocks}>
+            <div className={`${styles.formGrp} ${styles.addPlan_stocks}`}>
               {/* <h2>Add New Stock</h2> */}
               <label className={styles.addPlan_label}>Stock</label>
-              <label htmlFor="newSymbol">Symbol:</label>
+              {/* <label htmlFor="newSymbol">Symbol:</label> */}
               <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
               {/* <label htmlFor="newQty">Quantity:</label>
             <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} /> */}
-              <button type="button" onClick={handleAddStock}>Add Stock</button>
+              <button type="button" onClick={handleAddStock}>&#x2713;</button>
             </div>
             <div style={{ position: 'relative', width: '100%' }}>
               <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw'}} />
