@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import styles from './dashboard.module.css'
 
 const ApexChart = ({ plans_data }) => {
   const [seriesData, setSeriesData] = useState([]);
@@ -68,7 +69,7 @@ const ApexChart = ({ plans_data }) => {
   
   return (
     <div>
-      <div id="chart">
+      <div id="chart" style={{display:'grid', justifyItems:'center'}}>
         <ReactApexChart options={options} series={seriesData} type="bar" height={250} />
       </div>
     </div>

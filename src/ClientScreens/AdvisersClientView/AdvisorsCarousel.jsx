@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './../../components/AdvisorCardsPage/TestpageAdv.css'
+import styles from './advisorClient.module.css'
 
 
 const settings = {
@@ -29,7 +30,7 @@ const AdvisorsCarousel = ({ advisors }) => {
 
   return (
     <>
-      <h2 style={{ marginBottom: "-4rem" }}>Standard Advisors</h2>
+      <h2 style={{ marginBottom: "-4rem" }} className={styles.heading}>Standard Advisors</h2>
       <div className='w-4/4 m-auto '>
         <div className="mt-20 ">
           <Slider {...settings}>
@@ -66,7 +67,7 @@ const AdvisorsCarousel = ({ advisors }) => {
       <div>
 
 
-        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }}>Exeutive Advisors</h2>
+        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }} className={styles.heading}>Exeutive Advisors</h2>
         <div className='w-4/4 m-auto '>
           <div className="mt-20 ">
             <Slider {...settings}>
@@ -105,7 +106,7 @@ const AdvisorsCarousel = ({ advisors }) => {
         </div>
 
 
-        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }} >Premium Advisors</h2>
+        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }} className={styles.heading}>Premium Advisors</h2>
 
         <div className='w-4/4 m-auto '>
           <div className="mt-20">

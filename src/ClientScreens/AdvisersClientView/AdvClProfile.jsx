@@ -132,7 +132,7 @@ function AdvClProfile() {
         <AdvisorProfilePage />
  
         <br />
-        <h2 style={{marginBottom:"1rem"}}>{advisor.name.split(" ")[0]}&#39;s Plans</h2>
+        <h2 style={{marginBottom:"1rem"}} className={styles.heading}>{advisor.name.split(" ")[0]}&#39;s Plans</h2>
         <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000} className={styles.Carousel}>
           {plansWithDecodedImages.map((plan, index) => (
             <div key={index}>

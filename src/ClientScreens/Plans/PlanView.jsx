@@ -324,7 +324,7 @@ function PlanView() {
                     <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
                   </div>
                 ) : (
-                  <div>
+                  <div className={styles.investment_panel_box}>
                     <button className={styles.subscribeButton} onClick={handleSubscribe}>
                       Subscribe
                     </button>

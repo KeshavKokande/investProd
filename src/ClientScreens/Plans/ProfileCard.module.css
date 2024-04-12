@@ -332,11 +332,11 @@ h2{
 
 .purchased {
     position: absolute;
-    top: 8px;
+    top: 6%;
     left: -46px;
     z-index: 1;
     overflow: hidden;
-    width: 143px;
+    width: 174px;
     height: 32px;
     background-color: #ff0000;
     transform: rotate(-45deg);

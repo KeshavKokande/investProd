@@ -87,7 +87,7 @@ const ProfileCard = ({ plan, ids }) => {
         )}
           {ids && ids.includes(plan._id) && (
             <div className={styles.purchased}>
-              <p>Bought</p>
+              <p>Subscribed</p>
             </div>
           )}
           <div className={`${styles.image} ${styles.gridPosition}`}>
