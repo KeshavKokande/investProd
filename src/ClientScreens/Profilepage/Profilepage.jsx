@@ -124,7 +124,7 @@ const capitalize = (str) => {
                   style={{
                     backgroundColor: '#475BE8',
                     color: 'white',
-                    padding: '1rem 1rem',
+                    padding: '0.5rem 1rem',
                     borderRadius: '0.3rem',
                     border: 'none',
                     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',

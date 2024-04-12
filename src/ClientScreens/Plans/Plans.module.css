@@ -162,6 +162,7 @@
     height: fit-content;
     gap: 4vh;
     align-self: center;
+    width: 90%;
   } 
 
 .rowContainer{
@@ -217,6 +218,7 @@
   margin-top: 2vh;
   display: grid;
   gap: 1vh;
+  background-color: white !important;
 }
 
 .investment_panel{
@@ -329,3 +331,7 @@
     width: 90%;
     justify-self: center;
   }
+/* 
+  .react-multiple-carousel__arrow--left{
+    left:0 !important;
+  } */

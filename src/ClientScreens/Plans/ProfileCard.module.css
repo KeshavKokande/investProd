@@ -28,6 +28,8 @@
     grid-gap: 1vh;
     grid-template-columns: auto auto;
     box-shadow:  rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
+    position: relative;
+    overflow: hidden;
 }
 
 .gridPosition{
@@ -318,16 +320,44 @@ h2{
 
 .premium{
     position: absolute;
-    top: 12%;
-    right: 15%;
+    top: 5%;
+    right: 5%;
     width: 2.5vw;
+    z-index: 10;
 }
 
 .premium img{
     width: 100%;
 }
 
-.purchased{
+.purchased {
+    position: absolute;
+    top: 6%;
+    left: -46px;
+    z-index: 1;
+    overflow: hidden;
+    width: 174px;
+    height: 32px;
+    background-color: #ff0000;
+    transform: rotate(-45deg);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+  
+
+  .purchased p {
+    position: absolute;
+    /* top: 15px; */
+    /* left: 20px; */
+    /* transform: rotate(-45deg); */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    /* margin: auto; */
+  }
+
+/* .purchased{
     position: absolute;
     top: 13%;
     left: 15%;
@@ -336,7 +366,6 @@ h2{
     border-radius: 30px;
     align-items: center;
     display: flex;
-    /* width: 2vw; */
 }
 
 .purchased img{
@@ -348,4 +377,4 @@ h2{
     display: inline;
     font-size: small;
 }
-
+ */

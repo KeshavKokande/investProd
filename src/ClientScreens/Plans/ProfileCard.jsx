@@ -73,21 +73,23 @@ const ProfileCard = ({ plan, ids }) => {
   return (
     <>
       <div className={styles.containerProfile}>
-      {plan.planFees > 0 && ( // Render the div only if plan.planfees is greater than 0
-        <div className={styles.premium}>
-          <img src={premium} alt="" />
-        </div>
-      )}
+        
 
-        {ids && ids.includes(plan._id) && (
-          <div className={styles.purchased}>
-            <img src={tick} alt="" /> &nbsp; <p>Bought</p>
-          </div>
-        )}
+
         {/* <div className={styles.ribbon}>
             <img src={ribbon} alt="" />
         </div> */}
         <div className={styles.cardProfile}>
+        {plan.planFees > 0 && ( // Render the div only if plan.planfees is greater than 0
+          <div className={styles.premium}>
+            <img src={premium} alt="" />
+          </div>
+        )}
+          {ids && ids.includes(plan._id) && (
+            <div className={styles.purchased}>
+              <p>Subscribed</p>
+            </div>
+          )}
           <div className={`${styles.image} ${styles.gridPosition}`}>
             <img
               src={plan.decPhoto}

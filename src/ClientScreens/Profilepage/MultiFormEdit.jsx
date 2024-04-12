@@ -175,7 +175,7 @@ const MultiFormEdit = () => {
       <form onSubmit={handleSubmit}>
         <PageOne formData={formData} handleChange={handleChange} errors={errors} />
         <PageTwo formData={formData} handleChange={handleChange} />
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "2rem" }}>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "2rem", marginBottom:'5vh'}}>
           <button type="submit" className={`${styles['register-submit-btn']} ${styles['next-button']}`}>Submit</button>
           <Link to="/profile"><button type="button" className={styles['prev-button']} >Back</button></Link>
         </div>
