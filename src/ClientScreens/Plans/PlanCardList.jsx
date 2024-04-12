@@ -33,7 +33,7 @@ const PlanCardList = ({ plans, ids }) => {
       setFilteredPlans([]);
       return;
     }
-  
+
     let filtered = plans.filter((plan) => {
       if (filters.cat_risk && plan.risk !== filters.cat_risk) return false;
       if (
@@ -96,74 +96,74 @@ const PlanCardList = ({ plans, ids }) => {
               name="searchText"
               value={filters.searchText}
               onChange={handleFilterChange}
-             
+
             />
           </div>
-            <div className={styles.flex}>
-              <label>Filters:</label>
-              {/* {showFilterDropdown && ( */}
-              {/* <div className={styles.filterDropdown}> */}
-              <select name="cat_risk" value={filters.cat_risk} onChange={handleFilterChange}>
-                <option value="">Risk</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-              {/* <br /> */}
-              {/* <label></label> */}
-              <select value={sortOption} onChange={handleSortChange}>
-                <option value="">Sort by:</option>
-                <option value="rating">Rating</option>
-                <option value="total_orders">Total Orders</option>
-              </select>
-              {/* </div> */}
-              {/* )} */}
-            </div>
+          <div className={styles.flex}>
+            <label>Filters:</label>
+            {/* {showFilterDropdown && ( */}
+            {/* <div className={styles.filterDropdown}> */}
+            <select name="cat_risk" value={filters.cat_risk} onChange={handleFilterChange}>
+              <option value="">Risk</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+            {/* <br /> */}
+            {/* <label></label> */}
+            <select value={sortOption} onChange={handleSortChange}>
+              <option value="">Sort by:</option>
+              <option value="rating">Rating</option>
+              <option value="total_orders">Total Orders</option>
+            </select>
+            {/* </div> */}
+            {/* )} */}
+          </div>
 
           <div>
-          <div className={styles.flex} style={{ width: '22vw'}}>
-          Min: {filters.priceRange[0]}
-  <Range
-    _id='range'
-    step={500}
-    min={0}
-    max={100000}
-    values={filters.priceRange}
-    onChange={(values) => handlePriceRangeChange(values)}
-    renderTrack={({ props, children }) => (
-      <div
-        {...props}
-        style={{
-          ...props.style,
-          height: '6px',
-          width: '100%',
-          backgroundColor: '#ccc',
-          borderRadius: '4px',
-        }}
-      >
-        {children}
-      </div>
-    )}
-    renderThumb={({ props }) => (
-      <div
-        {...props}
-        style={{
-          ...props.style,
-          height: '16px',
-          width: '16px',
-          backgroundColor: '#007bff',
-          borderRadius: '50%',
-          boxShadow: '0px 2px 6px #AAA',
-        }}
-      />
-    )}
-  />
-  <br/>
-  <div style={{ marginTop: '10px' }}>
-    Max: {filters.priceRange[1]}
-  </div>
-  </div>
-</div>
+            <div className={styles.flex} style={{ width: '22vw' }}>
+              Min: {filters.priceRange[0]}
+              <Range
+                _id='range'
+                step={500}
+                min={0}
+                max={100000}
+                values={filters.priceRange}
+                onChange={(values) => handlePriceRangeChange(values)}
+                renderTrack={({ props, children }) => (
+                  <div
+                    {...props}
+                    style={{
+                      ...props.style,
+                      height: '6px',
+                      width: '100%',
+                      backgroundColor: '#ccc',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    {children}
+                  </div>
+                )}
+                renderThumb={({ props }) => (
+                  <div
+                    {...props}
+                    style={{
+                      ...props.style,
+                      height: '16px',
+                      width: '16px',
+                      backgroundColor: '#007bff',
+                      borderRadius: '50%',
+                      boxShadow: '0px 2px 6px #AAA',
+                    }}
+                  />
+                )}
+              />
+              <br />
+              <div style={{ marginTop: '10px' }}>
+                Max: {filters.priceRange[1]}
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
