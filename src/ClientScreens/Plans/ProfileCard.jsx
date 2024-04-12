@@ -104,7 +104,7 @@ const ProfileCard = ({ plan, ids }) => {
 
           </div>
           <div className={`${styles.reviews} ${styles.gridPosition}`}>
-            <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {(tab.total_current_value + plan.cash).toFixed(2)}</p>
+            <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {(tab.total_current_value ).toFixed(2)}</p>
           </div>
           <div className={styles.reviews}>
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
