@@ -53,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/stocks_curr');
+        const response = await axios.get('http://localhost:5000/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {

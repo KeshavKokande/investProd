@@ -164,7 +164,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           <IconName style={{ width: '1.5rem', height: '1.5rem' }} />
         </div>
       <div style={{ display: showSecondDiv ? 'block' : 'none' }}>
-      <StockChart stocks={stocks} days={90}/>
+      <StockChart stocks={stocks} days={5*365}/>
       </div>
     </div>
   );
