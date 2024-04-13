@@ -41,7 +41,7 @@ function PlansCl() {
         
 
         setRiks(rik.client.question_4)
-        setKiks(rik.client.planIds)
+        setKiks(rik.client.subscribedPlanIds)
 
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
