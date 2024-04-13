@@ -57,6 +57,7 @@ const PageTwo = ({ formData, handleChange }) => {
         {questions.map((question, index) => (
           <div key={index} className={styles['question-container']}>
             <label htmlFor={`question_${index}`}>{question.ques}:</label>
+            {riskLevel && index == 4 && <div className={styles['risk-level']}><strong>Recommended Risk Level:</strong> {riskLevel.split(" ")[0]}</div>}
             {question.type === 'mcq' && (
               <div>
                 <select
@@ -78,7 +79,6 @@ const PageTwo = ({ formData, handleChange }) => {
             )}
           </div>
         ))}
-        {riskLevel && <div className={styles['risk-level']}><strong>Recommended Risk Level:</strong> {riskLevel.split(" ")[0]}</div>}
       </div>
     </div>
   );
