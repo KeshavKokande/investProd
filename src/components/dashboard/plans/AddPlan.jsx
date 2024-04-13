@@ -16,7 +16,7 @@ const AddPlan = () => {
     stocks: [],
     cash: 0,
     photo: null,
-    planFees: 0
+    isPremium: ''
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
@@ -44,10 +44,16 @@ const AddPlan = () => {
     });
   };
 
+  const handleChangeToggle = (event) => {
+    const { name, checked } = event.target;
+    setFormData({ ...formData, [name]: checked });
+  };
+  
+
   const formatCurrency = (amount) => {
     // Convert amount to a number
     const parsedAmount = parseFloat(amount);
-  
+
     // Check if parsedAmount is a valid number
     if (!isNaN(parsedAmount)) {
       // Use toFixed to limit the decimal places to 3 and convert it back to string
@@ -59,7 +65,7 @@ const AddPlan = () => {
       return '';
     }
   };
-  
+
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -259,7 +265,7 @@ const AddPlan = () => {
   const capitalize = (str) => {
     return str.replace(/(^\w|\.\s\w)/g, (match) => match.toUpperCase());
   };
-  
+
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
       <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
@@ -310,8 +316,8 @@ const AddPlan = () => {
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="planFees">Plan Fees:</label>
-              <input className={styles.addPlan_input} type="number" id="planFees" name="planFees" value={formData.planFees} onChange={handleChange} required />
+              <label className={styles.addPlan_label} htmlFor="isPremium">Plan Fees:</label>
+              <input className={styles.addPlan_input} type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} onChange={handleChangeToggle} />
             </div>
             <div className={`${styles.formGrp} ${styles.formGrp3}`}>
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
@@ -329,7 +335,7 @@ const AddPlan = () => {
               <button type="button" onClick={handleAddStock}>&#x2713;</button>
             </div>
             <div style={{ position: 'relative', width: '100%' }}>
-              <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw'}} />
+              <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw' }} />
             </div>
             <div className={styles.addPlan_stock_cards}>
               {formData.stocks.map(stock => (

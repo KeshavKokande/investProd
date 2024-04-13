@@ -44,8 +44,7 @@ const MultiStepForm = () => {
     jobRole: '',
     agreement: false,
     photoId: null,
-    profilePhoto
-      : { data: '', contentType: '' },
+    profilePhoto: { data: '', contentType: '' },
     phone: '',
     question_0: '',
     question_1: '',
