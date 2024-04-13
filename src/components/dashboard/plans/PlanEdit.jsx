@@ -43,7 +43,7 @@ const EditPlan = () => {
           risk: data.plan.risk,
           advise: data.plan.advise,
           stocks: data.plan.stocks,
-          cash: data.plan.cash,
+          cash: 0,
           planFees: data.plan.planFees
         });
         setCc(data.plan.cash);
@@ -334,7 +334,7 @@ const EditPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
-              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value + cc} readOnly />
+              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value} readOnly />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
