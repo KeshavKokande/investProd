@@ -14,6 +14,7 @@ function PlanView() {
   const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
+  let linkurl = "/planDetail/" + plan_id; 
 
   console.log("kuch", profileData.subscribedPlanIds);
 
@@ -112,7 +113,7 @@ function PlanView() {
   const handleSubscribe = async () => {
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/client/subscribe/${plan_id}`, {
+      const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -133,7 +134,8 @@ function PlanView() {
 
       Swal.fire('Success', 'Plan Bought Successfully!', 'success');
       if (data.status === 'success') {
-        navigate('/planDetail/${plan_id}');// Update success state
+
+        navigate(linkurl);// Update success state
       }
     } catch (error) {
       console.error('Error buying plan:', error.message);
@@ -283,7 +285,7 @@ function PlanView() {
                     {capitalize(plan.advise)}
                   </p>
                 </div>
-                {plan.planFees==0 || (profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id)) && (
+                {!plan.isPremium || (plan.isSubscribed) && (
                   <div className={styles.row}>
                     <p className={styles.rowLabel}>
                       Stocks
@@ -298,7 +300,7 @@ function PlanView() {
                   </div>
                 )}
 
-                {plan.planFees==0||(profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id)) ? (
+                {!plan.isPremium||(plan.isSubscribed) ? (
                   <div style={{display: 'grid'}} className={styles.investment_panel_box}>
                     <div className={styles.investment_panel}>
                       <label htmlFor="amt">Amount to be invested</label>

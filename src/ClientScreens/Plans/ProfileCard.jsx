@@ -80,12 +80,12 @@ const ProfileCard = ({ plan, ids }) => {
             <img src={ribbon} alt="" />
         </div> */}
         <div className={styles.cardProfile}>
-        {plan.planFees > 0 && ( // Render the div only if plan.planfees is greater than 0
+        {plan.isPremium && ( // Render the div only if plan.planfees is greater than 0
           <div className={styles.premium}>
             <img src={premium} alt="" />
           </div>
         )}
-          {ids && ids.includes(plan._id) && (
+          {plan.isSubscribed && (
             <div className={styles.purchased}>
               <p>Subscribed</p>
             </div>
