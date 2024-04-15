@@ -115,7 +115,7 @@ const PlanCard = ({ plan, deletePlan }) => {
 
   return (
     <div className={styles.outerMax}>
-      <h4>{plan.planName}</h4>
+      <h4>{plan.planName} {plan.isPremium && <span style={{ fontSize: '0.5em' }}><i><b> Premium</b></i></span>}</h4>
       <div className={styles.adnewplan_plan_container}>
         <div className={styles.adnewplan_left_section}>
           <table className={styles.adnewplan_table}>
