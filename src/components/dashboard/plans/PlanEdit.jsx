@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import styles from "./AdNewPlans.module.css";
 import axios from 'axios';
 import StockList from './StockList';
+import TextArea from 'antd/es/input/TextArea';
 
 const EditPlan = () => {
   const { edit } = useParams();
@@ -17,7 +18,7 @@ const EditPlan = () => {
     advise: '',
     stocks: [],
     cash: 0,
-    planFees: 0
+    isPremium: false
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
@@ -42,8 +43,8 @@ const EditPlan = () => {
           risk: data.plan.risk,
           advise: data.plan.advise,
           stocks: data.plan.stocks,
-          cash: data.plan.cash,
-          planFees: data.plan.planFees
+          cash: 0,
+          isPremium:data.plan.isPremium
         });
         setCc(data.plan.cash);
       } catch (error) {
@@ -52,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/stocks_curr');
+        const response = await axios.get('http://localhost:5000/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {
@@ -333,12 +334,12 @@ const EditPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
-              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value + cc} readOnly />
+              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value} readOnly />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="planFees">Plan Fees:</label>
-              <input className={styles.addPlan_input} type="number" id="planFees" name="planFees" value={formData.planFees} onChange={handleChange} required />
+              <label className={styles.addPlan_label} htmlFor="isPremium">Premium</label>
+              <input className={styles.addPlan_input} type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} readOnly />
             </div>
 
             <div className={styles.formGrp}>
@@ -348,7 +349,7 @@ const EditPlan = () => {
 
             <div className={`${styles.formGrp} ${styles.formGrp3}`} >
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
+              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 

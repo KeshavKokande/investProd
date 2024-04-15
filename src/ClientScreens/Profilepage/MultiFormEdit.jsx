@@ -70,6 +70,11 @@ const MultiFormEdit = () => {
   }, []);
 
   const capitalize = (str) => {
+    if (typeof str !== 'string') {
+      // If str is not a string, return it without modification
+      return str;
+    }
+    // Capitalize the first letter of each word
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
@@ -87,7 +92,7 @@ const MultiFormEdit = () => {
     const newErrors = {};
 
     // Validate Age
-    if (formData.age.trim() === '') {
+    if (typeof formData.age !== 'string' || formData.age.trim() === '') {
       newErrors.age = 'Age is required';
     } else if (isNaN(formData.age.trim())) {
       newErrors.age = 'Age must be a number';
@@ -96,7 +101,7 @@ const MultiFormEdit = () => {
       if (ageValue <= 0 || ageValue > 120) {
         newErrors.age = 'Age must be between 1 and 120';
       }
-    }
+    }    
 
     //phone
     const phoneRegex = /^\d{10}$/; // Assumes a 10-digit phone number format

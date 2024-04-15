@@ -15,6 +15,7 @@
 
 .container {
   height: 68vh;
+  width: 90%;
   justify-items: center;
   padding: 20px;
   background-color: #fbf9f9;
@@ -23,7 +24,7 @@
   grid-template-columns: 50% 50%;
   align-items: center;
   /* justify-items: center; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .form-container {
@@ -52,7 +53,7 @@
 } */
 
 .form-container1 .question-container{
-  width: 96% !important;
+  width: 96%;
 }
 
 .container .imagecl{
@@ -238,4 +239,8 @@
 .required{
   color: red;
   font-weight: bold;
+}
+
+.risk-level{
+  font-size: 0.7rem;
 }

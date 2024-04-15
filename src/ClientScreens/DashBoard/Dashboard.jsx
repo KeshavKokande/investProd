@@ -50,7 +50,7 @@ function DashboardCl() {
             address: data.address || '',
             gender: data.gender || '',
             jobRole: data.jobRole || '',
-            planIds:data.planIds || []
+            boughtPlanIds:data.boughtPlanIds || []
           });
           console.log(data);
           console.log("data name", data.name);
@@ -75,7 +75,7 @@ function DashboardCl() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-subscribed-plans', {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-transactions', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ function DashboardCl() {
         }
         const data = await response.json();
 
-        console.log("plans ",data);
+        console.log("transactions ",data);
         setTransactions(data.transactions);
         setAdvisorNames(data.advisorNames);
       } catch (error) {
@@ -117,7 +117,8 @@ function DashboardCl() {
         }
   
         const data = await response.json();
-        const filteredPlans = data.plans.filter(plan => profileInfo.planIds.includes(plan._id));
+        const filteredPlans = data.plans.filter(plan => profileInfo.boughtPlanIds.includes(plan._id));
+        console.log("filteredPlans",filteredPlans);
         setPlansData(filteredPlans);
   
         const mappedData = filteredPlans.map(item => ({

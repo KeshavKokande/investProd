@@ -19,9 +19,9 @@ const settings = {
 };
 
 const AdvisorsCarousel = ({ advisors }) => {
-  const associateAdvisors = advisors.filter(advisor => advisor.category === "Standard");
-  const advanceAdvisors = advisors.filter(advisor => advisor.category === "Executive");
-  const expertAdvisors = advisors.filter(advisor => advisor.category === "Premium");
+  const associateAdvisors = advisors.filter(advisor => advisor.category === "standard");
+  const advanceAdvisors = advisors.filter(advisor => advisor.category === "executive");
+  const expertAdvisors = advisors.filter(advisor => advisor.category === "premium");
 
 
 

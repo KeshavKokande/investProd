@@ -80,12 +80,12 @@ const ProfileCard = ({ plan, ids }) => {
             <img src={ribbon} alt="" />
         </div> */}
         <div className={styles.cardProfile}>
-        {plan.planFees > 0 && ( // Render the div only if plan.planfees is greater than 0
+        {plan.isPremium && ( // Render the div only if plan.planfees is greater than 0
           <div className={styles.premium}>
             <img src={premium} alt="" />
           </div>
         )}
-          {ids && ids.includes(plan._id) && (
+          {plan.isSubscribed && (
             <div className={styles.purchased}>
               <p>Subscribed</p>
             </div>
@@ -106,13 +106,13 @@ const ProfileCard = ({ plan, ids }) => {
 
           </div>
           <div className={`${styles.reviews} ${styles.gridPosition}`}>
-            <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {(tab.total_current_value + plan.cash).toFixed(2)}</p>
+            <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {(tab.total_current_value ).toFixed(2)}</p>
           </div>
           <div className={styles.reviews}>
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
           </div>
           <div className={`${styles.size} ${styles.position}`}>
-            <p style={{ color: "black", fontSize: "15px" }}>👥 : {plan.noOfSubscription}</p>
+            <p style={{ color: "black", fontSize: "15px" }}>👥 : {(plan.boughtClientIds).length}</p>
           </div>
 
           <div className={`${styles.buttonsProfile} ${styles.gridPosition}`}>

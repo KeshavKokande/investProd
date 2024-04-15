@@ -14,6 +14,7 @@ function PlanView() {
   const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
+  const targetUrl = `/planDetail/${plan_id}`;
 
   console.log("kuch", profileData.subscribedPlanIds);
 
@@ -112,7 +113,7 @@ function PlanView() {
   const handleSubscribe = async () => {
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/client/subscribe/${plan_id}`, {
+      const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -130,10 +131,19 @@ function PlanView() {
       const data = await response.json();
       console.log('Buy plan response:', data);
 
-
-      Swal.fire('Success', 'Plan Bought Successfully!', 'success');
       if (data.status === 'success') {
-        navigate('/planDetail/${plan_id}');// Update success state
+        
+        Swal.fire({
+          title: 'Success',
+          text: 'Plan Bought Successfully!',
+          icon: 'success'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+
+      
       }
     } catch (error) {
       console.error('Error buying plan:', error.message);
@@ -160,7 +170,7 @@ function PlanView() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:8000/api/v1/client/buyPlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+          const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -256,7 +266,7 @@ function PlanView() {
                     Min Investment Amount
                   </p>
                   <p className={styles.rowValue}>
-                    ₹ {Number(tab.total_current_value + plan.cash).toLocaleString('en-IN')}
+                    ₹ {Number(tab.total_current_value).toLocaleString('en-IN')}
                   </p>
                 </div>
                 <div className={styles.row}>
@@ -283,7 +293,7 @@ function PlanView() {
                     {capitalize(plan.advise)}
                   </p>
                 </div>
-                {plan.planFees==0 || (profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id)) && (
+                {(!plan.isPremium || (plan.isSubscribed) )&& (
                   <div className={styles.row}>
                     <p className={styles.rowLabel}>
                       Stocks
@@ -298,7 +308,7 @@ function PlanView() {
                   </div>
                 )}
 
-                {plan.planFees==0||(profileData.subscribedPlanIds && profileData.subscribedPlanIds.some(plan => plan._id === plan_id)) ? (
+                {!plan.isPremium||(plan.isSubscribed) ? (
                   <div style={{display: 'grid'}} className={styles.investment_panel_box}>
                     <div className={styles.investment_panel}>
                       <label htmlFor="amt">Amount to be invested</label>
@@ -333,7 +343,7 @@ function PlanView() {
               </div>
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={10}/>
+              <StockChart stocks={plan.stocks} days={30}/>
             </div>
           </div>
 

@@ -19,13 +19,13 @@ const ProfilePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchProfileData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          withCredentials: true
-        });
+        try {
+          const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            withCredentials: true
+          });
  
         if (response.status === 200) {
           const data = response.data.client;
@@ -51,7 +51,7 @@ const ProfilePage = () => {
             question_4: capitalize(data.question_4) ||''
           });
           setIsLoading(false);
-          // console.log(data);
+          console.log("pp", response);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -63,9 +63,15 @@ const ProfilePage = () => {
     fetchProfileData();
   }, []);
 
-const capitalize = (str) => {
-  return str.replace(/\b\w/g, (char) => char.toUpperCase());
-};
+  const capitalize = (str) => {
+    if (typeof str !== 'string') {
+      // If str is not a string, return it without modification
+      return str;
+    }
+    // Capitalize the first letter of each word
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+  
  
   // Function to convert array to data URL
   const arrayToDataURL = (array) => {
