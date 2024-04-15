@@ -81,7 +81,7 @@ const Clientlist = () => {
                 <td>{client.name}</td>
                 <td>{client.email}</td>
                 <td>
-                  {getPlanNames(client.planIds).map((planName, index) => (
+                  {getPlanNames(client.boughtPlanIds).map((planName, index) => (
                     <div key={index}>{planName}</div>
                   ))}
                 </td>
