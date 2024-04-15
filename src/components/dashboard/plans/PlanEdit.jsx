@@ -338,8 +338,8 @@ const EditPlan = () => {
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="planFees">Plan Fees:</label>
-              <input className={styles.addPlan_input} type="number" id="planFees" name="planFees" value={formData.planFees} onChange={handleChange} required />
+              <label className={styles.addPlan_label} htmlFor="isPremium">Plan Fees:</label>
+              <input className={styles.addPlan_input} type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} readOnly />
             </div>
 
             <div className={styles.formGrp}>
