@@ -103,16 +103,40 @@ function AdvClProfile() {
       return <div>No data available for this advisor</div>;
     }
 
+    // const decodeImageData = (plan) => {
+    //   if (plan.photo && plan.photo.contentType) {
+    //     const imageDataArray = plan.photo.data.data;
+    //     const cota = plan.photo.contentType;
+    //     const blob = new Blob([new Uint8Array(imageDataArray)], { type: cota });
+    //     const urlCreator = window.URL || window.webkitURL;
+    //     const imageDataUrl = urlCreator.createObjectURL(blob);
+    //     return imageDataUrl;
+    //   } else {
+    //     console.warn('Missing photo or contentType in plan:', plan);
+    //     return null;
+    //   }
+    // };
+
     const decodeImageData = (plan) => {
-      if (plan.photo && plan.photo.contentType) {
-        const imageDataArray = plan.photo.data.data;
-        const cota = plan.photo.contentType;
-        const blob = new Blob([new Uint8Array(imageDataArray)], { type: cota });
+      if (plan.photo && plan.photo.contentType && plan.photo.data) {
+        const imageData = atob(plan.photo.data); // Decode base64-encoded data
+        const cota = plan.photo.contentType; // Use the contentType directly
+    
+        // Convert the decoded data into a Uint8Array
+        const byteArray = new Uint8Array(imageData.length);
+        for (let i = 0; i < imageData.length; i++) {
+          byteArray[i] = imageData.charCodeAt(i);
+        }
+    
+        // Create a blob from the Uint8Array
+        const blob = new Blob([byteArray], { type: cota });
+    
+        // Create the image URL
         const urlCreator = window.URL || window.webkitURL;
         const imageDataUrl = urlCreator.createObjectURL(blob);
         return imageDataUrl;
       } else {
-        console.warn('Missing photo or contentType in plan:', plan);
+        console.warn('Missing photo, contentType, or data in plan:', plan);
         return null;
       }
     };

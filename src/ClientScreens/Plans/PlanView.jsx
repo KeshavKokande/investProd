@@ -131,11 +131,17 @@ function PlanView() {
       const data = await response.json();
       console.log('Buy plan response:', data);
 
-
-      Swal.fire('Success', 'Plan Bought Successfully!', 'success');
       if (data.status === 'success') {
-
-        window.location.reload();
+        
+        Swal.fire({
+          title: 'Success',
+          text: 'Plan Bought Successfully!',
+          icon: 'success'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
 
       
       }
