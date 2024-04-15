@@ -51,7 +51,7 @@ const ProfilePage = () => {
             question_4: capitalize(data.question_4) ||''
           });
           setIsLoading(false);
-          // console.log(data);
+          console.log("pp", data);
         } else {
           throw new Error('Failed to fetch profile data');
         }

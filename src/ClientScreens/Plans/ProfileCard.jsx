@@ -112,7 +112,7 @@ const ProfileCard = ({ plan, ids }) => {
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
           </div>
           <div className={`${styles.size} ${styles.position}`}>
-            <p style={{ color: "black", fontSize: "15px" }}>👥 : {plan.noOfSubscription}</p>
+            <p style={{ color: "black", fontSize: "15px" }}>👥 : {(plan.boughtClientIds).length}</p>
           </div>
 
           <div className={`${styles.buttonsProfile} ${styles.gridPosition}`}>
