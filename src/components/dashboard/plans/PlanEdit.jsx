@@ -18,7 +18,7 @@ const EditPlan = () => {
     advise: '',
     stocks: [],
     cash: 0,
-    planFees: 0
+    isPremium: false
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
@@ -44,7 +44,7 @@ const EditPlan = () => {
           advise: data.plan.advise,
           stocks: data.plan.stocks,
           cash: 0,
-          planFees: data.plan.planFees
+          isPremium:data.plan.isPremium
         });
         setCc(data.plan.cash);
       } catch (error) {
@@ -338,7 +338,7 @@ const EditPlan = () => {
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="isPremium">Plan Fees:</label>
+              <label className={styles.addPlan_label} htmlFor="isPremium">Premium</label>
               <input className={styles.addPlan_input} type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} readOnly />
             </div>
 
