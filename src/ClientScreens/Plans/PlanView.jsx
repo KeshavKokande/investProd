@@ -14,7 +14,7 @@ function PlanView() {
   const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
-  let linkurl = "/planDetail/" + plan_id; 
+  const targetUrl = `/planDetail/${plan_id}`;
 
   console.log("kuch", profileData.subscribedPlanIds);
 
@@ -135,7 +135,9 @@ function PlanView() {
       Swal.fire('Success', 'Plan Bought Successfully!', 'success');
       if (data.status === 'success') {
 
-        navigate(linkurl);// Update success state
+        window.location.reload();
+
+      
       }
     } catch (error) {
       console.error('Error buying plan:', error.message);
@@ -162,7 +164,7 @@ function PlanView() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:8000/api/v1/client/buyPlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+          const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -285,7 +287,7 @@ function PlanView() {
                     {capitalize(plan.advise)}
                   </p>
                 </div>
-                {!plan.isPremium || (plan.isSubscribed) && (
+                {(!plan.isPremium || (plan.isSubscribed) )&& (
                   <div className={styles.row}>
                     <p className={styles.rowLabel}>
                       Stocks
@@ -335,7 +337,7 @@ function PlanView() {
               </div>
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={10}/>
+              <StockChart stocks={plan.stocks} days={30}/>
             </div>
           </div>
 
