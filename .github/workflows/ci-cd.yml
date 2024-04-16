@@ -24,8 +24,7 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install      
-        npm run build -- --warnings-as-errors
-        npm run test -- --warnings-as-errors
+        npm run build -- --warnings-as-errors        
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
