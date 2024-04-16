@@ -1,0 +1,56 @@
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+env:
+  AZURE_WEBAPP_NAME: invest-public  
+  AZURE_WEBAPP_PACKAGE_PATH: '.' 
+  NODE_VERSION: '20.7.0'
+
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'   
+    - name: Set CI environment variable
+      run: echo "CI=false" >> $GITHUB_ENV    
+    - name: npm install, build, and test
+      run: |
+        npm install      
+        npm run build -- --warnings-as-errors
+        npm run test -- --warnings-as-errors
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: invest-app
+        path: ./build
+
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: invest-app
+
+    - name: 'Deploy to Azure WebApp'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEB_APP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
