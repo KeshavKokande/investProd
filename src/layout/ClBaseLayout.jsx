@@ -66,7 +66,7 @@ const ClBaseLayout = () => {
         {/* <button>
           <img src={notification} alt="" />
         </button> */}
-        <Notifications />
+        <Notifications user={"client"} />
         <h4>{profileInfo.name}</h4>
         <img
             src={profileInfo.img}

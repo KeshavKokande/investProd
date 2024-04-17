@@ -12,7 +12,7 @@ const BaseLayout = () => {
     <main className="page-wrapper">
       {/* left of page */}
       <div className={styles.UserInfo}>
-        <Notifications />
+        <Notifications user={"advisor"}/>
       </div>
       {/* left of page */}
       <Sidebar />

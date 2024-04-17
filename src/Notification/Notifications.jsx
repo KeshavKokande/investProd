@@ -41,7 +41,7 @@ const MenuItemTimeStampStyle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const Notifications = () => {
+const Notifications = ({user}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [totalUnseenNotifications, setTotalUnseenNotifications] = useState(0);
   const [notificationList, setNotificationList] = useState([]);
@@ -50,7 +50,7 @@ const Notifications = () => {
     const fetchNotifications = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/v1/advisor/get-all-notifications",
+          `http://localhost:8000/api/v1/${user}/get-all-notifications`,
           {
             method: "GET",
             headers: {
@@ -65,6 +65,7 @@ const Notifications = () => {
         }
 
         const data = await response.json();
+        console.log("notifications:" ,data)
         setNotificationList(data.notifications);
 
         setTotalUnseenNotifications(
@@ -113,7 +114,7 @@ const Notifications = () => {
   const handleNotificationClick = async (notificationId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/advisor/view-notification/${notificationId}`,
+        `http://localhost:8000/api/v1/${user}/view-notification/${notificationId}`,
         {
           method: "GET",
           headers: {
