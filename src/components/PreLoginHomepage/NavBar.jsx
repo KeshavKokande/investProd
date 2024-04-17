@@ -1,5 +1,5 @@
 // import React from "react";
-import robot from './../../assest/images/robot.png';
+import robot from './../../assest/images/robot.jpg';
 import investlogogo from './../../assest/images/investlogogo.png';
 import { Link } from 'react-router-dom';
 import './css/style.scss'
@@ -9,7 +9,7 @@ function NavBar() {
     <div className="hero_area" >
       <div className="header_section">
         <div className="header_left">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light-nv">
             <div className="logogo"><a href="/"><img src={investlogogo} /></a></div>
             
             <NavbarHeader />

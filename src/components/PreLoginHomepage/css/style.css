@@ -27,6 +27,7 @@ body {
 .logogo {
   width: 25%;
   float: left;
+  margin-left: 21px;
 }
  .logogo img{
   width: 90px;
@@ -106,6 +107,7 @@ body {
   margin-left: 0px;
   font-size: 1.5rem !important;
     text-align: justify;
+    font-weight: 400;
 }
 .btn_main {
   width: 100%;
@@ -496,6 +498,12 @@ a:focus {
 
 .sub_page .hero_area .hero_bg_box {
   display: none;
+}
+#navlinks li a:hover{
+  color: gray;
+  text-decoration: none;
+  padding: 5px;
+  border-bottom: 3px solid gray;
 }
 
 .header_section {
@@ -1189,6 +1197,7 @@ a:focus {
 
 .info_section .info_col {
   margin-bottom: 30px;
+  height: fit-content;
 }
 
 .info_section .info_contact .contact_link_box {
