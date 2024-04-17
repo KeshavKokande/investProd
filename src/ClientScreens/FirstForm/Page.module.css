@@ -244,3 +244,21 @@
 .risk-level{
   font-size: 0.7rem;
 }
+
+.termsconditions{
+  overflow-y: scroll;
+  height: 45vh;
+  border-color: #000000;
+  border-width: 0.1rem 0.1rem 0.1rem 0.1rem;
+  /* background-color: #007bff; */
+}
+
+.preStyle{
+  white-space: pre-wrap;
+}
+
+.preStyle h3{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}

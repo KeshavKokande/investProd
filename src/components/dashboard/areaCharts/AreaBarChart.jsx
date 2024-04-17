@@ -113,7 +113,6 @@ const [datu, setDatu] = useState(null);
         console.error('Error fetching plans data:', error.message);
       }
 
-
     };
  
     fetchPlansData();
@@ -154,7 +153,7 @@ const [datu, setDatu] = useState(null);
       {datu ?(
         <ResponsiveContainer width="100%" height="100%">
 
-          <ApexChart plans_data={datu}/>
+          <ApexChart plans_data={datu} widthChart={600}/>
           {/* <BarChart
             width={500}
             height={200}

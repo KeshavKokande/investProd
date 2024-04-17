@@ -301,9 +301,6 @@ const EditPlan = () => {
     setNewSymbol(symbol);
   };
 
-  const capitalize = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());
-  };
 
   if (loading) { return (<div>Loading.....</div>); }
   return (
@@ -349,7 +346,7 @@ const EditPlan = () => {
 
             <div className={`${styles.formGrp} ${styles.formGrp3}`} >
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
+              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 

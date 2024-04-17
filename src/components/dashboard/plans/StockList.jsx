@@ -37,7 +37,7 @@ const StockList = ({ prices, handleSymbolClick, tv }) => {
         </div>
       </div>
       <ul className={styles.stock_list_ul}>
-        <li className={styles.stock_list_li}>
+        <li className={!tv ? `${styles.stock_list_li} ${styles.small_width}` : `${styles.stock_list_li} ${styles.large_width}`}>
           <p className={`${styles.inline} ${styles.bold}`}>Symbol</p>
           <p className={`${styles.inline} ${styles.bold}`}>Price</p>
           {tv && (<p className={`${styles.inline} ${styles.bold}`}>Eq. Weightage</p>)}

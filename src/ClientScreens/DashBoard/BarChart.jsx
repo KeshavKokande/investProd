@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styles from './dashboard.module.css'
 
-const ApexChart = ({ plans_data }) => {
+const ApexChart = ({ plans_data, widthChart }) => {
   const [seriesData, setSeriesData] = useState([]);
   const [options, setOptions] = useState({
     chart: {
@@ -69,8 +69,8 @@ const ApexChart = ({ plans_data }) => {
   
   return (
     <div>
-      <div id="chart" style={{display:'grid', justifyItems:'center'}}>
-        <ReactApexChart options={options} series={seriesData} type="bar" height={250} />
+      <div id="chart" style={{display:'grid', justifyItems:'center', paddingBottom:'20px'}}>
+        <ReactApexChart options={options} series={seriesData} type="bar" height={250} width={widthChart}/>
       </div>
     </div>
   );

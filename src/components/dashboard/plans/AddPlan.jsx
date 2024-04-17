@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import styles from "./AdNewPlans.module.css";
 import axios from 'axios';
 import StockList from './StockList';
+import TextArea from 'antd/es/input/TextArea';
 
 const AddPlan = () => {
   const navigate = useNavigate();
@@ -262,9 +263,6 @@ const AddPlan = () => {
     setNewSymbol(symbol);
   };
 
-  const capitalize = (str) => {
-    return str.replace(/(^\w|\.\s\w)/g, (match) => match.toUpperCase());
-  };
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
@@ -321,7 +319,7 @@ const AddPlan = () => {
             </div>
             <div className={`${styles.formGrp} ${styles.formGrp3}`}>
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <input className={styles.addPlan_input} type="text" id="advise" name="advise" value={capitalize(formData.advise)} onChange={handleChange} required />
+              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 

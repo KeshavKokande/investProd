@@ -522,7 +522,7 @@ body {
   margin-bottom: 1rem;
   display: grid;
   grid-gap: 2vh;
-
+  
 }
 
 .error{
@@ -567,13 +567,14 @@ body {
 }
 
 .stock_list_ul{
-  overflow-y: scroll;
   height: 60vh;
-  /* gap: 1vh; */
   display: grid;
   grid-template-rows: max-content max-content auto;
-  padding-right: 14px;
-  /* display: grid; */
+  padding-right: 2.5vh;
+}
+
+.stock_list_stocks{
+  overflow-y: scroll;
 }
 
 .stock_list_stocks li:hover{
@@ -594,11 +595,18 @@ body {
 } 
 
 .stock_list_li{
-  width: 20vw;
   display: grid;
   grid-template-columns: 8vw 5vw auto;
   align-items: center;
   height: 5vh;
+}
+
+.large_width{
+width: 20vw;
+}
+
+.small_width{
+  width: 16vw;
 }
 
 .stock_list_li:hover{
@@ -655,4 +663,12 @@ body {
 .addPlan_card_button button {
   font-size: 1.5rem;
   padding: 0.2rem;
+}
+
+.isPremium_heading{
+  font-size: 0.5rem;
+}
+
+.show_plans_list{
+  margin-bottom: 5vh;
 }
