@@ -73,18 +73,18 @@ const ProfileCard = ({ plan, ids }) => {
   return (
     <>
       <div className={styles.containerProfile}>
-        
+
 
 
         {/* <div className={styles.ribbon}>
             <img src={ribbon} alt="" />
         </div> */}
         <div className={styles.cardProfile}>
-        {plan.isPremium && ( // Render the div only if plan.planfees is greater than 0
-          <div className={styles.premium}>
-            <img src={premium} alt="" />
-          </div>
-        )}
+          {plan.isPremium && ( // Render the div only if plan.planfees is greater than 0
+            <div className={styles.premium}>
+              <img src={premium} alt="" />
+            </div>
+          )}
           {plan.isSubscribed && (
             <div className={styles.purchased}>
               <p>Subscribed</p>
@@ -106,7 +106,9 @@ const ProfileCard = ({ plan, ids }) => {
 
           </div>
           <div className={`${styles.reviews} ${styles.gridPosition}`}>
-            <p><strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> {(tab.total_current_value ).toFixed(2)}</p>
+            <p>
+              <strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> ₹ {Number(tab.total_current_value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+            </p>
           </div>
           <div className={styles.reviews}>
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>

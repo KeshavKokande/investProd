@@ -113,7 +113,6 @@ const [datu, setDatu] = useState(null);
         console.error('Error fetching plans data:', error.message);
       }
 
-
     };
  
     fetchPlansData();

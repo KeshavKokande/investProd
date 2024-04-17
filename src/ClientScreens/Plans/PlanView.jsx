@@ -95,7 +95,7 @@ function PlanView() {
 
         const data = await response.json();
         setPlansData(data.plans);
-        console.log(data);
+        console.log("GET ALL PLANS", data);
 
 
       } catch (error) {
@@ -213,10 +213,6 @@ function PlanView() {
     }
   };
 
-  const capitalize = (str) => {
-    return str.replace(/(^\w|\.\s\w)/g, (match) => match.toUpperCase());
-  };
-
 
   return (
     <div>
@@ -263,10 +259,10 @@ function PlanView() {
                 </div> */}
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
-                    Min Investment Amount
+                    Min. Investment Amount
                   </p>
                   <p className={styles.rowValue}>
-                    ₹ {Number(tab.total_current_value).toLocaleString('en-IN')}
+                  ₹ {Number(tab.total_current_value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                   </p>
                 </div>
                 <div className={styles.row}>
@@ -290,7 +286,7 @@ function PlanView() {
                     Advise
                   </p>
                   <p className={styles.rowValue}>
-                    {capitalize(plan.advise)}
+                    {plan.advise}
                   </p>
                 </div>
                 {(!plan.isPremium || (plan.isSubscribed) )&& (

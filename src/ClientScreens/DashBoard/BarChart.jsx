@@ -69,7 +69,7 @@ const ApexChart = ({ plans_data }) => {
   
   return (
     <div>
-      <div id="chart" style={{display:'grid', justifyItems:'center'}}>
+      <div id="chart" style={{display:'grid', justifyItems:'center', paddingBottom:'20px'}}>
         <ReactApexChart options={options} series={seriesData} type="bar" height={250} />
       </div>
     </div>

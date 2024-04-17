@@ -66,7 +66,7 @@ const AreaTable = () => {
   };
 
   return (
-    <section className="content-area-table">
+    <div className="content-area-table">
       <div className="data-table-info">
         <h4 className="data-table-title">Latest Orders</h4>
       </div>
@@ -82,7 +82,7 @@ const AreaTable = () => {
           }}
         />
       </div>
-    </section>
+    </div>
   );
 };
 
