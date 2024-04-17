@@ -45,7 +45,7 @@ const ClSidebar = () => {
   };
   const logoutUser = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/check-auth/logout", {
+      const response = await fetch("https://team4api.azurewebsites.net/api/v1/check-auth/logout", {
         method: "GET", 
         headers: {
           "Content-Type": "application/json",

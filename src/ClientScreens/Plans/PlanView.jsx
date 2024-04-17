@@ -16,7 +16,7 @@ function PlanView() {
     const fetchPlansData = async () => {
       console.log("Started fetching plans data");
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ function PlanView() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:8000/api/v1/client/buyPlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+          const response = await fetch(`https://team4api.azurewebsites.net/api/v1/client/buyPlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -179,7 +179,7 @@ export default PlanView;
 //     const fetchPlansData = async () => {
 //       console.log("Started fetching plans data");
 //       try {
-//         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+//         const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
 //           method: 'GET',
 //           headers: {
 //             'Content-Type': 'application/json'
@@ -208,7 +208,7 @@ export default PlanView;
 
 //   const handleBuyPlan = async () => {
 //     try {
-//       const response = await fetch(`http://localhost:8000/api/v1/client/buyPlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+//       const response = await fetch(`https://team4api.azurewebsites.net/api/v1/client/buyPlan/advisor/${plan.advisorId}/plan/${plan_id}`, {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json'

@@ -58,7 +58,7 @@ const AddPlan = () => {
       if (result.isConfirmed) {
         // User confirmed, proceed with form submission
         console.log('Form data:', formData);
-        fetch('http://localhost:8000/api/v1/advisor/add-plans', {
+        fetch('https://team4api.azurewebsites.net/api/v1/advisor/add-plans', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
