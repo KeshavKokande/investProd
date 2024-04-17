@@ -27,7 +27,7 @@ function DashboardCl() {
       const fetchTransactions = async () => {
         try {
    
-          const response = await fetch('http://localhost:8000/api/v1/Client/get-subscribed-plans', {
+          const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-subscribed-plans', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ function DashboardCl() {
             credentials: 'include'
           })
           
-          const ponse = await fetch('http://localhost:8000/api/v1/Client/get-returns-of-subscribed-plans', {
+          const ponse = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-returns-of-subscribed-plans', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

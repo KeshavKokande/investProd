@@ -82,7 +82,7 @@ const MultiStepForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/client/register-client`, {
+      const response = await fetch(`https://team4api.azurewebsites.net/api/v1/client/register-client`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

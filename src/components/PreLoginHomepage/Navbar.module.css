@@ -49,6 +49,9 @@
     .hamburger {
       display: block;
       cursor: pointer;
+      position: absolute;
+      right: 2%;
+      top: 0;
     }
   
     .bar {
@@ -76,11 +79,11 @@
     /* navMenu */
   
     .navMenu{
-      position: absolute;
-      flex-direction: column;
+      position: fixed;
+      /* flex-direction: column; */
       gap: 0;
-      top: 70px;
-      left: -100%;
+      top: -100%;
+      left: 0;
       text-align: start;
       width: 100%;
       transition: 0.7s ease-in-out;
@@ -89,7 +92,8 @@
     }
   
     .navMenu.active{
-      left: 0;
+      /* left: 0; */
+      top: 0;
     }
   
     .navMenu li {
