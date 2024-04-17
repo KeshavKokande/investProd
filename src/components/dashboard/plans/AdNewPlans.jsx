@@ -35,7 +35,7 @@ const AdNewPlans = () => {
   };
   
   return (
-    <div>
+    <div className={styles.show_plans_list}>
       <div className={styles["adnewplans_header"]}>
         <h1 className={styles["adnewplans_heading"]}>YOUR PLANS</h1>
         <button className={styles["adnewplans_add_button"]} onClick={handleAddPlanClick}>Add New Plan</button>

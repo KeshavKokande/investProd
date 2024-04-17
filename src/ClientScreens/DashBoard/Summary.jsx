@@ -109,7 +109,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg})
 
                 <p id={styles.piechart} style={{ fontSize: " x-large", boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)', }}><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
                 {/* <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p> */}
-                <p id={styles.piechart} style={{ fontSize: " x-large", boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)', }}><center><strong>Returns</strong></center><br /><ApexChart plans_data={etta} width={500} /> </p>
+                <p id={styles.piechart} style={{ fontSize: " x-large", boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)', }}><center><strong>Returns</strong></center><br /><ApexChart plans_data={etta} widthChart={500} /> </p>
             </div>
 
 

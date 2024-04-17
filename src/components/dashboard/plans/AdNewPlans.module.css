@@ -522,7 +522,7 @@ body {
   margin-bottom: 1rem;
   display: grid;
   grid-gap: 2vh;
-
+  
 }
 
 .error{
@@ -667,4 +667,8 @@ width: 20vw;
 
 .isPremium_heading{
   font-size: 0.5rem;
+}
+
+.show_plans_list{
+  margin-bottom: 5vh;
 }

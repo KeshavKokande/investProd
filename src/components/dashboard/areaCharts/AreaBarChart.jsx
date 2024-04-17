@@ -153,7 +153,7 @@ const [datu, setDatu] = useState(null);
       {datu ?(
         <ResponsiveContainer width="100%" height="100%">
 
-          <ApexChart plans_data={datu} width={600}/>
+          <ApexChart plans_data={datu} widthChart={600}/>
           {/* <BarChart
             width={500}
             height={200}
