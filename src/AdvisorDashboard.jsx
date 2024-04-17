@@ -20,7 +20,8 @@ import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
-// import ProtectedRoute from "./ProtectedRoute";
+
+import Payment from "./Payment/Payment";
 
 import News from "./News/News";
 import Stoks from './Stocks/Stoks'
@@ -63,6 +64,8 @@ function App() {
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/client_registration_form" element={<MultiStepForm />} />
           <Route path="/stocks" element={<Stoks />} />
+          
+          <Route path="/payment" element={<Payment />} />
 
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
