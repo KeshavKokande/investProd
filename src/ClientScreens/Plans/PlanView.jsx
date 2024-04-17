@@ -343,7 +343,7 @@ function PlanView() {
               </div>
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={30}/>
+              <StockChart stocks={plan.stocks} days={365}/>
             </div>
           </div>
 

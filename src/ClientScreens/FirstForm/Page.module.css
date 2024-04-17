@@ -248,6 +248,9 @@
 .termsconditions{
   overflow-y: scroll;
   height: 45vh;
+  border-color: #000000;
+  border-width: 0.1rem 0.1rem 0.1rem 0.1rem;
+  /* background-color: #007bff; */
 }
 
 .preStyle{
