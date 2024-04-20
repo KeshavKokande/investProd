@@ -67,7 +67,7 @@ const AdvisorsCarousel = ({ advisors }) => {
       <div>
 
 
-        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }} className={styles.heading}>Exeutive Advisors</h2>
+        <h2 style={{ marginBottom: "-4rem", marginTop:"4vh" }} className={styles.heading}>Executive Advisors</h2>
         <div className='w-4/4 m-auto '>
           <div className="mt-20 ">
             <Slider {...settings}>

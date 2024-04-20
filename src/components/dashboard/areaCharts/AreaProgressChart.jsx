@@ -31,7 +31,7 @@ const AreaProgressChart = () => {
       
   return (
 
-     <div className="adv-progress-bar" style={{backgroundColor:"#ffffff", boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)'}}>
+     <div className="adv-progress-bar" style={{backgroundColor:"#ffffff", borderRadius:'0.7rem',}}>
        <div className="progress-bar-info">
          <h4 className="adv-progress-bar-title">Most Sold Plans</h4>
        </div>

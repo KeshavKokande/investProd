@@ -28,7 +28,7 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
   }));
  
   return (
-    <section className={styles.contentAreaTable} style={{boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)'}}>
+    <section className={styles.contentAreaTable} style={{borderRadius:'0.7rem'}}>
       <div className={styles.dataTableInfo}>
         {/* <h4 className={styles.dataTableTitle}>Latest Orders</h4> */}
       </div>
