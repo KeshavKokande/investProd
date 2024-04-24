@@ -4,7 +4,7 @@ import "./Modal.css";
 import PricingCard from "../PricingCard/PricingCard";
 import './../PricingApp/PricingApp.css'
 import './../PricingCard/PricingCard.css'
-const Modal = ({ isOpen, closeModal }) => {
+const Modal = ({ isOpen, closeModal, planid, advisor }) => {
   if (!isOpen) return null;
 
   return (
@@ -24,14 +24,21 @@ const Modal = ({ isOpen, closeModal }) => {
             feature1="Access to free plans"
             feature2="X"
             feature3="X"
+            planid = {planid}
+            advisor ={advisor}
+            days={0}
           />
           <PricingCard
+          
             title="3 Month"
             recomendation="MOST BOUGHT"
             price="₹ 3000"
             feature1="90 days support"
             feature2="Access to free plans and paid plans"
             feature3="X"
+            planid = {planid}
+            advisor ={advisor}
+            days = {84}
           />
           <PricingCard
             title="6 Month"
@@ -39,6 +46,9 @@ const Modal = ({ isOpen, closeModal }) => {
             feature1="180 days support"
             feature2="Access to free plans and paid plans"
             feature3="Personalized recommendations"
+            planid = {planid}
+            advisor ={advisor}
+            days = {168}
           />
         </div>
       </div>

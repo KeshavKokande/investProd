@@ -611,10 +611,14 @@ function PlanView() {
           </div>
 
         </div>
+
+        
       )}
-      <Modal isOpen={modalIsOpen} closeModal={closeModal}>
+      {isLoading ? (
+        <p></p>
+      ) : (<Modal isOpen={modalIsOpen} closeModal={closeModal} planid={plan_id} advisor={plan.advisorId}>
          
-        </Modal>
+        </Modal>)}
     </div>
   );
 }

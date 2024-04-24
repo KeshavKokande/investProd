@@ -3,11 +3,14 @@ import style from './Payment.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import chip from './chip.png';
 import cardtype from './cardtype.png';
+import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Payment = () => {
 
 
-    
+    const navigate = useNavigate();
+    const { advisor_id, plan_id, days } = useParams();
     const [position, setPosition] = useState('0px');
     const [number, setNumber] = useState('');
     const [name, setName] = useState('');
@@ -102,6 +105,50 @@ const Payment = () => {
         setCvc(event.target.value)
     }
 
+
+
+    const handleSubscribe = async () => {
+
+            try {
+              const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    planDays:days
+                })
+              });
+        
+              if (!response.ok) {
+                throw new Error('Failed To Buy Plan');
+              }
+        
+              const data = await response.json();
+              console.log('Buy plan response:', data);
+        
+              if (data.status === 'success') {
+                
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Plan Bought Successfully!',
+                  icon: 'success'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    navigate(`/planDetail/${plan_id}`)
+                  }
+                });
+        
+              
+              }
+            } catch (error) {
+              console.error('Error buying plan:', error.message);
+              Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
+            }
+          };
+        
+
     return (
         <div className={style.fullCover} style={{ paddingTop: '40px', backgroundColor: '#000', height: '100vh' }}>
 
@@ -152,7 +199,7 @@ const Payment = () => {
                     <div><input value={year} onChange={yearHandler} maxLength={2} minLength={2} className='form-control' placeholder="YEAR" /></div>
                     <div><input maxLength={3} value={cvc} className='form-control' onChange={cvcValue} placeholder="CVC" onFocus={cvcHandler} onBlur={cvcRemove} /></div>
                 </div>
-                <div><button className='btn btn-dark' >Submit</button></div>
+                <div><button className='btn btn-dark' onClick={handleSubscribe}>Submit</button></div>
             </div>
         </div>
     )

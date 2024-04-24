@@ -64,8 +64,6 @@ function App() {
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/client_registration_form" element={<MultiStepForm />} />
           <Route path="/stocks" element={<Stoks />} />
-          
-          <Route path="/payment" element={<Payment />} />
 
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
@@ -88,6 +86,7 @@ function App() {
             <Route path="/profile/Edit" element={<MultiFormEdit />} />
             <Route path="/news" element={<News />} />
             <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
+            <Route path="/payment/:advisor_id/:plan_id/:days" element={<Payment />} />
 
           </Route>
         </Routes>

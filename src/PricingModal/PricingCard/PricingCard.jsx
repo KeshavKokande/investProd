@@ -4,12 +4,12 @@ import Modal from "../Modal/Modal";
 import "./PricingCard.css";
 import { useNavigate } from 'react-router-dom';
 
-const PricingCard = ({ title, price, feature1, feature2, feature3,recomendation }) => {
+const PricingCard = ({ title, price, feature1, feature2, feature3,recomendation,planid,advisor,days }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleBuyNow = () => {
-    navigate('/payment'); // Navigate to the payment page
+    navigate(`/payment/${advisor}/${planid}/${days}`); // Navigate to the payment page
   };
   const openModal = () => {
     setModalIsOpen(true);
