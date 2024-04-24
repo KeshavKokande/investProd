@@ -16,7 +16,7 @@
   // box-shadow: var(--light-shadow1);
   position: relative;
   width: 100.5%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 0.7rem;
 
   @media (max-width: 768px) {
     padding: 12px;

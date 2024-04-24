@@ -29,7 +29,7 @@
 @mixin lightMode {
   --primary-color: #475be8;
   --secondary-color: #fff;
-  --background-color: #fafafa;
+  --background-color: #f6f4f4;
   --side-link-hover-color: #f6f6f6;
   --side-text-color: #808191;
   --logo-color: var(--primary-color);
@@ -51,7 +51,7 @@
 @mixin darkMode {
   --primary-color: #475be8;
   --secondary-color: #2e2e48;
-  --background-color: #383854;
+  --background-color: #f6f4f4;
   --side-link-hover-color: #525270;
   --side-text-color: #e1e1e1;
   --logo-color: #fff;
