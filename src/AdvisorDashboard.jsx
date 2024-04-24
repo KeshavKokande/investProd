@@ -20,7 +20,8 @@ import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
-// import ProtectedRoute from "./ProtectedRoute";
+
+import Payment from "./Payment/Payment";
 
 import News from "./News/News";
 import Stoks from './Stocks/Stoks'
@@ -85,6 +86,7 @@ function App() {
             <Route path="/profile/Edit" element={<MultiFormEdit />} />
             <Route path="/news" element={<News />} />
             <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
+            <Route path="/payment/:advisor_id/:plan_id/:days" element={<Payment />} />
 
           </Route>
         </Routes>
