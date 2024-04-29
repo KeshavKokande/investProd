@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styles from './../../../ClientScreens/Plans/Plans.module.css';
 
-const StockChart = ({ stocks, days }) => {
+const StockChart = ({ stocks, days,setc }) => {
     const [series, setSeries] = useState([]);
     const [options] = useState({
         chart: {
@@ -13,6 +13,11 @@ const StockChart = ({ stocks, days }) => {
             type: 'datetime'
         }
     });
+
+    const calculateCAGR = (oldestValue, latestValue, years) => {
+        const cagr = Math.pow((latestValue / oldestValue), 1 / years) - 1;
+        return (cagr * 100).toFixed(2); // Convert to percentage with 2 decimal places
+      };
 
     const mapStockData = (data) => {
         const stockData = {};
@@ -33,6 +38,12 @@ const StockChart = ({ stocks, days }) => {
             const response = await fetch('http://localhost:5000/calculate_total_value', requestOptions);
             const data = await response.json();
             processChartData(data);
+            const oldestData = data[0];
+            const latestData = data[data.length - 1];
+            const oldestValue = oldestData.total_value;
+            const latestValue = latestData.total_value;
+            const years = 1; // Fixed to one year
+            if (setc) {setc(calculateCAGR(oldestValue, latestValue, years));}
         } catch (error) {
             console.error('Error fetching stock data:', error);
         }

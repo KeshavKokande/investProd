@@ -375,6 +375,7 @@ function PlanView() {
   const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [investedAmount, setInvestedAmount] = useState(0);
+  const [cagr, setCagr] = useState(0);
   const targetUrl = `/planDetail/${plan_id}`;
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -543,6 +544,14 @@ function PlanView() {
                 </div>
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
+                    One Year CAGR
+                  </p>
+                  <p className={styles.rowValue}>
+                    {cagr}%
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
                     Risk
                   </p>
                   <p className={styles.rowValue}>
@@ -606,7 +615,7 @@ function PlanView() {
               </div>
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={365}/>
+              <StockChart stocks={plan.stocks} days={365} setc={setCagr}/>
             </div>
           </div>
 
