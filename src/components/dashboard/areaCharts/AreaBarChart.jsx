@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   BarChart,
   Bar,
@@ -13,7 +13,7 @@ import { FaArrowUpLong } from "react-icons/fa6";
 import { LIGHT_THEME } from "../../../constants/themeConstants";
 import "./AreaCharts.scss";
 import axios from 'axios';
-import ApexChart from '../../../ClientScreens/DashBoard/BarChart';
+import DualAxis from '../../Dualaxis/DualAxis'
 
 
 
@@ -22,7 +22,6 @@ import ApexChart from '../../../ClientScreens/DashBoard/BarChart';
 
 
 
- 
 // const data = [
 //   {
 //     month: planName,
@@ -75,9 +74,9 @@ const AreaBarChart = () => {
 
 
   const [plansData, setPlansData] = useState(null);
-const [datu, setDatu] = useState(null);
+  const [datu, setDatu] = useState(null);
 
- 
+
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
@@ -98,23 +97,23 @@ const [datu, setDatu] = useState(null);
           startVal: item.minInvestmentAmount,
           cash: item.cash
         }));
-  
+
         const axiosResponse = await axios.post('https://invest-nse.azurewebsites.net/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
-  
+
         const mapData = calculatedData.plans_data.map((plan) => ({
           Name: plan.planName,
           gains: plan.total_current_gains,
         }));
         setDatu(calculatedData.plans_data);
-      
-  
+
+
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
       }
 
     };
- 
+
     fetchPlansData();
     window.scrollTo(0, 0);
   }, []);
@@ -150,11 +149,13 @@ const [datu, setDatu] = useState(null);
         </div>
       </div>
       <div className="bar-chart-wrapper">
-      {datu ?(
-        <ResponsiveContainer width="100%" height="100%">
+        {datu ? (
+          <ResponsiveContainer width="100%" height="100%">
 
-          <ApexChart plans_data={datu} widthChart={600}/>
-          {/* <BarChart
+            <DualAxis plans_data={datu} />
+
+            {/* <ApexChart plans_data={datu} widthChart={600}/> */}
+            {/* <BarChart
             width={500}
             height={200}
             data={datu}
@@ -213,9 +214,9 @@ const [datu, setDatu] = useState(null);
               barSize={24}
               radius={[4, 4, 4, 4]}
             /> */}
-          
-        </ResponsiveContainer>
-        ):(<div></div>)}
+
+          </ResponsiveContainer>
+        ) : (<div></div>)}
       </div>
     </div>
   );
