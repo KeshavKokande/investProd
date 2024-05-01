@@ -5,10 +5,12 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import styles from './registerpage.module.css';
 import RegistrationImage from './../../assets/images/RegFinancialAdvisor.jpg';
 import { isElementOfType } from 'react-dom/test-utils';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = () => {
   const [userData, setUserData] = useState(null);
 
+  const [verified, setVerified] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -96,6 +98,11 @@ const Register = () => {
       });
   };
 
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerified = true;
+  }
+
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
@@ -160,8 +167,14 @@ const Register = () => {
         {errors.general && <span className={styles['error-message']}>{errors.general}</span>}
         {registrationError && <span className={styles['error-message']}>{registrationError}</span>}
 
+        <ReCAPTCHA
+          // sitekey="6LccOscpAAAAAO5FQ0QrItjP-6i0kmbMD6ha2MKW"
+          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          onChange={onChange}
+        />
+
         <div style={{width:"100%"}}>
-          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>Register</button>
+          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit} disabled={!verified}>Register</button>
         </div>
 
         <hr />

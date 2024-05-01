@@ -30,7 +30,7 @@ const StockChart = ({ stocks, days }) => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/calculate_total_value', requestOptions);
+            const response = await fetch('https://invest-nse.azurewebsites.net/calculate_total_value', requestOptions);
             const data = await response.json();
             processChartData(data);
         } catch (error) {

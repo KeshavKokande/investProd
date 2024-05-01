@@ -53,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/get_symbol_lastprice');
+        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {
@@ -80,7 +80,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('http://127.0.0.1:5000/calculate', {
+        const response = await fetch('https://invest-nse.azurewebsites.net/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

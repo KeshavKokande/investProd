@@ -36,7 +36,7 @@ const AreaCards = () => {
             cash: item.cash
           }));
     
-          const axiosResponse = await axios.post('http://localhost:5000/calculate_sts', { plans_data: mappedData });
+          const axiosResponse = await axios.post('https://invest-nse.azurewebsites.net/calculate_sts', { plans_data: mappedData });
           const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
     
           const mapData = calculatedData.plans_data.map((plan) => ({

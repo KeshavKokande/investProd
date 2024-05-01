@@ -7,7 +7,7 @@ import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
-import ApexChart from './BarChart';
+import ApexChart from './CliBarChart';
 
 function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg}) {
 
