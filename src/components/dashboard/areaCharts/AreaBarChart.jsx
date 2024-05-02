@@ -80,7 +80,7 @@ const AreaBarChart = () => {
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/advisor/list-of-plans", {
+        const response = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -251,7 +251,7 @@ export default AreaBarChart;
 //     const fetchTotalInvestedAmount = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://localhost:8000/api/v1/advisor/get-total-invested-amount",
+//           "https://team4api.azurewebsites.net/api/v1/advisor/get-total-invested-amount",
 //           {
 //             method: "GET",
 //             headers: {
@@ -278,7 +278,7 @@ export default AreaBarChart;
 //     const fetchTotalCurrentProfit = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://localhost:8000/api/v1/advisor/get-total-current-profit",
+//           "https://team4api.azurewebsites.net/api/v1/advisor/get-total-current-profit",
 //           {
 //             method: "GET",
 //             headers: {

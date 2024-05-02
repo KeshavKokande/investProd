@@ -208,7 +208,7 @@ const AddPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           console.log('Form data:', formData);
-          axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, { withCredentials: true })
+          axios.post('https://team4api.azurewebsites.net/api/v1/advisor/add-plans', formData, { withCredentials: true })
             .then(response => {
               console.log('Response:', response.data);
               navigate("/advisor/planList");
