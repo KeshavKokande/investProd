@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PersonaDetails from "./../../assets/images/personal_details.svg";
 import styles from "./Page.module.css";
 
-const PageOne = ({ formData, handleChange }) => {
+const PageOne = ({ formData, handleChange, errors }) => {
   const [photo, setPhoto] = useState(null);
 
   const handlePhotoUpload = (event) => {
@@ -37,6 +37,7 @@ const PageOne = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={styles['form-control']}
           />
+           {errors.age && <div className={styles.error}>{errors.age}</div>}
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="gender">Gender:</label>
@@ -51,6 +52,7 @@ const PageOne = ({ formData, handleChange }) => {
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
+          {errors.gender && <div className={styles.error}>{errors.gender}</div>}
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="qualification">Qualification:</label>
@@ -62,6 +64,7 @@ const PageOne = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
+           {errors.qualification && <div className={styles.error}>{errors.qualification}</div>}
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="email">Email:</label>
@@ -75,14 +78,16 @@ const PageOne = ({ formData, handleChange }) => {
           />
         </div>
         <div className={styles['question-container']}>
-          <label htmlFor="address">Address:</label>
-          <textarea
+          <label htmlFor="address">Location:</label>
+          <input
+            type='text'
             id="address"
             name="address"
             value={formData.address}
             onChange={handleChange}
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
-          ></textarea>
+          />
+           {errors.address && <div className={styles.error}>{errors.address}</div>}
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="jobRole">Job Role:</label>
@@ -94,31 +99,25 @@ const PageOne = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
+           {errors.jobRole && <div className={styles.error}>{errors.jobRole}</div>}
         </div>
-        <div className={`${styles['form-group']} ${styles['question-container']}`}>
-          <label htmlFor="photoId">Upload Photo ID:</label>
+        <div className={styles['question-container']}>
+          <label htmlFor="phone">Phone:</label>
           <input
-            type="file"
-            id="photoId"
-            name="photoId"
-            accept="image/*"
-            onChange={handlePhotoUpload}
-            className={styles['form-control-file']}
+            type='text'
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className={`${styles['form-control']} ${styles['form-control-capitalize']}`}
           />
+           {errors.phone && <div className={styles.error}>{errors.phone}</div>}
         </div>
-        {photo && (
-          <div className={styles['preview-container']}>
-            <p>Preview:</p>
-            <img
-              src={URL.createObjectURL(photo)}
-              alt="Uploaded Photo ID"
-              className={styles['preview-image']}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
 export default PageOne;
+
+

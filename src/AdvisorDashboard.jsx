@@ -1,7 +1,6 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MoonIcon from "./assets/icons/moon.svg";
-import SunIcon from "./assets/icons/sun.svg";
+import { useState, useEffect } from "react";
 import BaseLayout from "./layout/BaseLayout";
 import ClBaseLayout from "./layout/ClBaseLayout";
 import { Dashboard } from "./screens";
@@ -20,50 +19,75 @@ import AdvClProfile from "./ClientScreens/AdvisersClientView/AdvClProfile";
 import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
+import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
 
+import Payment from "./Payment/Payment";
 
+import News from "./News/News";
+import Stoks from './Stocks/Stoks'
 
-
-
-import{
+import {
   HomepageAbout,
   Service,
   HomepageInfo,
   HomePage
 } from './components';
+import EditPlan from "./components/dashboard/plans/PlanEdit";
 
 function App() {
- 
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Check if the cookie is set
+    const cookieExists = document.cookie.includes('jwt');
+
+    if (cookieExists) {
+      setIsAuthenticated(true); // Update isAuthenticated state to true
+    } else {
+      // Cookie is not set
+      if (!['/login', '/', '/register', '/clform'].includes(window.location.pathname)) {
+        window.location.href = '/login';
+      }
+    }
+  }, []);
 
   return (
     <>
       <Router>
         <Routes>
-          <Route path ="/" element= {<HomePage />}/>
-          <Route path ="/login" element= {<Loginpage />}/>
-          <Route path ="/register" element= {<Registerpage/>}/>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Loginpage />} />
+          <Route path="/register" element={<Registerpage />} />
           <Route path="/about" element={<HomepageAbout />} />
           <Route path="/services" element={<Service />} />
           <Route path="/contact" element={<HomepageInfo />} />
-          <Route path="/clform" element={<MultiStepForm />} />
-          
+          <Route path="/client_registration_form" element={<MultiStepForm />} />
+          <Route path="/stocks" element={<Stoks />} />
+
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />
-            <Route path="/clientlist" element={<Clientlist/>} />
-            <Route path="/plan" element={<AdNewPlans/>} />
-            <Route path="/details" element={<UserDetails/>}/>
-            <Route path="/addplan" element={<AddPlan />} />
+            <Route path="/advisor/clientList" element={<Clientlist />} />
+            <Route path="/advisor/planList" element={<AdNewPlans />} />
+            <Route path="/advisor/clientDetails" element={<UserDetails />} />
+            <Route path="/advisor/addNewPlan" element={<AddPlan />} />
+            <Route path="/advisor/editPlan/:edit" element={<EditPlan />} />
+
           </Route>
 
           <Route element={<ClBaseLayout />}>
-            <Route path="/cldash" element={<DashboardClient />} />
-            <Route path="/advisor_id/:advisor_id" element={<AdvClProfile />} />
-            <Route path="/plan_id/:plan_id" element={<PlanView />} />
+            <Route path="/client_dashboard" element={<DashboardClient />} />
+            <Route path="/advisor/:advisor_id" element={<AdvClProfile />} />
+            <Route path="/planDetail/:plan_id" element={<PlanView />} />
+            <Route path="/plansList" element={<PlansCl />} />
+            <Route path="/viewAdvisor" element={<AdvClView />} />
+            <Route path="/plan" element={<Plans />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/planscl" element={<PlansCl/>} />
-            <Route path="/viewadvi" element={<AdvClView/>} /> 
-            <Route path="/plan" element={<Plans/>} />
-            <Route path="/profedit" element={<MultiFormEdit/>}/>
+            <Route path="/profile/Edit" element={<MultiFormEdit />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
+            <Route path="/payment/:advisor_id/:plan_id/:days" element={<Payment />} />
+
           </Route>
         </Routes>
       </Router>

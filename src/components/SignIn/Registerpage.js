@@ -14,6 +14,7 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    otp: '',
   });
 
   const [errors, setErrors] = useState({
@@ -22,7 +23,7 @@ const Register = () => {
     confirmPassword: '',
     general: '',
   });
-
+  const [getotp, setGetotp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
@@ -61,10 +62,21 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
-      window.location.href = 'https://team4api.azurewebsites.net/api/v1/check-auth/signin-google'; 
-    };
+    window.location.href = 'https://team4api.azurewebsites.net/api/v1/check-auth/signin-google';
+  };
+  function handlegetotp() {
+    fetch('https://team4api.azurewebsites.net/api/v1/otp/send-otp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: formData.email })
+    });
+    setGetotp(true);
 
+  }
   const handleSubmit = () => {
+    console.log(formData);
     fetch('https://team4api.azurewebsites.net/api/v1/check-auth/signup', {
       method: 'POST',
       headers: {
@@ -84,7 +96,7 @@ const Register = () => {
         // Storing name and email in session storage
         sessionStorage.setItem('name', formData.name);
         sessionStorage.setItem('email', formData.email);
-        navigate('/clform');
+        navigate('/client_registration_form');
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -159,9 +171,13 @@ const Register = () => {
 
         {errors.general && <span className={styles['error-message']}>{errors.general}</span>}
         {registrationError && <span className={styles['error-message']}>{registrationError}</span>}
+        {getotp ? <div className={styles['input-wrapper']}>
+          <label>Otp</label>
+          <input type="number" name="otp" value={formData.otp} onChange={handleChange} />
 
-        <div style={{width:"100%"}}>
-          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>Register</button>
+        </div> : null}
+        <div style={{ width: "100%" }}>
+          <button id="landing_signup" className={styles['register-btn']} onClick={!getotp ? handlegetotp : handleSubmit}>{getotp ? 'Register' : 'Get OTP'}</button>
         </div>
 
         <hr />
@@ -171,9 +187,9 @@ const Register = () => {
           <span className={styles['google-icon']}><FcGoogle /></span>
         </div> */}
         <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
-            <h2>Continue with</h2>
-            <span className={styles['google-icon']}><FcGoogle /></span>
-          </div>
+          <h2>Continue with</h2>
+          <span className={styles['google-icon']}><FcGoogle /></span>
+        </div>
       </div>
     </div>
   );

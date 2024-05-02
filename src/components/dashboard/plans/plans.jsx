@@ -15,6 +15,7 @@ const Plans = () => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
         const response = await fetch('./planlist.json'); // Assuming the JSON file is named purchase.json and placed in the public folder

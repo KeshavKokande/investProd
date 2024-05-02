@@ -1,14 +1,19 @@
 import React from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
-import { Flex } from 'antd';
+import styles from './dashboard.module.css'
 
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
+import ApexChart from './CliBarChart';
 
-function InvestmentSummary({ transactions, advisorNames, returns }) {
+function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg}) {
+
+    if (!transactions || !advisorNames || !returns) {
+        return null; // Render nothing if any of the props are missing
+    }
     // Function to calculate total amount invested in each plan
     const calculateTotalInvestment = (transactions) => {
         const investmentMap = new Map();
@@ -46,22 +51,24 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
     const totalProfits = uniquePlanIds.map(planId => {
         const planProfits = returns.filter(returns => returns.planId === planId);
         const totalProfit = planProfits.reduce((acc, curr) => acc + curr.profit, 0);
-        return { name: planId, value: totalProfit };
+        const planName = transactions.find(transaction => transaction.planId === planId).planName;
+        return { name: planName, value: totalProfit };
     });
 
     // Function to format data for PieChart
     const formatDataForPieChart = (uniquePlans, totalInvestments) => {
-        const data = uniquePlans.map(planId => ({
-            name: planId,
+        const data = uniquePlans.map((planId) => ({
+            name: transactions.find(transaction => transaction.planId === planId).planName,
             value: totalInvestments.get(planId)
         }));
         return data;
     }
 
+
     const formatCurrency = (value) => {
         const roundedValue = parseFloat(value).toFixed(2);
         return `₹${roundedValue}`;
-      };
+    };
 
     return (
         <div>
@@ -75,16 +82,16 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     cardInfo={{
                         title: "Total Amount Invested",
                         value: formatCurrency(totalInvestedAmount),
-                        text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
+                        // text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
                     colors={["#e4e8ef", "#4ce13f"]}
                     percentFillValue={50}
                     cardInfo={{
-                        title: "Total Profit",
-                        value: formatCurrency(totalProfitAmount),
-                        text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
+                        title: "Total Profit/Loss",
+                        value: formatCurrency(avggg*totalInvestedAmount/100),
+                        // text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -92,23 +99,21 @@ function InvestmentSummary({ transactions, advisorNames, returns }) {
                     percentFillValue={40}
                     cardInfo={{
                         title: "Current Value",
-                        value: formatCurrency(totalInvestedAmount + totalProfitAmount),
-                        text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
+                        value: formatCurrency(totalInvestedAmount + avggg*totalInvestedAmount/100),
+                        // text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
                     }}
                 />
             </section>
 
-            <hr />
+            <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
 
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", padding: "30px" }}>
-                <p><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
-                <p><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p>
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
+                {/* <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p> */}
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Returns</strong></center><br /><ApexChart plans_data={etta} widthChart={500} /> </p>
             </div>
 
-            <hr />
 
-
-            <center><h3 style={{ color: "black", fontSize: "30px", fontWeight: "bold" }}>Plan Information:</h3></center>
+            <h2 className={styles.heading}>Plan Information</h2>
 
 
             <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />

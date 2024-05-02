@@ -1,12 +1,61 @@
 import AreaCard from "./AreaCard";
 import { useState,useEffect } from "react";
 import "./AreaCards.scss";
+import axios from 'axios';
+
 
 const AreaCards = () => {
+
+  
 
   const [totalClients, setTotalClients] = useState();
   const [totalInvestedAmount, setTotalInvestedAmount] = useState();
   const [totalCurrentProfit, setTotalCurrentProfit] = useState();
+  const [plansData, setPlansData] = useState(null);
+  const [datu, setDatu] = useState(null);
+  
+   
+    useEffect(() => {
+      const fetchPlansData = async () => {
+        try {
+          const response = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans", {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+          });
+          const data = await response.json();
+          console.log(data);
+          setPlansData(data);
+  
+          const mappedData = data.plans.map(item => ({
+            planName: item.planName,
+            stocks: item.stocks,
+            startVal: item.minInvestmentAmount,
+            cash: item.cash
+          }));
+    
+          const axiosResponse = await axios.post('https://invest-nse.azurewebsites.net/calculate_sts', { plans_data: mappedData });
+          const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
+    
+          const mapData = calculatedData.plans_data.map((plan) => ({
+            Name: plan.planName,
+            gains: plan.total_current_gains,
+          }));
+          setDatu(calculatedData.plans_data);
+        
+    
+        } catch (error) {
+          console.error('Error fetching plans data:', error.message);
+        }
+  
+  
+      };
+   
+      fetchPlansData();
+      window.scrollTo(0, 0);
+    }, []);
 
   // get-no-of-clients
   useEffect(() => {
@@ -78,7 +127,6 @@ const AreaCards = () => {
         }
         const data = await response.json();
         setTotalCurrentProfit(data);
-        console.log("Ye Le BHadwe :  ", data);
     } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
@@ -92,6 +140,30 @@ const AreaCards = () => {
     return `₹${roundedValue}`;
   };
 
+  if (!datu){return(<div></div>);}
+
+  function calculateAverageGainPercentage(plansData) {
+    let totalGainPercentage = 0;
+    let totalStocks = 0;
+  
+    plansData.forEach((plan) => {
+      plan.individual_stocks.forEach((stock) => {
+        totalGainPercentage += stock.total_change_percent;
+        totalStocks++;
+      });
+    });
+  
+    if (totalStocks === 0) {
+      return 0; // Avoid division by zero
+    }
+  
+    const averageGainPercentage = totalGainPercentage / totalStocks;
+    return averageGainPercentage;
+  }
+
+  const averageGainPercentage = calculateAverageGainPercentage(datu);
+
+
   return (
     <section className="content-area-cards">
       <AreaCard
@@ -100,16 +172,16 @@ const AreaCards = () => {
         cardInfo={{
           title: "Total Clients",
           value: totalClients?.noOfClients, 
-          text: `You have ${totalClients?.noOfClients} clients.`,
+          // text: `You have ${totalClients?.noOfClients} clients.`,
         }}
       />
       <AreaCard
         colors={["#e4e8ef", "#4ce13f"]}
         percentFillValue={50}
         cardInfo={{
-          title: "Total Revenue",
+          title: "Invested Amount",
           value: formatCurrency(totalInvestedAmount?.totalInvestedAmount),
-          text: `Total investment ${formatCurrency(totalInvestedAmount?.totalInvestedAmount)}`,
+          // text: `Total investment ${formatCurrency(totalInvestedAmount?.totalInvestedAmount)}`,
         }}
       />
       <AreaCard
@@ -117,8 +189,8 @@ const AreaCards = () => {
         percentFillValue={40}
         cardInfo={{
           title: "Current Profit",
-          value: formatCurrency(totalCurrentProfit?.totalCumulativeProfit),
-          text: `Total Current Profit ${formatCurrency(totalCurrentProfit?.totalCumulativeProfit)}`,
+          value: formatCurrency(averageGainPercentage*totalInvestedAmount?.totalInvestedAmount),
+          // text: `Total Current Profit ${formatCurrency(totalCurrentProfit?.totalCumulativeProfit)}`,
         }}
       />
     </section>

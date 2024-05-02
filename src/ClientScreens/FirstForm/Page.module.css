@@ -15,6 +15,7 @@
 
 .container {
   height: 68vh;
+  width: 90%;
   justify-items: center;
   padding: 20px;
   background-color: #fbf9f9;
@@ -23,7 +24,7 @@
   grid-template-columns: 50% 50%;
   align-items: center;
   /* justify-items: center; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .form-container {
@@ -44,6 +45,7 @@
   display: grid;
   grid-template-columns: auto !important;
   grid-gap: 6%;
+  /* overflow: auto; */
 }
 
 /* .form-container2 input{
@@ -51,7 +53,7 @@
 } */
 
 .form-container1 .question-container{
-  width: 96% !important;
+  width: 96%;
 }
 
 .container .imagecl{
@@ -213,4 +215,50 @@
 
 .terms input{
   width: auto !important;
+}
+
+
+.remove {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 0.5rem;
+  font-weight: bold;
+  margin-top: 0.1rem;
+  color: white;
+  background-color: #007bff; /* Blue color (you can adjust this) */
+  border: 0.02rem solid #007bff;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.remove {
+  background-color: #0056b3; /* Darker blue color on hover (you can adjust this) */
+}
+
+
+.required{
+  color: red;
+  font-weight: bold;
+}
+
+.risk-level{
+  font-size: 0.7rem;
+}
+
+.termsconditions{
+  overflow-y: scroll;
+  height: 45vh;
+  border-color: #000000;
+  border-width: 0.1rem 0.1rem 0.1rem 0.1rem;
+  /* background-color: #007bff; */
+}
+
+.preStyle{
+  white-space: pre-wrap;
+}
+
+.preStyle h3{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
 }

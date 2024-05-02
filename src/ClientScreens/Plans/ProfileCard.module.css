@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+.containerProfile {
+    height: 60vh !important;
+    display: flex;;
+    flex-wrap: wrap;
+    display: flex-start !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: transparent !important;
+}
+
+.cardProfile {
+    max-width: 400px !important;
+    height: 50vh;
+    width: 20vw;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    display: grid;
+    grid-gap: 1vh;
+    grid-template-columns: auto auto;
+    box-shadow:  rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.gridPosition{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.position{
+    width: fit-content;
+    justify-self: end;
+}
+
+.top_part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.circle {
+    display: flex
+}
+
+.circle span {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #ccecfe;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: 1px solid #ccecfe
+}
+
+.circle span:hover {
+    border: 2px solid #c7e9ff;
+    background-color: #51bdfe
+}
+
+.top_part small {
+    height: 25px;
+    width: 25px;
+    background-color: #efefef;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.top_part small i {
+    margin-top: 2px;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.fa-heart {
+    color: red;
+    margin-top: 2px
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.image img {
+    width: 40%;
+    /* margin-bottom: 20px */
+}
+
+.vitamin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+}
+.vitamin-h2{
+    font-size: 1.5rem !important;
+    color: black !important;
+   font-weight: bold;
+}
+h2{
+    text-align: left;
+   color: black;
+   font-weight: bold;
+   font-size: 1.5rem;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    float: left
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 15px;
+    font-size: 19px;
+    color: #ff0000;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+.reviews {
+    display: flex;
+    /* margin-top: 5px; */
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+
+.reviews p {
+    font-size: 14px;
+    font-weight: 700;
+    /* color: #9f9f9f !important */ 	
+}
+
+.reviews u {
+    font-size: 11px;
+    color: red !important;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.size p {
+    font-size: 14px;
+    font-weight: 700;
+    /* color: #9f9f9f !important */
+}
+
+/* .size h5 {
+    margin-top: 10px
+} */
+
+.buttonsProfile {
+    display: flex;
+    gap: 10px;
+    /* margin-top: 10px */
+}
+
+.buttonsProfile button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer
+}
+
+.buttonsProfile button p {
+    font-size: 10px
+}
+
+.buttonsProfile button:nth-child(1) {
+    background-color: #475BE8;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.buttonsProfile button:nth-child(1):hover {
+    background-color: #c73f07
+}
+
+.buttonsProfile button:nth-child(2) {
+    background-color: #eff0f2;
+    color: #89898a;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.buttonsProfile button:nth-child(2):hover {
+    background-color: #b7bbc3;
+    color: #606060
+}
+
+.card-profile h2 {
+    margin-top: 10px
+    
+}
+
+.gender {
+    /* margin-top: 10px; */
+    display: flex;
+    gap: 10px;
+    width: 70%
+}
+
+.gender span {
+    height: 25px;
+    width: 30%;
+    background-color: #eff0f2;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-weight: 700;
+    color: #8e8e8e
+}
+
+.gender span:hover {
+    background-color: #b4b6b9;
+    color: #605c5c
+}
+
+.last_buttons {
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 20px */
+}
+
+.qty_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100px;
+    border-radius: 25px;
+    background-color: #eff0f2;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.qty_btn:hover {
+    background-color: #9d9fa3
+}
+
+.qty_btn p {
+    padding: 0 15px;
+    font-weight: 700
+}
+
+.money_bag {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+/* .money_bag h3 {
+    margin-right: 5px
+} */
+
+.money_bag button {
+    height: 40px;
+    width: 100px;
+    background-color: #51beff;
+    border: none;
+    border-radius: 25px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.money_bag button:hover {
+    background-color: #107bbb
+}
+
+.money_bag button i {
+    margin-right: 5px
+}
+
+.premium{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 2.5vw;
+    z-index: 10;
+}
+
+.premium img{
+    width: 100%;
+}
+
+.purchased {
+    position: absolute;
+    top: 6%;
+    left: -46px;
+    z-index: 1;
+    overflow: hidden;
+    width: 174px;
+    height: 32px;
+    background-color: #ff0000;
+    transform: rotate(-45deg);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+  
+
+  .purchased p {
+    position: absolute;
+    /* top: 15px; */
+    /* left: 20px; */
+    /* transform: rotate(-45deg); */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    /* margin: auto; */
+  }
+
+/* .purchased{
+    position: absolute;
+    top: 13%;
+    left: 15%;
+    border: 1.25px solid green;
+    padding: 0px 11px;
+    border-radius: 30px;
+    align-items: center;
+    display: flex;
+}
+
+.purchased img{
+    display: inline;
+    width: 1.25vw;
+}
+
+.purchased p{
+    display: inline;
+    font-size: small;
+}
+ */

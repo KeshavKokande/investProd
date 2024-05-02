@@ -1,14 +1,16 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "./registerpage.module.css";
 import { FcGoogle } from 'react-icons/fc';
 import LoginImage from './../../assets/images/loginImage.jpg';
 import Swal from 'sweetalert2';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  
+  const [verified, setVerified] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -35,7 +37,7 @@ const LoginPage = () => {
       });
       return;
     }
-  
+
     try {
       const response = await fetch('https://team4api.azurewebsites.net/api/v1/check-auth/login', {
         method: 'POST',
@@ -55,13 +57,13 @@ const LoginPage = () => {
         });
         return;
       }
-   
+
       const data = await response.json();
       // console.log(data);
 
       // Check the selected role to redirect appropriately
       if (data.user.role === 'client') {
-        navigate('/cldash');
+        navigate('/client_dashboard');
       } else if (data.user.role === 'advisor') {
         navigate('/advisor_dashboard');
       } else {
@@ -84,13 +86,13 @@ const LoginPage = () => {
   useEffect(() => {
     // Check if the cookie is set
     const cookieExists = document.cookie.includes('jwt');
-    
+
     if (cookieExists) {
-      if(sessionStorage.getItem('role') == 'advisor'){
+      if (sessionStorage.getItem('role') == 'advisor') {
         window.location.href = '/advisor_dashboard';
       }
-      else if(sessionStorage.getItem('role') == 'client'){
-        window.location.href = '/cldash';
+      else if (sessionStorage.getItem('role') == 'client') {
+        window.location.href = '/client_dashboard';
       }
     } else {
       // Cookie is not set
@@ -99,7 +101,12 @@ const LoginPage = () => {
         window.location.href = '/login';
       }
     }
-  }, []); 
+  }, []);
+
+  function onCheck(value) {
+    console.log("Captcha value:", value);
+    setVerified(true);
+  }
 
   return (
     <div className={styles['register-container']}>
@@ -119,12 +126,12 @@ const LoginPage = () => {
           <label>Password</label>
           <input type={showPassword ? 'text' : 'password'} name='password' value={formData.password} onChange={handleChange} />
           <button
-                type='button'
-                className={styles['password-toggle-btn']}
-                onClick={() => setShowPassword((prevShowPassword) => !prevShowPassword)}
-              >
-                {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
-              </button>
+            type='button'
+            className={styles['password-toggle-btn']}
+            onClick={() => setShowPassword((prevShowPassword) => !prevShowPassword)}
+          >
+            {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+          </button>
         </div>
         {/* {errorMessage && <div className={styles['error-message']}><strong>Invalid Email/Passwoard</strong></div>} */}
         {/* <div className={styles['input-wrapper']}>
@@ -133,8 +140,14 @@ const LoginPage = () => {
             <option value="advisor">Advisor</option>
           </select>
         </div> */}
-        <div style={{width:"100%"}}>
-          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit}>Sign In</button>
+        
+        <ReCAPTCHA
+          // sitekey="6LccOscpAAAAAO5FQ0QrItjP-6i0kmbMD6ha2MKW"
+          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          onChange={onCheck}
+        />
+        <div style={{ width: "100%" }}>
+          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit} disabled={!verified}>Sign In</button>
         </div>
         <hr />
         <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>

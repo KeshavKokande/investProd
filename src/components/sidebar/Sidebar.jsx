@@ -28,8 +28,8 @@ const Sidebar = () => {
   const navbarRef = useRef(null);
 
 
-   // Logout function
-   const handleLogout = () => {
+  // Logout function
+  const handleLogout = () => {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will be logged out',
@@ -56,11 +56,12 @@ const Sidebar = () => {
         credentials: "include", // include cookies in the request
       });
       if (response.ok) {
-        // Clear user authentication data (if any)
-        console.log("logout",response);
+        // Clear user authentication data
         localStorage.removeItem("token");
+        document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        sessionStorage.clear();
 
-        // Redirect to login page
         navigate("/login");
       } else {
         console.error("Logout failed:", response.statusText);
@@ -96,10 +97,12 @@ const Sidebar = () => {
       ref={navbarRef}
     >
       <div className="sidebar-top">
-        <div className="sidebar-brand">
-          <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
-          <span className="sidebar-brand-text">inVEST</span>
-        </div>
+        <Link to='/advisor_dashboard'>
+          <div className="sidebar-brand">
+            <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
+            <span className="sidebar-brand-text">inVEST</span>
+          </div>
+        </Link>
         <button className="sidebar-close-btn" onClick={closeSidebar}>
           <MdOutlineClose size={24} />
         </button>
@@ -115,16 +118,16 @@ const Sidebar = () => {
                 <span className="menu-link-text">Dashboard</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname === "/plan" ? "active" : ""}`}>
-              <Link to="/plan" className="menu-link">
+            <li className={`menu-item ${location.pathname.includes("/advisor/planList") || location.pathname.includes("/advisor/addNewPlan") || location.pathname.includes("/advisor/editPlan") ? "active" : ""}`}>
+              <Link to="/advisor/planList" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineShoppingBag size={20} />
                 </span>
                 <span className="menu-link-text">Plans</span>
               </Link>
             </li>
-            <li className={`menu-item ${location.pathname === "/Clientlist" ? "active" : ""}`}>
-              <Link to="/Clientlist" className="menu-link">
+            <li className={`menu-item ${location.pathname === "/advisor/clientList" ? "active" : ""}`}>
+              <Link to="/advisor/clientList" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>

@@ -1,12 +1,6 @@
-import  { useState, useEffect } from 'react';
-import "./AreaTable.scss";
-
-const TABLE_HEADS = [
-  "Client Name",
-  "Plan Name",
-  "Date",
-  "Invested Amount",
-];
+import React, { useState, useEffect } from 'react';
+import { Table } from 'antd';
+import './AreaTable.scss';
 
 const formatDate = (dateString) => {
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -16,7 +10,8 @@ const formatDate = (dateString) => {
 
 const AreaTable = () => {
   const [tableData, setTableData] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,51 +22,76 @@ const AreaTable = () => {
             'Content-Type': 'application/json'
           },
           credentials: 'include'
-        }); // Assuming the JSON file is named purchase.json and placed in the public folder
+        });
         const jsonData = await response.json();
         setTableData(jsonData.transactions);
-      } 
-      
-
-      catch (error) {
+      } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, []);
 
+  const columns = [
+    {
+      title: 'Client Name',
+      dataIndex: 'clientName',
+      key: 'clientName',
+    },
+    {
+      title: 'Plan Name',
+      dataIndex: 'planName',
+      key: 'planName',
+    },
+    {
+      title: 'Date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (date) => formatDate(date),
+    },
+    {
+      title: 'Invested Amount',
+      dataIndex: 'investedAmount',
+      key: 'investedAmount',
+    },
+  ];
+
+  const indexOfLastItem = currentPage * perPage;
+  const indexOfFirstItem = indexOfLastItem - perPage;
+  const currentItems = tableData ? tableData.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <section className="content-area-table">
+    <div className="content-area-table">
       <div className="data-table-info">
         <h4 className="data-table-title">Latest Orders</h4>
       </div>
       <div className="data-table-diagram">
-        <table>
-          <thead>
-            <tr>
-              {TABLE_HEADS.map((th, index) => (
-                <th key={index}>{th}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((purchase) => {
-              return (
-                <tr key={purchase._id}>
-                  <td>{purchase.clientName}</td>
-                  <td>{purchase.planName}</td>
-                  <td>{formatDate(purchase.createdAt)}</td>
-                  <td>{purchase.investedAmount}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <Table
+          columns={columns}
+          dataSource={currentItems}
+          pagination={{
+            current: currentPage,
+            pageSize: perPage,
+            total: tableData ? tableData.length : 0, // Ensure tableData is defined before accessing its length
+            onChange: handlePageChange,
+          }}
+        />
       </div>
-    </section>
+    </div>
   );
-  
 };
 
 export default AreaTable;
+
+
+
+
+
+
+
 

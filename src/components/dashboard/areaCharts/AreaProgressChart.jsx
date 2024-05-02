@@ -31,7 +31,7 @@ const AreaProgressChart = () => {
       
   return (
 
-     <div className="adv-progress-bar" style={{backgroundColor:"#ffffff"}}>
+     <div className="adv-progress-bar" style={{backgroundColor:"#ffffff", borderRadius:'0.7rem',}}>
        <div className="progress-bar-info">
          <h4 className="adv-progress-bar-title">Most Sold Plans</h4>
        </div>
@@ -42,14 +42,14 @@ const AreaProgressChart = () => {
                <div className="adv-bar-item-info">
                  <p className="adv-bar-item-info-name">{progressData.planName}</p>
                  <p className="adv-bar-item-info-value">
-                   {progressData.noOfSubscription}
+                   {(progressData.boughtClientIds).length}
                  </p>
                </div>
                <div className="adv-bar-item-full">
                  <div
                    className="adv-bar-item-filled"
                    style={{
-                     width: `${progressData.noOfSubscription*10}%`,
+                     width: `${(progressData.boughtClientIds).length*5}%`,
                    }}
                  ></div>
                </div>

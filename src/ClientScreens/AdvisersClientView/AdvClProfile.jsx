@@ -1,16 +1,15 @@
-
 import { useParams } from 'react-router-dom';
-import clplans from "../Plans/plans.json";
+ 
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
-import PlanCard from '../Plans/FlipingCard';
-import dummy from './grapghup.png';
-import advidata from "./advi.json";
-import "../Plans/Plans.css";
+ 
+// import "../Plans/Plans.css";
+import styles from "./../Plans/Plans.module.css";
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import ProfileCard from '../Plans/ProfileCard';
-
-
+import AdvisorProfilePage from '../AdvisorProfilePlans/AdvisorProfilePage';
+ 
 const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -29,18 +28,158 @@ const responsive = {
       items: 1
     }
   };
-
+ 
 function AdvClProfile() {
-    // Extracting the advisor ID from the URL params
+    // // Extracting the advisor ID from the URL params
+    // const { advisor_id } = useParams();
+ 
+    // const advisor = advidata.listOfNamesOfAdvisors.find(advisor => advisor._id === advisor_id);
+ 
+    // const advisorPlans = clplans.filter(plan => plan.advisor_id === advisor_id);
+ 
     const { advisor_id } = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const [advisors, setAdvisors] = useState([]);
+    const [plans, setPlans] = useState([]);
+    const [clientDetails, setClientDetails] = useState([]);
+ 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      const fetchData = async () => {
+        try {
+          const advisorsResponse = await fetch(`https://team4api.azurewebsites.net/api/v1/Client/get-all-advisors`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
+ 
+          const plansResponse = await fetch(`https://team4api.azurewebsites.net/api/v1/Client/get-all-plans`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
+          const clientDetailsResponse = await fetch(`https://team4api.azurewebsites.net/api/v1/Client/get-own-details`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
+ 
+          if (!advisorsResponse.ok || !plansResponse.ok) {
+            throw new Error('Failed to fetch data');
+          }
+ 
+          const advisorsData = await advisorsResponse.json();
+          const plansData = await plansResponse.json();
+          const clientDetailsData = await clientDetailsResponse.json();
+ 
+          setAdvisors(advisorsData.listOfNamesOfAdvisors);
+          setPlans(plansData.plans);
+          setClientDetails(clientDetailsData.client.planIds);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error.message);
+        }
+      };
+ 
+      fetchData();
+    }, []);
 
-    const advisor = advidata.listOfNamesOfAdvisors.find(advisor => advisor._id === advisor_id);
+    
+  
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+ 
+    const advisor = advisors.find((adv) => adv._id === advisor_id);
+    const advisorPlans = plans.filter((plan) => plan.advisorId === advisor_id && plan.isActive);
+  
+    if (!advisor) {
+      return <div>No data available for this advisor</div>;
+    }
 
-    const advisorPlans = clplans.filter(plan => plan.advisor_id === advisor_id);
+    // const decodeImageData = (plan) => {
+    //   if (plan.photo && plan.photo.contentType) {
+    //     const imageDataArray = plan.photo.data.data;
+    //     const cota = plan.photo.contentType;
+    //     const blob = new Blob([new Uint8Array(imageDataArray)], { type: cota });
+    //     const urlCreator = window.URL || window.webkitURL;
+    //     const imageDataUrl = urlCreator.createObjectURL(blob);
+    //     return imageDataUrl;
+    //   } else {
+    //     console.warn('Missing photo or contentType in plan:', plan);
+    //     return null;
+    //   }
+    // };
+
+    const decodeImageData = (plan) => {
+      if (plan.photo && plan.photo.contentType && plan.photo.data) {
+        const imageData = atob(plan.photo.data); // Decode base64-encoded data
+        const cota = plan.photo.contentType; // Use the contentType directly
+    
+        // Convert the decoded data into a Uint8Array
+        const byteArray = new Uint8Array(imageData.length);
+        for (let i = 0; i < imageData.length; i++) {
+          byteArray[i] = imageData.charCodeAt(i);
+        }
+    
+        // Create a blob from the Uint8Array
+        const blob = new Blob([byteArray], { type: cota });
+    
+        // Create the image URL
+        const urlCreator = window.URL || window.webkitURL;
+        const imageDataUrl = urlCreator.createObjectURL(blob);
+        return imageDataUrl;
+      } else {
+        console.warn('Missing photo, contentType, or data in plan:', plan);
+        return null;
+      }
+    };
+
+  
+
+    const plansWithDecodedImages = advisorPlans.map(plan => {
+      const decodedImageUrl = decodeImageData(plan);
+      return { ...plan, decPhoto: decodedImageUrl };
+    });
+
+
   
     return (
       <div>
-        <div className='bigadv'>
+       
+        <AdvisorProfilePage />
+ 
+        <br />
+        <h2 style={{marginBottom:"1rem"}} className={styles.heading}>{advisor.name.split(" ")[0]}&#39;s Plans</h2>
+        <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000} className={styles.Carousel}>
+          {plansWithDecodedImages.map((plan, index) => (
+            <div key={index}>
+            <Link to={`/plan_id/${plan._id}`}>
+            <ProfileCard plan={plan} ids={clientDetails}/>
+            </Link>
+            </div>
+          ))}
+        </Carousel>
+      </div>
+    );
+ 
+}
+ 
+export default AdvClProfile ;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* <div className='bigadv'>
             <div className='riga'>
             <div className='advleft'>
                 <img className="moneyimg" src="https://avatar.iran.liara.run/public/boy" alt="money" style={{ borderRadius: '1.5rem', width: '8rem', height: '8rem', margin: '0.6rem' }} />
@@ -48,7 +187,7 @@ function AdvClProfile() {
             </div>
             </div>
             <div className='lefa'>
-            <div className='advright'> 
+            <div className='advright'>
                 <h2 style={{marginTop:"0.5rem"}}>{advisor.name}</h2>
                 <center><hr style={{ width: '70%' }} /></center>
                 <div>📧: {advisor.email} </div>
@@ -56,19 +195,5 @@ function AdvClProfile() {
             </div>
             </div>
         </div>
-        <h2 style={{marginBottom:"1rem"}}>{advisor.name.split(" ")[0]}&#39;s Plans</h2>
-        <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000}>
-          {advisorPlans.map((plan, index) => (
-            <div key={index}>
-            <Link to={`/plan_id/${plan.plan_id}`}>
-            <ProfileCard plan={plan} />
-            </Link>
-            </div>
-          ))}
-        </Carousel>
-      </div>
-    );
-  
-}
-
-export default AdvClProfile ;
+ 
+        */
