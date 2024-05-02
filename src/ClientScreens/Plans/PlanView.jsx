@@ -378,6 +378,7 @@ function PlanView() {
   const [cagr, setCagr] = useState(0);
   const targetUrl = `/planDetail/${plan_id}`;
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -487,17 +488,59 @@ function PlanView() {
   };
 
   const handleBuyPlan = async () => {
-    // Your existing code for buying plan
-  };
+        Swal.fire({
+          title: 'Are You Sure?',
+          text: 'Do you want to buy this plan?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Buy It!'
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            try {
+              const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                  price: tab.total_current_value,
+                  qty: quantity
+                })
+              });
+    
+              if (!response.ok) {
+                throw new Error('Failed To Buy Plan');
+              }
+    
+              const data = await response.json();
+              console.log('Buy plan response:', data);
+    
+    
+              Swal.fire('Success', 'Plan Bought Successfully!', 'success');
+              if (data.status === 'success') {
+                navigate('/client_dashboard');// Update success state
+              }
+            } catch (error) {
+              console.error('Error buying plan:', error.message);
+              Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
+            }
+          }
+        });
+      };
 
   // Function to handle incrementing the invested amount
   const incrementAmount = () => {
+    setQuantity(quantity + 1);
     setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value + plan.cash) * 100) / 100);
   };
-
+  
   // Function to handle decrementing the invested amount
   const decrementAmount = () => {
     if (investedAmount > 0) {
+      setQuantity(quantity - 1);
       setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value - plan.cash) * 100) / 100);
     }
   };

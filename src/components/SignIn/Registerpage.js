@@ -5,35 +5,34 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import styles from './registerpage.module.css';
 import RegistrationImage from './../../assets/images/RegFinancialAdvisor.jpg';
 import { isElementOfType } from 'react-dom/test-utils';
-import ReCAPTCHA from "react-google-recaptcha";
-
+ 
 const Register = () => {
   const [userData, setUserData] = useState(null);
-
-  const [verified, setVerified] = useState(false);
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
+    otp:'',
   });
-
+ 
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     confirmPassword: '',
     general: '',
   });
-
+  const [getotp,setGetotp]=useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
-
+ 
   const navigate = useNavigate();
-
+ 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+ 
     // Validation for name input (proper case) and empty check
     if (name === 'name') {
       const properCaseName = value.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -46,7 +45,7 @@ const Register = () => {
     } else {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
-
+ 
     // Validation for email format
     if (name === 'email') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,19 +53,31 @@ const Register = () => {
       const isValidEmail = emailRegex.test(value);
       setErrors((prevErrors) => ({ ...prevErrors, email: isValidEmail ? '' : 'Invalid email format' }));
     }
-
+ 
     // Validation for password and confirm password match
     if (name === 'confirmPassword') {
       const isValidPasswordMatch = value === formData.password;
       setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: isValidPasswordMatch ? '' : 'Passwords do not match' }));
     }
   };
-
+ 
   const handleGoogleSignIn = () => {
-      window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google'; 
+      window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google';
     };
-
+function handlegetotp()
+{
+  fetch('http://localhost:8000/api/v1/otp/send-otp',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({email:formData.email})
+  });
+  setGetotp(true);
+ 
+}
   const handleSubmit = () => {
+    console.log(formData);
     fetch('http://localhost:8000/api/v1/check-auth/signup', {
       method: 'POST',
       headers: {
@@ -97,12 +108,7 @@ const Register = () => {
         }
       });
   };
-
-  function onChange(value) {
-    console.log("Captcha value:", value);
-    setVerified = true;
-  }
-
+ 
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
@@ -118,13 +124,13 @@ const Register = () => {
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
           {errors.name && <span className={styles['error-message']}>{errors.name}</span>}
         </div>
-
+ 
         <div className={styles['input-wrapper']}>
           <label>Email</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
           {errors.email && <span className={styles['error-message']}>{errors.email}</span>}
         </div>
-
+ 
         <div className={styles['input-wrapper']}>
           <label>Password</label>
           <div className={styles['password-input-wrapper']}>
@@ -143,7 +149,7 @@ const Register = () => {
             </button>
           </div>
         </div>
-
+ 
         <div className={styles['input-wrapper']}>
           <label>Confirm Password</label>
           <div className={styles['password-input-wrapper']}>
@@ -163,22 +169,20 @@ const Register = () => {
           </div>
           {errors.confirmPassword && <span className={styles['error-message']}>{errors.confirmPassword}</span>}
         </div>
-
+ 
         {errors.general && <span className={styles['error-message']}>{errors.general}</span>}
         {registrationError && <span className={styles['error-message']}>{registrationError}</span>}
-
-        <ReCAPTCHA
-          // sitekey="6LccOscpAAAAAO5FQ0QrItjP-6i0kmbMD6ha2MKW"
-          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-          onChange={onChange}
-        />
-
+        {getotp?<div className={styles['input-wrapper']}>
+          <label>Otp</label>
+          <input type="number" name="otp" value={formData.otp} onChange={handleChange} />
+         
+        </div>:null}
         <div style={{width:"100%"}}>
-          <button id="landing_signup" className={styles['register-btn']} onClick={handleSubmit} disabled={!verified}>Register</button>
+          <button id="landing_signup" className={styles['register-btn']} onClick={!getotp?handlegetotp:handleSubmit}>{getotp?'Register':'Get OTP'}</button>
         </div>
-
+ 
         <hr />
-
+ 
         {/* <div className={styles['gAuth']}>
           <h2>Continue with </h2>
           <span className={styles['google-icon']}><FcGoogle /></span>
@@ -191,5 +195,6 @@ const Register = () => {
     </div>
   );
 };
-
+ 
 export default Register;
+ 
