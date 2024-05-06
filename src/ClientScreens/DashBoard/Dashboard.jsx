@@ -27,7 +27,7 @@ function DashboardCl() {
     window.scrollTo(0, 0);
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -70,10 +70,10 @@ function DashboardCl() {
     return urlCreator.createObjectURL(blob);
   }
 
-  useEffect(() => {https://team4api.azurewebsites.net
+  useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-transactions', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-transactions', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -99,10 +99,10 @@ function DashboardCl() {
   }, []);
 
 
-  useEffect(() => {https://team4api.azurewebsites.net
+  useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
