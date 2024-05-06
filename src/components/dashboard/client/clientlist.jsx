@@ -62,6 +62,12 @@ const Clientlist = () => {
     }).filter((planName) => planName !== undefined); // Filter out undefined values
   };
 
+  const arrayToDataURL = (array, cota) => {
+    const blob = new Blob([new Uint8Array(array)], { type:cota });
+    const urlCreator = window.URL || window.webkitURL;
+    return urlCreator.createObjectURL(blob);
+  }
+
   return (
     <section className="content-area-table">
       <div className="data-table-info">
@@ -83,7 +89,7 @@ const Clientlist = () => {
                   <TableCell>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <img
-                      src={client.img}
+                      src={arrayToDataURL(client.profilePhoto.data.data,client.profilePhoto.contentType)}
                       alt={client.name}
                       style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
                     />
