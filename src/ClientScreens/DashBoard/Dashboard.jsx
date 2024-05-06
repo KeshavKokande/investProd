@@ -27,7 +27,7 @@ function DashboardCl() {
   const [datu, setDatu] = useState(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);https://team4api.azurewebsites.net
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
@@ -73,7 +73,7 @@ function DashboardCl() {
     return urlCreator.createObjectURL(blob);
   }
 
-  useEffect(() => {
+  useEffect(() => {https://team4api.azurewebsites.net
     const fetchTransactions = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-transactions', {
@@ -102,7 +102,7 @@ function DashboardCl() {
   }, []);
 
 
-  useEffect(() => {
+  useEffect(() => {https://team4api.azurewebsites.net
     const fetchPlansData = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
