@@ -1,5 +1,6 @@
 
 import "../Plans/Plans.css";
+import avatarBoy from "../../assets/images/avator.svg";
 
 /* eslint react/prop-types: 0 */
 
@@ -11,7 +12,7 @@ const AdvisorCard = ({ advisor }) => {
         <h2 style={{marginTop:"0.5rem",fontWeight:"bold",fontSize:"1.5rem", marginBottom:"0rem"}}>{advisor.name}</h2>
         <center><hr style={{ width: '50%', marginTop:"0rem",marginBottom:"0.4rem"}} /></center>
         <div>
-        <img className="moneyimg" src="https://avatar.iran.liara.run/public/boy" alt="money" style={{ borderRadius: '1.5rem', width: '8rem', height: '8rem', margin: '0.6rem' }} />
+        <img className="moneyimg" src={avatarBoy} alt="money" style={{ borderRadius: '1.5rem', width: '8rem', height: '8rem', margin: '0.6rem' }} />
         </div>
         <footer className='ffo'>
           <div className='finr'>

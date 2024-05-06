@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from "./../ClientScreens/DashBoard/dashboard.module.css";
 import notification from "./../assets/icons/notification.png"
 import Notifications from "../Notification/Notifications";
+import avatarBoy from "../assets/images/avator.svg";
 const ClBaseLayout = () => {
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -73,7 +74,7 @@ const ClBaseLayout = () => {
             alt='Profile'
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'https://avatar.iran.liara.run/public/boy';
+              e.target.src = {avatarBoy};
             }}
             className={styles.userProfileImg}
           />

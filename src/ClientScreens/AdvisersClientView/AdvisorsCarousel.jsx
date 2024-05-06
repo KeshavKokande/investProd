@@ -7,7 +7,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './../../components/AdvisorCardsPage/TestpageAdv.css'
-import styles from './advisorClient.module.css'
+import styles from './advisorClient.module.css';
+import avatarBoy from "../../assets/images/avator.svg";
 
 
 const settings = {
@@ -38,7 +39,7 @@ const AdvisorsCarousel = ({ advisors }) => {
               <div key={index} className="bg-white  text-black infocard rounded-xl " style={{height: "fit-content"}}>
 
                 <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
-                  <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+                  <img src={avatarBoy} alt="" className="h-44 w-44 rounded-full" />
                 </div>
 
                 <div className="flex flex-col items-center justify-center gap-1 p-4">
@@ -75,7 +76,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                 <div key={index} className="bg-white text-black infocard rounded-xl " style={{height: "fit-content"}}>
 
                   <div className='h-56 bg-indigo-500 flex justify-center items-center  rounded-t-xl'>
-                    <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+                    <img src={avatarBoy} alt="" className="h-44 w-44 rounded-full" />
                   </div>
 
                   <div className="flex flex-col items-center justify-center gap-1 p-4">
@@ -115,7 +116,7 @@ const AdvisorsCarousel = ({ advisors }) => {
                 <div key={index} className="bg-white  text-black infocard rounded-xl" style={{height: "fit-content"}}>
 
                   <div className='h-56 bg-indigo-500 flex justify-center items-center rounded-t-xl'>
-                    <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+                    <img src={avatarBoy} alt="" className="h-44 w-44 rounded-full" />
                   </div>
 
                   <div className="flex flex-col items-center justify-center gap-1 p-4">

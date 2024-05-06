@@ -7,6 +7,7 @@ import './AdvisorProfile.css';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CoverOne from './../../assest/images/cover-01.png';
+import avatarBoy from "../../assets/images/avator.svg";
 
 const AdvisorProfilePage = () => {
   const { advisor_id } = useParams();
@@ -66,7 +67,7 @@ const AdvisorProfilePage = () => {
       <div className="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5 pt-6 lg:pt-8 xl-pt-11.5">
         <div className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
           <div className="relative drop-shadow-2">
-            <img className="adv-img" src="https://avatar.iran.liara.run/public/boy" alt="profile" />
+            <img className="adv-img" src={avatarBoy} alt="profile" />
 
           </div>
         </div>

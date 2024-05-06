@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './pp.module.css';
+import avatarBoy from "../../assets/images/avator.svg";
  
 const ProfilePage = () => {
   const [profileInfo, setProfileInfo] = useState({
@@ -93,7 +94,7 @@ const ProfilePage = () => {
             alt='Profile'
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'https://avatar.iran.liara.run/public/boy';
+              e.target.src = {avatarBoy};
             }}
             className={styles['profile-image']}
           />

@@ -8,7 +8,7 @@ import Notifications from "../Notification/Notifications";
 
 const BaseLayout = () => {
 
-  const [advisor,setAdi] = useState();
+  const [advisor, setAdi] = useState();
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -22,7 +22,7 @@ const BaseLayout = () => {
 
         if (response.status === 200) {
           setAdi(response.data.advisor)
-        } 
+        }
         else {
           throw new Error('Failed to fetch profile data');
         }
@@ -38,12 +38,12 @@ const BaseLayout = () => {
     <main className="page-wrapper">
       {/* left of page */}
       <div className={styles.UserInfo}>
-      {advisor ? (
-        <div>{advisor.name}</div>
-      ) : (
-        <div></div>
-      )}
-        <Notifications user={"advisor"}/>
+        {advisor ? (
+          <div>{advisor.name}</div>
+        ) : (
+          <div></div>
+        )}
+        <Notifications user={"advisor"} />
       </div>
       {/* left of page */}
       <Sidebar />

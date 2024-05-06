@@ -188,7 +188,7 @@ const AreaCards = () => {
         colors={["#e4e8ef", "#f29a2e"]}
         percentFillValue={40}
         cardInfo={{
-          title: "Current Profit",
+          title: "Current Value",
           value: (
             <div>
               {formatCurrency((averageGainPercentage * totalInvestedAmount?.totalInvestedAmount / 100) + totalInvestedAmount?.totalInvestedAmount)}

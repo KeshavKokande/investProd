@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import "./../../ClientScreens/Plans/Plans.css";
+import avatarBoy from "../../assets/images/avator.svg";
 
 export default function MediaCard({ advisor }) {
   return (
@@ -14,7 +15,7 @@ export default function MediaCard({ advisor }) {
         
       <CardMedia
         sx={{ height: 200 }}
-        image="https://avatar.iran.liara.run/public/boy"
+        image={avatarBoy}
         title="green iguana"
       />
       

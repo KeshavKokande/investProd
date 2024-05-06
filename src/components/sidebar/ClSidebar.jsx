@@ -5,6 +5,7 @@ import { LIGHT_THEME } from "../../constants/themeConstants";
 import LogoBlue from "../../assets/images/logo_blue.svg";
 import LogoWhite from "../../assets/images/logo_white.svg";
 import Swal from "sweetalert2";
+import avatarBoy from "../../assets/images/avator.svg";
 // import axios from 'axios';
 
 
@@ -121,22 +122,6 @@ const ClSidebar = () => {
         </button>
       </div>
 
-{/* 
-      <Box  sx={{ mb: 5, mx: 2.5 }}>
-        <Link to="/" >
-          <div className="box-profile">
-            <Avatar  src="https://avatar.iran.liara.run/public/boy" alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {profileInfo.name}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {profileInfo.jobRole}
-              </Typography>
-            </Box>
-          </div>
-        </Link>
-      </Box> */}
 
 
       <div className="sidebar-body">

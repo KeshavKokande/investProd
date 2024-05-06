@@ -71,6 +71,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './../../components/AdvisorCardsPage/TestpageAdv.css'
+import avatarBoy from "../../assets/images/avator.svg";
 
 export default function TestpageAdv({ advisor }) {
   const settings = {
@@ -87,7 +88,7 @@ export default function TestpageAdv({ advisor }) {
 
     <div className="bg-white h-[450px] text-black rounded-xl">
       <div className='h-56 bg-indigo-500 flex justify-center items-center rounded-t-xl'>
-        <img src="https://avatar.iran.liara.run/public/boy" alt="" className="h-44 w-44 rounded-full" />
+        <img src={avatarBoy} alt="" className="h-44 w-44 rounded-full" />
       </div>
 
       <div className="flex flex-col items-center justify-center gap-4 p-4">
