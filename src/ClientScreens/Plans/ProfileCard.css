@@ -8,9 +8,8 @@
 
 .container-profile {
     height: 70vh !important;
-    display: flex;;
+    display: flex;
     flex-wrap: wrap;
-    display: flex-start !important;
     justify-content: center !important;
     align-items: center !important;
     background-color: transparent !important;

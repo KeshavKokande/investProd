@@ -5,12 +5,10 @@
     padding: 0;
     box-sizing: border-box
 }
-
 .containerProfile {
     height: 60vh !important;
-    display: flex;;
+    display: flex;
     flex-wrap: wrap;
-    display: flex-start !important;
     justify-content: center !important;
     align-items: center !important;
     background-color: transparent !important;
