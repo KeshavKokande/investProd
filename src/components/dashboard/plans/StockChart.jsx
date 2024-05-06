@@ -35,7 +35,7 @@ const StockChart = ({ stocks, days,setc }) => {
         };
 
         try {
-            const response = await fetch('https://invest-nse.azurewebsites.net/calculate_total_value', requestOptions);
+            const response = await fetch('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate_total_value', requestOptions);
             const data = await response.json();
             processChartData(data);
             const oldestData = data[0];
