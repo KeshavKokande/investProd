@@ -1,13 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer base{
   body {
     background-color: #ffffff;
+    
     /* color: black; */
+   
   }
-
-  h2 {
+  h2{
     font-size: 2rem;
     font-weight: bold;
+    
   }
+  
+}
 
 .slick-slide > div {
   margin: 0 10px;

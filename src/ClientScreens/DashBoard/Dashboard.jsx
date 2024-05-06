@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import InvestmentSummary from './Summary';
+import { Typography } from '@mui/material';
 import styles from "./dashboard.module.css";
 import axios from 'axios';
+import notification from "./../../assets/icons/notification.png";
+import user from "./../../assets/icons/moon.svg"
 
 function DashboardCl() {
   const [transactions, setTransactions] = useState([]);
@@ -126,7 +129,7 @@ function DashboardCl() {
           cash: item.cash
         }));
 
-        const axiosResponse = await axios.post('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('https://invest-nse.azurewebsites.net/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
 
 

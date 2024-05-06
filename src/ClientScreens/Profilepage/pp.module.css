@@ -30,13 +30,15 @@
 
 }
 
-.pp21 {
+.pp21{
+
     display: flex;
     justify-content: left;
     flex-direction: column;
     width: 100%;
-    height: auto;
+    height:"auto";
     margin: 2rem;
+    
 }
 
 

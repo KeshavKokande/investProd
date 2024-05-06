@@ -199,10 +199,9 @@
   display: block;
 }
 
-.register-submit-btn.invisible {
-  display: none;
+.register-submit-btn invisible{
+  display: hidden;
 }
-
 
 .terms{
   display: grid;
