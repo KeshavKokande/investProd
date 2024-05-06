@@ -1,8 +1,8 @@
 body {
 
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; /* Light gray background */
 
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Manrope', sans-serif; /* Manrope font */
 
   }
  
@@ -28,24 +28,24 @@ body {
     width: 50%;
     padding: 10px;
     display: flex;
-   
+    /* flex-direction: column; */
     justify-content: space-between;
   }
  
   .adnewplan-right-section .text{
     gap: 5px;
 
-   
+    /* width: 50%; */
 
-   
+    /* padding: 10px; */
 
     display: flex;
 
     flex-direction: column;
 
-   
+    /* justify-content: center; */
 
-   
+    /* align-items: center; */
 
   }
  
@@ -57,7 +57,7 @@ body {
 
     width: 1px;
 
-    background-color: #ddd;
+    background-color: #ddd; /* Light gray */
 
   }
 
@@ -87,7 +87,9 @@ body {
     border-radius: 10px;
   }
 
- 
+  /* .adnewplans-header button:hover{
+    background-color: #B40000;
+  } */
  
   .adnewplan-table {
 
@@ -106,13 +108,13 @@ body {
 
     text-align: left;
 
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; /* Light gray border */
 
   }
  
   .adnewplan-th {
 
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; /* Light gray background for table header */
 
   }
  
@@ -132,31 +134,31 @@ body {
  
   .adnewplan-risk-high {
 
-    background-color: #ef5350;
+    background-color: #ef5350; /* Red */
 
   }
  
   .adnewplan-risk-medium {
 
-    background-color: #ffeb3b;
+    background-color: #ffeb3b; /* Yellow */
 
   }
  
   .adnewplan-risk-low {
 
-    background-color: #66bb6a;
+    background-color: #66bb6a; /* Light green */
 
   }
 
   .adnewplan-risk-false {
 
-    background-color: #ef5350;
+    background-color: #ef5350; /* Red */
 
   }
 
   .adnewplan-risk-true {
 
-    background-color: #66bb6a;
+    background-color: #66bb6a; /* Light green */
 
   }
  
@@ -164,11 +166,11 @@ body {
 
     cursor: pointer;
 
-    color: #fff;
+    color: #fff; /* White text color */
 
-    background-color: red;
+    background-color: red; /* Blue background color */
 
-    padding: 5px 10px;
+    padding: 5px 10px; /* Compact padding */
 
     border-radius: 5px;
 
@@ -176,24 +178,32 @@ body {
 
     text-transform: uppercase;
 
-    align-self: center;
+    align-self: center; /* Align in the center */
 
   }
  
   .adnewplan-profit-positive {
 
-    color: green;
+    color: green; /* Green font color for positive profit */
 
   }
  
   .adnewplan-profit-negative {
 
-    color: red;
+    color: red; /* Red font color for negative profit */
 
   }
   
 
- 
+  /* .addPlan-form-container {
+    background-color: #f2f2f2;
+    font-family: 'Manrope', sans-serif;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  } */
  
   .addPlan-form-container {
     background-color: #fff;
@@ -210,7 +220,7 @@ body {
  
   .addPlan-image-container img {
     width: 100%; 
-   
+    /* height: 100%; */
     object-fit: cover;
     border-radius: 10px;
   }
@@ -220,11 +230,15 @@ body {
     padding-left: 20px;
   }
 
- 
+  /* #new-plan-form{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1vh;
+  } */
 
   .form-grp{
     display: grid;
-   
+    /* grid-template-columns: 50% 50%; */
   }
 
 .form-grp2{
@@ -245,9 +259,9 @@ body {
   .addPlan-label {
     position: static;
     font-weight: bold;
-   
+    /* margin-bottom: 5px; */
     display: inline-block;
-   
+    /* width: 120px; */
   }
  
   .addPlan-input, .addPlan-select {
@@ -256,14 +270,26 @@ body {
     box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
-   
+    /* width: calc(50% - 140px); */
     width: 90% !important;
   }
  
- 
+  /* #stocks{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-bottom: 2vh;
+    margin-left: 5vw;
+    display: grid;
+    grid-template-columns: 42% 52%;
+    justify-content: space-between;
+  } */
 
- 
- 
+  /* #stocks input{
+    width: 90% !important;
+  } */
+  /* .addPlan-select {
+    width: calc(50% - 140px);
+  } */
  
   .stock-container {
     border: 1px solid #ccc;
@@ -308,7 +334,7 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     z-index: 9999;
-    opacity: 1;
+    opacity: 1; /* Initially visible */
     transition: opacity 0.5s ease;
     backdrop-filter: blur(5px);
   }

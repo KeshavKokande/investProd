@@ -121,16 +121,17 @@ input[type="number"] {
 }
 
 .bigadv {
- 
- 
- 
+  /* display: flex;
+    flex-direction: row; */
+  /* justify-content: space-around; */
+  /* gap: 0; */
   background-color: rgb(255, 255, 255);
   border-radius: 1.5rem;
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: grid;
   grid-template-columns: 50% 50%;
- 
+  /* grid-row-gap: 2vh; */
   align-items: center;
   margin-bottom: 5vh;
 }
@@ -141,7 +142,7 @@ input[type="number"] {
   grid-column-end: 3;
 }
 
-
+/* Adjust the margin and padding as needed */
 
 .advleft,
 .advright {
@@ -154,7 +155,12 @@ input[type="number"] {
   width: 78%;
 }
 
-
+/* .lefa,.riga{
+    flex:50%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  } */
 
 .advright {
   gap: 4vh;
@@ -171,7 +177,7 @@ input[type="number"] {
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 12px;
- 
+  /* grid-gap: 2vh; */
 }
 
 .rowContainer div:nth-child(even) {
@@ -181,20 +187,28 @@ input[type="number"] {
 .row {
   display: flex;
   position: relative;
- 
+  /* height: 6vh; */
   align-items: center;
- 
+  /* gap: 1vh; */
 }
 
 .rowLabel,
 .rowValue {
   width: 50%;
- 
+  /* padding-left: 8px; */
   position: relative;
   padding: 8px;
 }
 
-
+/* .row::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left:  50%;
+  width: 1px;
+  height: 100%; 
+  background-color: #000;
+} */
 
 .rowLabel {
   font-weight: 600;
@@ -324,3 +338,7 @@ input[type="number"] {
   justify-self: center;
 }
 
+/* 
+  .react-multiple-carousel__arrow--left{
+    left:0 !important;
+  } */

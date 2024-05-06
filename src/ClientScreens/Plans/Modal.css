@@ -1,4 +1,4 @@
-
+/* Modal.css */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -26,5 +26,5 @@
     cursor: pointer;
   }
   
- 
+  /* Add any additional styling as needed */
   

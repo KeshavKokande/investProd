@@ -30,7 +30,7 @@ const EditPlan = () => {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const response = await fetch(`https://team4api.azurewebsites.net/api/v1/advisor/get-plan-details/${edit}`, {
+        const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include'
@@ -53,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
+        const response = await axios.get('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {
@@ -80,7 +80,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('https://invest-nse.azurewebsites.net/calculate', {
+        const response = await fetch('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -246,7 +246,7 @@ const EditPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          axios.patch(`https://team4api.azurewebsites.net/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
+          axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
             .then(response => {
               console.log('Response:', response.data);
               navigate('/advisor/planList');

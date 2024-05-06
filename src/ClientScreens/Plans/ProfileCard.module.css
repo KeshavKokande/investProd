@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
 * {
     margin: 0;
@@ -8,9 +8,10 @@
 
 .containerProfile {
     height: 60vh !important;
-    display: flex;
+    display: flex;;
     flex-wrap: wrap;
-    justify-content: flex-start !important;
+    display: flex-start !important;
+    justify-content: center !important;
     align-items: center !important;
     background-color: transparent !important;
 }
@@ -96,7 +97,7 @@
 
 .image img {
     width: 40%;
-   
+    /* margin-bottom: 20px */
 }
 
 .vitamin {
@@ -156,7 +157,7 @@ h2{
 
 .reviews {
     display: flex;
-   
+    /* margin-top: 5px; */
     justify-content: space-between;
     text-transform: capitalize;
 }
@@ -164,7 +165,7 @@ h2{
 .reviews p {
     font-size: 14px;
     font-weight: 700;
-    	
+    /* color: #9f9f9f !important */ 	
 }
 
 .reviews u {
@@ -177,15 +178,17 @@ h2{
 .size p {
     font-size: 14px;
     font-weight: 700;
-   
+    /* color: #9f9f9f !important */
 }
 
-
+/* .size h5 {
+    margin-top: 10px
+} */
 
 .buttonsProfile {
     display: flex;
     gap: 10px;
-   
+    /* margin-top: 10px */
 }
 
 .buttonsProfile button {
@@ -231,7 +234,7 @@ h2{
 }
 
 .gender {
-   
+    /* margin-top: 10px; */
     display: flex;
     gap: 10px;
     width: 70%
@@ -260,7 +263,7 @@ h2{
 .last_buttons {
     display: flex;
     justify-content: space-between;
-   
+    /* margin-top: 20px */
 }
 
 .qty_btn {
@@ -291,7 +294,9 @@ h2{
     align-items: center
 }
 
-
+/* .money_bag h3 {
+    margin-right: 5px
+} */
 
 .money_bag button {
     height: 40px;
@@ -343,13 +348,33 @@ h2{
 
   .purchased p {
     position: absolute;
-   
-   
-   
+    /* top: 15px; */
+    /* left: 20px; */
+    /* transform: rotate(-45deg); */
     color: white;
     font-weight: bold;
     font-size: 14px;
-   
+    /* margin: auto; */
   }
 
+/* .purchased{
+    position: absolute;
+    top: 13%;
+    left: 15%;
+    border: 1.25px solid green;
+    padding: 0px 11px;
+    border-radius: 30px;
+    align-items: center;
+    display: flex;
+}
 
+.purchased img{
+    display: inline;
+    width: 1.25vw;
+}
+
+.purchased p{
+    display: inline;
+    font-size: small;
+}
+ */

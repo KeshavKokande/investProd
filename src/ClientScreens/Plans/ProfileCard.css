@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
 * {
     margin: 0;
@@ -8,9 +8,10 @@
 
 .container-profile {
     height: 70vh !important;
-    display: flex;
+    display: flex;;
     flex-wrap: wrap;
-    justify-content: flex-start !important;
+    display: flex-start !important;
+    justify-content: center !important;
     align-items: center !important;
     background-color: transparent !important;
 }

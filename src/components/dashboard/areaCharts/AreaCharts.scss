@@ -8,10 +8,12 @@
   }
 }
 
+// bar chart
 .bar-chart {
   background-color: var(--secondary-color);
   padding: 16px 16px 20px 16px;
   border-radius: 5px;
+  // box-shadow: var(--light-shadow1);
   position: relative;
   width: 100.5%;
   border-radius: 0.7rem;
@@ -24,6 +26,7 @@
     width: 100%;
     height: 400px;
 
+    // recharts customization
     .recharts-wrapper {
       @media (max-width: 1400px) {
         margin-left: -10px;
@@ -62,6 +65,7 @@
     color: var(--green-color);
   }
 
+  // customization of recharts - bar chart
   .recharts-default-legend {
     position: absolute;
     top: -90px;
@@ -75,12 +79,14 @@
   }
 }
 
+// progress chart
 .adv-progress-bar {
   padding: 16px;
   border-radius: 5px;
   margin-left: 1.5%;
   box-shadow: var(--light-shadow1);
   background: var(--secondary-color);
+  // background: #ffffff;
 
   @media (max-width: 768px) {
     padding: 12px;
