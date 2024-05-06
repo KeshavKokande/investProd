@@ -37,11 +37,12 @@ body {
   float: left;
 }
 
-.header_bg{
+.header_bg {
   width: 100%;
   float: left;
-  background-color: #f8f9fa transparent!important ;
+  background-color: #f8f9fa !important;
 }
+
 .header_left{
     width: 50%;
     float: left;
@@ -86,13 +87,16 @@ body {
   width: 100%;
   float: left;
   font-size: 6rem !important;
-  color: #3c3d44;
+  color: #3c3d44; /* Set text color */
   padding-top: 80px;
-  
   /* text-transform: uppercase; */
-  text-decoration-color:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%);
+  background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%); /* Set gradient background */
+  -webkit-background-clip: text; /* Apply background to text */
+  background-clip: text; /* Apply background to text */
+  -webkit-text-fill-color: transparent; /* Hide text color */
   font-weight: bold;
 }
+
 .banner_text{
   font-size: 1.25rem !important;
 }
@@ -952,12 +956,14 @@ a:focus {
   color: white;
   border-radius: 5px;
 }
-#landing_signup:hover{
+#landing_signup:hover {
   background-color: white;
-  color:blue;
-  border:2px solid blue;
-  transform: scale3d(1.01);
+  color: blue;
+  border: 2px solid blue;
+  -webkit-transform: scale(1.01);
+  transform: scale(1.01);
 }
+
 #googlebutton{
   border: 2px solid rgb(19, 119, 219) !important;
   display: flex;
@@ -1028,7 +1034,7 @@ a:focus {
 
 .team_section .team_container .box {
   padding: 35px 0 0 0;
-  border-radius: 5px solid white !important;
+  border-radius: 5px; /* Removed 'solid white' */
   overflow: hidden;
   -webkit-transition: all .1s;
   transition: all .1s;

@@ -184,8 +184,8 @@ form{
   display: block;
 }
 
-.register-submit-btn invisible{
-  display: hidden;
+.register-submit-btn.invisible {
+  display: none;
 }
 
 .error{
