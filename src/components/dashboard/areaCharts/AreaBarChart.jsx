@@ -98,7 +98,7 @@ const AreaBarChart = () => {
           cash: item.cash
         }));
 
-        const axiosResponse = await axios.post('https://invest-nse.azurewebsites.net/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
 
         const mapData = calculatedData.plans_data.map((plan) => ({
@@ -139,7 +139,7 @@ const AreaBarChart = () => {
   return (
     <div className="bar-chart">
       <div className="bar-chart-info">
-        <h5 className="bar-chart-title">Returns</h5>
+        <h5 className="bar-chart-title">Plan Values</h5>
         <div className="chart-info-data">
           {/* <div className="info-data-value">₹100.4K</div> */}
           <div className="info-data-text">

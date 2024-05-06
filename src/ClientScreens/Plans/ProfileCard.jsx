@@ -45,7 +45,7 @@ const ProfileCard = ({ plan, ids }) => {
           avg_price: stock.price, // Assuming price is the average price
         }))
       };
-      const response = await fetch('https://invest-nse.azurewebsites.net/calculate', {
+      const response = await fetch('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

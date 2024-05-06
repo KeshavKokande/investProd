@@ -97,7 +97,7 @@ const DualAxis = ({ plans_data }) => {
 
   return (
     <div id="chart">
-      <ReactApexChart options={chartOptions} series={chartSeries} type="bar" height={250} />
+      <ReactApexChart options={chartOptions} series={chartSeries} type="bar" height={410} />
     </div>
   );
 };

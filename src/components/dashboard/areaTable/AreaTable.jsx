@@ -53,6 +53,7 @@ const AreaTable = () => {
       title: 'Invested Amount',
       dataIndex: 'investedAmount',
       key: 'investedAmount',
+      render: (investedAmount) => investedAmount.toFixed(2)
     },
   ];
 
