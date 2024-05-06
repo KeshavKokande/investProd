@@ -1,0 +1,150 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    padding: 2.5%;
+    border-radius: 1.5rem;
+    border: 0px solid rgba(0, 0, 0, 0.125);
+
+    background-color:transparent;
+    margin-top: 2rem;
+  }
+  
+  .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card-body {
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  .card-body p {
+    margin: 0.5rem 0;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 1rem;
+    background-color: #f3f3f3;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .progress {
+    height: 100%;
+    border-radius: 0.5rem;
+    background-color: #4caf50;
+  }
+  
+  .profile-outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 1.5rem;
+  }
+
+.one{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    border-radius: 1.5rem;
+
+}
+.two{
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-radius: 1.5rem;
+  
+
+}
+
+.oneone{
+ 
+}
+
+.twoone{
+    
+}
+
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .edit-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .form-buttons {
+    margin-top: 20px;
+  }
+  
+  .form-buttons button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .form-buttons button:hover {
+    background-color: #0056b3;
+  }
+
+  .dashboardcl{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+  }

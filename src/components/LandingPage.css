@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chart-container {
+  width: 45%;
+  height: 300px; /* Adjust the height as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Adjust the size of the canvas */
+.canvas-container {
+  width: 80%;
+  height: 80%;
+}
+
+
+  
+  .logo {
+    height: 50px;
+  }
+  
+

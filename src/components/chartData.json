@@ -1,0 +1,11 @@
+{
+    "pieChartData": {
+      "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      "values": [12, 19, 3, 5, 2, 3]
+    },
+    "lineGraphData": {
+      "labels": ["January", "February", "March", "April", "May", "June"],
+      "values": [12, 19, 3, 5, 2, 3]
+    }
+  }
+  

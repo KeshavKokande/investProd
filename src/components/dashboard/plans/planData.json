@@ -1,0 +1,28 @@
+{
+  "plan_id": "54545",
+  "plan_name": "dodo investment",
+  "advisor_id": "y6y75",
+  "created_at": "01012020",
+  "cash": 0,
+  "stocks": [
+    {
+      "symbol": "AAPL",
+      "qty": 25
+    },
+    {
+      "symbol": "MSFT",
+      "qty": 50
+    }
+
+  ],
+  "value": [
+    {
+      "date": "01042024",
+      "price":0
+    },
+    {
+      "date": "",
+      "price": 0
+    }
+  ]
+}
