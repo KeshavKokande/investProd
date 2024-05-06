@@ -17,7 +17,7 @@ const AddPlan = () => {
     stocks: [],
     cash: 0,
     photo: null,
-    isPremium: ''
+    isPremium: false
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
@@ -27,7 +27,7 @@ const AddPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
+        const response = await axios.get('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/get_symbol_lastprice');
         setSelectedPrices(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);

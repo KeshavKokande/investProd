@@ -4,9 +4,8 @@ import '../areaTable/AreaTable.scss';
 import AreaTableAction from '../areaTable/AreaTableAction';
 
 const TABLE_HEADS = [
-  'Client Image',
+  'Client',
   'Client Email',
-  'Client Name',
   'Plan Names',
 ];
 
@@ -56,11 +55,11 @@ const Clientlist = () => {
       console.error('Plan data is not an array:', planData);
       return [];
     }
-
+  
     return planIds.map((planId) => {
       const plan = planData.find((plan) => plan._id === planId);
-      return plan ? plan.planName : 'Unknown Plan';
-    });
+      return plan ? plan.planName : undefined; // Return undefined if plan is not found
+    }).filter((planName) => planName !== undefined); // Filter out undefined values
   };
 
   return (
@@ -82,11 +81,16 @@ const Clientlist = () => {
               {tableData.map((client) => (
                 <TableRow key={client._id}>
                   <TableCell>
-                    <img src={client.img} alt={client.name} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
-                  </TableCell>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <img
+                      src={client.img}
+                      alt={client.name}
+                      style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
+                    />
+                    {client.name}
+                  </div>
+                </TableCell>
                   <TableCell>{client.email}</TableCell>
-                  <TableCell>{client.name}</TableCell>
-                  
                   <TableCell>
                     {getPlanNames(client.boughtPlanIds).map((planName, index) => (
                       <div key={index}>{planName}</div>
