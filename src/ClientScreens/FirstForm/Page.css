@@ -20,7 +20,7 @@ form{
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;
-  /* justify-items: center; */
+ 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -72,9 +72,7 @@ form{
 }
 
 .form-container label {
-  /* display: block;
-  margin-bottom: 8px;
-  color: #333; */
+ 
   position: static !important;
   background: none !important;
 }
@@ -85,7 +83,7 @@ form{
 .form-container select {
   width: 100%;
   padding: 8px;
-  /* margin-bottom: 15px; */
+ 
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -156,26 +154,23 @@ form{
 
 .question-container{
 
-  /* display: grid;
-  grid-template-columns: 48% 48%;
-  grid-gap: 2vh; */
+ 
   width: 100%;
-  /* border-radius: 1.5rem;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+ 
 }
 
 
 
 .submit-button {
-  display: none; /* Initially hide the submit button */
+  display: none;
 }
 
-/* Show the submit button when terms are agreed */
+
 .terms-agreed .submit-button {
   display: block;
 }
 
-/* Hide the next button on PageThree */
+
 .page-three .next-button {
   display: none;
 }
@@ -193,5 +188,5 @@ form{
 }
 
 .register-submit-btn invisible{
-  display: hidden;
+  display: none;
 }

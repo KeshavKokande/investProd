@@ -23,7 +23,7 @@
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;
-  /* justify-items: center; */
+ 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -45,12 +45,10 @@
   display: grid;
   grid-template-columns: auto !important;
   grid-gap: 6%;
-  /* overflow: auto; */
+ 
 }
 
-/* .form-container2 input{
-  width: 100% ;
-} */
+
 
 .form-container1 .question-container{
   width: 96%;
@@ -77,9 +75,7 @@
 }
 
 .form-container label {
-  /* display: block;
-  margin-bottom: 8px;
-  color: #333; */
+ 
   font-size: large;
   font-weight: 600;
   position: static !important;
@@ -92,7 +88,7 @@
 .form-container select {
   width: 100% !important;
   padding: 8px;
-  /* margin-bottom: 15px; */
+ 
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -163,26 +159,23 @@
 
 .question-container{
 
-  /* display: grid;
-  grid-template-columns: 48% 48%;
-  grid-gap: 2vh; */
+ 
   width: 100%;
-  /* border-radius: 1.5rem;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+ 
 }
 
 
 
 .submit-button {
-  display: none; /* Initially hide the submit button */
+  display: none;
 }
 
-/* Show the submit button when terms are agreed */
+
 .terms-agreed .submit-button {
   display: block;
 }
 
-/* Hide the next button on PageThree */
+
 .page-three .next-button {
   display: none;
 }
@@ -199,8 +192,8 @@
   display: block;
 }
 
-.register-submit-btn invisible{
-  display: hidden;
+.register-submit-btn.invisible {
+  display: none;
 }
 
 .terms{
@@ -225,14 +218,14 @@
   font-weight: bold;
   margin-top: 0.1rem;
   color: white;
-  background-color: #007bff; /* Blue color (you can adjust this) */
+  background-color: #007bff;
   border: 0.02rem solid #007bff;
   border-radius: 0.5rem;
   transition: background-color 0.3s ease;
 }
 
 .remove {
-  background-color: #0056b3; /* Darker blue color on hover (you can adjust this) */
+  background-color: #0056b3;
 }
 
 
@@ -250,7 +243,7 @@
   height: 45vh;
   border-color: #000000;
   border-width: 0.1rem 0.1rem 0.1rem 0.1rem;
-  /* background-color: #007bff; */
+ 
 }
 
 .preStyle{

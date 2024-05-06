@@ -8,12 +8,14 @@ body {
   background-color: #992e2e;
   overflow-x: hidden;
 }
-.gradient-text{
+
+.gradient-text {
   background: linear-gradient(45deg, #c0619a, #493240);
-  -webkit-backdrop-clip: text ;
+  -webkit-backdrop-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
+
 .link{
   padding-right: 13px;
   padding-left: 13px;
@@ -37,11 +39,12 @@ body {
   float: left;
 }
 
-.header_bg{
+.header_bg {
   width: 100%;
   float: left;
-  background-color: #f8f9fa transparent!important ;
+  background-color: #f8f9fa !important;
 }
+
 .header_left{
     width: 50%;
     float: left;
@@ -88,11 +91,15 @@ body {
   font-size: 6rem !important;
   color: #3c3d44;
   padding-top: 80px;
-  
-  /* text-transform: uppercase; */
-  text-decoration-color:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%);
+ 
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
   font-weight: bold;
 }
+
 .banner_text{
   font-size: 1.25rem !important;
 }
@@ -446,7 +453,7 @@ a:focus {
   height: 300px;
 }
 
-/*header section*/
+
 .hero_area {
   position: relative;
   min-height: 100vh;
@@ -507,7 +514,7 @@ a:focus {
 }
 
 .header_section {
-  /* padding: 15px 0; */
+ 
   max-height: 100vh;
     overflow: hidden;
 }
@@ -619,8 +626,8 @@ a:focus {
   top: 0;
 }
 
-/*end header section*/
-/* slider section */
+
+
 .slider_section {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -952,12 +959,13 @@ a:focus {
   color: white;
   border-radius: 5px;
 }
-#landing_signup:hover{
+#landing_signup:hover {
   background-color: white;
-  color:blue;
-  border:2px solid blue;
-  transform: scale3d(1.01);
+  color: blue;
+  border: 2px solid blue;
+  transform: scale3d(1.01, 1.2, 0.3);
 }
+
 #googlebutton{
   border: 2px solid rgb(19, 119, 219) !important;
   display: flex;
@@ -1009,7 +1017,7 @@ a:focus {
   background-color: #007fa4;
 }
 
-/*team section */
+
 .team_section {
   text-align: center;
   background-color: #00204a;
@@ -1028,14 +1036,14 @@ a:focus {
 
 .team_section .team_container .box {
   padding: 35px 0 0 0;
-  border-radius: 5px solid white !important;
+  border: 5px solid white;
+  border-radius: 5px;
   overflow: hidden;
-  -webkit-transition: all .1s;
   transition: all .1s;
   margin-top: 45px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#002759), to(#002b64));
   background: linear-gradient(to bottom, #002759, #002b64);
 }
+
 
 .team_section .team_container .box .img-box {
   display: -webkit-box;
@@ -1084,8 +1092,8 @@ a:focus {
   color: #00bbf0;
 }
 
-/*team section end*/
-/* client section start */
+
+
 .client_section .heading_container {
   margin-bottom: 30px;
 }
@@ -1183,7 +1191,7 @@ a:focus {
   color: #00204a;
 }
 
-/* client section end */
+
 .info_section {
   background-color: #00204a;
   color: #ffffff;
@@ -1322,7 +1330,7 @@ a:focus {
   background-color: #007fa4;
 }
 
-/* footer section*/
+
 .footer_section {
   position: relative;
   background-color: #ffffff;
@@ -1338,11 +1346,11 @@ a:focus {
 .footer_section p a {
   color: inherit;
 }
-/*# sourceMappingURL=style.css.map */
 
 
 
-/* Flipping Card Styles */
+
+
 .flip-card {
   background-color: transparent;
   perspective: 1000px;

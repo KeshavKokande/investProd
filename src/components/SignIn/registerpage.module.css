@@ -9,7 +9,7 @@
   height: 100vh;
   width: 88vw;
   border-radius: 10px;
-  /* display: flex; */
+ 
   overflow: hidden;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -64,7 +64,7 @@
   }
   .register-right h2 {
     font-family: 'Manrope', sans-serif;
-    /* font-size: 2rem; */
+   
   }
   .input-wrapper {
     width: 100%;
@@ -106,7 +106,7 @@
   }
   
   .gAuth {
-    /* margin-top: 20px !important; */
+   
     cursor: pointer;
     border: 2px solid transparent !important;
     padding: 10px !important;
@@ -115,7 +115,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    /* border: 2px solid black !important; */
+   
   }
   
   .gAuth:hover {

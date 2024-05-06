@@ -1,4 +1,3 @@
-
 .modal {
   display: block;
   position: fixed;
@@ -100,13 +99,6 @@
   align-items: stretch;
 }
 
-/* .card-price {
-  font-size: 32px;
-  color: #007bff;
-  margin-bottom: 20px;
-  margin-block: 1rem;
-    font-size: 3.5em;
-} */
 
 .PricingCard header > .card-price {
   margin-block: 1rem;
@@ -164,8 +156,8 @@
 
 .PricingCard:hover {
   box-shadow: 0 0 20px rgba(31, 2, 252, 0.1);
-  transform: scale(1.05); /* Add zoom effect on hover */
-  transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
 @media screen and (max-width: 800px) {

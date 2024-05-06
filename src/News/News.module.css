@@ -19,7 +19,7 @@ a:hover{
   font-weight: 900 !important;
 }
 
-/* MOBILE VIEW */
+
 @media screen and (max-width: 800px) {
   .containerNews {
     flex-direction: column;
