@@ -7,7 +7,10 @@ body {
   /* Manrope font */
 
 }
-
+.scrollableTextarea {
+  overflow-y: auto; /* or overflow-y: scroll; */
+  overflow-wrap: break-word;
+}
 .adnewplan_plan_container {
 
   display: flex;

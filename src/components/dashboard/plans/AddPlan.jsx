@@ -19,7 +19,7 @@ const AddPlan = () => {
     photo: null,
     isPremium: ''
   });
-  const [advice,setadvice]=useState('');
+  const [advice, setadvice] = useState('');
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
   const [newSymbol, setNewSymbol] = useState('');
@@ -50,7 +50,7 @@ const AddPlan = () => {
     const { name, checked } = event.target;
     setFormData({ ...formData, [name]: checked });
   };
-  
+
 
   const formatCurrency = (amount) => {
     // Convert amount to a number
@@ -263,32 +263,31 @@ const AddPlan = () => {
   const handleSymbolClick = (symbol) => {
     setNewSymbol(symbol);
   };
-  
-async function handlegenaireq()
-{
-  
-  axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks,{ withCredentials: true })
-            .then(response => {
-              console.log('Response:', response.data);
-              let data=response.data.planAdvise;
-              let index = 0;
-              const interval = setInterval(() => {
-                if (index < data.length) {
-                  setadvice(prevWords => prevWords+data[index]);
-                  index++;
-                } else {
-                  clearInterval(interval);
-                }
-              }, 50);
-                
-              
 
-            })
-            .catch(error => {
-              console.error('Error:', error);
-            });
+  async function handlegenaireq() {
 
-}
+    axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks, { withCredentials: true })
+      .then(response => {
+        console.log('Response:', response.data);
+        let data = response.data.planAdvise;
+        let index = 0;
+        const interval = setInterval(() => {
+          if (index < data.length) {
+            setadvice(prevWords => prevWords + data[index]);
+            index++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 50);
+
+
+
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
@@ -344,8 +343,18 @@ async function handlegenaireq()
               <input className={styles.addPlan_input} type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} onChange={handleChangeToggle} />
             </div>
             <div className={`${styles.formGrp} ${styles.formGrp3}`}>
-              <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={advice} onChange={handleChange} required />
+              <label className={styles.addPlan_label} htmlFor="advise">
+                Advise<span className={styles.required}>*</span>:
+              </label>
+              <TextArea
+                className={`${styles.addPlan_input} ${styles.scrollableTextarea}`}
+                type="text"
+                id="advise"
+                name="advise"
+                value={advice}
+                onChange={handleChange}
+                required
+              />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
@@ -378,8 +387,8 @@ async function handlegenaireq()
                 </div>
               ))}
               {console.log(formData.stocks)}
-              {formData.stocks.length?<button className={styles.addPlan_add_stock_btn}style={{width:'100%'}} onClick={handlegenaireq}>create Gen Ai advice</button>:null}
-                         
+              {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>create Gen Ai advice</button> : null}
+
 
             </div>
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
