@@ -17,8 +17,9 @@ const AddPlan = () => {
     stocks: [],
     cash: 0,
     photo: null,
-    isPremium: false
+    isPremium: ''
   });
+  const [advice,setadvice]=useState('');
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
   const [newSymbol, setNewSymbol] = useState('');
@@ -27,7 +28,7 @@ const AddPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/get_symbol_lastprice');
+        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
         setSelectedPrices(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -262,7 +263,32 @@ const AddPlan = () => {
   const handleSymbolClick = (symbol) => {
     setNewSymbol(symbol);
   };
+  
+async function handlegenaireq()
+{
+  
+  axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks,{ withCredentials: true })
+            .then(response => {
+              console.log('Response:', response.data);
+              let data=response.data.planAdvise;
+              let index = 0;
+              const interval = setInterval(() => {
+                if (index < data.length) {
+                  setadvice(prevWords => prevWords+data[index]);
+                  index++;
+                } else {
+                  clearInterval(interval);
+                }
+              }, 50);
+                
+              
 
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+
+}
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
@@ -319,7 +345,7 @@ const AddPlan = () => {
             </div>
             <div className={`${styles.formGrp} ${styles.formGrp3}`}>
               <label className={styles.addPlan_label} htmlFor="advise">Advise<span className={styles.required}>*</span>:</label>
-              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={formData.advise} onChange={handleChange} required />
+              <TextArea className={styles.addPlan_input} type="text" id="advise" name="advise" value={advice} onChange={handleChange} required />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
@@ -343,7 +369,7 @@ const AddPlan = () => {
                     <p>
                       Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
                     </p>
-                    <p>Price:</p>
+                    <p>Price:{selectedPrices[stock.symbol]}</p>
                   </div>
                   <div className={styles.addPlan_card_button}>
                     <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'green' }}>+</button>
@@ -351,6 +377,10 @@ const AddPlan = () => {
                   </div>
                 </div>
               ))}
+              {console.log(formData.stocks)}
+              {formData.stocks.length?<button className={styles.addPlan_add_stock_btn}style={{width:'100%'}} onClick={handlegenaireq}>create Gen Ai advice</button>:null}
+                         
+
             </div>
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
             {/* <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button> */}
@@ -361,5 +391,4 @@ const AddPlan = () => {
     </div>
   );
 };
-
 export default AddPlan;
