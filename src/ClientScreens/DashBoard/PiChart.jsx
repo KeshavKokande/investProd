@@ -3,6 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 import styles from "./dashboard.module.css"
 
 const PiChart = ({ data, title }) => {
+  console.log("pidata", data);
   const options = {
     chart: {
       fontFamily: 'Satoshi, sans-serif',

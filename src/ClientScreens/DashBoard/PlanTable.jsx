@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './dashboard.module.css';
  
-const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
+const PlanTable = ({ data }) => {
+  console.log("pro>>",data);
   const columns = [
     {
       title: 'Plan Name',
@@ -10,25 +11,23 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
     },
     {
       title: 'Advisor Name',
-      dataIndex: 'advisorNames',
-      key: 'advisorNames',
+      dataIndex: 'advisorName',
+      key: 'advisorName',
     },
     {
       title: 'Total Amount Invested',
-      dataIndex: 'totalInvestment',
-      key: 'totalInvestment',
+      dataIndex: 'total_investedamount',
+      key: 'total_investedamount',
+    },
+    {
+      title: 'Latest Transaction Date',
+      dataIndex: 'last_date_to_investment',
+      key: 'last_date_to_investment',
     },
   ];
- 
-  const data = uniquePlans.map((plan, index) => ({
-    key: plan.planId,
-    planName: plan.planName,
-    advisorName: advisorNames[index],
-    totalInvestment: totalInvestments.get(plan.planId),
-  }));
- 
+
   return (
-    <section className={styles.contentAreaTable} style={{borderRadius:'0.7rem'}}>
+    <section className={styles.contentAreaTable} style={{ borderRadius: '0.7rem' }}>
       <div className={styles.dataTableInfo}>
         {/* <h4 className={styles.dataTableTitle}>Latest Orders</h4> */}
       </div>
@@ -36,17 +35,21 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th className={styles.tableHeader}>Plan Names</th>
-              <th className={styles.tableHeader}>Advisor Name</th>
-              <th className={styles.tableHeader}>Total Amount Invested</th>
+              {columns.map(column => (
+                <th key={column.key} className={styles.tableHeader}>
+                  {column.title}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr key={item.key}>
-                <td className={styles.tableData}>{item.planName}</td>
-                <td className={styles.tableData}>{item.advisorName}</td>
-                <td className={styles.tableData}>{item.totalInvestment}</td>
+            {data.map((item, index) => (
+              <tr key={index} className={styles.tableRow}>
+                {columns.map(column => (
+                  <td key={column.key} className={styles.tableData}>
+                    {item[column.dataIndex]}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
@@ -55,5 +58,5 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
     </section>
   );
 };
- 
+
 export default PlanTable;

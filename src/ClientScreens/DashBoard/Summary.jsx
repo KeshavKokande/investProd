@@ -7,9 +7,9 @@ import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
-import ApexChart from './CliBarChart';
+import BarChartComponent from './CliBarChart';
 
-function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg}) {
+function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg, table}) {
 
     if (!transactions || !advisorNames || !returns) {
         return null; // Render nothing if any of the props are missing
@@ -64,6 +64,8 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg})
         return data;
     }
 
+    console.log("bargraphdata", etta);
+
 
     const formatCurrency = (value) => {
         const roundedValue = parseFloat(value).toFixed(2);
@@ -100,6 +102,14 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg})
                     cardInfo={{
                         title: "Current Value",
                         value: formatCurrency(totalInvestedAmount + avggg*totalInvestedAmount/100),
+                        value: (
+                            <div>
+                              {formatCurrency((totalInvestedAmount + avggg*totalInvestedAmount/100))}
+                              <span style={{ fontSize: 'small', color: avggg >= 0 ? 'green' : 'red' }}>
+                                &nbsp; {avggg.toFixed(2)}%
+                              </span>
+                            </div>
+                          )
                         // text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
                     }}
                 />
@@ -109,14 +119,14 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg})
 
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
                 {/* <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p> */}
-                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Returns</strong></center><br /><ApexChart plans_data={etta} widthChart={500} /> </p>
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Returns</strong></center><br /><BarChartComponent plansData={etta} widthChart={500} /> </p>
             </div>
 
 
             <h2 className={styles.heading}>Plan Information</h2>
 
 
-            <PlanTable uniquePlans={Array.from(new Set(transactions.map(transaction => ({ planId: transaction.planId, planName: transaction.planName }))))} advisorNames={advisorNames} totalInvestments={totalInvestments} />
+            <PlanTable data={table} />
 
 
 

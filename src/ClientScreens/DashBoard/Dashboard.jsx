@@ -13,6 +13,7 @@ function DashboardCl() {
   const [error, setError] = useState(null);
   const [plansData, setPlansData] = useState([]);
   const [mapu, setMapu] = useState([]);
+  const [tabData, setTabdata]=useState([]);
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
     name: '',
@@ -73,6 +74,56 @@ function DashboardCl() {
     return urlCreator.createObjectURL(blob);
   }
 
+  const processData = (responseData) => {
+    const { transactions, advisorNames } = responseData;
+
+    // Create a map to store total invested amount for each plan
+    const planInvestmentsMap = new Map();
+
+    transactions.forEach(transaction => {
+        const { planName, advisorId, investedAmount, date } = transaction;
+        const advisorIndex = transactions.findIndex(item => item.advisorId === advisorId);
+        const advisorName = advisorNames[advisorIndex]; // Map advisorId to advisorName
+
+        // Calculate total invested amount for recurring plans
+        if (planInvestmentsMap.has(planName)) {
+            const currentInvestment = planInvestmentsMap.get(planName);
+            planInvestmentsMap.set(planName, currentInvestment + investedAmount);
+        } else {
+            planInvestmentsMap.set(planName, investedAmount);
+        }
+
+        // Update advisor name
+        transaction.advisorName = advisorName;
+    });
+
+    // Convert map to array of objects with desired format
+    const processedData = Array.from(planInvestmentsMap).map(([planName, totalInvestedAmount]) => {
+        const transactionsForPlan = transactions.filter(transaction => transaction.planName === planName);
+        const latestTransaction = transactionsForPlan.reduce((latest, current) => (
+            new Date(current.date) > new Date(latest.date) ? current : latest
+        ));
+
+        return {
+            planName: latestTransaction.planName,
+            advisorName: latestTransaction.advisorName,
+            total_investedamount: totalInvestedAmount,
+            last_date_to_investment: formatDate(latestTransaction.date),
+        };
+    });
+
+    return processedData;
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear().toString().slice(-2);
+  return `${day}-${month}-20${year}`;
+};
+
+
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -92,6 +143,7 @@ function DashboardCl() {
 
         console.log("transactions ", data);
         setTransactions(data.transactions);
+        setTabdata(processData(data));
         setAdvisorNames(data.advisorNames);
       } catch (error) {
         setError(error.message);
@@ -203,7 +255,7 @@ function DashboardCl() {
 
       <h2 className={styles.heading}> Portfolio Summary</h2>
 
-      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} />
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} />
       <script>
         console.log(document.queryselector(".alert"));
       </script>
