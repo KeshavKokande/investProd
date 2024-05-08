@@ -77,7 +77,7 @@ function handlegetotp()
  
 }
   const handleSubmit = () => {
-    console.log(formData);
+    // console.log(formData);
     fetch('https://team4api.azurewebsites.net/api/v1/check-auth/signup', {
       method: 'POST',
       headers: {
@@ -93,7 +93,7 @@ function handlegetotp()
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // Storing name and email in session storage
         sessionStorage.setItem('name', formData.name);
         sessionStorage.setItem('email', formData.email);

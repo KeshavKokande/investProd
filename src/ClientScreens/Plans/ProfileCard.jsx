@@ -105,11 +105,11 @@ const ProfileCard = ({ plan, ids }) => {
             <h2 className={styles.vitaminH2}>{plan.planName}</h2>
 
           </div>
-          <div className={`${styles.reviews} ${styles.gridPosition}`}>
+          {/* <div className={`${styles.reviews} ${styles.gridPosition}`}>
             <p>
               <strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> ₹ {Number(tab.total_current_value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
             </p>
-          </div>
+          </div> */}
           <div className={styles.reviews}>
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
           </div>

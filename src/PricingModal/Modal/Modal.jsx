@@ -17,11 +17,11 @@ const Modal = ({ isOpen, closeModal, planid, advisor }) => {
           <h1 className="header-topic">Our Pricing Plan</h1>
           <div className="header-row"></div>
         </header>
-        <div className="pricing-cards" >
+<div className="pricing-cards" >
           <PricingCard
-            title="Free"
-            price="₹ 0"
-            feature1="Access to free plans"
+            title="3 Months"
+            price="₹ 1000"
+            feature1="Rebancing updates for 3 months"
             feature2="X"
             feature3="X"
             planid = {planid}
@@ -29,23 +29,23 @@ const Modal = ({ isOpen, closeModal, planid, advisor }) => {
             days={0}
           />
           <PricingCard
-          
-            title="3 Month"
+         
+            title="6 Months"
             recomendation="MOST BOUGHT"
-            price="₹ 3000"
+            price="₹ 1800"
             feature1="90 days support"
-            feature2="Access to free plans and paid plans"
+            feature2="Access to paid plans for 6 months"
             feature3="X"
             planid = {planid}
             advisor ={advisor}
             days = {84}
           />
           <PricingCard
-            title="6 Month"
-            price="₹ 4000"
+            title="12 Months"
+            price="3000"
             feature1="180 days support"
-            feature2="Access to free plans and paid plans"
-            feature3="Personalized recommendations"
+            feature2="Access to free plans and paid plans for 12 months"
+            feature3=""
             planid = {planid}
             advisor ={advisor}
             days = {168}

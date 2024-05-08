@@ -6,7 +6,7 @@ function LoginForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Logging in with', email, password);
+        // console.log('Logging in with', email, password);
 
         // Using fetch to send a POST request to your backend
         try {
@@ -21,7 +21,7 @@ function LoginForm() {
             const data = await response.json();
 
             if (response.ok) {
-                console.log('Login successful:', data);
+                // console.log('Login successful:', data);
                 // Handle successful login here (e.g., redirect, store the user session)
             } else {
                 console.error('Login failed:', data.message);

@@ -24,7 +24,7 @@ function AdvClView() {
                 }
                 
                 const data = await response.json();
-                console.log(data)
+                // console.log(data)
                 setAdData(data.listOfNamesOfAdvisors);
                 setIsLoading(false);
             } catch (error) {

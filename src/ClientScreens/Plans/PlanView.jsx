@@ -388,7 +388,7 @@ function PlanView() {
     setModalIsOpen(false);
   };
 
-  console.log("kuch", profileData.subscribedPlanIds);
+  // console.log("kuch", profileData.subscribedPlanIds);
 
   const formatCurrency = (amount) => {
     const roundedAmount = amount.toFixed(2);
@@ -467,7 +467,7 @@ function PlanView() {
 
         const data = await response.json();
         setPlansData(data.plans);
-        console.log("GET ALL PLANS", data);
+        // console.log("GET ALL PLANS", data);
 
 
       } catch (error) {
@@ -480,7 +480,7 @@ function PlanView() {
   }, []);
 
   const plan = plansData.find(plan => plan._id === plan_id);
-  console.log("PLAN DATA IS:", plan);
+  // console.log("PLAN DATA IS:", plan);
 
   const handleSubscribe = async () => {
     // Navigate to pricingApp link
@@ -516,7 +516,7 @@ function PlanView() {
               }
     
               const data = await response.json();
-              console.log('Buy plan response:', data);
+              // console.log('Buy plan response:', data);
     
     
               Swal.fire('Success', 'Plan Bought Successfully!', 'success');
@@ -534,14 +534,14 @@ function PlanView() {
   // Function to handle incrementing the invested amount
   const incrementAmount = () => {
     setQuantity(quantity + 1);
-    setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value + plan.cash) * 100) / 100);
+    setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value ) * 100) / 100);
   };
   
   // Function to handle decrementing the invested amount
   const decrementAmount = () => {
     if (investedAmount > 0) {
       setQuantity(quantity - 1);
-      setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value - plan.cash) * 100) / 100);
+      setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value) * 100) / 100);
     }
   };
 
@@ -582,7 +582,7 @@ function PlanView() {
                     No of Subscription
                   </p>
                   <p className={styles.rowValue}>
-                    {plan.noOfSubscription}
+                    {(plan.boughtClientIds).length}
                   </p>
                 </div>
                 <div className={styles.row}>

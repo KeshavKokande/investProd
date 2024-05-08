@@ -65,7 +65,7 @@ const Notifications = ({user}) => {
         }
 
         const data = await response.json();
-        console.log("notifications:" ,data)
+        // console.log("notifications:" ,data)
         setNotificationList(data.notifications);
 
         setTotalUnseenNotifications(

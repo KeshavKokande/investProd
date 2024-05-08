@@ -31,6 +31,14 @@ const AreaTable = () => {
     };
     fetchData();
   }, []);
+  const formatCurrency = (value) => {
+    const parsedValue = parseFloat(value).toFixed(2);
+    const stringValue = String(parsedValue);
+    const [integerPart, decimalPart] = stringValue.split(".");
+    const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
+    const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
+    return formattedValue;
+  };
 
   const columns = [
     {
@@ -53,10 +61,11 @@ const AreaTable = () => {
       title: 'Invested Amount',
       dataIndex: 'investedAmount',
       key: 'investedAmount',
-      render: (investedAmount) => investedAmount.toFixed(2)
+      render: (investedAmount) => formatCurrency(investedAmount)
     },
   ];
 
+  
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
   const currentItems = tableData ? tableData.slice(indexOfFirstItem, indexOfLastItem) : [];

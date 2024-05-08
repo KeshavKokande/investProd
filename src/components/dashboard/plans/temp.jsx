@@ -143,8 +143,8 @@ const InvestmentForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('Updated Stocks:', updatedPlan.stocks);
-    console.log('Available Cash Balance:', updatedPlan.cash);
+    // console.log('Updated Stocks:', updatedPlan.stocks);
+    // console.log('Available Cash Balance:', updatedPlan.cash);
   };
 
   if (isLoading) {

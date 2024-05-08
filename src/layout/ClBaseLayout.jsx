@@ -47,8 +47,8 @@ const ClBaseLayout = () => {
             gender: data.gender || '',
             jobRole: data.jobRole || ''
           });
-          console.log(data);
-          console.log("data name", data.name);
+          // console.log(data);
+          // console.log("data name", data.name);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -70,14 +70,15 @@ const ClBaseLayout = () => {
         <Notifications user={"client"} />
         <h4>{profileInfo.name}</h4>
         <img
-            src={profileInfo.img}
-            alt='Profile'
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = {avatarBoy};
-            }}
-            className={styles.userProfileImg}
-          />
+          src={profileInfo.img}
+          alt='Profile'
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = avatarBoy;
+          }}
+          className={styles.userProfileImg}
+        />
+
       </div>
       <ClSidebar />
       {/* right side/content of the page */}

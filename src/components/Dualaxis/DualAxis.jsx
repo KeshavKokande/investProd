@@ -49,6 +49,7 @@ const DualAxis = ({ plans_data }) => {
       },
       {
         opposite: true,
+        min: 0,
         axisTicks: {
           show: true,
         },

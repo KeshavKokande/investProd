@@ -1,48 +1,79 @@
-import React, { Component } from 'react';
-import CanvasJSReact from '@canvasjs/react-charts';
+import React from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Cell,
+  Text,
+} from 'recharts';
 
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+const lossCircleStyle = {
+  display: 'inline-block',
+  width: '1rem',
+  height: '1rem',
+  backgroundColor: 'red',
+  marginRight: '0.5rem',
+  borderRadius: '50%',
+};
 
-class ApexChart extends Component {
-  render() {
-    const { plans_data } = this.props;
+const profitCircleStyle = {
+  display: 'inline-block',
+  width: '1rem',
+  height: '1rem',
+  backgroundColor: 'blue',
+  marginRight: '0.5rem',
+  borderRadius: '50%',
+};
+const BarChartComponent = ({ plansData }) => {
+  // Extract plan names, gains, and colors from the data
+  const data = plansData.map(plan => ({
+    name: plan.planName,
+    gains: Math.abs(plan.total_current_gains),
+    originalGains: plan.total_current_gains,
+    color: plan.total_current_gains < 0 ? '#FF0000' : '#0066FF',
+  }));
 
-    // Define an array of colors
-    const colors = ["#543FF0", "#1C4CEF", "#3E4DE7", "#4169E1", "#45766F7"];
+  return (
+    <ResponsiveContainer width="100%" height={350}>
+      <BarChart data={data} margin={{ top: 50, right: 30, left: 50, bottom: 80 }}>
+        <XAxis dataKey="name" tick={{ fontSize: 12 }} angle={-45}
+        dx={-45}
+        dy={45}
+        />
+        <YAxis tickFormatter={val => Math.abs(val).toFixed(2)} tick={{ fontSize: 12 }} />
+        <Tooltip formatter={val => Math.abs(val).toFixed(2)} />
+        <Bar dataKey="gains">
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+          {data.map((entry, index) => (
+            <Text
+              key={`label-${index}`}
+              x={index}
+              y={entry.originalGains < 0 ? -10 : 20}
+              dy={entry.originalGains < 0 ? -10 : 20}
+              textAnchor="middle"
+              fill={entry.originalGains < 0 ? '#FF0000' : '#0066FF'}
+              fontSize={12}
+              angle={-45}
+            >
+              {Math.abs(entry.originalGains).toFixed(2)}
+            </Text>
+          ))}
+        </Bar>
+      </BarChart>
+      <div><center>
+      <span style={lossCircleStyle}></span>
+      <span style={{ color: 'red', marginRight: '1rem',fontSize:"small"}}>Loss</span>
+      <span style={profitCircleStyle}></span>
+      <span style={{ color: 'blue', fontSize:"small" }}>Profit</span></center>
+    </div>
+    </ResponsiveContainer>
+  );
+};
 
-    const dataPoints = plans_data.map((plan, index) => ({
-      x: index + 1,
-      y: plan.total_current_gains,
-      indexLabel: plan.planName, // Show plan name as index label
-      color: colors[index % colors.length] // Assign a color from the colors array
-    }));
-
-    const options = {
-      animationEnabled: true,
-      exportEnabled: true,
-      theme: "light2",
-      title: {
-        // text: "Bar Chart with Plan Names"
-      },
-      axisY: {
-        includeZero: false // Set to false to start from negative values
-      },
-      data: [{
-        type: "column",
-        indexLabelFontColor: "#5A5757",
-        indexLabelPlacement: "outside",
-        columnWidth: 0.1, // Adjust the width of the bars (value between 0 and 1)
-        dataPoints: dataPoints
-      }]
-    };
-
-    return (
-      <div>
-        <CanvasJSChart options={options} />
-      </div>
-    );
-  }
-}
-
-export default ApexChart;
+export default BarChartComponent;

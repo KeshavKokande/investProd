@@ -126,7 +126,7 @@ const Payment = () => {
               }
         
               const data = await response.json();
-              console.log('Buy plan response:', data);
+            //   console.log('Buy plan response:', data);
         
               if (data.status === 'success') {
                 

@@ -1,7 +1,25 @@
 import React from 'react';
 import styles from './dashboard.module.css';
- 
-const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
+
+// Format currency function
+const formatCurrency = (value) => {
+  const parsedValue = parseFloat(value).toFixed(2);
+  const stringValue = String(parsedValue);
+  const [integerPart, decimalPart] = stringValue.split(".");
+  const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
+  const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
+  return formattedValue;
+};
+
+// Format date function
+const formatDate = (dateString) => {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+  return formattedDate;
+};
+
+const PlanTable = ({ data }) => {
+  // console.log("pro>>",data);
   const columns = [
     {
       title: 'Plan Name',
@@ -10,25 +28,25 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
     },
     {
       title: 'Advisor Name',
-      dataIndex: 'advisorNames',
-      key: 'advisorNames',
+      dataIndex: 'advisorName',
+      key: 'advisorName',
     },
     {
       title: 'Total Amount Invested',
-      dataIndex: 'totalInvestment',
-      key: 'totalInvestment',
+      dataIndex: 'total_investedamount',
+      key: 'total_investedamount',
+      render: (value) => formatCurrency(value), // Apply formatCurrency function
+    },
+    {
+      title: 'Latest Transaction Date',
+      dataIndex: 'last_date_to_investment',
+      key: 'last_date_to_investment',
+      render: (dateString) => formatDate(dateString), // Apply formatDate function
     },
   ];
- 
-  const data = uniquePlans.map((plan, index) => ({
-    key: plan.planId,
-    planName: plan.planName,
-    advisorName: advisorNames[index],
-    totalInvestment: totalInvestments.get(plan.planId),
-  }));
- 
+
   return (
-    <section className={styles.contentAreaTable} style={{borderRadius:'0.7rem'}}>
+    <section className={styles.contentAreaTable} style={{ borderRadius: '0.7rem' }}>
       <div className={styles.dataTableInfo}>
         {/* <h4 className={styles.dataTableTitle}>Latest Orders</h4> */}
       </div>
@@ -36,17 +54,21 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th className={styles.tableHeader}>Plan Names</th>
-              <th className={styles.tableHeader}>Advisor Name</th>
-              <th className={styles.tableHeader}>Total Amount Invested</th>
+              {columns.map(column => (
+                <th key={column.key} className={styles.tableHeader}>
+                  {column.title}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr key={item.key}>
-                <td className={styles.tableData}>{item.planName}</td>
-                <td className={styles.tableData}>{item.advisorName}</td>
-                <td className={styles.tableData}>{item.totalInvestment}</td>
+            {data.map((item, index) => (
+              <tr key={index} className={styles.tableRow}>
+                {columns.map(column => (
+                  <td key={column.key} className={styles.tableData}>
+                    {column.render ? column.render(item[column.dataIndex]) : item[column.dataIndex]}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
@@ -55,5 +77,5 @@ const PlanTable = ({ uniquePlans, advisorNames, totalInvestments }) => {
     </section>
   );
 };
- 
+
 export default PlanTable;

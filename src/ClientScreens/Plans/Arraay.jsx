@@ -1,4 +1,3 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
@@ -13,8 +12,7 @@ const responsive = {
 };
 
 const Arraay = ({ plans, risk, ids }) => {
-  console.log('PLANS DATA: ', risk);
-  // const topRatedPlans = plans.sort((a, b) => parseFloat(b.noOfSubscription) - parseFloat(a.noOfSubscription)).slice(0, 5);
+  // console.log('PLANS DATA: ', risk);
   const topRatedPlans = plans.filter(plan => plan.risk == risk);
 
   const mostOrderedPlans = plans.sort((a, b) => parseInt(b.noOfSubscription) - parseInt(a.noOfSubscription)).slice(0, 5);
