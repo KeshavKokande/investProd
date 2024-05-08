@@ -38,7 +38,7 @@
 //           }))
 //         };
 
-//         const response = await fetch('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate', {
+//         const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
 //           method: 'POST',
 //           headers: {
 //             'Content-Type': 'application/json'
@@ -410,7 +410,7 @@ function PlanView() {
           }))
         };
 
-        const response = await fetch('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate', {
+        const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

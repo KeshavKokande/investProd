@@ -53,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/get_symbol_lastprice');
+        const response = await axios.get('https://bba4-103-226-169-60.ngrok-free.app/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {
@@ -80,7 +80,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/calculate', {
+        const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
