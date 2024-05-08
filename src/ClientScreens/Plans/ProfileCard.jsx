@@ -5,70 +5,70 @@ import premium from '../../assets/images/premium.png'
 import tick from '../../assets/images/tick.png'
 
 const ProfileCard = ({ plan, ids }) => {
-  const [tab, setTab] = useState(null);
+  // const [tab, setTab] = useState(null);
 
-  let totalValue = 0;
-  let selectedPrices = {};
-  let selectedDate = "2022-03-07";
+  // let totalValue = 0;
+  // let selectedPrices = {};
+  // let selectedDate = "2022-03-07";
 
-  const setTotalValue = (value) => {
-    totalValue = value;
-  };
+  // const setTotalValue = (value) => {
+  //   totalValue = value;
+  // };
 
-  const setSelectedPrices = (prices) => {
-    selectedPrices = prices;
-  };
+  // const setSelectedPrices = (prices) => {
+  //   selectedPrices = prices;
+  // };
 
-  const setSelectedDate = (date) => {
-    selectedDate = date;
-  };
+  // const setSelectedDate = (date) => {
+  //   selectedDate = date;
+  // };
 
-  const calculateTotalValue = (plan) => {
-    let total = plan.cash;
+  // const calculateTotalValue = (plan) => {
+  //   let total = plan.cash;
 
-    plan.stocks.forEach((stock) => {
-      const price = selectedPrices[stock.symbol];
-      if (price) {
-        total += stock.qty * price;
-      }
-    });
+  //   plan.stocks.forEach((stock) => {
+  //     const price = selectedPrices[stock.symbol];
+  //     if (price) {
+  //       total += stock.qty * price;
+  //     }
+  //   });
 
-    setTotalValue(total);
-  };
+  //   setTotalValue(total);
+  // };
 
-  const fetchStockPrices = async () => {
-    try {
-      const data = {
-        stocks: plan.stocks.map(stock => ({
-          symbol: stock.symbol,
-          qty: stock.qty,
-          avg_price: stock.price, // Assuming price is the average price
-        }))
-      };
-      const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+  // const fetchStockPrices = async () => {
+  //   try {
+  //     const data = {
+  //       stocks: plan.stocks.map(stock => ({
+  //         symbol: stock.symbol,
+  //         qty: stock.qty,
+  //         avg_price: stock.price, // Assuming price is the average price
+  //       }))
+  //     };
+  //     const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(data)
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok.');
+  //     }
 
-      const responseData = await response.json();
-      setTab(responseData);
-    } catch (error) {
-      console.error('Error fetching stock prices:', error);
-    }
-  };
+  //     const responseData = await response.json();
+  //     setTab(responseData);
+  //   } catch (error) {
+  //     console.error('Error fetching stock prices:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchStockPrices();
-  }, []);
+  // useEffect(() => {
+  //   fetchStockPrices();
+  // }, []);
 
-  if (!tab) { return (<div></div>); }
+  // if (!tab) { return (<div></div>); }
 
   return (
     <>

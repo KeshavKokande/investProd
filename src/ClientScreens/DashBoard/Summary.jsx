@@ -126,11 +126,11 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
             {/* Stock Component Added */}
 
 
-            <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
+            {/* <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
                 <ChakraProvider>
                     <CliStock />
                 </ChakraProvider>
-            </div>
+            </div> */}
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
 
