@@ -8,7 +8,11 @@ import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
 import BarChartComponent from './CliBarChart';
-
+import CliStock from './../../CliStockChart/CliStock'
+import { ChakraProvider } from '@chakra-ui/react'
+import moneyImage1 from './../../assest/images/money1.png';
+import moneyImage2 from './../../assest/images/money2.png';
+import moneyImage3 from './../../assest/images/money3.png';
 function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table }) {
 
     if (!transactions || !advisorNames || !returns) {
@@ -89,6 +93,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         title: "Total Amount Invested",
                         value: formatCurrency(totalInvestedAmount),
                     }}
+                    imageSrc={moneyImage1}
                 />
                 <AreaCard
                     colors={["#e4e8ef", "#4ce13f"]}
@@ -97,6 +102,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         title: "Total Profit/Loss",
                         value: formatCurrency(avggg * totalInvestedAmount / 100),
                     }}
+                    imageSrc={moneyImage2}
                 />
                 <AreaCard
                     colors={["#e4e8ef", "#f29a2e"]}
@@ -113,8 +119,18 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                             </div>
                         )
                     }}
+                    imageSrc={moneyImage3}
                 />
             </section>
+
+            {/* Stock Component Added */}
+
+
+            <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
+                <ChakraProvider>
+                    <CliStock />
+                </ChakraProvider>
+            </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
 

@@ -201,7 +201,7 @@ const Notifications = ({user}) => {
         {seenNotifications.length > 0 && (
           <>
             <MenuItem key="before" disabled>
-              BEFORE THAT
+              OLDER
             </MenuItem>
             {seenNotifications.map((el) => (
               <MenuItem key={el._id}>

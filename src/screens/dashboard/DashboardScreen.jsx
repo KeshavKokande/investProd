@@ -1,6 +1,6 @@
 import { AreaCards, AreaCharts, AreaTable} from "../../components";
 import { useEffect, useState } from "react";
-import loadingGif from "./../../assest/images/Animation5.gif";
+import loadingGif from "./../../assest/images/Animation.gif";
  
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ const Dashboard = () => {
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <div style={{ position: 'relative', top: '-80px' }}>
-            <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%',height: '500px', width: "500px" }} />
+            <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
           </div>
         </div>
       ) : (
