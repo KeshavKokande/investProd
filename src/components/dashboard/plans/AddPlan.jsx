@@ -13,22 +13,22 @@ const AddPlan = () => {
     planName: '',
     risk: '',
     minInvestmentAmount: '',
-    advise: '',
+    advise: '', // Changed 'advice' to 'advise' to match the state
     stocks: [],
     cash: 0,
     photo: null,
     isPremium: ''
   });
-  const [advice, setadvice] = useState('');
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
   const [newSymbol, setNewSymbol] = useState('');
   const [newQty, setNewQty] = useState(1);
+  const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://bba4-103-226-169-60.ngrok-free.app/get_symbol_lastprice');
+        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
         setSelectedPrices(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -211,7 +211,7 @@ const AddPlan = () => {
           // console.log('Form data:', formData);
           axios.post('https://team4api.azurewebsites.net/api/v1/advisor/add-plans', formData, { withCredentials: true })
             .then(response => {
-              // console.log('Response:', response.data);
+              console.log('Response:', response.data);
               navigate("/advisor/planList");
             })
             .catch(error => {
@@ -268,35 +268,43 @@ const AddPlan = () => {
 
     axios.post('https://team4api.azurewebsites.net/api/v1/advisor/getGenAIPlanr', formData.stocks, { withCredentials: true })
       .then(response => {
-        // console.log('Response:', response.data);
+        console.log('Response:', response.data);
         let data = response.data.planAdvise;
         let index = 0;
         const interval = setInterval(() => {
           if (index < data.length) {
-            setadvice(prevWords => prevWords + data[index]);
+            setFormData(prevData => ({
+              ...prevData,
+              advise: prevData.advise + data[index] 
+            }));
             index++;
           } else {
             clearInterval(interval);
           }
-        }, 50);
-
-
-
+        }, 20);
       })
       .catch(error => {
         console.error('Error:', error);
       });
-
   }
+
+  useEffect(() => {
+    // Hide cursor initially
+    setShowCursor(false);
+
+    // Show cursor after 1 second
+    const timeout = setTimeout(() => {
+      setShowCursor(true);
+    }, 1000);
+
+    return () => clearTimeout(timeout); // Clear timeout on unmount
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
       <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
       <hr className={styles.addPlan_hr} />
       <div >
-        {/* <div className={styles.addPlan_image_container}>
-          <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />
-        </div> */}
         <div className={styles.addPlan_form_section}>
           <form id={styles.new_plan_form} onSubmit={handleSubmit}>
             <div className={styles.formGrp}>
@@ -344,27 +352,24 @@ const AddPlan = () => {
             </div>
             <div className={`${styles.formGrp} ${styles.formGrp3}`}>
               <label className={styles.addPlan_label} htmlFor="advise">
-                Advise<span className={styles.required}>*</span>:
+                Description<span className={styles.required}>*</span>:
               </label>
               <TextArea
                 className={`${styles.addPlan_input} ${styles.scrollableTextarea}`}
-                type="text"
                 id="advise"
                 name="advise"
-                value={advice}
-                onChange={handleChange}
-                required
+                value={formData.advise} 
+                onChange={handleChange} 
+                // required
+                autoFocus 
+                style={{ caretColor: showCursor ? 'auto' : 'transparent' }}
               />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}
             </div>
 
             <div className={`${styles.formGrp} ${styles.addPlan_stocks}`}>
-              {/* <h2>Add New Stock</h2> */}
               <label className={styles.addPlan_label}>Stock</label>
-              {/* <label htmlFor="newSymbol">Symbol:</label> */}
               <input type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
-              {/* <label htmlFor="newQty">Quantity:</label>
-            <input type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} /> */}
               <button type="button" onClick={handleAddStock}>&#x2713;</button>
             </div>
             <div style={{ position: 'relative', width: '100%' }}>
@@ -386,14 +391,10 @@ const AddPlan = () => {
                   </div>
                 </div>
               ))}
-              {/* {console.log(formData.stocks)} */}
-              {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>create Gen Ai advice</button> : null}
-
-
+              {console.log(formData.stocks)}
+              {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>Generate Description Using Gen AI</button> : null}
             </div>
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
-            {/* <button type="button" onClick={handleSimplifyStocks} className={styles.addPlan_simplify_btn}>Simplify</button> */}
-
           </form>
         </div>
       </div>
