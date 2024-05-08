@@ -1,10 +1,10 @@
 import { AreaCards, AreaCharts, AreaTable} from "../../components";
 import { useEffect, useState } from "react";
-import loadingGif from "./../../assest/images/Animation.gif";
-
+import loadingGif from "./../../assest/images/Animation5.gif";
+ 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
-  
+ 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
@@ -14,13 +14,13 @@ const Dashboard = () => {
  
     return () => clearTimeout(timeout);
   }, []);
-
+ 
   return (
     <div className="content-area">
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <div style={{ position: 'relative', top: '-80px' }}>
-            <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%',height: '500px', width: "500px" }} />
           </div>
         </div>
       ) : (
@@ -34,5 +34,5 @@ const Dashboard = () => {
     </div>
   );
 };
-
+ 
 export default Dashboard;
