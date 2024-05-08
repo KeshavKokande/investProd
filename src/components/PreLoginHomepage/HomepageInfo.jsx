@@ -1,10 +1,8 @@
-// import React from "react";
-
 import "./css/style.css"
 function HomepageInfo() {
   return (
     <section id="contact" className="info_section layout_padding2">
-      <div className="container my-custom-container  d-flex flex-column flex-wrap">
+      <div className="about_us_container my-custom-container  d-flex flex-column flex-wrap">
        
           <div className="col-md-6 col-lg-3 info_col">
             <div className="info_contact">
@@ -49,32 +47,7 @@ function HomepageInfo() {
               </a>
             </div>
           </div>
-          {/* <div className="col-md-6 col-lg-3 info_col">
-          <div className="info_detail">
-            <h4>
-              Info
-            </h4>
-            <p>
-              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-            </p>
-          </div>
-        </div> */}
-          {/* <div className="col-md-6 col-lg-2 mx-auto info_col">
-
-          </div> */}
-          {/* <div className="col-md-6 col-lg-3 info_col "> */}
-          {/* <h4>
-            Subscribe
-          </h4>
-          <form action="#">
-            <input type="text" placeholder="Enter email" />
-            <button type="submit">
-              Subscribe
-            </button>
-          </form> */}
-          {/* </div> */}
         </div>
-    
     </section>
   )
 }
