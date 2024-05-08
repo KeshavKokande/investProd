@@ -28,8 +28,6 @@ const AdvisorsCarousel = ({ advisors }) => {
 
 
 
-
-
   return (
     <>
       <div>

@@ -58,6 +58,12 @@ const PlanCardList = ({ plans, ids }) => {
     setFilteredPlans(filtered);
   };
 
+  const handleSearchCheckboxChange = (isChecked) => {
+    const updatedFilters = { ...filters };
+    updatedFilters.searchText = isChecked ? ' ' : ''; // Set searchText to ' ' if checked, '' otherwise
+    setFilters(updatedFilters);
+};
+
   const handleFilterChange = (event) => {
     setFilters({ ...filters, [event.target.name]: event.target.value });
   };
@@ -157,7 +163,15 @@ const PlanCardList = ({ plans, ids }) => {
               </div>
             </div>
           </div>
-
+          <div className={styles.flex}>
+          <input
+                type="checkbox"
+                id="searchCheckbox"
+                checked={filters.searchText === ' '}
+                onChange={(e) => handleSearchCheckboxChange(e.target.checked)}
+            />
+            <label htmlFor="searchCheckbox">View All</label>
+            </div>
         </div>
       </div>
 
