@@ -62,11 +62,11 @@ const Register = () => {
   };
  
   const handleGoogleSignIn = () => {
-      window.location.href = 'https://team4api.azurewebsites.net/api/v1/check-auth/signin-google';
+      window.location.href = 'http://localhost:8000/api/v1/check-auth/signin-google';
     };
 function handlegetotp()
 {
-  fetch('https://team4api.azurewebsites.net/api/v1/otp/send-otp',{
+  fetch('http://localhost:8000/api/v1/otp/send-otp',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ function handlegetotp()
 }
   const handleSubmit = () => {
     // console.log(formData);
-    fetch('https://team4api.azurewebsites.net/api/v1/check-auth/signup', {
+    fetch('http://localhost:8000/api/v1/check-auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
