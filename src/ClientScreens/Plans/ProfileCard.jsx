@@ -85,11 +85,15 @@ const ProfileCard = ({ plan, ids }) => {
               <img src={premium} alt="" />
             </div>
           )}
-          {plan.isSubscribed && (
+          {plan.boughtClientIds.includes(sessionStorage.getItem('Cl_Id')) ? (
+            <div className={styles.invested}>
+              <p>Invested</p>
+            </div>
+          ) : plan.isSubscribed ? (
             <div className={styles.purchased}>
               <p>Subscribed</p>
             </div>
-          )}
+          ) : null}
           <div className={`${styles.image} ${styles.gridPosition}`}>
             <img
               src={plan.decPhoto}

@@ -346,7 +346,34 @@ h2{
   }
   
 
-  .purchased p {
+.purchased p {
+    position: absolute;
+    /* top: 15px; */
+    /* left: 20px; */
+    /* transform: rotate(-45deg); */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    /* margin: auto; */
+  }
+
+  .invested {
+    position: absolute;
+    top: 6%;
+    left: -46px;
+    z-index: 1;
+    overflow: hidden;
+    width: 174px;
+    height: 32px;
+    background-color: #464bee;
+    transform: rotate(-45deg);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+  
+
+.invested p {
     position: absolute;
     /* top: 15px; */
     /* left: 20px; */
