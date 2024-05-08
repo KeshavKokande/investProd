@@ -36,6 +36,8 @@ function PlanView() {
   };
 
   const [tab, setTab] = useState(null);
+  const [anotherAmount, setAnotherAmount] = useState(0);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -127,59 +129,63 @@ function PlanView() {
   };
 
   const handleBuyPlan = async () => {
-        Swal.fire({
-          title: 'Are You Sure?',
-          text: 'Do you want to buy this plan?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, Buy It!'
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            try {
-              const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                  price: tab.total_current_value,
-                  qty: quantity
-                })
-              });
-    
-              if (!response.ok) {
-                throw new Error('Failed To Buy Plan');
-              }
-    
-              const data = await response.json();
-              // console.log('Buy plan response:', data);
-    
-    
-              Swal.fire('Success', 'Plan Bought Successfully!', 'success');
-              if (data.status === 'success') {
-                navigate('/client_dashboard');// Update success state
-              }
-            } catch (error) {
-              console.error('Error buying plan:', error.message);
-              Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
+    if (investedAmount === 0 || anotherAmount === 0) {
+      alert('Please enter a valid invested amount.');
+    } else {
+      Swal.fire({
+        title: 'Are You Sure?',
+        text: 'Do you want to buy this plan?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Buy It!'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                price: tab.total_current_value,
+                qty: quantity
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed To Buy Plan');
             }
+
+            const data = await response.json();
+            // console.log('Buy plan response:', data);
+
+
+            Swal.fire('Success', 'Plan Bought Successfully!', 'success');
+            if (data.status === 'success') {
+              navigate('/client_dashboard');// Update success state
+            }
+          } catch (error) {
+            console.error('Error buying plan:', error.message);
+            Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
           }
-        });
-      };
+        }
+      });
+    }
+  };
 
   // Function to handle incrementing the invested amount
   const incrementAmount = () => {
-    setQuantity(quantity + 1);
-    setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value ) * 100) / 100);
+    setAnotherAmount(Number(anotherAmount) + 1);
+    setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value) * 100) / 100);
   };
-  
+
   // Function to handle decrementing the invested amount
   const decrementAmount = () => {
     if (investedAmount > 0) {
-      setQuantity(quantity - 1);
+      setAnotherAmount(Number(anotherAmount) - 1);
       setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value) * 100) / 100);
     }
   };
@@ -188,11 +194,11 @@ function PlanView() {
   return (
     <div>
       {isLoading ? (
-       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-       <div style={{ position: 'relative', top: '-80px' }}>
-         <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
-       </div>
-     </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div style={{ position: 'relative', top: '-80px' }}>
+            <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+          </div>
+        </div>
       ) : (
         <div>
           <div className={styles.bigadv}>
@@ -217,7 +223,7 @@ function PlanView() {
                     Min. Investment Amount
                   </p>
                   <p className={styles.rowValue}>
-                  ₹ {Number(tab.total_current_value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                    ₹ {Number(tab.total_current_value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                   </p>
                 </div>
                 <div className={styles.row}>
@@ -240,7 +246,7 @@ function PlanView() {
                   <p className={styles.rowLabel}>
                     Risk
                   </p>
-                  <p className={styles.rowValue}>
+                  <p className={`${styles.rowValue} ${styles.riskValue}`}>
                     {plan.risk}
                   </p>
                 </div>
@@ -252,7 +258,7 @@ function PlanView() {
                     {plan.advise}
                   </p>
                 </div>
-                {(!plan.isPremium || (plan.isSubscribed) )&& (
+                {(!plan.isPremium || (plan.isSubscribed)) && (
                   <div className={styles.row}>
                     <p className={styles.rowLabel}>
                       Stocks
@@ -267,8 +273,8 @@ function PlanView() {
                   </div>
                 )}
 
-                {!plan.isPremium||(plan.isSubscribed) ? (
-                  <div style={{display: 'grid'}} className={styles.investment_panel_box}>
+                {!plan.isPremium || (plan.isSubscribed) ? (
+                  <div style={{ display: 'grid' }} className={styles.investment_panel_box}>
                     <div className={styles.investment_panel}>
                       <label htmlFor="amt">Amount to be invested</label>
                       <div className={styles.modify_qty}>
@@ -287,6 +293,18 @@ function PlanView() {
                           <button onClick={decrementAmount} className={styles.modify_qty_btn}>-</button>
                           <button onClick={incrementAmount} className={styles.modify_qty_btn} >+</button>
                         </div>
+                        <input
+                          className={styles.anotherInput}
+                          type="text"
+                          value={anotherAmount}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                            setAnotherAmount(value);
+                            setInvestedAmount(value * tab.total_current_value);
+                          }}
+                          placeholder="Enter Lots"
+                        />
+
                       </div>
                     </div>
                     <button className={styles.buyButton} onClick={handleBuyPlan}>Buy</button>
@@ -301,19 +319,15 @@ function PlanView() {
               </div>
             </div>
             <div className={styles.chart}>
-              <StockChart stocks={plan.stocks} days={365} setc={setCagr}/>
+              <StockChart stocks={plan.stocks} days={365} setc={setCagr} />
             </div>
           </div>
-
         </div>
-
-        
       )}
       {isLoading ? (
         <p></p>
       ) : (<Modal isOpen={modalIsOpen} closeModal={closeModal} planid={plan_id} advisor={plan.advisorId}>
-         
-        </Modal>)}
+      </Modal>)}
     </div>
   );
 }
