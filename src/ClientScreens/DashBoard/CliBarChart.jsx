@@ -11,6 +11,23 @@ import {
   Text,
 } from 'recharts';
 
+const lossCircleStyle = {
+  display: 'inline-block',
+  width: '1rem',
+  height: '1rem',
+  backgroundColor: 'red',
+  marginRight: '0.5rem',
+  borderRadius: '50%',
+};
+
+const profitCircleStyle = {
+  display: 'inline-block',
+  width: '1rem',
+  height: '1rem',
+  backgroundColor: 'blue',
+  marginRight: '0.5rem',
+  borderRadius: '50%',
+};
 const BarChartComponent = ({ plansData }) => {
   // Extract plan names, gains, and colors from the data
   const data = plansData.map(plan => ({
@@ -49,6 +66,12 @@ const BarChartComponent = ({ plansData }) => {
           ))}
         </Bar>
       </BarChart>
+      <div><center>
+      <span style={lossCircleStyle}></span>
+      <span style={{ color: 'red', marginRight: '1rem',fontSize:"small"}}>Loss</span>
+      <span style={profitCircleStyle}></span>
+      <span style={{ color: 'blue', fontSize:"small" }}>Profit</span></center>
+    </div>
     </ResponsiveContainer>
   );
 };
