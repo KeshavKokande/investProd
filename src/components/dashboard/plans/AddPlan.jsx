@@ -17,7 +17,7 @@ const AddPlan = () => {
     stocks: [],
     cash: 0,
     photo: null,
-    isPremium: ''
+    isPremium: false
   });
   const [errors, setErrors] = useState({});
   const [selectedPrices, setSelectedPrices] = useState({});
