@@ -368,6 +368,7 @@ import axios from 'axios';
 import Modal from './../../PricingModal/Modal/Modal';
 import PricingCard from '../../PricingModal/PricingCard/PricingCard';
 import './../../PricingModal/PricingApp/PricingApp.css'
+import loadingGif from "./../../assest/images/Animation.gif";
 function PlanView() {
   const navigate = useNavigate();
   const { plan_id } = useParams();
@@ -549,7 +550,11 @@ function PlanView() {
   return (
     <div>
       {isLoading ? (
-        <p>Loading...</p>
+       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+       <div style={{ position: 'relative', top: '-80px' }}>
+         <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+       </div>
+     </div>
       ) : (
         <div>
           <div className={styles.bigadv}>

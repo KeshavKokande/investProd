@@ -3,11 +3,12 @@ import PlanCardList from './PlanCardList';
 import React, { useState, useEffect } from 'react';
 import styles from "./Plans.module.css"
 import axios from 'axios';
-
+import loadingGif from "./../../assest/images/Animation.gif";
 function PlansCl() {
   const [plansData, setPlansData] = useState([]);
   const [riks, setRiks] = useState([]);
   const [kiks, setKiks] = useState(null);
+  const [loading, setLoading] = useState(true); // New state for loading indicator
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,7 +29,6 @@ function PlansCl() {
           },
           credentials: 'include'
         });
- 
 
         if (!response.ok && !ponse.ok) {
           throw new Error('Failed to fetch plans data');
@@ -37,16 +37,15 @@ function PlansCl() {
         const data = await response.json();
         const rik = await ponse.json();
 
-        // console.log('ris  ',data);
-        
-
         setRiks(rik.client.question_4)
         setKiks(rik.client.subscribedPlanIds)
 
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
+        setLoading(false); // Update loading state when data is fetched
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
+        setLoading(false); // Update loading state in case of error
       }
     };
 
@@ -76,19 +75,21 @@ function PlansCl() {
       return null;
     }
   };
-  
 
   const plansWithDecodedImages = plansData.map(plan => {
     const decodedImageUrl = decodeImageData(plan);
     return { ...plan, decPhoto: decodedImageUrl };
   });
 
-// console.log("riks",riks);
-// console.log("kiks",kiks);
-
-if (!kiks){return (<div></div>);}
-
- 
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ position: 'relative', top: '-80px' }}>
+        <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      </div>
+    </div>
+    );
+  }
 
   return (
     <>
