@@ -87,7 +87,7 @@ const PlanCardList = ({ plans, ids }) => {
   return (
     <div style={{ marginTop: '4vh' }} >
       <div className={styles.clContainer}>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 1vw' }}>
+        <div className={styles.filterOptions}>
           <div className={styles.flex}>
             <label> Search: </label>
             <input
@@ -163,15 +163,21 @@ const PlanCardList = ({ plans, ids }) => {
 
       <br />
 
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} className={styles.CardList}>
-        {sortPlans().map((plan, index) => (
-          <div key={index} style={{ width: '33%', padding: '10px' }}>
-            <Link to={`/planDetail/${plan._id}`}>
-              <ProfileCard plan={plan} ids={ids} />
-            </Link>
-          </div>
-        ))}
-      </div>
+      {(filters.searchText && filteredPlans.length === 0) ? (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <h3>No data found</h3>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} className={styles.CardList}>
+          {sortPlans().map((plan, index) => (
+            <div key={index} style={{ width: '33%', padding: '10px' }}>
+              <Link to={`/planDetail/${plan._id}`}>
+                <ProfileCard plan={plan} ids={ids} />
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
