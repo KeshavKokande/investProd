@@ -1,10 +1,10 @@
 import { AreaCards, AreaCharts, AreaTable} from "../../components";
 import { useEffect, useState } from "react";
 import loadingGif from "./../../assest/images/Animation.gif";
-
+ 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
-  
+ 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
@@ -14,7 +14,7 @@ const Dashboard = () => {
  
     return () => clearTimeout(timeout);
   }, []);
-
+ 
   return (
     <div className="content-area">
       {loading ? (
@@ -34,5 +34,5 @@ const Dashboard = () => {
     </div>
   );
 };
-
+ 
 export default Dashboard;
