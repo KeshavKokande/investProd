@@ -14,14 +14,6 @@ const PageThree = ({ agreed, handleCheckboxChange }) => {
       <div className={`${styles['form-container']} ${styles['form-container2']}`}>
         <div className={styles.preStyle}>
           <h3>Terms and Conditions</h3>
-          {/* <h4>By using inVest, you as a client agree to:</h4>
-          <p>
-            Provide accurate registration information, safeguard account credentials, and report unauthorized use promptly. While we provide financial services and investment tools, information is for informational purposes only. Users may connect with professional advisors through our platform for personalized guidance.
-          </p>
-          <p>
-            They must adhere to lawful usage, respect privacy, and understand the risks of financial markets. We reserve the right to suspend or terminate accounts for violations. Any changes to terms will be communicated. These terms are governed by Indian jurisdiction laws.
-          </p> */}
-
           <div className={styles.termsconditions}>
             <pre prestyle={styles.preStyle}>
               {`  Welcome to Invest! Before you proceed, please take a moment to review the 

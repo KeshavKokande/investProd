@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import styles from './registerpage.module.css';
 import RegistrationImage from './../../assets/images/RegFinancialAdvisor.jpg';
-import { isElementOfType } from 'react-dom/test-utils';
  
 const Register = () => {
   const [userData, setUserData] = useState(null);
@@ -173,7 +172,7 @@ function handlegetotp()
         {errors.general && <span className={styles['error-message']}>{errors.general}</span>}
         {registrationError && <span className={styles['error-message']}>{registrationError}</span>}
         {getotp?<div className={styles['input-wrapper']}>
-          <label>Otp</label>
+          <label>OTP</label>
           <input type="number" name="otp" value={formData.otp} onChange={handleChange} />
          
         </div>:null}
@@ -182,11 +181,6 @@ function handlegetotp()
         </div>
  
         <hr />
- 
-        {/* <div className={styles['gAuth']}>
-          <h2>Continue with </h2>
-          <span className={styles['google-icon']}><FcGoogle /></span>
-        </div> */}
         <div id="googlebutton" className={styles['gAuth']} onClick={handleGoogleSignIn}>
             <h2>Continue with</h2>
             <span className={styles['google-icon']}><FcGoogle /></span>

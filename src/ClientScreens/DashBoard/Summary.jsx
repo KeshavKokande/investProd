@@ -113,7 +113,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         value: (
                             <div>
                                 {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
-                                <span style={{ fontSize: 'small', color: avggg >= 0 ? 'green' : 'red' }}>
+                                <span style={{ fontSize: 'small', color: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
                                     &nbsp; {avggg.toFixed(2)}%
                                 </span>
                             </div>
@@ -133,36 +133,20 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
             </div> */}
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
-
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
                     <center><strong>Investment</strong></center><br />
                     <PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} />
                 </p>
-                
+
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
                     <center><strong>Returns</strong></center><br />
                     <BarChartComponent plansData={etta} widthChart={500} />
                 </p>
             </div>
-
-
             <h2 className={styles.heading}>Plan Information</h2>
-
-
             <PlanTable data={table} />
-
-
-
         </div>
     );
 }
 
 export default InvestmentSummary;
-
-
-
-{/* <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                <p><strong>Total Amount Invested:</strong><br/> {roundToTwoDecimalPlaces(totalInvestedAmount)}</p>
-                <p><strong>Total Returns:</strong><br/> {roundToTwoDecimalPlaces(totalProfitAmount)}</p>
-                <p><strong>Current Value:</strong><br/> {roundToTwoDecimalPlaces(totalInvestedAmount+totalProfitAmount)}</p>
-            </div> */}

@@ -166,6 +166,17 @@ body {
   background-size: 100%;
   
 }
+
+.about_us_container {
+  padding: 20px;
+  background-color: #fbf9f9;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: left;
+  /* justify-items: center; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 .my-custom-container{
   background-color: #00204a !important;
 }

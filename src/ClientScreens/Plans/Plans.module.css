@@ -188,7 +188,7 @@ input[type="number"] {
   position: relative;
   /* height: 6vh; */
   align-items: center;
-  /* gap: 1vh; */
+  text-transform: none;
 }
 
 .rowLabel,
