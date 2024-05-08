@@ -37,6 +37,7 @@ const ClBaseLayout = () => {
           const data = response.data.client;
           const imageDataArray = data.profilePhoto?.data?.data || [];
           const imageDataUrl = arrayToDataURL(imageDataArray);
+          sessionStorage.setItem("Cl_Id", data._id)
           setProfileInfo({
             cota: data.profilePhoto.contentType,
             img: imageDataUrl,

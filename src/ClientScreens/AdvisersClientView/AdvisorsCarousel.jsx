@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './../../components/AdvisorCardsPage/TestpageAdv.css'
 import styles from './advisorClient.module.css';
 import avatarBoy from "../../assets/images/avator.svg";
+import './StarRating.css';
 
 
 const settings = {
@@ -47,17 +48,11 @@ const AdvisorsCarousel = ({ advisors }) => {
                   <div className="flex flex-col items-center justify-center gap-1 p-4">
                     <p className="text-xl font-semibold">{advisor.name}</p>
                     {/* <p className="text-center">{d.review}</p> */}
-                    <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
+                    <p style={{ textAlign: "justify" }}>{advisor.description}</p>
                     <div className='rating' style={{ color: "gold" }}>
-                      <div>
-
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-
-                      </div>
+                    <div className="star-rating" style={{ '--star-width': `${advisor.ratings/2 * 20}%` }}>
+                      <i data-star={advisor.ratings/2}></i>
+                    </div>
                       <Link to={`/advisor/${advisor._id}`}>
                         <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                       </Link>
@@ -85,17 +80,11 @@ const AdvisorsCarousel = ({ advisors }) => {
                     <p className="text-xl font-semibold">{advisor.name}</p>
 
                     {/* <p className="text-center">{d.review}</p> */}
-                    <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
+                    <p style={{ textAlign: "justify" }}>{advisor.description}</p>
                     <div className='rating' style={{ color: "gold" }}>
-                      <div style={{ width: "max-content" }}>
-
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-
-                      </div>
+                    <div className="star-rating" style={{ '--star-width': `${advisor.ratings/2 * 20}%` }}>
+                      <i data-star={advisor.ratings/2}></i>
+                    </div>
                       <Link to={`/advisor/${advisor._id}`}>
                         <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                       </Link>
@@ -120,15 +109,11 @@ const AdvisorsCarousel = ({ advisors }) => {
 
                   <div className="flex flex-col items-center justify-center gap-1 p-4">
                     <p className="text-xl font-semibold">{advisor.name}</p>
-                    <p style={{ textAlign: "justify" }}>Is an experienced financial advisor specializing in investment planning and wealth management, trusted for his strategic insights and commitment to client success and satisfaction.</p>
+                    <p style={{ textAlign: "justify" }}>{advisor.description}</p>
                     <div className='rating' style={{ color: "gold" }}>
-                      <div>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                      </div>
+                    <div className="star-rating" style={{ '--star-width': `${advisor.ratings/2 * 20}%` }}>
+                      <i data-star={advisor.ratings/2}></i>
+                    </div>
                       <Link to={`/advisor/${advisor._id}`}>
                         <button className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl'>Open Profile</button>
                       </Link>

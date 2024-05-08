@@ -1,0 +1,25 @@
+.star-rating {
+    display: inline-block;
+    font-style: normal;
+    position: relative;
+    unicode-bidi: bidi-override;
+  }
+  
+  .star-rating i::before {
+    display: block;
+    content: '★★★★★';
+    color: #eee;
+  }
+  
+  .star-rating i::after {
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '★★★★★';
+    width: var(--star-width);
+    color: #ff8c00;
+    overflow: hidden;
+    height: 100%;
+  }
+  
