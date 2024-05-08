@@ -22,8 +22,11 @@ const BarChartComponent = ({ plansData }) => {
 
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+      <BarChart data={data} margin={{ top: 50, right: 30, left: 50, bottom: 80 }}>
+        <XAxis dataKey="name" tick={{ fontSize: 12 }} angle={-45}
+        dx={-45}
+        dy={45}
+        />
         <YAxis tickFormatter={val => Math.abs(val).toFixed(2)} tick={{ fontSize: 12 }} />
         <Tooltip formatter={val => Math.abs(val).toFixed(2)} />
         <Bar dataKey="gains">
@@ -39,6 +42,7 @@ const BarChartComponent = ({ plansData }) => {
               textAnchor="middle"
               fill={entry.originalGains < 0 ? '#FF0000' : '#0066FF'}
               fontSize={12}
+              angle={-45}
             >
               {Math.abs(entry.originalGains).toFixed(2)}
             </Text>
