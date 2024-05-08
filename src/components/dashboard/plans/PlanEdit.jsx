@@ -53,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://bba4-103-226-169-60.ngrok-free.app/get_symbol_lastprice');
+        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {
