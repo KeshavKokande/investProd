@@ -138,7 +138,7 @@ const PlanCard = ({ plan, deletePlan }) => {
             <div><strong>Risk </strong>:<span className={`${styles.adnewplan_risk_dot} ${riskClassName}`}></span>{risk}</div>
             <div><strong>Status </strong>:<span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
             <div><strong>Minimum Investment Amount</strong>: {formatCurrency(tab.total_current_value)}</div>
-            <div><strong>Number of Subscriptions</strong>: {noOfSubscription}</div>
+            <div><strong>Number of Subscriptions</strong>: {(plan.boughtClientIds).length}</div>
             <div><strong>Percent P&L</strong>: {(((tab.total_current_value-minInvestmentAmount)/minInvestmentAmount)*100).toFixed(2)}%</div>
             <div><strong>Advise</strong>: {advise}</div>
           </div>

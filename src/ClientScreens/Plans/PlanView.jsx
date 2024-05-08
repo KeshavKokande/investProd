@@ -582,7 +582,7 @@ function PlanView() {
                     No of Subscription
                   </p>
                   <p className={styles.rowValue}>
-                    {plan.noOfSubscription}
+                    {(plan.boughtClientIds).length}
                   </p>
                 </div>
                 <div className={styles.row}>
