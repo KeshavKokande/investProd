@@ -392,7 +392,7 @@ const AddPlan = () => {
                 </div>
               ))}
               {console.log(formData.stocks)}
-              {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>create Gen Ai advice</button> : null}
+              {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>Generate Description Using Gen AI</button> : null}
             </div>
             <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
           </form>
