@@ -1,0 +1,226 @@
+[
+        {
+            "_id": "65e99cb2a01b763d047b416e",
+            "capValue": 5200,
+            "maxVal": "130",
+            "risk": "low",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 1000,
+            "noOfSubscription": 1,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "MRF",
+                    "contri": 20,
+                    "_id": "65e99cb2a01b763d047b416f",
+                    "currentDayValue": "4.21"
+                },
+                {
+                    "stockName": "ICICI",
+                    "contri": 30,
+                    "_id": "65e99cb2a01b763d047b4170",
+                    "currentDayValue": "-2.85"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 50,
+                    "_id": "65e99cb2a01b763d047b4171",
+                    "currentDayValue": "-2.28"
+                }
+            ],
+            "createdAt": "2024-03-07T10:53:38.746Z",
+            "updatedAt": "2024-03-07T20:50:45.135Z"
+        },
+        {
+            "_id": "65e99cf1a01b763d047b4182",
+            "capValue": 5200,
+            "maxVal": "130",
+            "risk": "low",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 1000,
+            "noOfSubscription": 2,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "MRF",
+                    "contri": 30,
+                    "_id": "65e99cf1a01b763d047b4183",
+                    "currentDayValue": "-1.65"
+                },
+                {
+                    "stockName": "ICICI",
+                    "contri": 30,
+                    "_id": "65e99cf1a01b763d047b4184",
+                    "currentDayValue": "0.44"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 40,
+                    "_id": "65e99cf1a01b763d047b4185",
+                    "currentDayValue": "-0.90"
+                }
+            ],
+            "createdAt": "2024-03-07T10:54:41.818Z",
+            "updatedAt": "2024-03-07T20:50:27.734Z"
+        },
+        {
+            "_id": "65ea2a1fc45b1e008e4b7715",
+            "capValue": 5600,
+            "maxVal": "130",
+            "risk": "medium",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 500,
+            "noOfSubscription": 0,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "Birlasoft",
+                    "contri": 30,
+                    "_id": "65ea2a1fc45b1e008e4b7716",
+                    "currentDayValue": "-1.30"
+                },
+                {
+                    "stockName": "SBI",
+                    "contri": 30,
+                    "_id": "65ea2a1fc45b1e008e4b7717",
+                    "currentDayValue": "-1.85"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 40,
+                    "_id": "65ea2a1fc45b1e008e4b7718",
+                    "currentDayValue": "0.05"
+                }
+            ],
+            "createdAt": "2024-03-07T20:57:03.101Z",
+            "updatedAt": "2024-03-07T20:57:03.101Z"
+        },
+        {
+            "_id": "65ea2a56c45b1e008e4b771c",
+            "capValue": 900,
+            "maxVal": "130",
+            "risk": "high",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 1000,
+            "noOfSubscription": 0,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "YESBANK",
+                    "contri": 30,
+                    "_id": "65ea2a56c45b1e008e4b771d",
+                    "currentDayValue": "-1.75"
+                },
+                {
+                    "stockName": "HDFC",
+                    "contri": 30,
+                    "_id": "65ea2a56c45b1e008e4b771e",
+                    "currentDayValue": "-1.61"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 40,
+                    "_id": "65ea2a56c45b1e008e4b771f",
+                    "currentDayValue": "-1.52"
+                }
+            ],
+            "createdAt": "2024-03-07T20:57:58.424Z",
+            "updatedAt": "2024-03-07T20:57:58.424Z"
+        },
+        {
+            "_id": "65ea2a8dc45b1e008e4b7723",
+            "capValue": 9000,
+            "maxVal": "130",
+            "risk": "medium",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 2000,
+            "noOfSubscription": 0,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "PAYTM",
+                    "contri": 30,
+                    "_id": "65ea2a8dc45b1e008e4b7724",
+                    "currentDayValue": "2.73"
+                },
+                {
+                    "stockName": "RIL",
+                    "contri": 30,
+                    "_id": "65ea2a8dc45b1e008e4b7725",
+                    "currentDayValue": "0.48"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 40,
+                    "_id": "65ea2a8dc45b1e008e4b7726",
+                    "currentDayValue": "2.47"
+                }
+            ],
+            "createdAt": "2024-03-07T20:58:53.492Z",
+            "updatedAt": "2024-03-07T20:58:53.492Z"
+        },
+        {
+            "_id": "65ea2ac5c45b1e008e4b772a",
+            "capValue": 7000,
+            "maxVal": "130",
+            "risk": "high",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 1500,
+            "noOfSubscription": 0,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "IRFC",
+                    "contri": 20,
+                    "_id": "65ea2ac5c45b1e008e4b772b",
+                    "currentDayValue": "3.83"
+                },
+                {
+                    "stockName": "KOTAK",
+                    "contri": 20,
+                    "_id": "65ea2ac5c45b1e008e4b772c",
+                    "currentDayValue": "-2.84"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 60,
+                    "_id": "65ea2ac5c45b1e008e4b772d",
+                    "currentDayValue": "3.02"
+                }
+            ],
+            "createdAt": "2024-03-07T20:59:49.494Z",
+            "updatedAt": "2024-03-07T20:59:49.494Z"
+        },
+        {
+            "_id": "65ea2af3c45b1e008e4b7731",
+            "capValue": 4000,
+            "maxVal": "130",
+            "risk": "medium",
+            "advisorId": "65e06a02e9e6135f3fd72780",
+            "minInvestmentAmount": 1500,
+            "noOfSubscription": 0,
+            "advise": "Take this plan, Bikki pleeaseeee !!!!",
+            "stocks": [
+                {
+                    "stockName": "KESHKING",
+                    "contri": 20,
+                    "_id": "65ea2af3c45b1e008e4b7732",
+                    "currentDayValue": "-1.47"
+                },
+                {
+                    "stockName": "PRAG",
+                    "contri": 20,
+                    "_id": "65ea2af3c45b1e008e4b7733",
+                    "currentDayValue": "3.30"
+                },
+                {
+                    "stockName": "Incedo",
+                    "contri": 60,
+                    "_id": "65ea2af3c45b1e008e4b7734",
+                    "currentDayValue": "2.58"
+                }
+            ],
+            "createdAt": "2024-03-07T21:00:35.815Z",
+            "updatedAt": "2024-03-07T21:00:35.815Z"
+        }
+    ]

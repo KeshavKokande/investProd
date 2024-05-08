@@ -1,0 +1,28 @@
+[
+    {
+      "id": 1,
+      "name": "Plan 1",
+      "percentValues": 70
+    },
+    {
+      "id": 2,
+      "name": "Plan 2",
+      "percentValues": 40
+    },
+    {
+      "id": 3,
+      "name": "Plan 3",
+      "percentValues": 60
+    },
+    {
+      "id": 4,
+      "name": "Plan 4",
+      "percentValues": 80
+    },
+    {
+      "id": 5,
+      "name": "Others",
+      "percentValues": 20
+    }
+  ]
+  

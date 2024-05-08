@@ -1,0 +1,67 @@
+{
+    "status": "success",
+    "listOfNamesOfAdvisors": [
+        {
+            "_id": "65e06a02e9e6135f3fd72780",
+            "ratings": "5",
+            "name": "Shubham Goswami",
+            "certificateNo": "123JX",
+            "email": "shubham@gmail.com",
+            "userIdCredentials": "65e069b4e9e6135f3fd7277d",
+            "createdAt": "2024-02-29T11:26:58.241Z",
+            "updatedAt": "2024-03-05T07:49:46.160Z",
+            "clientIds": [
+                "65e5db863bf948b8677a18a3"
+            ],
+            "cat_type": "Expert"
+        },
+        {
+            "clientIds": [],
+            "_id": "65e06c31423daa8d032f2c29",
+            "ratings": "4.5",
+            "name": "Mukul Patwal",
+            "certificateNo": "456JX",
+            "email": "mukul@gmail.com",
+            "userIdCredentials": "65e06c20423daa8d032f2c26",
+            "createdAt": "2024-02-29T11:36:17.286Z",
+            "updatedAt": "2024-02-29T11:36:17.286Z",
+            "cat_type": "Advance"
+        },
+        {
+            "clientIds": [],
+            "_id": "65e0ce13731f20364d9dbc50",
+            "ratings": "3",
+            "name": "Kumar Aditya",
+            "certificateNo": "789JX",
+            "email": "aditya@gmail.com",
+            "userIdCredentials": "65e0cca7731f20364d9dbc40",
+            "createdAt": "2024-02-29T18:33:55.898Z",
+            "updatedAt": "2024-02-29T18:33:55.898Z",
+            "cat_type": "Associate"
+        },
+        {
+            "clientIds": [],
+            "_id": "65e0ce47731f20364d9dbc55",
+            "ratings": "4",
+            "name": "Jonas Schmedtmann",
+            "certificateNo": "999JX",
+            "email": "jonas@gmail.com",
+            "userIdCredentials": "65e0ccc7731f20364d9dbc43",
+            "createdAt": "2024-02-29T18:34:47.593Z",
+            "updatedAt": "2024-02-29T18:34:47.593Z",
+            "cat_type": "Expert"
+        },
+        {
+            "clientIds": [],
+            "_id": "65e0d133731f20364d9dbc6d",
+            "ratings": "5",
+            "name": "Allie K Miller",
+            "certificateNo": "111JX",
+            "email": "allie@gmail.com",
+            "userIdCredentials": "65e0d0c0731f20364d9dbc62",
+            "createdAt": "2024-02-29T18:47:15.874Z",
+            "updatedAt": "2024-02-29T18:47:15.874Z",
+            "cat_type": "Expert"
+        }
+    ]
+}

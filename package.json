@@ -1,0 +1,79 @@
+{
+  "name": "advisordashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@canvasjs/react-charts": "^1.0.2",
+    "@chakra-ui/react": "^2.8.2",
+    "@faker-js/faker": "^8.4.1",
+    "@iconify/react": "^4.1.1",
+    "@mui/material": "^5.15.12",
+    "@mui/x-charts": "^7.2.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.15.2",
+    "axios": "^1.6.7",
+    "bootstrap": "^5.3.3",
+    "change-case": "^5.4.3",
+    "date-fns": "^3.6.0",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
+    "mdb-react-ui-kit": "^7.2.0",
+    "moment": "^2.30.1",
+    "react": "^18.2.0",
+    "react-apexcharts": "^1.4.1",
+    "react-date-range": "^2.0.0-alpha.4",
+    "react-dom": "^18.2.0",
+    "react-form-stepper": "^2.0.3",
+    "react-google-recaptcha": "^3.1.0",
+    "react-icons": "^4.4.0",
+    "react-modal": "^3.16.1",
+    "react-multi-carousel": "^2.8.4",
+    "react-plotly.js": "^2.6.0",
+    "react-range": "^1.8.14",
+    "react-range-slider": "^0.2.1",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-spinners": "^0.13.6",
+    "reactstrap": "^9.2.2",
+    "recharts": "^2.10.3",
+    "sass": "^1.69.7",
+    "simplebar-react": "^3.2.4",
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.10.6",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "font-awesome": "^4.7.0",
+    "tailwindcss": "^3.4.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

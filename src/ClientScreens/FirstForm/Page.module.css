@@ -1,0 +1,264 @@
+.StepperContainer-0-2-1{
+  width: 70vw;
+  margin: auto;
+}
+
+.completed{
+  background-color: rgb(197, 197, 9) !important;
+}
+
+.cl-form{
+  display: grid;
+  grid-gap: 4vh;
+  justify-items: center;
+}
+
+.container {
+  height: 68vh;
+  width: 90%;
+  justify-items: center;
+  padding: 20px;
+  background-color: #fbf9f9;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  /* justify-items: center; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.form-container {
+  display: grid;
+    grid-template-columns: 48% 48%;
+    grid-gap: 2%;
+}
+
+.form-container1{
+  display: grid;
+  grid-template-columns: auto !important;
+  grid-gap: 6%;
+  height: 58vh;
+  overflow: auto;
+}
+
+.form-container2{
+  display: grid;
+  grid-template-columns: auto !important;
+  grid-gap: 6%;
+  /* overflow: auto; */
+}
+
+/* .form-container2 input{
+  width: 100% ;
+} */
+
+.form-container1 .question-container{
+  width: 96%;
+}
+
+.container .imagecl{
+  width: 28vw;
+  display: grid;
+  justify-items: center;
+}
+
+.container .imagecl img{
+  width: 100% !important;
+}
+
+.form-container h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container form {
+  margin-top: 20px;
+}
+
+.form-container label {
+  /* display: block;
+  margin-bottom: 8px;
+  color: #333; */
+  font-size: large;
+  font-weight: 600;
+  position: static !important;
+  background: none !important;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container textarea,
+.form-container select {
+  width: 100% !important;
+  padding: 8px;
+  /* margin-bottom: 15px; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.form-container input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: red;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.prev-button {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.next-button,
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btns{
+  display: grid;
+  width: fit-content;
+  grid-template-columns: auto auto;
+  grid-gap: 1vw;
+}
+
+.prev-button, 
+.next-button{
+  width: 8vw;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.preview-container {
+  margin-top: 20px;
+}
+
+.preview-container p {
+  margin-bottom: 10px;
+}
+
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.question-container{
+
+  /* display: grid;
+  grid-template-columns: 48% 48%;
+  grid-gap: 2vh; */
+  width: 100%;
+  /* border-radius: 1.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+}
+
+
+
+.submit-button {
+  display: none; /* Initially hide the submit button */
+}
+
+/* Show the submit button when terms are agreed */
+.terms-agreed .submit-button {
+  display: block;
+}
+
+/* Hide the next button on PageThree */
+.page-three .next-button {
+  display: none;
+}
+
+.form-control-capitalize{
+  text-transform: capitalize;
+}
+
+.error-message{
+  display: none;
+}
+
+.register-submit-btn visible{
+  display: block;
+}
+
+.register-submit-btn invisible{
+  display: hidden;
+}
+
+.terms{
+  display: grid;
+  grid-gap: 2vh;
+}
+
+.terms h3{
+  font-size: x-large;
+  font-weight: 800;
+}
+
+.terms input{
+  width: auto !important;
+}
+
+
+.remove {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 0.5rem;
+  font-weight: bold;
+  margin-top: 0.1rem;
+  color: white;
+  background-color: #007bff; /* Blue color (you can adjust this) */
+  border: 0.02rem solid #007bff;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.remove {
+  background-color: #0056b3; /* Darker blue color on hover (you can adjust this) */
+}
+
+
+.required{
+  color: red;
+  font-weight: bold;
+}
+
+.risk-level{
+  font-size: 0.7rem;
+}
+
+.termsconditions{
+  overflow-y: scroll;
+  height: 45vh;
+  border-color: #000000;
+  border-width: 0.1rem 0.1rem 0.1rem 0.1rem;
+  /* background-color: #007bff; */
+}
+
+.preStyle{
+  white-space: pre-wrap;
+}
+
+.preStyle h3{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
