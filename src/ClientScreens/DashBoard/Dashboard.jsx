@@ -3,8 +3,6 @@ import InvestmentSummary from './Summary';
 import { Typography } from '@mui/material';
 import styles from "./dashboard.module.css";
 import axios from 'axios';
-import notification from "./../../assets/icons/notification.png";
-import user from "./../../assets/icons/moon.svg"
 
 function DashboardCl() {
   const [transactions, setTransactions] = useState([]);
@@ -12,7 +10,6 @@ function DashboardCl() {
   const [advisorNames, setAdvisorNames] = useState([]);
   const [error, setError] = useState(null);
   const [plansData, setPlansData] = useState([]);
-  const [mapu, setMapu] = useState([]);
   const [tabData, setTabdata]=useState([]);
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -53,7 +50,7 @@ function DashboardCl() {
             jobRole: data.jobRole || '',
             boughtPlanIds: data.boughtPlanIds || []
           });
-          console.log(data);
+          // console.log(data);
           console.log("data name", data.name);
         } else {
           throw new Error('Failed to fetch profile data');
@@ -141,7 +138,7 @@ const formatDate = (dateString) => {
         }
         const data = await response.json();
 
-        console.log("transactions ", data);
+        // console.log("transactions ", data);
         setTransactions(data.transactions);
         setTabdata(processData(data));
         setAdvisorNames(data.advisorNames);
@@ -171,7 +168,7 @@ const formatDate = (dateString) => {
 
         const data = await response.json();
         const filteredPlans = data.plans.filter(plan => profileInfo.boughtPlanIds.includes(plan._id));
-        console.log("filteredPlans", filteredPlans);
+        // console.log("filteredPlans", filteredPlans);
         setPlansData(filteredPlans);
 
         const mappedData = filteredPlans.map(item => ({
@@ -235,30 +232,13 @@ const formatDate = (dateString) => {
   }
 
   const averageGainPercentage = calculateAverageGainPercentage(datu);
-  console.log("Average Gain Percentage:", averageGainPercentage);
+  // console.log("Average Gain Percentage:", averageGainPercentage);
 
 
   return (
     <div className={styles.App}>
-      {/* <Typography className={styles["profile-landing-name"]} variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back {profileInfo.name} 
-</Typography> */}
-
-      {/* <div className={styles.UserInfo}>
-  <button>
-    <img src={notification} alt="" />
-  </button>
-  <h4>{profileInfo.name}</h4>
-  <img src={profileInfo.img} alt="" className={styles.userProfileImg} />
-</div> */}
-
-
       <h2 className={styles.heading}> Portfolio Summary</h2>
-
       <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} />
-      <script>
-        console.log(document.queryselector(".alert"));
-      </script>
     </div>
   );
 }

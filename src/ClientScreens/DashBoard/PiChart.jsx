@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
-import styles from "./dashboard.module.css"
+import styles from "./dashboard.module.css";
 
 const PiChart = ({ data, title }) => {
-  console.log("pidata", data);
+  const colors = [
+    '#003f5c',
+    '#2f4b7c',
+    '#665191',
+    '#a05195',
+    '#d45087',
+    '#f95d6a',
+    '#ff7c43',
+    '#ffa600'
+  ]; // Define additional colors here
+
   const options = {
     chart: {
       fontFamily: 'Satoshi, sans-serif',
       type: 'donut',
     },
-    colors: ['#3C50E0', '#6577F3', '#8FD0EF', '#0FADCF'],
-    labels: data.map(item => item.name), // Use the names from data for labels
+    colors: colors.slice(0, data.length),
+    labels: data.map(item => item.name),
     legend: {
       show: false,
       position: 'bottom',
@@ -44,13 +54,18 @@ const PiChart = ({ data, title }) => {
         },
       },
     ],
+    tooltip: {
+      enabled: true,
+      y: {
+        formatter: function(val) {
+          return `₹${parseFloat(val).toFixed(2)}`;
+        }
+      }
+    }
   };
 
   return (
     <div style={{display:'flex'}}>
-      {/* <h5 className="text-xl font-semibold text-black dark:text-white">
-        {title}
-      </h5> */}
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
           <ReactApexChart options={options} series={data.map(item => item.value)} type="donut" />
@@ -60,12 +75,9 @@ const PiChart = ({ data, title }) => {
         {data.map((item, index) => (
           <div  key={index}>
             <div className="flex w-full items-center">
-              <span className={`mr-2 block h-3 w-full max-w-3 rounded-full bg-${item.color}`}></span>
+              <span style={{ backgroundColor: colors[index] }} className={`mr-2 block h-3 w-full max-w-3 rounded-full`}></span>
               <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
                 <span> {item.name}</span>
-                {/* <span> {item.percentage}% </span> */}
-                {/* <span> {item.value} </span> */}
-
               </p>
             </div>
           </div>
@@ -76,61 +88,3 @@ const PiChart = ({ data, title }) => {
 };
 
 export default PiChart;
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
-
-// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF19D9']; // Colors for each slice
-
-// const PiChart = ({ data, title }) => {
-//     // Round off the values
-//     const roundedData = data.map(item => ({
-//         name: item.planName,
-//         value: Math.round(Math.abs(item.value) * 100) / 100 // Round to two decimal places
-//     }));
-
-//     console.log("DATA:", data);
-//     console.log("ROUNDED DATA:", roundedData);
-//     console.log("title:", title);
-
-
-//     return (
-//         <div style={{ textAlign: 'center' }}>
-//             <h3>{title}</h3>
-//             <PieChart width={300} height={300}>
-//                 <Pie
-//                     data={roundedData}
-//                     dataKey="value"
-//                     nameKey="name"
-//                     cx="50%"
-//                     cy="50%"
-//                     outerRadius={75}
-//                     fill="#8884d8"
-//                     label
-//                 >
-//                     {roundedData.map((entry, index) => (
-//                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-//                     ))}
-//                 </Pie>
-//                 <Tooltip />
-//                 <Legend />
-//             </PieChart>
-//         </div>
-//     );
-// };
-
-// export default PiChart;
-
-
-
-
-
-
-

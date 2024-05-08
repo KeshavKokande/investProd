@@ -36,7 +36,7 @@ const EditPlan = () => {
           credentials: 'include'
         });
         const data = await response.json();
-        console.log("data = ", data);
+        // console.log("data = ", data);
 
         setFormData({
           planName: data.plan.planName,
@@ -248,7 +248,7 @@ const EditPlan = () => {
 
           axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
             .then(response => {
-              console.log('Response:', response.data);
+              // console.log('Response:', response.data);
               navigate('/advisor/planList');
             })
             .catch(error => {

@@ -28,7 +28,7 @@ const AddPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
+        const response = await axios.get('https://39aa-2405-201-13-f123-18f5-1f2-ad71-9a64.ngrok-free.app/get_symbol_lastprice');
         setSelectedPrices(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -208,10 +208,10 @@ const AddPlan = () => {
         confirmButtonText: 'Yes, create it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log('Form data:', formData);
+          // console.log('Form data:', formData);
           axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, { withCredentials: true })
             .then(response => {
-              console.log('Response:', response.data);
+              // console.log('Response:', response.data);
               navigate("/advisor/planList");
             })
             .catch(error => {
@@ -268,7 +268,7 @@ const AddPlan = () => {
 
     axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks, { withCredentials: true })
       .then(response => {
-        console.log('Response:', response.data);
+        // console.log('Response:', response.data);
         let data = response.data.planAdvise;
         let index = 0;
         const interval = setInterval(() => {
@@ -386,7 +386,7 @@ const AddPlan = () => {
                   </div>
                 </div>
               ))}
-              {console.log(formData.stocks)}
+              {/* {console.log(formData.stocks)} */}
               {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>create Gen Ai advice</button> : null}
 
 

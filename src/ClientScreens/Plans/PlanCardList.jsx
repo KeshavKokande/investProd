@@ -6,7 +6,7 @@ import ProfileCard from './ProfileCard';
 
 const PlanCardList = ({ plans, ids }) => {
 
-  console.log(plans);
+  // console.log(plans);
   const [filteredPlans, setFilteredPlans] = useState(plans);
   const [filters, setFilters] = useState({
     cat_risk: '',
@@ -29,7 +29,6 @@ const PlanCardList = ({ plans, ids }) => {
       filters.priceRange[1] === 100000 &&
       !filters.searchText
     ) {
-      // All filters are null or default, return an empty array
       setFilteredPlans([]);
       return;
     }
@@ -101,23 +100,17 @@ const PlanCardList = ({ plans, ids }) => {
           </div>
           <div className={styles.flex}>
             <label>Filters:</label>
-            {/* {showFilterDropdown && ( */}
-            {/* <div className={styles.filterDropdown}> */}
             <select name="cat_risk" value={filters.cat_risk} onChange={handleFilterChange}>
               <option value="">Risk</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            {/* <br /> */}
-            {/* <label></label> */}
             <select value={sortOption} onChange={handleSortChange}>
               <option value="">Sort by:</option>
               <option value="rating">Rating</option>
               <option value="total_orders">Total Orders</option>
             </select>
-            {/* </div> */}
-            {/* )} */}
           </div>
 
           <div>

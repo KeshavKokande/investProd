@@ -153,7 +153,7 @@ const MultiFormEdit = () => {
 
       const data = await response.json();
 
-      console.log('PATCH request successful:', data);
+      // console.log('PATCH request successful:', data);
 
       if (data.status === 'success') {
         setSuccess(true);

@@ -161,15 +161,15 @@ const MultiStepForm = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log(formData);
-      console.log('Response status:', response.status);
+      // console.log(formData);
+      // console.log('Response status:', response.status);
 
       if (!response.ok) {
         throw new Error('Failed');
       }
 
       const data = await response.json();
-      console.log('response:', data);
+      // console.log('response:', data);
 
       navigate('/client_dashboard'); // Navigate to '/cldash' if registration is successful
       document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';

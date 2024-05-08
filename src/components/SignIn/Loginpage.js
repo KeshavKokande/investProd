@@ -104,7 +104,7 @@ const LoginPage = () => {
   }, []);
 
   function onCheck(value) {
-    console.log("Captcha value:", value);
+    // console.log("Captcha value:", value);
     setVerified(true);
   }
 

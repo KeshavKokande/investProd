@@ -1,8 +1,25 @@
 import React from 'react';
 import styles from './dashboard.module.css';
- 
+
+// Format currency function
+const formatCurrency = (value) => {
+  const parsedValue = parseFloat(value).toFixed(2);
+  const stringValue = String(parsedValue);
+  const [integerPart, decimalPart] = stringValue.split(".");
+  const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
+  const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
+  return formattedValue;
+};
+
+// Format date function
+const formatDate = (dateString) => {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+  return formattedDate;
+};
+
 const PlanTable = ({ data }) => {
-  console.log("pro>>",data);
+  // console.log("pro>>",data);
   const columns = [
     {
       title: 'Plan Name',
@@ -18,11 +35,13 @@ const PlanTable = ({ data }) => {
       title: 'Total Amount Invested',
       dataIndex: 'total_investedamount',
       key: 'total_investedamount',
+      render: (value) => formatCurrency(value), // Apply formatCurrency function
     },
     {
       title: 'Latest Transaction Date',
       dataIndex: 'last_date_to_investment',
       key: 'last_date_to_investment',
+      render: (dateString) => formatDate(dateString), // Apply formatDate function
     },
   ];
 
@@ -47,7 +66,7 @@ const PlanTable = ({ data }) => {
               <tr key={index} className={styles.tableRow}>
                 {columns.map(column => (
                   <td key={column.key} className={styles.tableData}>
-                    {item[column.dataIndex]}
+                    {column.render ? column.render(item[column.dataIndex]) : item[column.dataIndex]}
                   </td>
                 ))}
               </tr>

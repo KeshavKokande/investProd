@@ -52,7 +52,7 @@ const ClientCards = () => {
         }
         const data = await response.json();
         setTotalInvestedAmount(data);
-        console.log("Ye Le BHadwe :  ", data);
+        // console.log("Data ", data);
     } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
@@ -79,7 +79,7 @@ const ClientCards = () => {
         }
         const data = await response.json();
         setTotalCurrentProfit(data);
-        console.log("Ye Le BHadwe :  ", data);
+        // console.log("Data :", data);
     } catch (error) {
         console.error('Error fetching user data:', error.message);
       }

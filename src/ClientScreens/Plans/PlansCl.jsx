@@ -37,7 +37,7 @@ function PlansCl() {
         const data = await response.json();
         const rik = await ponse.json();
 
-        console.log('ris  ',data);
+        // console.log('ris  ',data);
         
 
         setRiks(rik.client.question_4)
@@ -52,20 +52,6 @@ function PlansCl() {
 
     fetchPlansData();
   }, []);
-
-  // const decodeImageData = (plan) => {
-  //   if (plan.photo && plan.photo.contentType) {
-  //     const imageDataArray = plan.photo.data;
-  //     const cota = (plan.photo.contentType).split('/')[1];
-  //     const blob = new Blob([new Uint8Array(imageDataArray)], { type: cota });
-  //     const urlCreator = window.URL || window.webkitURL;
-  //     const imageDataUrl = urlCreator.createObjectURL(blob);
-  //     return imageDataUrl;
-  //   } else {
-  //     console.warn('Missing photo or contentType in plan:', plan);
-  //     return null;
-  //   }
-  // };
 
   const decodeImageData = (plan) => {
     if (plan.photo && plan.photo.contentType && plan.photo.data) {

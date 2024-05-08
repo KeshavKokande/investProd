@@ -9,7 +9,7 @@ import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
 import BarChartComponent from './CliBarChart';
 
-function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg, table}) {
+function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table }) {
 
     if (!transactions || !advisorNames || !returns) {
         return null; // Render nothing if any of the props are missing
@@ -64,12 +64,16 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg, 
         return data;
     }
 
-    console.log("bargraphdata", etta);
+    // console.log("bargraphdata", etta);
 
 
     const formatCurrency = (value) => {
-        const roundedValue = parseFloat(value).toFixed(2);
-        return `₹${roundedValue}`;
+        const parsedValue = parseFloat(value).toFixed(2);
+        const stringValue = String(parsedValue);
+        const [integerPart, decimalPart] = stringValue.split(".");
+        const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
+        const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
+        return formattedValue;
     };
 
     return (
@@ -84,7 +88,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg, 
                     cardInfo={{
                         title: "Total Amount Invested",
                         value: formatCurrency(totalInvestedAmount),
-                        // text: `You have ${formatCurrency(totalInvestedAmount)} Amount.`,
                     }}
                 />
                 <AreaCard
@@ -92,8 +95,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg, 
                     percentFillValue={50}
                     cardInfo={{
                         title: "Total Profit/Loss",
-                        value: formatCurrency(avggg*totalInvestedAmount/100),
-                        // text: `You have ${formatCurrency(totalProfitAmount)} Amount.`,
+                        value: formatCurrency(avggg * totalInvestedAmount / 100),
                     }}
                 />
                 <AreaCard
@@ -101,25 +103,30 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta , avggg, 
                     percentFillValue={40}
                     cardInfo={{
                         title: "Current Value",
-                        value: formatCurrency(totalInvestedAmount + avggg*totalInvestedAmount/100),
+                        value: formatCurrency(totalInvestedAmount + avggg * totalInvestedAmount / 100),
                         value: (
                             <div>
-                              {formatCurrency((totalInvestedAmount + avggg*totalInvestedAmount/100))}
-                              <span style={{ fontSize: 'small', color: avggg >= 0 ? 'green' : 'red' }}>
-                                &nbsp; {avggg.toFixed(2)}%
-                              </span>
+                                {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
+                                <span style={{ fontSize: 'small', color: avggg >= 0 ? 'green' : 'red' }}>
+                                    &nbsp; {avggg.toFixed(2)}%
+                                </span>
                             </div>
-                          )
-                        // text: `You have ${formatCurrency(totalInvestedAmount + totalProfitAmount)} current value.`,
+                        )
                     }}
                 />
             </section>
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
 
-                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Investment</strong></center><br /><PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} /></p>
-                {/* <p id={styles.piechart} style={{ fontSize: " x-large" }}><center><strong>Returns</strong></center><br /><PiChart data={totalProfits} /></p> */}
-                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius:'0.7rem', }}><center><strong>Returns</strong></center><br /><BarChartComponent plansData={etta} widthChart={500} /> </p>
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
+                    <center><strong>Investment</strong></center><br />
+                    <PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} />
+                </p>
+                
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
+                    <center><strong>Returns</strong></center><br />
+                    <BarChartComponent plansData={etta} widthChart={500} />
+                </p>
             </div>
 
 

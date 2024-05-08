@@ -26,7 +26,7 @@ const AreaCards = () => {
           credentials: 'include'
         });
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setPlansData(data);
 
         const mappedData = data.plans.map(item => ({
@@ -136,8 +136,12 @@ const AreaCards = () => {
   }, []);
 
   const formatCurrency = (value) => {
-    const roundedValue = parseFloat(value).toFixed(2);
-    return `₹${roundedValue}`;
+    const parsedValue = parseFloat(value).toFixed(2);
+    const stringValue = String(parsedValue);
+    const [integerPart, decimalPart] = stringValue.split(".");
+    const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
+    const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
+    return formattedValue;
   };
 
   if (!datu) { return (<div></div>); }

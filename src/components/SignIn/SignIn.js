@@ -317,7 +317,7 @@ function SignIn() {
       const data = await response.json();
 
       if (response.ok && data.status === 'success') {
-        console.log('Login successful:', data);
+        // console.log('Login successful:', data);
         localStorage.setItem('token', data.token); // Store the token securely
 
         // Redirect based on the user role
