@@ -80,7 +80,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://1fed-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
