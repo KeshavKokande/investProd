@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './dashboard.module.css';
 
 // Format currency function
@@ -19,7 +19,13 @@ const formatDate = (dateString) => {
 };
 
 const PlanTable = ({ data }) => {
-  // console.log("pro>>",data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(5);
+  
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const columns = [
     {
       title: 'Plan Name',
@@ -45,6 +51,11 @@ const PlanTable = ({ data }) => {
     },
   ];
 
+  // Pagination calculation
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const paginatedData = data.slice(startIndex, endIndex);
+
   return (
     <section className={styles.contentAreaTable} style={{ borderRadius: '0.7rem' }}>
       <div className={styles.dataTableInfo}>
@@ -62,7 +73,7 @@ const PlanTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {paginatedData.map((item, index) => (
               <tr key={index} className={styles.tableRow}>
                 {columns.map(column => (
                   <td key={column.key} className={styles.tableData}>
@@ -73,6 +84,11 @@ const PlanTable = ({ data }) => {
             ))}
           </tbody>
         </table>
+        <div className={styles.pagination}>
+          <button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
+          <span>{currentPage}</span>
+          <button disabled={currentPage * perPage >= data.length} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
+        </div>
       </div>
     </section>
   );

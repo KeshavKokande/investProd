@@ -37,8 +37,9 @@ const Payment = () => {
         setNumber(event.target.value)
     }
 
-    const cardHolderHandler = (event) => {
-        setName(event.target.value)
+    const cardHolderHandler = (event, capitalizedValue) => {
+        const name = capitalizedValue || event.target.value;
+        setName(name)
     }
 
     function GetCardType(number) {
@@ -86,8 +87,23 @@ const Payment = () => {
     }
 
     const monthHandler = (event) => {
-        setMonth(event.target.value)
-    }
+        let inputMonth = event.target.value;
+        
+        // Check if the input is a single digit and not '0'
+        if (inputMonth.length === 1 && inputMonth !== '0') {
+            // If it's a single digit other than '0', update the state with the input
+            setMonth(inputMonth);
+        } else if (inputMonth.length === 2 && parseInt(inputMonth) <= 12) {
+            // If it's a two-digit number and less than or equal to 12, update the state
+            setMonth(inputMonth);
+        } else if (inputMonth.length === 0) {
+            // If the input is empty, update the state to empty
+            setMonth('');
+        }
+        // Ignore input that doesn't meet the conditions
+    };
+    
+    
 
     const yearHandler = (event) => {
         setYear(event.target.value)
@@ -109,45 +125,53 @@ const Payment = () => {
 
     const handleSubscribe = async () => {
 
-            try {
-              const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
+        try {
+            const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 credentials: 'include',
                 body: JSON.stringify({
-                    planDays:days
+                    planDays: days
                 })
-              });
-        
-              if (!response.ok) {
+            });
+
+            if (!response.ok) {
                 throw new Error('Failed To Buy Plan');
-              }
-        
-              const data = await response.json();
-            //   console.log('Buy plan response:', data);
-        
-              if (data.status === 'success') {
-                
-                Swal.fire({
-                  title: 'Success',
-                  text: 'Plan Bought Successfully!',
-                  icon: 'success'
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    navigate(`/planDetail/${plan_id}`)
-                  }
-                });
-        
-              
-              }
-            } catch (error) {
-              console.error('Error buying plan:', error.message);
-              Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
             }
-          };
-        
+
+            const data = await response.json();
+            //   console.log('Buy plan response:', data);
+
+            if (data.status === 'success') {
+
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Plan Bought Successfully!',
+                    icon: 'success'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate(`/planDetail/${plan_id}`)
+                    }
+                });
+
+
+            }
+        } catch (error) {
+            console.error('Error buying plan:', error.message);
+            Swal.fire('Error', 'Failed to buy plan. Please try again later.', 'error');
+        }
+    };
+
+    const onlyAllowNumbers = (event) => {
+        const keyCode = event.keyCode || event.which;
+        const keyValue = String.fromCharCode(keyCode);
+        const isValidKey = /^\d+$/.test(keyValue); // Check if the pressed key is a digit
+        if (!isValidKey) {
+            event.preventDefault(); // Prevent the input if the key is not a digit
+        }
+    };    
 
     return (
         <div className={style.fullCover} style={{ paddingTop: '40px', backgroundColor: '#000', height: '100vh' }}>
@@ -182,23 +206,54 @@ const Payment = () => {
                     <div className={`p-1 d-flex align-items-center justify-content-end ${style.cvcPlace}`}>
                         <div className='text-dark'>{cvc ? cvc : '***'}</div>
                     </div>
-                    <p className={style.demoText}><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</small></p>
+                    <p className={style.demoText}><small>Our security is our priority. Please ensure the safety of your card by safeguarding the Card Verification Code (CVC) located on this side. This three-digit code is crucial for online and over-the-phone transactions, helping to prevent unauthorized use of your card. Never share this code with anyone, including merchants or customer service representatives</small></p>
                 </div>
             </div>
 
             <div className={style.cardDetails}>
                 <div>
-                    <input maxLength={16} value={number} onChange={cardNumebrHandler} className='form-control' placeholder="CARD NUMBER" />
-                </div>
-                <div>
-                    <input onChange={cardHolderHandler} value={name} className='form-control' placeholder="CARD HOLDER NAME" />
+                    <input
+                        maxLength={16}
+                        value={number}
+                        onChange={cardNumebrHandler}
+                        className='form-control'
+                        placeholder="CARD NUMBER"
+                        pattern="[0-9]*" // Only allow numeric characters
+                        onKeyPress={(event) => {
+                            const keyCode = event.keyCode || event.which;
+                            const keyValue = String.fromCharCode(keyCode);
+                            const isValidKey = /^\d+$/.test(keyValue); // Check if the pressed key is a digit
+                            if (!isValidKey) {
+                                event.preventDefault(); // Prevent the input if the key is not a digit
+                            }
+                        }}
+                    />
                 </div>
 
-                <div className={style.holderDetail}>
-                    <div><input value={month} onChange={monthHandler} maxLength={2} className='form-control' placeholder="MONTH" /></div>
-                    <div><input value={year} onChange={yearHandler} maxLength={2} minLength={2} className='form-control' placeholder="YEAR" /></div>
-                    <div><input maxLength={3} value={cvc} className='form-control' onChange={cvcValue} placeholder="CVC" onFocus={cvcHandler} onBlur={cvcRemove} /></div>
+                <div>
+                    <input
+                        onChange={(event) => {
+                            const inputValue = event.target.value;
+                            const capitalizedValue = inputValue.replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
+                            const alphabeticValue = capitalizedValue.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
+                            cardHolderHandler(event, alphabeticValue); // Pass event and alphabetic value to the handler
+                        }}
+                        value={name}
+                        className='form-control'
+                        placeholder="CARD HOLDER NAME"
+                        title="Please enter only alphabetic characters"
+                    />
                 </div>
+
+
+
+
+                <div className={style.holderDetail}>
+                    <div><input value={month} onChange={monthHandler} onKeyPress={onlyAllowNumbers} maxLength={2} className='form-control' placeholder="MONTH" /></div>
+                    <div><input value={year} onChange={yearHandler} onKeyPress={onlyAllowNumbers} maxLength={2} minLength={2} className='form-control' placeholder="YEAR" /></div>
+                    <div><input maxLength={3} value={cvc} className='form-control' onChange={cvcValue} onKeyPress={onlyAllowNumbers} placeholder="CVC" onFocus={cvcHandler} onBlur={cvcRemove} /></div>
+                </div>
+
                 <div><button className='btn btn-dark' onClick={handleSubscribe}>Submit</button></div>
             </div>
         </div>
