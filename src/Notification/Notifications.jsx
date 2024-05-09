@@ -50,7 +50,7 @@ const Notifications = ({user}) => {
     const fetchNotifications = async () => {
       try {
         const response = await fetch(
-          `https://team4api.azurewebsites.net/api/v1/${user}/get-all-notifications`,
+          `https://localhost:8000/api/v1/${user}/get-all-notifications`,
           {
             method: "GET",
             headers: {
@@ -114,7 +114,7 @@ const Notifications = ({user}) => {
   const handleNotificationClick = async (notificationId) => {
     try {
       const response = await fetch(
-        `https://team4api.azurewebsites.net/api/v1/${user}/view-notification/${notificationId}`,
+        `https://localhost:8000/api/v1/${user}/view-notification/${notificationId}`,
         {
           method: "GET",
           headers: {

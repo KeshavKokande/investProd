@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ApiService=axios.create(
     {
-        baseURL:`https://team4api.azurewebsites.net/api/v1/check-auth/login`,
+        baseURL:`https://localhost:8000/api/v1/check-auth/login`,
         headers:{
             'Content-Type':"application/json"
         }

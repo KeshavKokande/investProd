@@ -47,7 +47,7 @@ const Sidebar = () => {
 
   const logoutUser = async () => {
     try {
-      const response = await fetch("https://team4api.azurewebsites.net/api/v1/check-auth/logout", {
+      const response = await fetch("https://localhost:8000/api/v1/check-auth/logout", {
         method: "GET", // or 'POST'
         headers: {
           "Content-Type": "application/json",

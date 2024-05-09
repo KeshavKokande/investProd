@@ -73,7 +73,7 @@ function PlanView() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
+        const response = await fetch('https://localhost:8000/api/v1/Client/get-own-details', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ function PlanView() {
 
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
+        const response = await fetch('https://localhost:8000/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -143,7 +143,7 @@ function PlanView() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
-            const response = await fetch(`https://team4api.azurewebsites.net/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+            const response = await fetch(`https://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

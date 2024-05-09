@@ -306,7 +306,7 @@ function SignIn() {
     event.preventDefault();
 
     try {
-      const response = await fetch('https://team4api.azurewebsites.net/api/v1/check-auth/login', {
+      const response = await fetch('https://localhost:8000/api/v1/check-auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -358,7 +358,7 @@ function SignIn() {
           <Link href="#">Forgot Your Password?</Link>
           <Button>Sign In</Button>
           {/* Google SSO Button */}
-          <GoogleSSOButton href="https://team4api.azurewebsites.net/api/v1/check-auth/signin-google" isActive={!click || click}>Sign In with Google</GoogleSSOButton>
+          <GoogleSSOButton href="https://localhost:8000/api/v1/check-auth/signin-google" isActive={!click || click}>Sign In with Google</GoogleSSOButton>
         </form>
 
         <Form className="signup">
