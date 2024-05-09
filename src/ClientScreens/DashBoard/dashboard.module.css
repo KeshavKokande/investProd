@@ -1,4 +1,4 @@
-.UserInfo{
+.UserInfo {
   display: flex;
   position: relative;
   left: -22vh;
@@ -15,19 +15,19 @@
 
 }
 
-.UserInfo button{
+.UserInfo button {
   width: 2vw;
 }
 
-.userProfileImg{
+.userProfileImg {
   border-radius: 50%;
   width: 3vw;
-  height:3vw
+  height: 3vw
 }
 
-.heading{
-  font-family: 'DM serif text';
-    font-size: 2.5vw;
+.heading {
+  font-family: sans-serif;
+  font-size: 2.5vw;
 }
 
 #piechart {
@@ -37,7 +37,7 @@
   /* width: 490px; */
 }
 
-.pieChartLabels{
+.pieChartLabels {
   gap: 1rem;
   display: grid;
   height: fit-content;
@@ -65,7 +65,7 @@
   justify-content: space-around;
   align-content: center;
   align-items: center;
-  
+
 }
 
 .profile-landing-name {
@@ -97,74 +97,100 @@
   overflow-x: scroll;
 }
 
-  &::-webkit-scrollbar {
-    height: 6px;
-    width: 6px;
-  }
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
 
-  &::-webkit-scrollbar-track {
-    background-color: var(--scroll-track-bg-color);
-  }
+::-webkit-scrollbar-track {
+  background-color: var(--scroll-track-bg-color);
+}
 
-  &::-webkit-scrollbar-thumb {
-    border-radius: 100vh !important;
-    background-color: #e9e9e9;
-    outline: 1px solid rgba(0, 0, 0, 0.02);
-    outline-offset: -1px;
-  }
+::-webkit-scrollbar-thumb {
+  border-radius: 100vh;
+  background-color: #e9e9e9;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+}
 
-  table {
-    /* min-width: 900px; */
-    width: 100%;
-    border-collapse: collapse;
-    color: var(--text-color-inverted);
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-color-inverted);
+}
 
-  td,
-  th {
-    padding: 14px 12px;
-  }
+td,
+th {
+  padding: 14px 12px;
+}
 
-  /* @media (max-width: 768px) {
+/* @media (max-width: 768px) {
     font-size: 15px;
     padding: 12px 10px;
   } */
 
 
-  thead {
-    text-align: left;
-    font-size: 17px;
-    background-color: var(--thead-bg-color);
-  }
+thead {
+  text-align: left;
+  font-size: 17px;
+  background-color: var(--thead-bg-color);
+}
 
-  th {
-    &:last-child {
-      text-align: left;
-    }
-  }
+th:last-child {
+  text-align: left;
+}
 
-  #chart{
-    display: grid;
-    justify-items: center;
-  }
 
-  /* Set a custom scrollbar width */
+#chart {
+  display: grid;
+  justify-items: center;
+}
+
+/* Set a custom scrollbar width */
 ::-webkit-scrollbar {
-  width: 12px; /* Adjust this value as needed */
+  width: 12px;
+  /* Adjust this value as needed */
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Change the background color if desired */
+  background: #f1f1f1;
+  /* Change the background color if desired */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Change the scrollbar handle color */
-  border-radius: 10px; /* Add rounded corners to the scrollbar handle */
+  background: #888;
+  /* Change the scrollbar handle color */
+  border-radius: 10px;
+  /* Add rounded corners to the scrollbar handle */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Change the scrollbar handle color on hover */
+  background: #555;
+  /* Change the scrollbar handle color on hover */
+}
+
+.pagination {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.pagination button:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
 }

@@ -5,20 +5,20 @@ import {
   Cell,
   Tooltip,
 } from "recharts";
-
-const AreaCard = ({ colors, percentFillValue, cardInfo }) => {
+ 
+const AreaCard = ({ colors, percentFillValue, cardInfo,imageSrc }) => {
   const filledValue = (percentFillValue / 100) * 360; // 360 degress for a full circle
   const remainedValue = 360 - filledValue;
-
+ 
   const data = [
     { name: "Remained", value: remainedValue },
     { name: "Achieved Sales", value: filledValue },
   ];
-
+ 
   const renderTooltipContent = (value) => {
     return `${(value / 360) * 100} %`;
   };
-
+ 
   return (
     <center><div className="area-card" style={{
       borderRadius:'0.7rem',      
@@ -51,13 +51,17 @@ const AreaCard = ({ colors, percentFillValue, cardInfo }) => {
           </Pie>
           <Tooltip formatter={renderTooltipContent} />
         </PieChart> */}
+ 
+<div style={{ marginLeft: '65px' }}> {/* Add margin bottom */}
+            <img src={imageSrc} alt="Money" width={100} height={100}/>
+          </div>
       </div>
     </div></center>
   );
 };
-
+ 
 export default AreaCard;
-
+ 
 AreaCard.propTypes = {
   colors: PropTypes.array.isRequired,
   percentFillValue: PropTypes.number.isRequired,

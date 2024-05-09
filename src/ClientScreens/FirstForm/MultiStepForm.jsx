@@ -171,7 +171,7 @@ const MultiStepForm = () => {
       const data = await response.json();
       // console.log('response:', data);
 
-      navigate('/client_dashboard'); // Navigate to '/cldash' if registration is successful
+      navigate('/client_dashboard'); // Navigate to '/client_dashboard' if registration is successful
       document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 

@@ -53,7 +53,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://bba4-103-226-169-60.ngrok-free.app/get_symbol_lastprice');
+        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
         setSelectedPrices(response.data);
         setDataLoading(1);
       } catch (error) {
@@ -307,7 +307,7 @@ const EditPlan = () => {
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
       <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} tv={getPricePercentage} />
 
-      <hr className={styles.addPlan_hr} />
+      {/* <hr className={styles.addPlan_hr} /> */}
       <div >
         {/* <div className={styles.addPlan_image_container}>
           <img src="https://media.istockphoto.com/id/1372102011/vector/business-analyst-financial-data-analysis-advisor-analyzing-financial-report.jpg?s=612x612&w=0&k=20&c=LpfJhQ4yLFPh-yXebLXpPZFHhDhT3lGzjA2mkGioiLw=" alt="Financial Analysis" />

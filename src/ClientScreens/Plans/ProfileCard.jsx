@@ -68,7 +68,7 @@ const ProfileCard = ({ plan, ids }) => {
     fetchStockPrices();
   }, []);
 
-  if (!tab) { return (<div></div>); }
+
 
   return (
     <>
@@ -85,11 +85,15 @@ const ProfileCard = ({ plan, ids }) => {
               <img src={premium} alt="" />
             </div>
           )}
-          {plan.isSubscribed && (
+          {plan.boughtClientIds.includes(sessionStorage.getItem('Cl_Id')) ? (
+            <div className={styles.invested}>
+              <p>Invested</p>
+            </div>
+          ) : plan.isSubscribed ? (
             <div className={styles.purchased}>
               <p>Subscribed</p>
             </div>
-          )}
+          ) : null}
           <div className={`${styles.image} ${styles.gridPosition}`}>
             <img
               src={plan.decPhoto}
@@ -105,11 +109,16 @@ const ProfileCard = ({ plan, ids }) => {
             <h2 className={styles.vitaminH2}>{plan.planName}</h2>
 
           </div>
-          {/* <div className={`${styles.reviews} ${styles.gridPosition}`}>
-            <p>
-              <strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>Min. Investment :</strong> ₹ {Number(tab.total_current_value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
-            </p>
-          </div> */}
+          {tab && (
+            <div className={`${styles.reviews} ${styles.gridPosition}`}>
+              <p>
+                <strong style={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>
+                  Min. Investment:
+                </strong>{" "}
+                ₹ {Number(tab.total_current_value).toLocaleString("en-IN", { maximumFractionDigits: 2 })}
+              </p>
+            </div>
+          )}
           <div className={styles.reviews}>
             <p><strong style={{ color: "black", fontSize: "15px" }}>Risk :</strong> {plan.risk}</p>
           </div>

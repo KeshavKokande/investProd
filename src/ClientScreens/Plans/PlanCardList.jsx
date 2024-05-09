@@ -58,6 +58,12 @@ const PlanCardList = ({ plans, ids }) => {
     setFilteredPlans(filtered);
   };
 
+  const handleSearchCheckboxChange = (isChecked) => {
+    const updatedFilters = { ...filters };
+    updatedFilters.searchText = isChecked ? ' ' : ''; // Set searchText to ' ' if checked, '' otherwise
+    setFilters(updatedFilters);
+};
+
   const handleFilterChange = (event) => {
     setFilters({ ...filters, [event.target.name]: event.target.value });
   };
@@ -87,7 +93,7 @@ const PlanCardList = ({ plans, ids }) => {
   return (
     <div style={{ marginTop: '4vh' }} >
       <div className={styles.clContainer}>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 1vw' }}>
+        <div className={styles.filterOptions}>
           <div className={styles.flex}>
             <label> Search: </label>
             <input
@@ -157,21 +163,35 @@ const PlanCardList = ({ plans, ids }) => {
               </div>
             </div>
           </div>
-
+          <div className={styles.flex}>
+          <input
+                type="checkbox"
+                id="searchCheckbox"
+                checked={filters.searchText === ' '}
+                onChange={(e) => handleSearchCheckboxChange(e.target.checked)}
+            />
+            <label htmlFor="searchCheckbox">View All</label>
+            </div>
         </div>
       </div>
 
       <br />
 
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} className={styles.CardList}>
-        {sortPlans().map((plan, index) => (
-          <div key={index} style={{ width: '33%', padding: '10px' }}>
-            <Link to={`/planDetail/${plan._id}`}>
-              <ProfileCard plan={plan} ids={ids} />
-            </Link>
-          </div>
-        ))}
-      </div>
+      {(filters.searchText && filteredPlans.length === 0) ? (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <h3>No data found</h3>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} className={styles.CardList}>
+          {sortPlans().map((plan, index) => (
+            <div key={index} style={{ width: '33%', padding: '10px' }}>
+              <Link to={`/planDetail/${plan._id}`}>
+                <ProfileCard plan={plan} ids={ids} />
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -94,6 +94,8 @@ body {
 
   /* align-items: center; */
 
+  text-transform: capitalize;
+
 }
 
 .adnewplan_separator {
@@ -186,6 +188,8 @@ body {
   border-radius: 50%;
 
   margin-right: 5px;
+
+
 
 }
 
@@ -673,4 +677,5 @@ width: 20vw;
 
 .show_plans_list{
   margin-bottom: 5vh;
+  
 }

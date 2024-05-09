@@ -15,7 +15,7 @@ const lossCircleStyle = {
   display: 'inline-block',
   width: '1rem',
   height: '1rem',
-  backgroundColor: 'red',
+  backgroundColor: 'rgba(255,30,56,255)',
   marginRight: '0.5rem',
   borderRadius: '50%',
 };
@@ -24,7 +24,7 @@ const profitCircleStyle = {
   display: 'inline-block',
   width: '1rem',
   height: '1rem',
-  backgroundColor: 'blue',
+  backgroundColor: 'rgba(38, 166, 91, 1)',
   marginRight: '0.5rem',
   borderRadius: '50%',
 };
@@ -34,7 +34,7 @@ const BarChartComponent = ({ plansData }) => {
     name: plan.planName,
     gains: Math.abs(plan.total_current_gains),
     originalGains: plan.total_current_gains,
-    color: plan.total_current_gains < 0 ? '#FF0000' : '#0066FF',
+    color: plan.total_current_gains < 0 ? 'rgba(255,30,56,255)' : 'rgba(38, 166, 91, 1)',
   }));
 
   return (
@@ -68,9 +68,9 @@ const BarChartComponent = ({ plansData }) => {
       </BarChart>
       <div><center>
       <span style={lossCircleStyle}></span>
-      <span style={{ color: 'red', marginRight: '1rem',fontSize:"small"}}>Loss</span>
+      <span style={{ color: 'rgba(255,30,56,255)', marginRight: '1rem',fontSize:"small"}}>Loss</span>
       <span style={profitCircleStyle}></span>
-      <span style={{ color: 'blue', fontSize:"small" }}>Profit</span></center>
+      <span style={{ color: 'rgba(38, 166, 91, 1', fontSize:"small" }}>Profit</span></center>
     </div>
     </ResponsiveContainer>
   );

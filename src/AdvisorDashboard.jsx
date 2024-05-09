@@ -46,7 +46,7 @@ function App() {
       setIsAuthenticated(true); // Update isAuthenticated state to true
     } else {
       // Cookie is not set
-      if (!['/login', '/', '/register', '/clform'].includes(window.location.pathname)) {
+      if (!['/login', '/', '/register', '/client_registration_form'].includes(window.location.pathname)) {
         window.location.href = '/login';
       }
     }

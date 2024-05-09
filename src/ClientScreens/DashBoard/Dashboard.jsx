@@ -3,9 +3,9 @@ import InvestmentSummary from './Summary';
 import { Typography } from '@mui/material';
 import styles from "./dashboard.module.css";
 import axios from 'axios';
-import notification from "./../../assets/icons/notification.png";
-import user from "./../../assets/icons/moon.svg"
-
+import loadingGif from "./../../assest/images/Animation.gif";
+import CliStock from './../../CliStockChart/CliStock'
+import { ChakraProvider } from '@chakra-ui/react'
 function DashboardCl() {
   const [transactions, setTransactions] = useState([]);
   const [returns, setReturns] = useState([]);
@@ -25,6 +25,7 @@ function DashboardCl() {
   });
 
   const [datu, setDatu] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -185,7 +186,7 @@ const formatDate = (dateString) => {
 
 
         setDatu(calculatedData.plans_data);
-
+        setLoading(false);
 
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
@@ -212,7 +213,15 @@ const formatDate = (dateString) => {
     })(document, 'script');
   }, []);
 
-  if (!datu) { return (<div></div>); }
+  if (loading) { 
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ position: 'relative', top: '-80px' }}>
+        <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      </div>
+    </div>
+    );
+  }
 
   function calculateAverageGainPercentage(plansData) {
     let totalGainPercentage = 0;
