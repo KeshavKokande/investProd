@@ -252,6 +252,14 @@ function PlanView() {
                 </div>
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
+                    Advisor Name
+                  </p>
+                  <p className={styles.rowValue}>
+                    {plan.advisorName}
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
                     Description
                   </p>
                   <p className={styles.rowValue}>
