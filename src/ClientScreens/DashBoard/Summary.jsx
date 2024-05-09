@@ -123,14 +123,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                 />
             </section>
 
-            {/* Stock Component Added */}
-
-
-            {/* <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
-                <ChakraProvider>
-                    <CliStock />
-                </ChakraProvider>
-            </div> */}
+          
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
@@ -143,6 +136,15 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     <BarChartComponent plansData={etta} widthChart={500} />
                 </p>
             </div>
+  {/* Stock Component Added */}
+
+
+  <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
+                <ChakraProvider>
+                    <CliStock />
+                </ChakraProvider>
+            </div>
+
             <h2 className={styles.heading}>Plan Information</h2>
             <PlanTable data={table} />
         </div>
