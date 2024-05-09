@@ -10,7 +10,7 @@ const Payment = () => {
 
 
     const navigate = useNavigate();
-    const { advisor_id, plan_id, days } = useParams();
+    const { advisor_id, plan_id, days, fee } = useParams();
     const [position, setPosition] = useState('0px');
     const [number, setNumber] = useState('');
     const [name, setName] = useState('');
@@ -126,7 +126,7 @@ const Payment = () => {
     const handleSubscribe = async () => {
 
         try {
-            const response = await fetch(`https://localhost:8000/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
+            const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

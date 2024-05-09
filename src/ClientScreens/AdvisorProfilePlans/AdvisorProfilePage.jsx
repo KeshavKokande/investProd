@@ -19,7 +19,7 @@ const AdvisorProfilePage = () => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
-        const advisorsResponse = await fetch(`https://localhost:8000/api/v1/Client/get-all-advisors`, {
+        const advisorsResponse = await fetch(`http://localhost:8000/api/v1/Client/get-all-advisors`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

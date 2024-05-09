@@ -100,7 +100,7 @@ function Stock() {
   }
 
   useEffect(() => {
-    fetch('RELIANCE.BSE', 7)
+    fetch('RELIANCE.BSE', 60) // Fetching data for 3 months (60 days)
   }, [])
 
   let prices = {
@@ -146,7 +146,7 @@ function Stock() {
       symbol,
       latestPrice: 0
     })
-    fetch(symbol, 7)
+    fetch(symbol, 60) // Fetching data for 3 months (60 days)
   }
 
   function handleBlur() {
@@ -177,13 +177,13 @@ function Stock() {
           <InputLeftElement m='0'>
             <BsSearch />
           </InputLeftElement>
-          <Input placeholder='search any stock' textAlign='center' bgColor='whiteAlpha.300'
+          <Input placeholder='Search any stock' textAlign='center' bgColor='whiteAlpha.300'
             fontWeight='semibold'
             isInvalid
             errorBorderColor='teal'
             onChange={(e) => handleChange(e)}
             value={query}
-            minW={['70vw', '60vw']}
+            minW={['40vw', '20vw']}
             onFocus={() => setInputFocus(true)}
             onBlur={handleBlur}
             color='black !important'
@@ -217,27 +217,35 @@ function Stock() {
         </Box>
       </Box>
       {/* Period & chart */}
-      <Box display='flex' flexDir={['column', 'row']} maxW={['95vw', '80vw']}>
-        <Box>
-          <Box w={['90vw', '40vw']}>
-            <Text color={'black'} ml={['1', '8']} fontSize={['3xl', '4xl', '5xl'] }>{company.name}</Text>
+      <Box display='flex' flexDir={['column', 'row']} maxW={['95vw', '80vw']} >
+        <Box >
+          <Box w={['90vw', '40vw']}  >
+        <VStack  align={'start'}>
+            <Text  color={'black'} ml={['1', '8']} fontSize={['1xl', '2xl', '3xl'] } fontFamily={"sans-serif;"} fontWeight={"semibold"}>{company.name} - {'\u20B9'}{company.latestPrice}</Text>
             <HStack >
-              <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 7)}>
-                <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
-                  1 week
-                </Tag>
-              </Link>
-              <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 30)}>
-                <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
-                  1 month
-                </Tag>
-              </Link>
-              <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 60)}>
-                <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
-                  3 month
-                </Tag>
-              </Link>
+              <Box>
+                <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 7)}>
+                  <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
+                    1 week
+                  </Tag>
+                </Link>
+              </Box>
+              <Box>
+                <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 30)}>
+                  <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
+                    1 month
+                  </Tag>
+                </Link>
+              </Box>
+              <Box>
+                <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 60)}>
+                  <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
+                    3 month
+                  </Tag>
+                </Link>
+              </Box>
             </HStack>
+            </VStack>
           </Box>
           <Box display='flex' flexDir={['column', 'row']} justifyContent={'space-between'}>
             <Box>
@@ -247,15 +255,14 @@ function Stock() {
               >
                 {loading ? <Loading /> : <Line data={prices} options={chartOptions} />}
               </Box>
-              <Text fontSize={['3xl', '4xl', '5xl']} textAlign='center' color={'black'}>Latest Price: {'\u20B9'}{company.latestPrice}</Text>
             </Box>
           </Box>
         </Box>
         {/* Companies list */}
-        <Box p='5' display='flex' flexDirection={'column'} justifyContent='center' alignItems='center' color={'black'}>
-          <Text fontSize={['2xl', '3xl']} >Other Companies</Text>
+        <Box p='5' display='flex' flexDirection={'column'} justifyContent='flex-start' alignItems='center' color={'black'}>
+          <Text fontSize={['1xl', '2xl']} mb="3" fontFamily={"sans-serif;"} fontWeight={"semibold"}>Other Companies</Text>
           {companies.map((companyEle, i) => (
-            <Button color={'black'} key={i} onClick={() => handleSearch(companyEle.name, companyEle.symbol)} size='lg' mb='1'>
+            <Button color={'black'} key={i} onClick={() => handleSearch(companyEle.name, companyEle.symbol)} size='lg' mb='1' alignSelf="flex-start" maxW={['40vw', '10vw']} width={['80vw', '30vw']}>
               {companyEle.name}
             </Button>
           ))}

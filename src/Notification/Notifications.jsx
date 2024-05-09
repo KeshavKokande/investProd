@@ -50,7 +50,7 @@ const Notifications = ({user}) => {
     const fetchNotifications = async () => {
       try {
         const response = await fetch(
-          `https://localhost:8000/api/v1/${user}/get-all-notifications`,
+          `http://localhost:8000/api/v1/${user}/get-all-notifications`,
           {
             method: "GET",
             headers: {
@@ -114,7 +114,7 @@ const Notifications = ({user}) => {
   const handleNotificationClick = async (notificationId) => {
     try {
       const response = await fetch(
-        `https://localhost:8000/api/v1/${user}/view-notification/${notificationId}`,
+        `http://localhost:8000/api/v1/${user}/view-notification/${notificationId}`,
         {
           method: "GET",
           headers: {

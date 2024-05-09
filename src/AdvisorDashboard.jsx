@@ -86,7 +86,7 @@ function App() {
             <Route path="/profile/Edit" element={<MultiFormEdit />} />
             <Route path="/news" element={<News />} />
             <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
-            <Route path="/payment/:advisor_id/:plan_id/:days" element={<Payment />} />
+            <Route path="/payment/:advisor_id/:plan_id/:days/:fee" element={<Payment />} />
 
           </Route>
         </Routes>

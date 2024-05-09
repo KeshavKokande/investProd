@@ -31,7 +31,7 @@ const MultiFormEdit = () => {
     window.scrollTo(0, 0);
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('https://localhost:8000/api/v1/Client/get-own-details', {
+        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -138,7 +138,7 @@ const MultiFormEdit = () => {
     }
 
     try {
-      const response = await fetch('https://localhost:8000/api/v1/client/edit-profile', {
+      const response = await fetch('http://localhost:8000/api/v1/client/edit-profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
