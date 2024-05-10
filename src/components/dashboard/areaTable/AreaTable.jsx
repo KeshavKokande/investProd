@@ -19,10 +19,11 @@ const AreaTable = () => {
         const response = await fetch('http://localhost:8000/api/v1/advisor/get-latest-transactions-of-own-plans', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
+
         const jsonData = await response.json();
         setTableData(jsonData.transactions);
       } catch (error) {

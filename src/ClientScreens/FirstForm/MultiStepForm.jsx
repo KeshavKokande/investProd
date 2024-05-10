@@ -156,8 +156,8 @@ const MultiStepForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: 'include',
         body: JSON.stringify(formData),
       });
 

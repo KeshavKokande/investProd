@@ -209,7 +209,12 @@ const AddPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           // console.log('Form data:', formData);
-          axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, { withCredentials: true })
+          axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
+          })
             .then(response => {
               console.log('Response:', response.data);
               navigate("/advisor/planList");
@@ -266,7 +271,12 @@ const AddPlan = () => {
 
   async function handlegenaireq() {
 
-    axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks, { withCredentials: true })
+    axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks,  {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
       .then(response => {
         console.log('Response:', response.data);
         let data = response.data.planAdvise;
@@ -275,7 +285,7 @@ const AddPlan = () => {
           if (index < data.length) {
             setFormData(prevData => ({
               ...prevData,
-              advise: prevData.advise + data[index] 
+              advise: prevData.advise + data[index]
             }));
             index++;
           } else {
@@ -358,10 +368,10 @@ const AddPlan = () => {
                 className={`${styles.addPlan_input} ${styles.scrollableTextarea}`}
                 id="advise"
                 name="advise"
-                value={formData.advise} 
-                onChange={handleChange} 
+                value={formData.advise}
+                onChange={handleChange}
                 // required
-                autoFocus 
+                autoFocus
                 style={{ caretColor: showCursor ? 'auto' : 'transparent' }}
               />
               {errors.advise && <div className={styles.error}><strong>{errors.advise}</strong></div>}

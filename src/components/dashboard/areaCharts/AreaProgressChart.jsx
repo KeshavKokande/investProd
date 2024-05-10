@@ -10,9 +10,9 @@ const AreaProgressChart = () => {
             const response = await fetch('http://localhost:8000/api/v1/advisor/list-of-plans-with-more-subscriptions', {
               method: 'GET',
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
               },
-              credentials: 'include'
             })
             if (!response.ok) {
               throw new Error('Failed to fetch user data');

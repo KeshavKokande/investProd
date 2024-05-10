@@ -32,10 +32,10 @@ function DashboardCl() {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
-          headers: {
-            'Content-Type': 'application/json'
+           headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${localStorage.getItem('jwt')}`
           },
-          withCredentials: true
         });
 
         if (response.status === 200) {
@@ -130,9 +130,10 @@ const formatDate = (dateString) => {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-transactions', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
+        
         });
 
 
@@ -160,9 +161,9 @@ const formatDate = (dateString) => {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
         if (!response.ok) {

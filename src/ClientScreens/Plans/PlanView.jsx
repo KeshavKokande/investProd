@@ -76,9 +76,9 @@ function PlanView() {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
         if (response.ok) {
@@ -97,10 +97,11 @@ function PlanView() {
         const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
+
 
         if (!response.ok) {
           throw new Error('Failed to fetch plans data');
@@ -146,9 +147,10 @@ function PlanView() {
             const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
               },
-              credentials: 'include',
+
               body: JSON.stringify({
                 price: tab.total_current_value,
                 qty: quantity

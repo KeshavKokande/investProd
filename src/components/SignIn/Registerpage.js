@@ -81,9 +81,9 @@ function handlegetotp()
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
       },
       body: JSON.stringify(formData),
-      credentials: 'include',
     })
       .then((response) => {
         if (!response.ok) {

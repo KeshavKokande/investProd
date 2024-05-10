@@ -16,9 +16,9 @@ const ClientCards = () => {
         const response = await fetch('http://localhost:8000/api/v1/advisor/get-no-of-clients', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         })
 
         if (!response.ok) {
@@ -42,9 +42,9 @@ const ClientCards = () => {
         const response = await fetch('http://localhost:8000/api/v1/advisor/get-total-invested-amount', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         })
 
         if (!response.ok) {
@@ -69,9 +69,9 @@ const ClientCards = () => {
         const response = await fetch('http://localhost:8000/api/v1/advisor/get-total-current-profit', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         })
 
         if (!response.ok) {

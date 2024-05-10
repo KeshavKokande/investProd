@@ -32,8 +32,10 @@ const EditPlan = () => {
       try {
         const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
+          headers: { 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+           },
+
         });
         const data = await response.json();
         // console.log("data = ", data);
@@ -246,7 +248,12 @@ const EditPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
+          axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData,  {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
+          })
             .then(response => {
               // console.log('Response:', response.data);
               navigate('/advisor/planList');

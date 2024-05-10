@@ -67,8 +67,8 @@ const PlanCard = ({ plan, deletePlan }) => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: 'include',
         body: JSON.stringify({ isActive: !isActive }) // Toggle isActive value
       });
 

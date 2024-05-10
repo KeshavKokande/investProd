@@ -10,9 +10,10 @@ const UserDetails = () => {
         const response = await fetch('http://localhost:8000/api/v1/advisor/get-own-details', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
+
         })
 
         if (!response.ok) {

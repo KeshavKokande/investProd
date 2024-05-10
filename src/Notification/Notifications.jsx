@@ -55,8 +55,8 @@ const Notifications = ({user}) => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`
             },
-            credentials: "include",
           }
         );
 
@@ -119,8 +119,9 @@ const Notifications = ({user}) => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: "include",
+
         }
       );
   

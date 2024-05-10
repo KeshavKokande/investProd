@@ -21,16 +21,16 @@ const Clientlist = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include',
         });
 
         const plansResponse = await fetch('http://localhost:8000/api/v1/advisor/list-of-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include',
         });
 
         if (!clientsResponse.ok || !plansResponse.ok) {

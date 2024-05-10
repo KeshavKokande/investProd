@@ -61,13 +61,13 @@ const ClSidebar = () => {
         method: "GET", 
         headers: {
           "Content-Type": "application/json",
-          
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: "include", // include cookies in the request
+
       });
       if (response.ok) {
 
-        localStorage.removeItem("token");
+        localStorage.removeItem("jwt");
         document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         sessionStorage.clear();

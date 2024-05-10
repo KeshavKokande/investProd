@@ -42,10 +42,10 @@ const LoginPage = () => {
       const response = await fetch('http://localhost:8000/api/v1/check-auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
         body: JSON.stringify(formData),
-        credentials: 'include'
       });
 
       if (!response.ok) {
@@ -59,9 +59,10 @@ const LoginPage = () => {
       }
 
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
 
       // Check the selected role to redirect appropriately
+      localStorage.setItem("jwt",data.token);
       if (data.user.role === 'client') {
         navigate('/client_dashboard');
       } else if (data.user.role === 'advisor') {

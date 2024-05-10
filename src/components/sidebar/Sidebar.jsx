@@ -51,9 +51,10 @@ const Sidebar = () => {
         method: "GET", // or 'POST'
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           // You might need to include additional headers depending on your backend requirements
         },
-        credentials: "include", // include cookies in the request
+      
       });
       if (response.ok) {
         // Clear user authentication data
