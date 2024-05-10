@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     // Check if the cookie is set
-    const cookieExists = document.cookie.includes('jwt');
+    const cookieExists = localStorage.getItem('jwt');
 
     if (cookieExists) {
       setIsAuthenticated(true); // Update isAuthenticated state to true

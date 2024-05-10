@@ -14,20 +14,20 @@ function PlansCl() {
     window.scrollTo(0, 0);
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
-        const ponse = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
+        const ponse = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
         if (!response.ok && !ponse.ok) {

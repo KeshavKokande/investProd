@@ -26,7 +26,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           }))
         };
 
-        const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://1fed-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -63,12 +63,12 @@ const PlanCard = ({ plan, deletePlan }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/advisor/deletePlan/${toBeDeleted}`, {
+      const response = await fetch(`https://team4api.azurewebsites.net/api/v1/advisor/deletePlan/${toBeDeleted}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: 'include',
         body: JSON.stringify({ isActive: !isActive }) // Toggle isActive value
       });
 
@@ -99,7 +99,7 @@ const PlanCard = ({ plan, deletePlan }) => {
     return tab.individual_stocks.map((stock, index) => (
       <tr key={index}>
         <td className={styles.adnewplan_td}>{stock.symbol}</td>
-        <td className={styles.adnewplan_td}>{((stock.current_value/(tab.total_current_value+plan.cash))*100).toFixed(2)}%</td>
+        <td className={styles.adnewplan_td}>{((stock.current_value/(tab.total_current_value))*100).toFixed(2)}%</td>
         <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.total_change_percent) < 0 ? 'red' : 'green' }}>{stock.total_change_percent.toFixed(2)}%</td>
         <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.today_change_percent) < 0 ? 'red' : 'green' }}>{stock.today_change_percent.toFixed(2)}%</td>
         {/* <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td> */}

@@ -32,10 +32,10 @@ const MultiFormEdit = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
-          headers: {
-            'Content-Type': 'application/json'
+           headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${localStorage.getItem('jwt')}`
           },
-          withCredentials: true
         });
 
         if (response.status === 200) {
@@ -138,12 +138,12 @@ const MultiFormEdit = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/client/edit-profile', {
+      const response = await fetch('https://team4api.azurewebsites.net/api/v1/client/edit-profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: 'include',
         body: JSON.stringify(formData)
       });
 

@@ -126,12 +126,12 @@ const Payment = () => {
     const handleSubscribe = async () => {
 
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
+            const response = await fetch(`https://team4api.azurewebsites.net/api/v1/client/subscribePlan/advisor/${advisor_id}/plan/${plan_id}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
                 },
-                credentials: 'include',
                 body: JSON.stringify({
                     planDays: days
                 })
