@@ -30,7 +30,7 @@ const EditPlan = () => {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
+        const response = await fetch(`https://team4api.azurewebsites.net/api/v1/advisor/get-plan-details/${edit}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
