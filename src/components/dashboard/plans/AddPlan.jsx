@@ -212,7 +212,7 @@ const AddPlan = () => {
           axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('jwt')}`
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`
             }
           })
             .then(response => {
@@ -274,7 +274,7 @@ const AddPlan = () => {
     axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks,  {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(response => {

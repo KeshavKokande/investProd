@@ -251,7 +251,7 @@ const EditPlan = () => {
           axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData,  {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('jwt')}`
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`
             }
           })
             .then(response => {
