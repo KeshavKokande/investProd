@@ -138,7 +138,7 @@ const MultiFormEdit = () => {
     }
 
     try {
-      const response = await fetch('https://team4api.azurewebsites.net/api/v1/client/edit-profile', {
+      const response = await fetch('http://localhost:8000/api/v1/client/edit-profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

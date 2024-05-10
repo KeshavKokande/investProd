@@ -274,6 +274,7 @@ input[type="number"] {
 
 .modify_qty_btns input{
   padding-left: 15%;
+  width: 100%;
 }
 
 .modify_qty_btn {
