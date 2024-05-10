@@ -160,7 +160,7 @@ function AdvClProfile() {
         <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000} className={styles.Carousel}>
           {plansWithDecodedImages.map((plan, index) => (
             <div key={index}>
-            <Link to={`/plan_id/${plan._id}`}>
+            <Link to={`/planDetail/${plan._id}`}>
             <ProfileCard plan={plan} ids={clientDetails}/>
             </Link>
             </div>

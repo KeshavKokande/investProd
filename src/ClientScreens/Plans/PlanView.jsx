@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import dummy from './13429911_5242374.jpg';
 import styles from './Plans.module.css';
@@ -51,7 +51,7 @@ function PlanView() {
           }))
         };
 
-        const response = await fetch('https://bba4-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://1fed-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -252,6 +252,14 @@ function PlanView() {
                 </div>
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
+                    Advisor Name 
+                  </p>
+                  <p className={styles.rowValue}>
+                  <Link to={`/advisor/${plan.advisorId}`}><h4> <b >{plan.advisorName}</b> &nbsp; <span style={{ fontSize: '0.75em',textTransform:"capitalize" }}><i><b>{plan.category}</b></i></span></h4></Link>
+                  </p>
+                </div>
+                <div className={styles.row}>
+                  <p className={styles.rowLabel}>
                     Description
                   </p>
                   <p className={styles.rowValue}>
@@ -326,7 +334,7 @@ function PlanView() {
       )}
       {isLoading ? (
         <p></p>
-      ) : (<Modal isOpen={modalIsOpen} closeModal={closeModal} planid={plan_id} advisor={plan.advisorId}>
+      ) : (<Modal isOpen={modalIsOpen} closeModal={closeModal} planid={plan_id} advisor={plan.advisorId} cat={plan.category}>
       </Modal>)}
     </div>
   );

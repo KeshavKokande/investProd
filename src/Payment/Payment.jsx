@@ -10,7 +10,7 @@ const Payment = () => {
 
 
     const navigate = useNavigate();
-    const { advisor_id, plan_id, days } = useParams();
+    const { advisor_id, plan_id, days, fee } = useParams();
     const [position, setPosition] = useState('0px');
     const [number, setNumber] = useState('');
     const [name, setName] = useState('');

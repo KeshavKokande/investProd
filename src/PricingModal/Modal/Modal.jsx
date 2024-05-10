@@ -4,8 +4,21 @@ import "./Modal.css";
 import PricingCard from "../PricingCard/PricingCard";
 import './../PricingApp/PricingApp.css'
 import './../PricingCard/PricingCard.css'
-const Modal = ({ isOpen, closeModal, planid, advisor }) => {
+const Modal = ({ isOpen, closeModal, planid, advisor, cat }) => {
   if (!isOpen) return null;
+ let price1=1000;
+ let price2=1800;
+ let price3=3000;
+
+ if (cat == 'executive') {
+    price1 = 1500;
+    price2 = 2500;
+    price3 = 4000;
+  } else if (cat == 'premium') {
+    price1 = 1800;
+    price2 = 3000;
+    price3 = 5000;
+  }
 
   return (
     <div className="modal">
@@ -20,35 +33,38 @@ const Modal = ({ isOpen, closeModal, planid, advisor }) => {
 <div className="pricing-cards" >
           <PricingCard
             title="3 Months"
-            price="₹ 1000"
-            feature1="Rebancing updates for 3 months"
-            feature2="X"
+            price={`₹ ${price1}`}
+            feature1="Rebalncing updates for 3 months"
+            feature2="Access Premium plan for 3 months"
             feature3="X"
             planid = {planid}
             advisor ={advisor}
-            days={0}
+            days={90}
+            fee={price1}
           />
           <PricingCard
          
             title="6 Months"
             recomendation="MOST BOUGHT"
-            price="₹ 1800"
-            feature1="90 days support"
-            feature2="Access to paid plans for 6 months"
+            price={`₹ ${price2}`}
+            feature1="Rebalncing updates for 6 months"
+            feature2="Access Premium plan for 6 months"
             feature3="X"
             planid = {planid}
             advisor ={advisor}
-            days = {84}
+            days = {180}
+            fee={price3}
           />
           <PricingCard
             title="12 Months"
-            price="3000"
-            feature1="180 days support"
-            feature2="Access to free plans and paid plans for 12 months"
-            feature3=""
+            price={`₹ ${price3}`}
+            feature1="Rebalncing updates for 12 months"
+            feature2="Access Premium plan for 12 months"
+            feature3="X"
             planid = {planid}
             advisor ={advisor}
-            days = {168}
+            days = {360}
+            fee={price3}
           />
         </div>
       </div>

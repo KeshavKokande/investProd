@@ -36,7 +36,7 @@ const AreaBarChart = () => {
           cash: item.cash
         }));
  
-        const axiosResponse = await axios.post('https://bba4-103-226-169-60.ngrok-free.app/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('https://1fed-103-226-169-60.ngrok-free.app/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
  
         const mapData = calculatedData.plans_data.map((plan) => ({
