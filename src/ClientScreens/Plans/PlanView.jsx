@@ -252,10 +252,10 @@ function PlanView() {
                 </div>
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
-                    Advisor Name 
+                    Advisor Name
                   </p>
                   <p className={styles.rowValue}>
-                  <Link to={`/advisor/${plan.advisorId}`}><h4> <b >{plan.advisorName}</b> &nbsp; <span style={{ fontSize: '0.75em',textTransform:"capitalize" }}><i><b>{plan.category}</b></i></span></h4></Link>
+                    <Link to={`/advisor/${plan.advisorId}`}><h4> <b >{plan.advisorName}</b> &nbsp; <span style={{ fontSize: '0.75em', textTransform: "capitalize" }}><i><b>{plan.category}</b></i></span></h4></Link>
                   </p>
                 </div>
                 <div className={styles.row}>
@@ -298,9 +298,7 @@ function PlanView() {
                           readOnly
                         />
                         <div className={styles.modify_qty_btns}>
-                          <button onClick={decrementAmount} className={styles.modify_qty_btn}>-</button>
-                          <button onClick={incrementAmount} className={styles.modify_qty_btn} >+</button>
-                        </div>
+                          <button onClick={decrementAmount} className={`${styles.modify_qty_btn} ${styles.modify_qty_btn1}`}>-</button>
                         <input
                           className={styles.anotherInput}
                           type="text"
@@ -312,6 +310,8 @@ function PlanView() {
                           }}
                           placeholder="Enter Lots"
                         />
+                          <button onClick={incrementAmount} className={`${styles.modify_qty_btn} ${styles.modify_qty_btn2}`} >+</button>
+                        </div>
 
                       </div>
                     </div>

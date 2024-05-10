@@ -242,6 +242,8 @@ input[type="number"] {
   width: 50%;
   background: white !important;
   position: relative;
+  display: flex;
+  gap: 2%;
 }
 
 .advright button {
@@ -261,11 +263,17 @@ input[type="number"] {
 }
 
 .modify_qty_btns {
-  position: absolute;
+  /* position: absolute;
   display: flex;
   right: 4%;
-  top: 6%;
+  top: 6%; */
   background-color: white !important;
+  width: 39%;
+  position: relative;
+}
+
+.modify_qty_btns input{
+  padding-left: 15%;
 }
 
 .modify_qty_btn {
@@ -273,7 +281,19 @@ input[type="number"] {
   background-color: white !important;
   color: #000 !important;
   padding: 0 !important;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+}
+
+.modify_qty_btn1{
+  position: absolute;
+  top: 15%;
+  left: 5%;
+}
+
+.modify_qty_btn2{
+  position: absolute;
+  top: 15%;
+  right: 5%;
 }
 
 .cl-h2-plans {
@@ -338,6 +358,19 @@ input[type="number"] {
 .flex input {
   width: 8rem;
 }
+
+.activeButton{
+  background-color: black !important;
+  color: #ffffff;
+  border-radius: 8px;
+}
+.inactiveButton{
+  background-color: #475BE8 !important;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+
 
 .chart {
   grid-column-start: 1;

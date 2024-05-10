@@ -169,8 +169,9 @@ const PlanCardList = ({ plans, ids }) => {
                 id="searchCheckbox"
                 checked={filters.searchText === ' '}
                 onChange={(e) => handleSearchCheckboxChange(e.target.checked)}
+                style={{display: 'none'}}
             />
-            <label htmlFor="searchCheckbox">View All</label>
+            <label className={`${filters.searchText ? styles.inactiveButton : styles.activeButton}`} htmlFor="searchCheckbox">View All</label>
             </div>
         </div>
       </div>
