@@ -57,7 +57,7 @@ const ClSidebar = () => {
   };
   const logoutUser = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/check-auth/logout", {
+      const response = await fetch("https://team4api.azurewebsites.net/api/v1/check-auth/logout", {
         method: "GET", 
         headers: {
           "Content-Type": "application/json",
@@ -196,79 +196,3 @@ const ClSidebar = () => {
 };
 
 export default ClSidebar;
-
-
-
-
-
-
-
-
-  //------> geting profile Name
-
-  // const [profileInfo, setProfileInfo] = useState({
-  //   img: '', // Add the img property to store the image data
-  //   name: '',
-  //   email: '',
-  //   age: '',
-  //   address: '',
-  //   gender: '',
-  //   jobRole: ''
-   
-  // });
- 
-
-  // useEffect(() => {
-  //   const fetchProfileData = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         withCredentials: true
-  //       });
-
-  //       if (response.status === 200) {
-  //         const data = response.data.client;
-  //         const imageDataArray = data.ppfoto?.data?.data || []; // Get the image data array
-  //         const imageDataUrl = arrayToDataURL(imageDataArray); 
-          
-          
-  //         setProfileInfo({
-  //           img: imageDataUrl,
-  //           name: data.name || '',
-  //           email: data.email || '',
-  //           age: data.age || '',
-  //           address: data.address || '',
-  //           gender: data.gender || '',
-  //           jobRole: data.jobRole || ''
-           
-  //         });
-          
-  //         console.log(data)
-  //         console.log("data name", data.name)
-  //       } else {
-  //         throw new Error('Failed to fetch profile data');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching profile data:', error.message);
-  //     }
-  //   };
-
-  //   fetchProfileData();
-  // }, []);
-
-
-  //  // Function to convert array to data URL
-  //  const arrayToDataURL = (array) => {
-  //   const blob = new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
-  //   const urlCreator = window.URL || window.webkitURL;
-  //   return urlCreator.createObjectURL(blob);
-  // };
-
-
-
-
-
-  
-  // --------------->end
