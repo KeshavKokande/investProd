@@ -27,10 +27,17 @@
     display: grid;
     grid-gap: 1vh;
     grid-template-columns: auto auto;
-    box-shadow:  rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
+    box-shadow: rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
     position: relative;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.cardProfile:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+}
+
 
 .gridPosition{
     grid-column-start: 1;

@@ -96,9 +96,11 @@ function PlansCl() {
       <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
       <PlanCardList plans={plansWithDecodedImages} ids={kiks} />
       <br />
-      <hr />
+      {/* <hr /> */}
+      {/* <br />
       <br />
-      <br />
+       */}
+      
       <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} ids={kiks}/>
     </>
   );
