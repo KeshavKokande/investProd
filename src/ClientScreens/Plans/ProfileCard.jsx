@@ -45,7 +45,7 @@ const ProfileCard = ({ plan, ids }) => {
           avg_price: stock.price, // Assuming price is the average price
         }))
       };
-      const response = await fetch('https://15f4-103-226-169-60.ngrok-free.app/calculate', {
+      const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

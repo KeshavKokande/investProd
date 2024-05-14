@@ -35,7 +35,7 @@ const StockChart = ({ stocks, days, setc }) => {
         };
 
         try {
-            const response = await axios.post('https://15f4-103-226-169-60.ngrok-free.app/calculate_total_value', JSON.stringify(requestData), {
+            const response = await axios.post('https://c33b-103-226-169-60.ngrok-free.app/calculate_total_value', JSON.stringify(requestData), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
