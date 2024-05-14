@@ -113,8 +113,8 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         value: (
                             <div>
                                 {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
-                                <span style={{padding: '2px 3px 2px 2px', borderRadius:' 20% / 50%', fontSize: 'small',color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
-                                &darr;&nbsp;{avggg.toFixed(2)}%
+                                <span style={{padding: '2px 3px 2px 2px', borderRadius:' 20% / 50%', fontSize: '14px',marginLeft:'10px',color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
+                                &uarr;&nbsp;{avggg.toFixed(2)}%
                                 </span>
                             </div>
                         )
