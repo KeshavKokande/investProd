@@ -170,15 +170,15 @@ function Stock() {
 
   return (
     <VStack pt='3' fontFamily={'Roboto Slab'} alignItems='center' borderRadius='0.7rem' >
-      <Heading textAlign='center' mt={{ base: '3vh' }}>Market Updates</Heading>
+      <Heading textAlign='center' fontSize='30px' fontFamily='sans-serif'mt={{ base: '3vh', }}>Market Updates</Heading>
       {/* Search & suggestion */}
       <Box m='auto' maxW={['95vw', '80vw']} pos='relative'>
         <InputGroup>
           <InputLeftElement m='0'>
             <BsSearch />
           </InputLeftElement>
-          <Input placeholder='Search any stock' textAlign='center' bgColor='whiteAlpha.300'
-            fontWeight='semibold'
+          <Input placeholder='Search Stock' textAlign='left' bgColor='whiteAlpha.300' fontFamily='sans-serif' 
+            // fontWeight='semibold' 
             isInvalid
             errorBorderColor='teal'
             onChange={(e) => handleChange(e)}
@@ -224,21 +224,21 @@ function Stock() {
             <Text  color={'black'} ml={['1', '8']} fontSize={['1xl', '2xl', '3xl'] } fontFamily={"sans-serif;"} fontWeight={"semibold"}>{company.name} - {'\u20B9'}{company.latestPrice}</Text>
             <HStack >
               <Box>
-                <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 7)}>
+                <Link mr='2' fontFamily='sans-serif' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 7)}>
                   <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
                     1 week
                   </Tag>
                 </Link>
               </Box>
               <Box>
-                <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 30)}>
+                <Link mr='2' fontFamily='sans-serif' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 30)}>
                   <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
                     1 month
                   </Tag>
                 </Link>
               </Box>
               <Box>
-                <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 60)}>
+                <Link mr='2' fontFamily='sans-serif' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 60)}>
                   <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
                     3 month
                   </Tag>
@@ -260,7 +260,7 @@ function Stock() {
         </Box>
         {/* Companies list */}
         <Box p='5' display='flex' flexDirection={'column'} justifyContent='flex-start' alignItems='center' color={'black'}>
-          <Text fontSize={['1xl', '2xl']} mb="3" fontFamily={"sans-serif;"} fontWeight={"semibold"}>Other Companies</Text>
+          <Text fontSize='20px' mb="3" fontFamily={"sans-serif;"} fontWeight={"semibold"}>Other Companies</Text>
           {companies.map((companyEle, i) => (
             <Button color={'black'} key={i} onClick={() => handleSearch(companyEle.name, companyEle.symbol)} size='lg' mb='1' alignSelf="flex-start" maxW={['40vw', '10vw']} width={['80vw', '30vw']}>
               {companyEle.name}
