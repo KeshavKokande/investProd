@@ -106,6 +106,7 @@ const PlanCardList = ({ plans, ids }) => {
             <input
               type="text"
               name="searchText"
+              placeholder="Search Plans"
               value={filters.searchText}
               onChange={handleFilterChange}
               style={{ width: "150px", marginLeft: "-30px" }} // Adjust width and margin as needed
