@@ -40,7 +40,6 @@ function PlansCl() {
         setRiks(rik.client.question_1)
         setKiks(rik.client.subscribedPlanIds)
 
-        console.log("RISKS", rik.client.question_4);
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
         setLoading(false); // Update loading state when data is fetched
