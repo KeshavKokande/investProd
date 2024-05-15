@@ -37,9 +37,10 @@ function PlansCl() {
         const data = await response.json();
         const rik = await ponse.json();
 
-        setRiks(rik.client.question_4)
+        setRiks(rik.client.question_1)
         setKiks(rik.client.subscribedPlanIds)
 
+        console.log("RISKS", rik.client.question_4);
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
         setLoading(false); // Update loading state when data is fetched
@@ -96,11 +97,6 @@ function PlansCl() {
       <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
       <PlanCardList plans={plansWithDecodedImages} ids={kiks} />
       <br />
-      {/* <hr /> */}
-      {/* <br />
-      <br />
-       */}
-      
       <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} ids={kiks}/>
     </>
   );
