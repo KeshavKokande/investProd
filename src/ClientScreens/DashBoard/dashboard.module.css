@@ -1,6 +1,6 @@
 .UserInfo {
   display: flex;
-  position: relative;
+  position: fixed;
   left: -22vh;
   width: 110%;
   background-color: #ffffff;
@@ -10,6 +10,7 @@
   justify-content: end;
   padding-right: 4vw;
   gap: 2vw;
+  z-index: 10;
   /* position: fixed; */
   /* z-index: 3; */
 
