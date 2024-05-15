@@ -24,13 +24,14 @@ const ClBaseLayout = () => {
   }
 
   useEffect(() => {
+    
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
+        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${localStorage.getItem('jwt')}`
           },
-          withCredentials: true
         });
 
         if (response.status === 200) {

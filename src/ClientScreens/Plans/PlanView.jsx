@@ -51,7 +51,7 @@ function PlanView() {
           }))
         };
 
-        const response = await fetch('https://1fed-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -73,12 +73,12 @@ function PlanView() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
         if (response.ok) {
@@ -94,13 +94,14 @@ function PlanView() {
 
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
+
 
         if (!response.ok) {
           throw new Error('Failed to fetch plans data');
@@ -143,12 +144,13 @@ function PlanView() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
-            const response = await fetch(`https://team4api.azurewebsites.net/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
+            const response = await fetch(`http://localhost:8000/api/v1/client/invest-on-a-plan/advisor/${plan.advisorId}/plan/${plan_id}`, {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
               },
-              credentials: 'include',
+
               body: JSON.stringify({
                 price: tab.total_current_value,
                 qty: quantity
@@ -252,10 +254,10 @@ function PlanView() {
                 </div>
                 <div className={styles.row}>
                   <p className={styles.rowLabel}>
-                    Advisor Name 
+                    Advisor Name
                   </p>
                   <p className={styles.rowValue}>
-                  <Link to={`/advisor/${plan.advisorId}`}><h4> <b >{plan.advisorName}</b> &nbsp; <span style={{ fontSize: '0.75em',textTransform:"capitalize" }}><i><b>{plan.category}</b></i></span></h4></Link>
+                    <Link to={`/advisor/${plan.advisorId}`}><h4> <b >{plan.advisorName}</b> &nbsp; <span style={{ fontSize: '0.75em', textTransform: "capitalize" }}><i><b>{plan.category}</b></i></span></h4></Link>
                   </p>
                 </div>
                 <div className={styles.row}>
@@ -298,9 +300,7 @@ function PlanView() {
                           readOnly
                         />
                         <div className={styles.modify_qty_btns}>
-                          <button onClick={decrementAmount} className={styles.modify_qty_btn}>-</button>
-                          <button onClick={incrementAmount} className={styles.modify_qty_btn} >+</button>
-                        </div>
+                          <button onClick={decrementAmount} className={`${styles.modify_qty_btn} ${styles.modify_qty_btn1}`}>-</button>
                         <input
                           className={styles.anotherInput}
                           type="text"
@@ -312,6 +312,8 @@ function PlanView() {
                           }}
                           placeholder="Enter Lots"
                         />
+                          <button onClick={incrementAmount} className={`${styles.modify_qty_btn} ${styles.modify_qty_btn2}`} >+</button>
+                        </div>
 
                       </div>
                     </div>

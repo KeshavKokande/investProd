@@ -12,13 +12,14 @@ const AdNewPlans = () => {
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans", {
+        const response = await fetch("http://localhost:8000/api/v1/advisor/list-of-plans", {
           method: "GET",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
+
         const data = await response.json();
         setPlansData(data);
         setIsLoading(false); // Set loading to false when data is fetched

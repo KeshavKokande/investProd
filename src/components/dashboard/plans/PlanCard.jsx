@@ -26,7 +26,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           }))
         };
 
-        const response = await fetch('https://1fed-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -63,12 +63,12 @@ const PlanCard = ({ plan, deletePlan }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://team4api.azurewebsites.net/api/v1/advisor/deletePlan/${toBeDeleted}`, {
+      const response = await fetch(`http://localhost:8000/api/v1/advisor/deletePlan/${toBeDeleted}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: 'include',
         body: JSON.stringify({ isActive: !isActive }) // Toggle isActive value
       });
 

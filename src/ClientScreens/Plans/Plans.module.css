@@ -1,7 +1,7 @@
 .CarouselBox {
   display: flex;
   flex-direction: column;
-  gap: 14vh;
+  gap: 7vh;
   margin-bottom: 5vh;
 }
 
@@ -13,7 +13,7 @@
 
 .heading {
   font-family: sans-serif;
-  font-size: 2.5vw;
+  font-size: 2vw;
 }
 
 .Carousel {
@@ -242,6 +242,8 @@ input[type="number"] {
   width: 50%;
   background: white !important;
   position: relative;
+  display: flex;
+  gap: 2%;
 }
 
 .advright button {
@@ -261,11 +263,18 @@ input[type="number"] {
 }
 
 .modify_qty_btns {
-  position: absolute;
+  /* position: absolute;
   display: flex;
   right: 4%;
-  top: 6%;
+  top: 6%; */
   background-color: white !important;
+  width: 39%;
+  position: relative;
+}
+
+.modify_qty_btns input{
+  padding-left: 15%;
+  width: 100%;
 }
 
 .modify_qty_btn {
@@ -273,7 +282,19 @@ input[type="number"] {
   background-color: white !important;
   color: #000 !important;
   padding: 0 !important;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+}
+
+.modify_qty_btn1{
+  position: absolute;
+  top: 15%;
+  left: 5%;
+}
+
+.modify_qty_btn2{
+  position: absolute;
+  top: 15%;
+  right: 5%;
 }
 
 .cl-h2-plans {
@@ -281,6 +302,7 @@ input[type="number"] {
   font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 0rem;
+
 }
 
 .cl-hr-plans {
@@ -308,7 +330,7 @@ input[type="number"] {
 
 .CardList {
   background-color: white;
-  box-shadow: rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px;
+  /* box-shadow: rgba(100, 100, 111, 0.1) 2px 2px 4px 4px, rgba(100, 100, 111, 0.1) -2px -2px 4px 4px; */
   border-radius: 0.75rem;
 }
 
@@ -339,6 +361,19 @@ input[type="number"] {
   width: 8rem;
 }
 
+.activeButton{
+  background-color: black !important;
+  color: #ffffff;
+  border-radius: 8px;
+}
+.inactiveButton{
+  background-color: #475BE8 !important;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+
+
 .chart {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -356,3 +391,40 @@ input[type="number"] {
   .react-multiple-carousel__arrow--left{
     left:0 !important;
   } */
+
+
+  /* search icon */
+  .searchIcon {
+    width: 20px; /* Adjust the width to make the icon smaller */
+    height: 20px;
+    margin-right: -30px;  /* Adjust the height to maintain aspect ratio */
+  }
+ 
+
+    /* filter icon */
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filterIcon {
+    width: 20px; /* Adjust the width of the icon */
+    height: 20px; /* Adjust the height of the icon */
+    margin-right: -30px; /* Adjust the margin to move the icon slightly to the left */
+  }
+
+
+   /* settings icon */
+
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .settingsIcon {
+    width: 20px; /* Adjust the width of the icon */
+    height: 20px; /* Adjust the height of the icon */
+    margin-right: -25px; /* Adjust the margin to move the icon slightly to the left */
+  }
+  
+  

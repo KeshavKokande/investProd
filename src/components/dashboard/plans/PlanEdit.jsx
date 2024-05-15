@@ -30,10 +30,12 @@ const EditPlan = () => {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const response = await fetch(`https://team4api.azurewebsites.net/api/v1/advisor/get-plan-details/${edit}`, {
+        const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
+          headers: { 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+           },
+
         });
         const data = await response.json();
         // console.log("data = ", data);
@@ -80,7 +82,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('https://1fed-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -246,7 +248,12 @@ const EditPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          axios.patch(`https://team4api.azurewebsites.net/api/v1/advisor/edit-stocks/${edit}`, formData, { withCredentials: true })
+          axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData,  {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            }
+          })
             .then(response => {
               // console.log('Response:', response.data);
               navigate('/advisor/planList');

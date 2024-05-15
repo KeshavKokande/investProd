@@ -47,13 +47,14 @@ const Sidebar = () => {
 
   const logoutUser = async () => {
     try {
-      const response = await fetch("https://team4api.azurewebsites.net/api/v1/check-auth/logout", {
+      const response = await fetch("http://localhost:8000/api/v1/check-auth/logout", {
         method: "GET", // or 'POST'
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           // You might need to include additional headers depending on your backend requirements
         },
-        credentials: "include", // include cookies in the request
+      
       });
       if (response.ok) {
         // Clear user authentication data

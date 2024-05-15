@@ -14,20 +14,20 @@ function PlansCl() {
     window.scrollTo(0, 0);
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
-        const ponse = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
+        const ponse = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-          credentials: 'include'
         });
 
         if (!response.ok && !ponse.ok) {
@@ -37,9 +37,10 @@ function PlansCl() {
         const data = await response.json();
         const rik = await ponse.json();
 
-        setRiks(rik.client.question_4)
+        setRiks(rik.client.question_1)
         setKiks(rik.client.subscribedPlanIds)
 
+        console.log("RISKS", rik.client.question_4);
         const filteredPlans = data.plans.filter(plan => plan.isActive);
         setPlansData(filteredPlans);
         setLoading(false); // Update loading state when data is fetched
@@ -95,9 +96,6 @@ function PlansCl() {
     <>
       <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
       <PlanCardList plans={plansWithDecodedImages} ids={kiks} />
-      <br />
-      <hr />
-      <br />
       <br />
       <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} ids={kiks}/>
     </>

@@ -57,17 +57,17 @@ const ClSidebar = () => {
   };
   const logoutUser = async () => {
     try {
-      const response = await fetch("https://team4api.azurewebsites.net/api/v1/check-auth/logout", {
+      const response = await fetch("http://localhost:8000/api/v1/check-auth/logout", {
         method: "GET", 
         headers: {
           "Content-Type": "application/json",
-          
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        credentials: "include", // include cookies in the request
+
       });
       if (response.ok) {
 
-        localStorage.removeItem("token");
+        localStorage.removeItem("jwt");
         document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         sessionStorage.clear();
