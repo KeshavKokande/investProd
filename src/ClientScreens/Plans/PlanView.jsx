@@ -153,7 +153,8 @@ function PlanView() {
 
               body: JSON.stringify({
                 price: tab.total_current_value,
-                qty: quantity
+                qty: quantity,
+                
               })
             });
 
@@ -167,7 +168,7 @@ function PlanView() {
 
             Swal.fire('Success', 'Plan Bought Successfully!', 'success');
             if (data.status === 'success') {
-              navigate('/client_dashboard');// Update success state
+              navigate('/client/client_dashboard');// Update success state
             }
           } catch (error) {
             console.error('Error buying plan:', error.message);
@@ -181,6 +182,7 @@ function PlanView() {
   // Function to handle incrementing the invested amount
   const incrementAmount = () => {
     setAnotherAmount(Number(anotherAmount) + 1);
+    setQuantity(quantity+1);
     setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value) * 100) / 100);
   };
 
@@ -188,6 +190,7 @@ function PlanView() {
   const decrementAmount = () => {
     if (investedAmount > 0) {
       setAnotherAmount(Number(anotherAmount) - 1);
+      setQuantity(quantity-1);
       setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value) * 100) / 100);
     }
   };
@@ -309,6 +312,7 @@ function PlanView() {
                             const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
                             setAnotherAmount(value);
                             setInvestedAmount(value * tab.total_current_value);
+                            setQuantity(value);
                           }}
                           placeholder="Enter Lots"
                         />

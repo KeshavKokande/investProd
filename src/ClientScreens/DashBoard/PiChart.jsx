@@ -1,25 +1,18 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import chroma from 'chroma-js';
 import styles from "./dashboard.module.css";
-
+ 
 const PiChart = ({ data, title }) => {
-  const colors = [
-    '#003f5c',
-    '#2f4b7c',
-    '#665191',
-    '#a05195',
-    '#d45087',
-    '#f95d6a',
-    '#ff7c43',
-    '#ffa600'
-  ]; // Define additional colors here
-
+  const numDataPoints = data.length;
+  const colors = chroma.scale(['#003f5c', '#ffa600']).mode('lch').colors(numDataPoints);
+ 
   const options = {
     chart: {
-      fontFamily: 'Satoshi, sans-serif',
+      fontFamily: 'sans-serif',
       type: 'donut',
     },
-    colors: colors.slice(0, data.length),
+    colors: colors,
     labels: data.map(item => item.name),
     legend: {
       show: false,
@@ -63,7 +56,7 @@ const PiChart = ({ data, title }) => {
       }
     }
   };
-
+ 
   return (
     <div style={{display:'flex'}}>
       <div className="mb-2">
@@ -73,7 +66,7 @@ const PiChart = ({ data, title }) => {
       </div>
       <div className={styles.pieChartLabels}>
         {data.map((item, index) => (
-          <div  key={index}>
+          <div key={index}>
             <div className="flex w-full items-center">
               <span style={{ backgroundColor: colors[index] }} className={`mr-2 block h-3 w-full max-w-3 rounded-full`}></span>
               <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
@@ -86,5 +79,5 @@ const PiChart = ({ data, title }) => {
     </div>
   );
 };
-
+ 
 export default PiChart;

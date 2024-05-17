@@ -54,7 +54,7 @@ function DashboardCl() {
             boughtPlanIds: data.boughtPlanIds || []
           });
           // console.log(data);
-          console.log("data name", data.name);
+          // console.log("data name", data.name);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -250,7 +250,7 @@ const formatDate = (dateString) => {
   return (
     <div className={styles.App}>
       <h2 className={styles.heading}> Portfolio Summary</h2>
-      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} />
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} plansData={plansData} />
     </div>
   );
 }

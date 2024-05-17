@@ -5,9 +5,9 @@ import { Tag, Box, Button, VStack, HStack, Heading, Text, Link, Input, InputGrou
 import axios from 'axios';
 import { BsSearch } from 'react-icons/bs'
 import { Chart } from 'chart.js/auto';
-
+ 
 import symbols from './Symbol.json'; // Importing symbols JSON file
-
+ 
 function Stock() {
   const [companies, setCompanies] = useState([
     {
@@ -43,7 +43,7 @@ function Stock() {
       symbol: 'TECHM.BSE'
     }
   ]);
-
+ 
   const [company, setCompany] = useState({
     name: 'RELIANCE',
     symbol: 'RELIANCE.BSE',
@@ -55,7 +55,7 @@ function Stock() {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [isInputFocused, setInputFocus] = useState(false);
-
+ 
   const fetch = async (symbol, days) => {
     setLoading(true)
     const options = {
@@ -98,11 +98,11 @@ function Stock() {
       console.error(error);
     }
   }
-
+ 
   useEffect(() => {
     fetch('RELIANCE.BSE', 60) // Fetching data for 3 months (60 days)
   }, [])
-
+ 
   let prices = {
     labels: list.map(x => {
       const parts = x[1].split('-');
@@ -115,21 +115,21 @@ function Stock() {
       backgroundColor: graphColor,
     }],
   }
-  
+ 
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false
   }
-
+ 
   async function fetchSuggestions() {
     // Filter the symbols based on the query
     const filteredSymbols = symbols.filter(symbol =>
       symbol.toLowerCase().includes(query.toLowerCase())
     );
-
+ 
     setSuggestionList(filteredSymbols);
   }
-
+ 
   async function handleChange(event) {
     const searchKeyword = event.target.value;
     setQuery(searchKeyword);
@@ -138,7 +138,7 @@ function Stock() {
       return
     }
   }
-
+ 
   function handleSearch(name, symbol) {
     setQuery('')
     setCompany({
@@ -148,13 +148,13 @@ function Stock() {
     })
     fetch(symbol, 60) // Fetching data for 3 months (60 days)
   }
-
+ 
   function handleBlur() {
     setTimeout(() => {
       setInputFocus(false)
     }, 1000);
   }
-
+ 
   useEffect(() => {
     if (query === '') {
       setSuggestionList([])
@@ -167,84 +167,89 @@ function Stock() {
       clearTimeout(timeOutId)
     }
   }, [query])
-
+ 
   return (
     <VStack pt='3' fontFamily={'Roboto Slab'} alignItems='center' borderRadius='0.7rem' >
-      <Heading textAlign='center' fontSize='30px' fontFamily='sans-serif'mt={{ base: '3vh', }}>Market Updates</Heading>
-      {/* Search & suggestion */}
-      <Box m='auto' maxW={['95vw', '80vw']} pos='relative'>
-        <InputGroup>
-          <InputLeftElement m='0'>
-            <BsSearch />
-          </InputLeftElement>
-          <Input placeholder='Search Stock' textAlign='left' bgColor='whiteAlpha.300' fontFamily='sans-serif' 
-            // fontWeight='semibold' 
-            isInvalid
-            errorBorderColor='teal'
-            onChange={(e) => handleChange(e)}
-            value={query}
-            minW={['40vw', '20vw']}
-            onFocus={() => setInputFocus(true)}
-            onBlur={handleBlur}
-            color='black !important'
-          />
-        </InputGroup>
-        <Box pos='absolute'
-          top={'100%'}
-          width='100%'
-          bgColor='#c7c3c0'
-          color='black'
-          zIndex='10'
-        >
-          {isInputFocused && suggestionList.length > 0 &&
-            suggestionList.map((symbol, index) =>
-              <HStack fontWeight='bold'
-                onClick={() => handleSearch(symbol, symbol)} // Use the symbol itself as the name
-                _hover={
-                  { backgroundColor: '#fcf3ec' }
-                }
-                key={index}
-              >
-                <Box
-                  textAlign='left' m='1'
-                  fontFamily={"'Roboto', sans-serif;"}
-                  borderBottom='1px'
-                  borderColor='gray.500'
-                >{symbol}</Box>
-              </HStack>
-            )
-          }
-        </Box>
+   
+      <HStack width='100%' justifyContent='space-between'>
+  <Heading textAlign='left' >Market Updates</Heading>
+  <Box display="flex" alignItems="center">
+    <Box flexGrow="1" pos='relative'>
+      <InputGroup>
+        <InputLeftElement m='0'>
+          <BsSearch />
+        </InputLeftElement>
+        <Input placeholder='Search any stock' textAlign='center' bgColor='whiteAlpha.300'
+          fontWeight='semibold'
+          isInvalid
+          errorBorderColor='teal'
+          onChange={(e) => handleChange(e)}
+          value={query}
+          minW={['40vw', '20vw']}
+          onFocus={() => setInputFocus(true)}
+          onBlur={handleBlur}
+          color='black !important'
+        />
+      </InputGroup>
+      <Box pos='absolute'
+        top={'100%'}
+        width='100%'
+        bgColor='#c7c3c0'
+        color='black'
+        zIndex='10'
+      >
+        {isInputFocused && suggestionList.length > 0 &&
+          suggestionList.map((symbol, index) =>
+            <HStack fontWeight='bold'
+              onClick={() => handleSearch(symbol, symbol)} // Use the symbol itself as the name
+              _hover={
+                { backgroundColor: '#fcf3ec' }
+              }
+              key={index}
+            >
+              <Box
+                textAlign='left' m='1'
+                fontFamily={"'Roboto', sans-serif;"}
+                borderBottom='1px'
+                borderColor='gray.500'
+              >{symbol}</Box>
+            </HStack>
+          )
+        }
       </Box>
+    </Box>
+  </Box>
+</HStack>
+ 
       {/* Period & chart */}
       <Box display='flex' flexDir={['column', 'row']} maxW={['95vw', '80vw']} >
         <Box >
           <Box w={['90vw', '40vw']}  >
-        <VStack  align={'start'}>
-            <Text  color={'black'} ml={['1', '8']} fontSize={['1xl', '2xl', '3xl'] } fontFamily={"sans-serif;"} fontWeight={"semibold"}>{company.name} - {'\u20B9'}{company.latestPrice}</Text>
-            <HStack >
-              <Box>
-                <Link mr='2' fontFamily='sans-serif' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 7)}>
-                  <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
-                    1 week
-                  </Tag>
-                </Link>
-              </Box>
-              <Box>
-                <Link mr='2' fontFamily='sans-serif' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 30)}>
-                  <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
-                    1 month
-                  </Tag>
-                </Link>
-              </Box>
-              <Box>
-                <Link mr='2' fontFamily='sans-serif' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 60)}>
-                  <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
-                    3 month
-                  </Tag>
-                </Link>
-              </Box>
-            </HStack>
+            <VStack  align={'start'}>
+              <Text  color={'black'} ml={['1', '8']} fontSize={['1xl', '2xl', '3xl'] } fontFamily={"sans-serif;"} fontWeight={"semibold"}>{company.name} - {'\u20B9'}{company.latestPrice}</Text>
+              <HStack >
+                <Box>
+                  <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 7)}>
+                    <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
+                      1 week
+                    </Tag>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 30)}>
+                    <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
+                      1 month
+                    </Tag>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link mr='2' fontSize={['sm', 'md', 'lg']} onClick={() => fetch(company.symbol, 60)}>
+                    <Tag size={['sm', 'md', 'lg']} fontWeight='bold' variant='solid' colorScheme='twitter'>
+                      3 month
+                    </Tag>
+                  </Link>
+                </Box>
+              </HStack>
             </VStack>
           </Box>
           <Box display='flex' flexDir={['column', 'row']} justifyContent={'space-between'}>
@@ -260,7 +265,7 @@ function Stock() {
         </Box>
         {/* Companies list */}
         <Box p='5' display='flex' flexDirection={'column'} justifyContent='flex-start' alignItems='center' color={'black'}>
-          <Text fontSize='20px' mb="3" fontFamily={"sans-serif;"} fontWeight={"semibold"}>Other Companies</Text>
+          <Text fontSize={['1xl', '2xl']} mb="3" fontFamily={"sans-serif;"} fontWeight={"semibold"}>Other Companies</Text>
           {companies.map((companyEle, i) => (
             <Button color={'black'} key={i} onClick={() => handleSearch(companyEle.name, companyEle.symbol)} size='lg' mb='1' alignSelf="flex-start" maxW={['40vw', '10vw']} width={['80vw', '30vw']}>
               {companyEle.name}
@@ -271,5 +276,5 @@ function Stock() {
     </VStack>
   );
 }
-
+ 
 export default Stock;
