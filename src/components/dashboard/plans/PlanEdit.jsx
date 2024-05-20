@@ -55,8 +55,8 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://invest-nse.azurewebsites.net/get_symbol_lastprice');
-        setSelectedPrices(response.data);
+        const response = await axios.get('http://localhost:8000/api/v1/stock/get_symbol_lastprice');
+        setSelectedPrices(response.data.symbolPricesByDate);
         setDataLoading(1);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -82,7 +82,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('http://localhost:8000/api/v1/stock/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

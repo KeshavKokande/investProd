@@ -88,11 +88,13 @@ const DualAxis = ({ plans_data }) => {
   const chartSeries = [
     {
       name: 'Total Current Value',
-      data: plans_data.map(plan => plan.total_current_value),
+      data: plans_data.map(plan => plan.totalCurrentValue
+      ),
     },
     {
       name: 'Initial Value',
-      data: plans_data.map(plan => plan.initial_value),
+      data: plans_data.map(plan => plan.initialValue
+      ),
     },
   ];
 

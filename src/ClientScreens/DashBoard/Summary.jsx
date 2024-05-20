@@ -17,8 +17,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import moneyImage1 from './../../assest/images/money1.png';
 import moneyImage2 from './../../assest/images/money2.png';
 import moneyImage3 from './../../assest/images/money3.png';
+function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table, plansData, pnl }) {
 
-function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table, plansData }) {
 
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
@@ -200,7 +200,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
             </Carousel>
 
             <h2 className={styles.heading}>Plan Information</h2>
-            <PlanTable data={table} />
+            <PlanTable data={table} pnl={pnl} />
         </div>
     );
 }
