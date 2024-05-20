@@ -6,6 +6,8 @@ import styles from "./../ClientScreens/DashBoard/dashboard.module.css";
 import notification from "./../assets/icons/notification.png"
 import Notifications from "../Notification/Notifications";
 import avatarBoy from "../assets/images/avator.svg";
+import Breadcrumb from "../components/BreadCrumb/Breadcrumb";
+
 const ClBaseLayout = () => {
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -85,6 +87,7 @@ const ClBaseLayout = () => {
       <ClSidebar />
       {/* right side/content of the page */}
       <div className="content-wrapper">
+        <Breadcrumb />
         <Outlet />
       </div>
     </main>

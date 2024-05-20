@@ -76,15 +76,16 @@ function App() {
           </Route>
 
           <Route element={<ClBaseLayout />}>
-            <Route path="/client_dashboard" element={<DashboardClient />} />
+            <Route path="/client/client_dashboard" element={<DashboardClient />} />
+            <Route path="/client/plansList" element={<PlansCl />} />
+            <Route path="/client/viewAdvisor" element={<AdvClView />} />
+            <Route path="/client/news" element={<News />} />
+            <Route path="/client/profile" element={<ProfilePage />} />
+            
             <Route path="/advisor/:advisor_id" element={<AdvClProfile />} />
             <Route path="/planDetail/:plan_id" element={<PlanView />} />
-            <Route path="/plansList" element={<PlansCl />} />
-            <Route path="/viewAdvisor" element={<AdvClView />} />
             <Route path="/plan" element={<Plans />} />
-            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/Edit" element={<MultiFormEdit />} />
-            <Route path="/news" element={<News />} />
             <Route path="/advisorprofile" element={<AdvisorProfilePage />} />
             <Route path="/payment/:advisor_id/:plan_id/:days/:fee" element={<Payment />} />
 

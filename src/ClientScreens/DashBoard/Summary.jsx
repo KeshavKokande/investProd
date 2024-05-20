@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
 import styles from './dashboard.module.css'
 
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
+import Carousel from 'react-multi-carousel';
+import DonutChartCard from './DonutChartCard';
+import ExpiryPlanCard from './ExpiryPlanCardWrapper';
 
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
@@ -80,6 +83,35 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return formattedValue;
     };
 
+    const categorizePlans = (plans) => {
+        const categories = {
+            lessThan2000: [],
+            lessThan4000: [],
+            lessThan6000: [],
+            lessThan8000: [],
+            moreThan8000: []
+        };
+
+        plans.forEach(plan => {
+            if (plan.minInvestmentAmount < 2000) {
+                categories.lessThan2000.push(plan);
+            } else if (plan.minInvestmentAmount < 4000) {
+                categories.lessThan4000.push(plan);
+            } else if (plan.minInvestmentAmount < 6000) {
+                categories.lessThan6000.push(plan);
+            } else if (plan.minInvestmentAmount < 8000) {
+                categories.lessThan8000.push(plan);
+            } else {
+                categories.moreThan8000.push(plan);
+            }
+        });
+
+        return categories;
+    };
+
+
+    const categorizedPlans = categorizePlans(plansData);
+
     return (
         <div>
 
@@ -113,8 +145,8 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         value: (
                             <div>
                                 {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
-                                <span style={{padding: '2px 3px 2px 2px', borderRadius:' 20% / 50%', fontSize: '14px',marginLeft:'10px',color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
-                                &uarr;&nbsp;{avggg.toFixed(2)}%
+                                <span style={{ padding: '2px 3px 2px 2px', borderRadius: ' 20% / 50%', fontSize: '14px', marginLeft: '10px', color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
+                                    &uarr;&nbsp;{avggg.toFixed(2)}%
                                 </span>
                             </div>
                         )
@@ -123,7 +155,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                 />
             </section>
 
-          
+
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
@@ -136,10 +168,14 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     <BarChartComponent plansData={etta} widthChart={500} />
                 </p>
             </div>
-  {/* Stock Component Added */}
+
+            <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
+                <DonutChartCard />
+                <ExpiryPlanCard />
+            </div>
 
 
-  <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
+            <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px", marginTop: "20px", backgroundColor: '#fff' }}>
                 <ChakraProvider>
                     <CliStock />
                 </ChakraProvider>
@@ -152,3 +188,15 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
 }
 
 export default InvestmentSummary;
+
+
+const PlanItem = ({ plan }) => (
+    <div style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "10px", margin: "10px" }}>
+        <h4>{plan.planName}</h4>
+        <p>Minimum Investment Amount: {plan.minInvestmentAmount}</p>
+        <p>Risk: {plan.risk}</p>
+        <p>Advisor: {plan.advisorName}</p>
+        <p>Advise: {plan.advise}</p>
+        {/* Render other plan details as needed */}
+    </div>
+);

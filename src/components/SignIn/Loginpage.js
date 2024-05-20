@@ -64,7 +64,7 @@ const LoginPage = () => {
       // Check the selected role to redirect appropriately
       localStorage.setItem("jwt",data.token);
       if (data.user.role === 'client') {
-        navigate('/client_dashboard');
+        navigate('/client/client_dashboard');
       } else if (data.user.role === 'advisor') {
         navigate('/advisor_dashboard');
       } else {

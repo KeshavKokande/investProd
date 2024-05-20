@@ -56,7 +56,7 @@ function DashboardCl() {
 
           });
           // console.log(data);
-          console.log("data name", data.name);
+          // console.log("data name", data.name);
         } else {
           throw new Error('Failed to fetch profile data');
         }

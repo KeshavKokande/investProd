@@ -47,7 +47,7 @@ const MultiFormEdit = () => {
             age: capitalize(data.age) || '',
             phone: capitalize(data.phone) || '',
             address: capitalize(data.address) || '',
-            gender: capitalize(data.gender) || '',
+            gender: data.gender || '',
             jobRole: capitalize(data.jobRole) || '',
             phone: capitalize(data.phone) || '',
             qualification: capitalize(data.qualification) || '',
@@ -167,7 +167,7 @@ const MultiFormEdit = () => {
 
   useEffect(() => {
     if (success) {
-      navigate('/profile');
+      navigate('/client/profile');
     }
   }, [success, navigate]);
 

@@ -195,3 +195,29 @@ th:last-child {
   cursor: not-allowed;
   background-color: #ddd;
 }
+
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  background: none;
+  z-index: 20; /* Ensure breadcrumb is above UserInfo */
+}
+
+.breadcrumb-item {
+  margin-right: 0.5rem;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '>';
+  margin-left: 0.5rem;
+}

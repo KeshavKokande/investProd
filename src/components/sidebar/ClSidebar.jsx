@@ -128,7 +128,7 @@ const ClSidebar = () => {
         <div className="sidebar-menu">
           <ul className="menu-list">
             <li className={`menu-item ${location.pathname.includes("/client_dashboard") ? "active" : ""}`}>
-              <Link to="/client_dashboard" className="menu-link">
+              <Link to="/client/client_dashboard" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
                 </span>
@@ -137,7 +137,7 @@ const ClSidebar = () => {
             </li>
             
             <li className={`menu-item ${location.pathname.includes("/plansList") || location.pathname.includes("/planDetail") ? "active" : ""}`}>
-              <Link to="/plansList" className="menu-link">
+              <Link to="/client/plansList" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineShoppingBag size={20} />
                 </span>
@@ -145,7 +145,7 @@ const ClSidebar = () => {
               </Link>
             </li>
             <li className={`menu-item ${location.pathname.includes("/viewAdvisor") || location.pathname.includes("/advisor") ? "active" : ""}`}>
-              <Link to="/viewAdvisor" className="menu-link">
+              <Link to="/client/viewAdvisor" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>
@@ -154,7 +154,7 @@ const ClSidebar = () => {
             </li>
             
             <li className={`menu-item ${location.pathname.includes("/news") ? "active" : ""}`}>
-              <Link to="/news" className="menu-link">
+              <Link to="/client/news" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>
@@ -168,7 +168,7 @@ const ClSidebar = () => {
           <ul className="menu-list">
             
             <li className={`menu-item ${location.pathname.includes("/profile") || location.pathname.includes("/profile/Edit") ? "active" : ""}`}>
-              <Link to="/profile" className="menu-link">
+              <Link to="/client/profile" className="menu-link">
                 <span className="menu-link-icon">
                   <CgProfile size={18} />
                 </span>
