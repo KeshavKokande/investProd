@@ -41,14 +41,15 @@ const AreaCards = () => {
           cash: item.cash
         }));
  
-        const axiosResponse = await axios.post('https://c33b-103-226-169-60.ngrok-free.app/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('http://localhost:8000/api/v1/stock/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
+      
  
-        const mapData = calculatedData.plans_data.map((plan) => ({
+        const mapData = calculatedData.responseData.map((plan) => ({
           Name: plan.planName,
           gains: plan.total_current_gains,
         }));
-        setDatu(calculatedData.plans_data);
+        setDatu(calculatedData.responseData);
  
         setIsLoading(false);
       } catch (error) {
@@ -115,30 +116,30 @@ const AreaCards = () => {
   }, []);
  
   // get-total-current-profit
-  useEffect(() => {
-    const fetchTotalCurrentProfit = async () => {
-      try {
+  // useEffect(() => {
+  //   const fetchTotalCurrentProfit = async () => {
+  //     try {
  
-        const response = await fetch('http://localhost:8000/api/v1/advisor/get-total-current-profit', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-          },
-        })
+  //       const response = await fetch('http://localhost:8000/api/v1/advisor/get-total-current-profit', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+  //         },
+  //       })
  
-        if (!response.ok) {
-          throw new Error('Failed to fetch user data');
-        }
-        const data = await response.json();
-        setTotalCurrentProfit(data);
-      } catch (error) {
-        console.error('Error fetching user data:', error.message);
-      }
-    };
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch user data');
+  //       }
+  //       const data = await response.json();
+  //       setTotalCurrentProfit(data);
+  //     } catch (error) {
+  //       console.error('Error fetching user data:', error.message);
+  //     }
+  //   };
  
-    fetchTotalCurrentProfit();
-  }, []);
+  //   fetchTotalCurrentProfit();
+  // }, []);
  
   const formatCurrency = (value) => {
     const parsedValue = parseFloat(value).toFixed(2);
@@ -149,7 +150,7 @@ const AreaCards = () => {
     return formattedValue;
   };
  
-  if (isLoading) {
+  if (!datu) {
     return (
       <section className="content-area-cards">
         <div className="skeleton-card">
@@ -174,10 +175,11 @@ const AreaCards = () => {
   function calculateAverageGainPercentage(plansData) {
     let totalGainPercentage = 0;
     let totalStocks = 0;
+  
  
     plansData.forEach((plan) => {
-      plan.individual_stocks.forEach((stock) => {
-        totalGainPercentage += stock.total_change_percent;
+      plan.individualStocks.forEach((stock) => {
+        totalGainPercentage += parseFloat(stock.totalChangePercent);
         totalStocks++;
       });
     });
@@ -187,10 +189,13 @@ const AreaCards = () => {
     }
  
     const averageGainPercentage = totalGainPercentage / totalStocks;
+    console.log("avgper", averageGainPercentage);
     return averageGainPercentage;
+    
   }
  
   const averageGainPercentage = calculateAverageGainPercentage(datu);
+
  
  
   return (

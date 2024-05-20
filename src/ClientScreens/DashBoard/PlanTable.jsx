@@ -18,9 +18,27 @@ const formatDate = (dateString) => {
   return formattedDate;
 };
 
-const PlanTable = ({ data }) => {
+const PlanTable = ({ data,pnl }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(5);
+  // console.log("tab : ",data);
+  // console.log("pnl : ",pnl);
+
+  const addProfitPercent = (plans, profits) => {
+    // Create a map for quick lookup of profit percent by planName
+    const profitMap = new Map();
+    profits.forEach(profit => {
+        profitMap.set(profit.planName, parseFloat(profit.profit_percent));
+    });
+
+    // Add profit_percent to each plan
+    return plans.map(plan => ({
+        ...plan,
+        profit_percent: profitMap.get(plan.planName) || 0
+    }));
+};
+
+data=addProfitPercent(data,pnl);
   
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -47,7 +65,12 @@ const PlanTable = ({ data }) => {
       title: 'Latest Transaction Date',
       dataIndex: 'last_date_to_investment',
       key: 'last_date_to_investment',
-      render: (dateString) => formatDate(dateString), // Apply formatDate function
+      //render: (dateString) => formatDate(dateString), // Apply formatDate function
+    },
+    {
+      title: 'Returns',
+      dataIndex: 'profit_percent',
+      key: 'profit_percent',
     },
   ];
 

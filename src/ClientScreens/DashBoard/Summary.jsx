@@ -13,7 +13,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import moneyImage1 from './../../assest/images/money1.png';
 import moneyImage2 from './../../assest/images/money2.png';
 import moneyImage3 from './../../assest/images/money3.png';
-function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table }) {
+function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table,pnl }) {
 
     if (!transactions || !advisorNames || !returns) {
         return null; // Render nothing if any of the props are missing
@@ -146,7 +146,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
             </div>
 
             <h2 className={styles.heading}>Plan Information</h2>
-            <PlanTable data={table} />
+            <PlanTable data={table} pnl={pnl} />
         </div>
     );
 }
