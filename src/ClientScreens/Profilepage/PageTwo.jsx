@@ -18,33 +18,19 @@ const PageTwo = ({ formData, handleChange }) => {
             onChange={handleChange}
             className={styles['form-control']}
           >
-              <option value="Retirement planning">Retirement Planning</option>
-              <option value="Wealth accumulation">Wealth Accumulation</option>
-              <option value="Saving for education">Saving For Education</option>
-              <option value="Buying a home">Buying a Home</option>
-              <option value="Starting a business">Starting a Business</option>
-              </select>
-        </div>
-        <div className={styles['question-container']}>
-          <label htmlFor="riskTolerance">What is Your Risk Tolerance?</label>
-          <select
-            id="riskTolerance"
-            name="question_1"
-            value={formData.question_1}
-            onChange={handleChange}
-            className={styles['form-control']}
-          >
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
+            <option value="Retirement planning">Retirement Planning</option>
+            <option value="Wealth accumulation">Wealth Accumulation</option>
+            <option value="Saving for education">Saving For Education</option>
+            <option value="Buying a home">Buying a Home</option>
+            <option value="Starting a business">Starting a Business</option>
           </select>
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="investmentExperience">Select Your Investment Experience</label>
           <select
             id="investmentExperience"
-            name="question_2"
-            value={formData.question_2}
+            name="question_1"
+            value={formData.question_1}
             onChange={handleChange}
             className={styles['form-control']}
           >
@@ -58,8 +44,8 @@ const PageTwo = ({ formData, handleChange }) => {
           <label htmlFor="annualIncome">Annual Income:</label>
           <select
             id="annualIncome"
-            name="question_3"
-            value={formData.question_3}
+            name="question_2"
+            value={formData.question_2}
             onChange={handleChange}
             className={styles['form-control']}
           >
@@ -67,20 +53,34 @@ const PageTwo = ({ formData, handleChange }) => {
             <option value="Between 1 to 3 Lakhs">Between 1 to 3 Lakhs</option>
             <option value="Between 3 to 5 Lakhs">Between 3 to 5 Lakhs</option>
             <option value="Above 5 Lakhs">Above 5 Lakhs</option>
-            </select>
+          </select>
         </div>
         <div className={styles['question-container']}>
           <label htmlFor="investmentTimeHorizon">What Is Your Investment Time Horizon?</label>
           <select
             id="investmentTimeHorizon"
-            name="question_4"
-            value={formData.question_4}
+            name="question_3"
+            value={formData.question_3}
             onChange={handleChange}
             className={styles['form-control']}
           >
             <option value="Short-term (1-3 years)">Short-Term (1-3 Years)</option>
             <option value="Medium-term (3-10 years)">Medium-Term (3-10 Years)</option>
             <option value="Long-term (10+ years)">Long-Term (10+ Years)</option>
+          </select>
+        </div>
+        <div className={styles['question-container']}>
+          <label htmlFor="riskTolerance">What is Your Risk Tolerance?</label>
+          <select
+            id="riskTolerance"
+            name="question_4"
+            value={formData.question_4}
+            onChange={handleChange}
+            className={styles['form-control']}
+          >
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
       </div>

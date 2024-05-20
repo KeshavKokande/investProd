@@ -5,7 +5,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   Cell,
   Text,
@@ -28,21 +27,27 @@ const profitCircleStyle = {
   marginRight: '0.5rem',
   borderRadius: '50%',
 };
+
 const BarChartComponent = ({ plansData }) => {
   // Extract plan names, gains, and colors from the data
   const data = plansData.map(plan => ({
     name: plan.planName,
-    gains: Math.abs(plan.total_current_gains),
-    originalGains: plan.total_current_gains,
-    color: plan.total_current_gains < 0 ? 'rgba(255,30,56,255)' : 'rgba(38, 166, 91, 1)',
+    gains: Math.abs(plan.totalCurrentGains),
+    originalGains: plan.totalCurrentGains,
+    color: plan.totalCurrentGains < 0 ? 'rgba(255,30,56,255)' : 'rgba(38, 166, 91, 1)',
   }));
 
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data} margin={{ top: 50, right: 30, left: 50, bottom: 80 }}>
-        <XAxis dataKey="name" tick={{ fontSize: 12 }} angle={-45}
-        dx={-45}
-        dy={45}
+        <XAxis 
+          dataKey="name" 
+          tick={{ fontSize: 12 }} 
+          angle={-45}
+          dx={-45}
+          dy={45}
+          // Custom tick formatter to limit characters to 10
+          tickFormatter={name => name.length > 10 ? `${name.substring(0, 10)}...` : name}
         />
         <YAxis tickFormatter={val => Math.abs(val).toFixed(2)} tick={{ fontSize: 12 }} />
         <Tooltip formatter={val => Math.abs(val).toFixed(2)} />
@@ -68,9 +73,9 @@ const BarChartComponent = ({ plansData }) => {
       </BarChart>
       <div><center>
       <span style={lossCircleStyle}></span>
-      <span style={{ color: 'rgba(255,30,56,255)', marginRight: '1rem',fontSize:"small"}}>Loss</span>
+      <span style={{ color: 'rgba(255,30,56,255)', marginRight: '1rem', fontSize: "small" }}>Loss</span>
       <span style={profitCircleStyle}></span>
-      <span style={{ color: 'rgba(38, 166, 91, 1', fontSize:"small" }}>Profit</span></center>
+      <span style={{ color: 'rgba(38, 166, 91, 1', fontSize: "small" }}>Profit</span></center>
     </div>
     </ResponsiveContainer>
   );

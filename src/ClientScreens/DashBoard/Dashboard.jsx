@@ -12,6 +12,7 @@ function DashboardCl() {
   const [advisorNames, setAdvisorNames] = useState([]);
   const [error, setError] = useState(null);
   const [plansData, setPlansData] = useState([]);
+  const [allPlansData, setAllPlansData] = useState([]);
   const [tabData, setTabdata]=useState([]);
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -51,10 +52,12 @@ function DashboardCl() {
             address: data.address || '',
             gender: data.gender || '',
             jobRole: data.jobRole || '',
-            boughtPlanIds: data.boughtPlanIds || []
+            boughtPlanIds: data.boughtPlanIds || [],
+            planData:data.planData||[]
+
           });
           // console.log(data);
-          console.log("data name", data.name);
+          // console.log("data name", data.name);
         } else {
           throw new Error('Failed to fetch profile data');
         }
@@ -174,6 +177,8 @@ const formatDate = (dateString) => {
         const filteredPlans = data.plans.filter(plan => profileInfo.boughtPlanIds.includes(plan._id));
         // console.log("filteredPlans", filteredPlans);
         setPlansData(filteredPlans);
+        const filteredPlansIsActive = data.plans.filter(plan => plan.isActive);
+        setAllPlansData(filteredPlansIsActive);
 
         const mappedData = filteredPlans.map(item => ({
           planName: item.planName,
@@ -182,11 +187,12 @@ const formatDate = (dateString) => {
           cash: item.cash
         }));
 
-        const axiosResponse = await axios.post('https://invest-nse.azurewebsites.net/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
 
 
-        setDatu(calculatedData.plans_data);
+        setDatu(calculatedData.responseData);
+        console.log(datu);
         setLoading(false);
 
       } catch (error) {
@@ -196,6 +202,31 @@ const formatDate = (dateString) => {
 
     fetchPlansData();
   }, [profileInfo]);
+
+
+  function processPlansData(responseData, planData) {
+    const tbl_data = planData.map(plan => {
+        // Find corresponding responseData entry
+        const responseEntry = responseData.find(response => response.planName === plan.planName);
+
+        if (responseEntry) {
+            const currentValue = parseFloat(responseEntry.totalCurrentValue);
+            const avgPrice = plan.avgPrice;
+            const profitPercent = ((currentValue - avgPrice) / avgPrice) * 100;
+
+            return {
+                planName: plan.planName,
+                _id: plan._id,
+                profit_percent: profitPercent.toFixed(2) // Keeping it to 2 decimal places
+            };
+        }
+        
+        return null; // If no corresponding entry is found
+    }).filter(entry => entry !== null); // Filter out null entries
+
+    return tbl_data;
+}
+
 
 
 
@@ -229,8 +260,8 @@ const formatDate = (dateString) => {
     let totalStocks = 0;
 
     plansData.forEach((plan) => {
-      plan.individual_stocks.forEach((stock) => {
-        totalGainPercentage += stock.total_change_percent;
+      plan.individualStocks.forEach((stock) => {
+        totalGainPercentage += parseFloat(stock.totalChangePercent);
         totalStocks++;
       });
     });
@@ -250,7 +281,7 @@ const formatDate = (dateString) => {
   return (
     <div className={styles.App}>
       <h2 className={styles.heading}> Portfolio Summary</h2>
-      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} />
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} plansData={allPlansData} pnl={processPlansData(datu,profileInfo.planData )}/>
     </div>
   );
 }

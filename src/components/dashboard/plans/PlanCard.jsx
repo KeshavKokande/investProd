@@ -26,7 +26,7 @@ const PlanCard = ({ plan, deletePlan }) => {
           }))
         };
 
-        const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/stock/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -84,33 +84,38 @@ const PlanCard = ({ plan, deletePlan }) => {
     }
   };
 
-  const riskClassName = risk === 'low' ? styles.adnewplan_risk_low :  risk === 'medium' ? styles.adnewplan_risk_medium : styles.adnewplan_risk_high;
-  
+  const riskClassName = risk === 'low' ? styles.adnewplan_risk_low : risk === 'medium' ? styles.adnewplan_risk_medium : styles.adnewplan_risk_high;
+
   const isActiveClassName = isActive ? styles.adnewplan_risk_true : styles.adnewplan_risk_false;
 
-  if (isLoading){ return (<div></div>);}
+  if (isLoading) { return (<div></div>); }
 
 
   const renderStocks = () => {
     if (!tab || !tab.individual_stocks) {
       return <tr><td colSpan="5">No data available</td></tr>;
     }
-  
+
     return tab.individual_stocks.map((stock, index) => (
       <tr key={index}>
         <td className={styles.adnewplan_td}>{stock.symbol}</td>
-        <td className={styles.adnewplan_td}>{((stock.current_value/(tab.total_current_value))*100).toFixed(2)}%</td>
-        <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.total_change_percent) < 0 ? 'red' : 'green' }}>{stock.total_change_percent.toFixed(2)}%</td>
-        <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.today_change_percent) < 0 ? 'red' : 'green' }}>{stock.today_change_percent.toFixed(2)}%</td>
+        <td className={styles.adnewplan_td}>{((stock.current_value / tab.total_current_value) * 100).toFixed(2)}%</td>
+        <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.total_change_percent) < 0 ? 'red' : 'green' }}>{stock.total_change_percent}%</td>
+        <td className={styles.adnewplan_td} style={{ color: parseFloat(stock.today_change_percent) < 0 ? 'red' : 'green' }}>{stock.today_change_percent}%</td>
         {/* <td className={`${styles.adnewplan_td} ${parseFloat(stock.currentDayValue) >= 0 ? styles.adnewplan_profit_positive : styles.adnewplan_profit_negative}`}>{stock.currentDayValue}%</td> */}
       </tr>
     ));
   };
- 
+
   const formatCurrency = (amount) => {
-    const roundedAmount = amount.toFixed(2);
-      const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const roundedAmount = amount;
+    const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return `₹ ${formattedAmount}`;
+  };
+
+  const calculatePercentPL = () => {
+    const percentPL = (((tab.total_current_value - minInvestmentAmount) / minInvestmentAmount) * 100);
+    return percentPL.toFixed(2);
   };
 
   return (
@@ -139,32 +144,32 @@ const PlanCard = ({ plan, deletePlan }) => {
             <div><strong>Status </strong>:<span className={`${styles.adnewplan_risk_active} ${isActiveClassName}`}></span>{isActive ? 'Active' : 'Inactive'}</div>
             <div><strong>Minimum Investment Amount</strong>: {formatCurrency(tab.total_current_value)}</div>
             <div><strong>Number of Subscriptions</strong>: {(plan.boughtClientIds).length}</div>
-            <div><strong>Percent P&L</strong>: {(((tab.total_current_value-minInvestmentAmount)/minInvestmentAmount)*100).toFixed(2)}%</div>
+            <div><strong>Percent P&L</strong>: {calculatePercentPL()}%</div>
             <div><strong>Description</strong>: {advise}</div>
           </div>
 
           <div className={styles.btn}>
             {/* <div className={styles.adnewplan_delete_icon} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div> */}
             <Link to={`/advisor/editPlan/${_id}`}>
-            <button className={styles.inactiveButton} style={{ backgroundColor: "#475BE8" }}>
-            Rebalance
-            </button>
-            <br/>
+              <button className={styles.inactiveButton} style={{ backgroundColor: "#475BE8" }}>
+                Rebalance
+              </button>
+              <br />
             </Link>
-            <br/>
+            <br />
 
             <div className={`${isActive ? styles.inactiveButton : styles.activeButton}`} onClick={handleDelete}>{isActive ? 'Deactivate' : 'Activate'}</div>
           </div>
         </div>
       </div>
       <div
-          onClick={() => setShowSecondDiv((prevShow) => !prevShow)}
-          style={{ marginBottom: '10px', cursor: 'pointer' }} // Added cursor style
-        >
-          <IconName style={{ width: '1.5rem', height: '1.5rem' }} />
-        </div>
+        onClick={() => setShowSecondDiv((prevShow) => !prevShow)}
+        style={{ marginBottom: '10px', cursor: 'pointer' }} // Added cursor style
+      >
+        <IconName style={{ width: '1.5rem', height: '1.5rem' }} />
+      </div>
       <div style={{ display: showSecondDiv ? 'block' : 'none' }}>
-      <StockChart stocks={stocks} days={365}/>
+        <StockChart stocks={stocks} days={365} />
       </div>
     </div>
   );

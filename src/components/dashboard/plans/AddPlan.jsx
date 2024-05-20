@@ -28,8 +28,8 @@ const AddPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://bba4-103-226-169-60.ngrok-free.app/get_symbol_lastprice');
-        setSelectedPrices(response.data);
+        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/stock/get_symbol_lastprice');
+        setSelectedPrices(response.data.symbolPricesByDate);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -271,16 +271,20 @@ const AddPlan = () => {
 
   async function handlegenaireq() {
 
-    axios.post('https://team4api.azurewebsites.net/api/v1/advisor/getGenAIPlanr', formData.stocks,  {
+    axios.post('https://team4api.azurewebsites.net/api/v1/advisor/getGenAIPlanr', formData.stocks, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(response => {
-        console.log('Response:', response.data);
+        // console.log('Response:', response.data);
         let data = response.data.planAdvise;
         let index = 0;
+        setFormData({
+          ...formData,
+          advise: '',
+        });
         const interval = setInterval(() => {
           if (index < data.length) {
             setFormData(prevData => ({
@@ -316,7 +320,7 @@ const AddPlan = () => {
       <hr className={styles.addPlan_hr} />
       <div >
         <div className={styles.addPlan_form_section}>
-          <form id={styles.new_plan_form} onSubmit={handleSubmit}>
+          <form id={styles.new_plan_form} >
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="planName">Plan Name<span className={styles.required}>*</span>:</label>
               <input className={styles.addPlan_input} type="text" id="planName" name="planName" value={formData.planName} onChange={handleChange} required />
@@ -393,7 +397,7 @@ const AddPlan = () => {
                     <p>
                       Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
                     </p>
-                    <p>Price:{selectedPrices[stock.symbol]}</p>
+                    <p>Price:{formatCurrency(selectedPrices[stock.symbol])}</p>
                   </div>
                   <div className={styles.addPlan_card_button}>
                     <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'green' }}>+</button>
@@ -404,7 +408,7 @@ const AddPlan = () => {
               {console.log(formData.stocks)}
               {formData.stocks.length ? <button className={styles.addPlan_add_stock_btn} style={{ width: '100%' }} onClick={handlegenaireq}>Generate Description Using Gen AI</button> : null}
             </div>
-            <button type="submit" className={styles.addPlan_add_stock_btn}>Create Plan</button>
+            <button type="submit" onClick={handleSubmit} className={styles.addPlan_add_stock_btn}>Create Plan</button>
           </form>
         </div>
       </div>

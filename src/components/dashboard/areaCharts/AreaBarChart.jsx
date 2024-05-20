@@ -37,14 +37,14 @@ const AreaBarChart = () => {
           cash: item.cash
         }));
  
-        const axiosResponse = await axios.post('https://c33b-103-226-169-60.ngrok-free.app/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
  
-        const mapData = calculatedData.plans_data.map((plan) => ({
+        const mapData = calculatedData.responseData.map((plan) => ({
           Name: plan.planName,
           gains: plan.total_current_gains,
         }));
-        setDatu(calculatedData.plans_data);
+        setDatu(calculatedData.responseData);
         setLoading(false);
  
       } catch (error) {

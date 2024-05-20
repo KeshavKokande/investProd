@@ -1,6 +1,6 @@
 .UserInfo {
   display: flex;
-  position: relative;
+  position: fixed;
   left: -22vh;
   width: 110%;
   background-color: #ffffff;
@@ -10,54 +10,55 @@
   justify-content: end;
   padding-right: 4vw;
   gap: 2vw;
+  z-index: 10;
   /* position: fixed; */
   /* z-index: 3; */
-
+ 
 }
-
+ 
 .UserInfo button {
   width: 2vw;
 }
-
+ 
 .userProfileImg {
   border-radius: 50%;
   width: 3vw;
   height: 3vw
 }
-
+ 
 .heading {
   font-family: sans-serif;
   font-size: 2.5vw;
 }
-
+ 
 #piechart {
   background-color: white;
   padding: 30px;
   border-radius: 10px;
   /* width: 490px; */
 }
-
+ 
 .pieChartLabels {
   gap: 1rem;
   display: grid;
   height: fit-content;
 }
-
+ 
 .infocard {
   width: 100%;
   display: inline-block;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   margin: 30px;
 }
-
+ 
 .checked {
   color: orange;
 }
-
+ 
 .fa {
   font-size: 1.25rem !important;
 }
-
+ 
 .rating {
   padding: 0px;
   width: 90%;
@@ -65,14 +66,14 @@
   justify-content: space-around;
   align-content: center;
   align-items: center;
-
+ 
 }
-
+ 
 .profile-landing-name {
   font-weight: 900 !important;
 }
-
-
+ 
+ 
 .contentAreaTable {
   background: var(--secondary-color);
   border-radius: 5px;
@@ -80,84 +81,84 @@
   padding: 12px 16px;
   margin-bottom: 5vh;
 }
-
+ 
 /* @media (max-width: 768px) {
  padding: 12px;
 } */
-
+ 
 .data-table-title {
   font-size: 18px;
   color: var(--xl-text-color);
   margin-bottom: 12px;
 }
-
+ 
 .dataTableDiagram {
   border-radius: 6px;
   border: 1px solid var(--tbl-border-color) !important;
   overflow-x: scroll;
 }
-
+ 
 ::-webkit-scrollbar {
   height: 6px;
   width: 6px;
 }
-
+ 
 ::-webkit-scrollbar-track {
   background-color: var(--scroll-track-bg-color);
 }
-
+ 
 ::-webkit-scrollbar-thumb {
   border-radius: 100vh;
   background-color: #e9e9e9;
   border: 1px solid rgba(0, 0, 0, 0.02);
   border-radius: 10px;
 }
-
+ 
 table {
   width: 100%;
   border-collapse: collapse;
   color: var(--text-color-inverted);
 }
-
+ 
 td,
 th {
   padding: 14px 12px;
 }
-
+ 
 /* @media (max-width: 768px) {
     font-size: 15px;
     padding: 12px 10px;
   } */
-
-
+ 
+ 
 thead {
   text-align: left;
   font-size: 17px;
   background-color: var(--thead-bg-color);
 }
-
+ 
 th:last-child {
   text-align: left;
 }
-
-
+ 
+ 
 #chart {
   display: grid;
   justify-items: center;
 }
-
+ 
 /* Set a custom scrollbar width */
 ::-webkit-scrollbar {
   width: 12px;
   /* Adjust this value as needed */
 }
-
+ 
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
   /* Change the background color if desired */
 }
-
+ 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
@@ -165,18 +166,18 @@ th:last-child {
   border-radius: 10px;
   /* Add rounded corners to the scrollbar handle */
 }
-
+ 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
   /* Change the scrollbar handle color on hover */
 }
-
+ 
 .pagination {
   margin-top: 10px;
   text-align: center;
 }
-
+ 
 .pagination button {
   padding: 5px 20px;
   margin: 0 5px;
@@ -185,12 +186,77 @@ th:last-child {
   background-color: #f0f0f0;
   border-radius: 4px;
 }
-
+ 
 .pagination button:hover {
   background-color: #e0e0e0;
 }
-
+ 
 .pagination button:disabled {
   cursor: not-allowed;
   background-color: #ddd;
+}
+ 
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  background: none;
+  z-index: 20; /* Ensure breadcrumb is above UserInfo */
+}
+ 
+.breadcrumb-item {
+  margin-right: 0.5rem;
+}
+ 
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+ 
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+ 
+.breadcrumb-item:not(:last-child)::after {
+  content: '>';
+  margin-left: 0.5rem;
+}
+ 
+.infocard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 30px auto;
+}
+ 
+.chartContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+ 
+.box {
+  background-color: white;
+  /* padding: 30px; */
+  border-radius: 10px;
+  /* margin: 20px; */
+  flex: 1;
+  max-width: 45%;
+}
+ 
+.heading {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+ 
+.plot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

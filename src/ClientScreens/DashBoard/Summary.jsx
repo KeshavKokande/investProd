@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
 import styles from './dashboard.module.css'
-
+import { Link } from "react-router-dom";
+import ProfileCard from "./../../ClientScreens/Plans/ProfileCard";
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
+import Carousel from 'react-multi-carousel';
+import DonutChartCard from './DonutChartCard';
+import ExpiryPlanCard from './ExpiryPlanCardWrapper';
 
 import "./../../components/dashboard/areaCards/AreaCards.scss";
 import "./../../components/dashboard/areaTable/AreaTable.scss";
@@ -13,11 +17,21 @@ import { ChakraProvider } from '@chakra-ui/react'
 import moneyImage1 from './../../assest/images/money1.png';
 import moneyImage2 from './../../assest/images/money2.png';
 import moneyImage3 from './../../assest/images/money3.png';
-function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table }) {
+function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table, plansData, pnl }) {
+
+
+    const responsive = {
+        superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
+        desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3 },
+        tablet: { breakpoint: { max: 1024, min: 464 }, items: 2 },
+        mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
+    };
+    const [expandedCategory, setExpandedCategory] = useState(null);
 
     if (!transactions || !advisorNames || !returns) {
         return null; // Render nothing if any of the props are missing
     }
+
     // Function to calculate total amount invested in each plan
     const calculateTotalInvestment = (transactions) => {
         const investmentMap = new Map();
@@ -33,7 +47,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return investmentMap;
     }
 
-    // console.log("TRANSACTION DATA : ", transactions);
     // Function to calculate total invested amount
     const calculateTotalInvestedAmount = (transactions) => {
         let totalInvestedAmount = 0;
@@ -68,9 +81,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return data;
     }
 
-    // console.log("bargraphdata", etta);
-
-
     const formatCurrency = (value) => {
         const parsedValue = parseFloat(value).toFixed(2);
         const stringValue = String(parsedValue);
@@ -80,12 +90,37 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return formattedValue;
     };
 
+    const categorizePlans = (plans) => {
+        const categories = {
+            2000: [],
+            4000: [],
+            6000: [],
+            8000: [],
+            moreThan8000: []
+        };
+
+        plans.forEach(plan => {
+            if (plan.minInvestmentAmount < 2000) {
+                categories[2000].push(plan);
+            } else if (plan.minInvestmentAmount < 4000) {
+                categories[4000].push(plan);
+            } else if (plan.minInvestmentAmount < 6000) {
+                categories[6000].push(plan);
+            } else if (plan.minInvestmentAmount < 8000) {
+                categories[8000].push(plan);
+            } else {
+                categories.moreThan8000.push(plan);
+            }
+        });
+
+        return categories;
+    };
+
+    const categorizedPlans = categorizePlans(plansData);
+
     return (
         <div>
-
-
             <section className="content-area-cards">
-
                 <AreaCard
                     colors={["#e4e8ef", "#475be8"]}
                     percentFillValue={80}
@@ -109,12 +144,11 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     percentFillValue={40}
                     cardInfo={{
                         title: "Current Value",
-                        value: formatCurrency(totalInvestedAmount + avggg * totalInvestedAmount / 100),
                         value: (
                             <div>
                                 {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
-                                <span style={{padding: '2px 3px 2px 2px', borderRadius:' 20% / 50%', fontSize: '14px',marginLeft:'10px',color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
-                                &uarr;&nbsp;{avggg.toFixed(2)}%
+                                <span style={{ padding: '0.5vh 1vh', borderRadius: ' 23% / 40%', fontSize: '0.75rem', marginLeft: '1vh', color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
+                                    &uarr;&nbsp;{avggg.toFixed(2)}%
                                 </span>
                             </div>
                         )
@@ -122,8 +156,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     imageSrc={moneyImage3}
                 />
             </section>
-
-          
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
@@ -136,19 +168,53 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     <BarChartComponent plansData={etta} widthChart={500} />
                 </p>
             </div>
-  {/* Stock Component Added */}
 
+            <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: " 0", gap: "16px" }}>
+                <DonutChartCard />
+                <ExpiryPlanCard />
+            </div>
 
-  <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px",marginTop: "20px" ,backgroundColor: '#fff'}}>
+            <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px", marginTop: "20px", backgroundColor: '#fff' }}>
                 <ChakraProvider>
                     <CliStock />
                 </ChakraProvider>
             </div>
 
             <h2 className={styles.heading}>Plan Information</h2>
-            <PlanTable data={table} />
+            <Carousel responsive={responsive} infinite={true} className={styles.Carousel}>
+                {Object.entries(categorizedPlans).map(([category, plans]) => (
+                    <div key={category}>
+                        <h3 onClick={() => {
+                            const newExpandedCategory = expandedCategory === category ? null : category;
+                            setExpandedCategory(newExpandedCategory);
+                        }}>
+                            {`Plans Under ${category === 'moreThan8000' ? '8000+' : category}`}
+                        </h3>
+                        {expandedCategory === category && plans.map(plan => (
+                            <Link to={`/planDetail/${plan._id}`}>
+                            <ProfileCard plan={plan}/>
+                          </Link>
+                        ))}
+                    </div>
+                ))}
+            </Carousel>
+
+            <h2 className={styles.heading}>Plan Information</h2>
+            <PlanTable data={table} pnl={pnl} />
         </div>
     );
 }
 
 export default InvestmentSummary;
+
+
+const PlanItem = ({ plan }) => (
+    <div style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "10px", margin: "10px" }}>
+        <h4>{plan.planName}</h4>
+        <p>Minimum Investment Amount: {plan.minInvestmentAmount}</p>
+        <p>Risk: {plan.risk}</p>
+        <p>Advisor: {plan.advisorName}</p>
+        <p>Advise: {plan.advise}</p>
+        {/* Render other plan details as needed */}
+    </div>
+);

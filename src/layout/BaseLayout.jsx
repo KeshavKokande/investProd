@@ -5,6 +5,7 @@ import styles from "./../ClientScreens/DashBoard/dashboard.module.css";
 import { useEffect, useState } from "react";
 import notification from "./../assets/icons/notification.png"
 import Notifications from "../Notification/Notifications";
+import Breadcrumb from "../components/BreadCrumb/Breadcrumb";
 
 const BaseLayout = () => {
 
@@ -14,7 +15,7 @@ const BaseLayout = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('https://team4api.azurewebsites.net/api/v1/Advisor/get-own-details', {
-           headers: {
+          headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`
           },
@@ -49,6 +50,7 @@ const BaseLayout = () => {
       <Sidebar />
       {/* right side/content of the page */}
       <div className="content-wrapper">
+        <Breadcrumb />
         <Outlet />
       </div>
     </main>

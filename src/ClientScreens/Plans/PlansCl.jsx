@@ -37,7 +37,7 @@ function PlansCl() {
         const data = await response.json();
         const rik = await ponse.json();
 
-        setRiks(rik.client.question_1)
+        setRiks(rik.client.question_4)
         setKiks(rik.client.subscribedPlanIds)
 
         const filteredPlans = data.plans.filter(plan => plan.isActive);

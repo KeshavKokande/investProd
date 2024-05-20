@@ -6,7 +6,7 @@ const ClientCards = () => {
 
   const [totalClients, setTotalClients] = useState();
   const [totalInvestedAmount, setTotalInvestedAmount] = useState();
-  const [totalCurrentProfit, setTotalCurrentProfit] = useState();
+  const [totalCurrentProfit, setTotalCurrentProfit] = useState(50);
 
   // get-no-of-clients
   useEffect(() => {
@@ -62,31 +62,31 @@ const ClientCards = () => {
   }, []);
 
   // get-total-current-profit
-  useEffect(() => {
-    const fetchTotalCurrentProfit = async () => {
-      try {
+  // useEffect(() => {
+  //   const fetchTotalCurrentProfit = async () => {
+  //     try {
 
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/get-total-current-profit', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-          },
-        })
+  //       const response = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/get-total-current-profit', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+  //         },
+  //       })
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch user data');
-        }
-        const data = await response.json();
-        setTotalCurrentProfit(data);
-        // console.log("Data :", data);
-    } catch (error) {
-        console.error('Error fetching user data:', error.message);
-      }
-    };
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch user data');
+  //       }
+  //       const data = await response.json();
+  //       setTotalCurrentProfit(data);
+  //       // console.log("Data :", data);
+  //   } catch (error) {
+  //       console.error('Error fetching user data:', error.message);
+  //     }
+  //   };
 
-    fetchTotalCurrentProfit();
-  }, []);
+  //   fetchTotalCurrentProfit();
+  // }, []);
 
   const formatCurrency = (value) => {
     const roundedValue = parseFloat(value).toFixed(2);

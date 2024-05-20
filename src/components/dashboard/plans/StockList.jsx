@@ -9,10 +9,19 @@ const StockList = ({ prices, handleSymbolClick, tv }) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredSymbols = Object.keys(prices).filter(symbol =>
-    symbol.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
+  const filteredSymbols = Object.keys(prices)
+    .filter(symbol => symbol.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((a, b) => a.localeCompare(b));
+
+    const formatCurrency = (amount) => {
+      const num = parseFloat(amount);
+      if (isNaN(num)) {
+        return amount; // or return a default value or format
+      }
+      return `₹ ${num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+    };
+  
   const handleClick = (symbol) => {
     // Set the radio button to checked for the clicked item
     setSelectedSymbol(symbol);
@@ -46,17 +55,16 @@ const StockList = ({ prices, handleSymbolClick, tv }) => {
           <hr className={styles.stock_list_hr} />
         )}
         <div className={styles.stock_list_stocks}>
-        {filteredSymbols.map(symbol => (
-          <li key={symbol} onClick={() => handleClick(symbol)} className={styles.stock_list_li}>
-            <p className={styles.inline}>{symbol}</p>
-            <p className={styles.inline}>{prices[symbol]}</p>
-            {tv &&
-              <p className={styles.inline}>{tv(prices[symbol])}%
-              </p>
-            }
-            {/* <input type="radio" name="selectedSymbol" checked={selectedSymbol === symbol} /> */}
-          </li>
-        ))}
+          {filteredSymbols.map(symbol => (
+            <li key={symbol} onClick={() => handleClick(symbol)} className={styles.stock_list_li}>
+              <p className={styles.inline}>{symbol}</p>
+              <p className={styles.inline}>{formatCurrency(prices[symbol])}</p>
+              {tv &&
+                <p className={styles.inline}>{tv(prices[symbol])}%
+                </p>
+              }
+            </li>
+          ))}
         </div>
       </ul>
     </div>

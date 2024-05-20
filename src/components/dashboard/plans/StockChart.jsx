@@ -35,12 +35,14 @@ const StockChart = ({ stocks, days, setc }) => {
         };
 
         try {
-            const response = await axios.post('https://c33b-103-226-169-60.ngrok-free.app/calculate_total_value', JSON.stringify(requestData), {
+            const response = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_total_value', JSON.stringify(requestData), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            const data = response.data;
+            console.log('API Response:', response.data); // Log API response
+            let data = response.data.data; // Access data property from response
+            data = data.sort((a, b) => new Date(a.date) - new Date(b.date));
             processChartData(data);
             const oldestData = data[0];
             const latestData = data[data.length - 1];
@@ -57,10 +59,10 @@ const StockChart = ({ stocks, days, setc }) => {
 
     const processChartData = (data) => {
         const seriesData = data.map((item) => ({
-            x: new Date(item.date).getTime(),
+            x: new Date(item.date + 'T00:00:00').getTime(), // Ensure the date is properly formatted and parsed
             y: parseFloat(item.total_value.toFixed(2))
         }));
-
+        console.log('Series Data:', seriesData); // Log processed series data
         setSeries([{ name: 'Total Value', data: seriesData }]);
     };
 
@@ -70,7 +72,7 @@ const StockChart = ({ stocks, days, setc }) => {
 
     return (
         <div className={styles.stock_chart}>
-            <ReactApexChart options={options} series={series} type="line" height={350} />
+            <ReactApexChart options={options} series={series}  height={350} />
         </div>
     );
 };

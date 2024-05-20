@@ -36,7 +36,7 @@ function PlanView() {
   };
 
   const [tab, setTab] = useState(null);
-  const [anotherAmount, setAnotherAmount] = useState(0);
+  //const [anotherAmount, setAnotherAmount] = useState(0);
 
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function PlanView() {
           }))
         };
 
-        const response = await fetch('https://c33b-103-226-169-60.ngrok-free.app/calculate', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/stock/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ function PlanView() {
   };
 
   const handleBuyPlan = async () => {
-    if (investedAmount === 0 || anotherAmount === 0) {
+    if (investedAmount === 0) {
       alert('Please enter a valid invested amount.');
     } else {
       Swal.fire({
@@ -153,7 +153,8 @@ function PlanView() {
 
               body: JSON.stringify({
                 price: tab.total_current_value,
-                qty: quantity
+                qty: quantity,
+                
               })
             });
 
@@ -167,7 +168,7 @@ function PlanView() {
 
             Swal.fire('Success', 'Plan Bought Successfully!', 'success');
             if (data.status === 'success') {
-              navigate('/client_dashboard');// Update success state
+              navigate('/client/client_dashboard');// Update success state
             }
           } catch (error) {
             console.error('Error buying plan:', error.message);
@@ -180,15 +181,17 @@ function PlanView() {
 
   // Function to handle incrementing the invested amount
   const incrementAmount = () => {
-    setAnotherAmount(Number(anotherAmount) + 1);
-    setInvestedAmount(prevAmount => Math.round((prevAmount + tab.total_current_value) * 100) / 100);
+    //setAnotherAmount(Number(anotherAmount) + 1);
+    setQuantity(quantity+1);
+    setInvestedAmount(prevAmount => Math.round((tab.total_current_value*quantity) * 100) / 100);
   };
 
   // Function to handle decrementing the invested amount
   const decrementAmount = () => {
     if (investedAmount > 0) {
-      setAnotherAmount(Number(anotherAmount) - 1);
-      setInvestedAmount(prevAmount => Math.round((prevAmount - tab.total_current_value) * 100) / 100);
+      //setAnotherAmount(Number(anotherAmount) - 1);
+      setQuantity(quantity+1);
+      setInvestedAmount(prevAmount => Math.round((tab.total_current_value*quantity) * 100) / 100);
     }
   };
 
@@ -304,11 +307,12 @@ function PlanView() {
                         <input
                           className={styles.anotherInput}
                           type="text"
-                          value={anotherAmount}
+                          value={quantity}
                           onChange={(e) => {
                             const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-                            setAnotherAmount(value);
+                            setQuantity(value);
                             setInvestedAmount(value * tab.total_current_value);
+                            setQuantity(value);
                           }}
                           placeholder="Enter Lots"
                         />
