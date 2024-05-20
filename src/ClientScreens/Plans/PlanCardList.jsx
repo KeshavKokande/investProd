@@ -97,13 +97,12 @@ const PlanCardList = ({ plans, ids }) => {
       <div className={styles.clContainer}>
         <div className={styles.filterOptions}>
           <div className={styles.flex}>
-            <label>
-              <img
-                src={searchIcon}
-                alt="Search Icon"
-                className={styles.searchIcon}
-              />
-            </label>
+            <img
+              src={searchIcon}
+              alt="Search Icon"
+              className={styles.searchIcon}
+            />
+            <label>Search:</label>
             <input
               type="text"
               name="searchText"
@@ -145,7 +144,7 @@ const PlanCardList = ({ plans, ids }) => {
           </div>
 
           <div>
-            <div className={styles.flex} style={{ width: "22vw"}}>
+            <div className={styles.flex} style={{ width: "22vw" }}>
               Min: {filters.priceRange[0]}
               <Range
                 _id="range"
@@ -197,8 +196,7 @@ const PlanCardList = ({ plans, ids }) => {
               style={{ display: "none" }}
             />
             <label
-              className={`${
-                filters.searchText ? styles.inactiveButton : styles.activeButton
+              className={`${filters.searchText ? styles.inactiveButton : styles.activeButton
                 }`}
               htmlFor="searchCheckbox"
             >

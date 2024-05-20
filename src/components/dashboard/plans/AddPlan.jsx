@@ -271,14 +271,14 @@ const AddPlan = () => {
 
   async function handlegenaireq() {
 
-    axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks,  {
+    axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(response => {
-        console.log('Response:', response.data);
+        // console.log('Response:', response.data);
         let data = response.data.planAdvise;
         let index = 0;
         const interval = setInterval(() => {
@@ -393,7 +393,7 @@ const AddPlan = () => {
                     <p>
                       Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
                     </p>
-                    <p>Price:{selectedPrices[stock.symbol]}</p>
+                    <p>Price:{formatCurrency(selectedPrices[stock.symbol])}</p>
                   </div>
                   <div className={styles.addPlan_card_button}>
                     <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'green' }}>+</button>
