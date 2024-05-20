@@ -75,39 +75,40 @@ function handlegetotp()
   setGetotp(true);
  
 }
-  const handleSubmit = () => {
-    // console.log(formData);
-    fetch('http://localhost:8000/api/v1/check-auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      },
-      body: JSON.stringify(formData),
+const handleSubmit = () => {
+  // console.log(formData);
+  fetch('http://localhost:8000/api/v1/check-auth/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to register. Please try again.');
+      }
+      return response.json();
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to register. Please try again.');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        // Storing name and email in session storage
-        sessionStorage.setItem('name', formData.name);
-        sessionStorage.setItem('email', formData.email);
-        navigate('/client_registration_form');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        if (error.message.includes('E11000')) {
-          setRegistrationError('Email already exists. Please use a different email.');
-        } else {
-          setRegistrationError('Email already exists. Please use a different email.');
-        }
-      });
-  };
- 
+    .then((data) => {
+      localStorage.setItem('jwt', data.token);
+
+      // Storing name and email in session storage
+      sessionStorage.setItem('name', formData.name);
+      sessionStorage.setItem('email', formData.email);
+      
+      navigate('/client_registration_form');
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      if (error.message.includes('E11000')) {
+        setRegistrationError('Email already exists. Please use a different email.');
+      } else {
+        setRegistrationError('Failed to register. Please try again.');
+      }
+    });
+};
+
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-left']}>
