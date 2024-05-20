@@ -30,7 +30,7 @@ const EditPlan = () => {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
+        const response = await fetch(`https://team4api.azurewebsites.net/api/v1/advisor/get-plan-details/${edit}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -55,7 +55,7 @@ const EditPlan = () => {
     };
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/stock/get_symbol_lastprice');
+        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/stock/get_symbol_lastprice');
         setSelectedPrices(response.data.symbolPricesByDate);
         setDataLoading(1);
       } catch (error) {
@@ -82,7 +82,7 @@ const EditPlan = () => {
           }))
         };
 
-        const response = await fetch('http://localhost:8000/api/v1/stock/calculate', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/stock/calculate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -248,7 +248,7 @@ const EditPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          axios.patch(`http://localhost:8000/api/v1/advisor/edit-stocks/${edit}`, formData,  {
+          axios.patch(`https://team4api.azurewebsites.net/api/v1/advisor/edit-stocks/${edit}`, formData,  {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${localStorage.getItem('jwt')}`
