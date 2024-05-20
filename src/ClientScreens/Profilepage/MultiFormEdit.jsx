@@ -32,7 +32,7 @@ const MultiFormEdit = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
-           headers: {
+          headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`
           },
@@ -44,18 +44,18 @@ const MultiFormEdit = () => {
             img: "",
             name: capitalize(data.name) || '',
             email: data.email || '',
-            age: capitalize(data.age) || '',
+            age: data.age || '',
             phone: capitalize(data.phone) || '',
             address: capitalize(data.address) || '',
             gender: data.gender || '',
             jobRole: capitalize(data.jobRole) || '',
             phone: capitalize(data.phone) || '',
             qualification: capitalize(data.qualification) || '',
-            question_0: capitalize(data.question_0) ||'',
-            question_1: capitalize(data.question_1) ||'',
-            question_2: capitalize(data.question_2) ||'',
-            question_3: capitalize(data.question_3) ||'',
-            question_4: capitalize(data.question_4) ||''
+            question_0: capitalize(data.question_0) || '',
+            question_1: capitalize(data.question_1) || '',
+            question_2: capitalize(data.question_2) || '',
+            question_3: capitalize(data.question_3) || '',
+            question_4: capitalize(data.question_4) || ''
           });
           setIsLoading(false);
         } else {
@@ -92,16 +92,16 @@ const MultiFormEdit = () => {
     const newErrors = {};
 
     // Validate Age
-    if (typeof formData.age !== 'string' || formData.age.trim() === '') {
+    if (formData.age === '') {
       newErrors.age = 'Age is required';
-    } else if (isNaN(formData.age.trim())) {
+    } else if (isNaN(formData.age)) {
       newErrors.age = 'Age must be a number';
     } else {
-      const ageValue = parseInt(formData.age.trim(), 10);
+      const ageValue = parseInt(formData.age, 10);
       if (ageValue <= 0 || ageValue > 120) {
         newErrors.age = 'Age must be between 1 and 120';
       }
-    }    
+    }
 
     //phone
     const phoneRegex = /^\d{10}$/; // Assumes a 10-digit phone number format
@@ -110,7 +110,7 @@ const MultiFormEdit = () => {
     } else if (!phoneRegex.test(formData.phone.trim())) {
       newErrors.phone = 'Invalid phone number format';
     }
-  
+
     // Validate gender
     if (formData.gender.trim() === '') {
       newErrors.gender = 'Gender is required';
@@ -180,7 +180,7 @@ const MultiFormEdit = () => {
       <form onSubmit={handleSubmit}>
         <PageOne formData={formData} handleChange={handleChange} errors={errors} />
         <PageTwo formData={formData} handleChange={handleChange} />
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "2rem", marginBottom:'5vh'}}>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "2rem", marginBottom: '5vh' }}>
           <button type="submit" className={`${styles['register-submit-btn']} ${styles['next-button']}`}>Submit</button>
           <Link to="/profile"><button type="button" className={styles['prev-button']} >Back</button></Link>
         </div>

@@ -102,7 +102,7 @@ const PlanCardList = ({ plans, ids }) => {
               alt="Search Icon"
               className={styles.searchIcon}
             />
-            <label>Search: </label>
+            <label>Search:</label>
             <input
               type="text"
               name="searchText"
@@ -144,7 +144,7 @@ const PlanCardList = ({ plans, ids }) => {
           </div>
 
           <div>
-            <div className={styles.flex} style={{ width: "22vw" ,}}>
+            <div className={styles.flex} style={{ width: "22vw" }}>
               Min: {filters.priceRange[0]}
               <Range
                 _id="range"
@@ -182,7 +182,7 @@ const PlanCardList = ({ plans, ids }) => {
                 )}
               />
               <br />
-              <div style={{ marginTop: "10px" , marginLeft: '-35px'}}>
+              <div style={{ marginTop: "10px", marginLeft: '-35px' }}>
                 Max: {filters.priceRange[1]}
               </div>
             </div>
@@ -196,9 +196,8 @@ const PlanCardList = ({ plans, ids }) => {
               style={{ display: "none" }}
             />
             <label
-              className={`${
-                filters.searchText ? styles.inactiveButton : styles.activeButton
-              }`}
+              className={`${filters.searchText ? styles.inactiveButton : styles.activeButton
+                }`}
               htmlFor="searchCheckbox"
             >
               View All

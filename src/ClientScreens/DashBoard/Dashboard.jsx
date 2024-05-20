@@ -12,6 +12,7 @@ function DashboardCl() {
   const [advisorNames, setAdvisorNames] = useState([]);
   const [error, setError] = useState(null);
   const [plansData, setPlansData] = useState([]);
+  const [allPlansData, setAllPlansData] = useState([]);
   const [tabData, setTabdata]=useState([]);
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
@@ -176,6 +177,8 @@ const formatDate = (dateString) => {
         const filteredPlans = data.plans.filter(plan => profileInfo.boughtPlanIds.includes(plan._id));
         // console.log("filteredPlans", filteredPlans);
         setPlansData(filteredPlans);
+        const filteredPlansIsActive = data.plans.filter(plan => plan.isActive);
+        setAllPlansData(filteredPlansIsActive);
 
         const mappedData = filteredPlans.map(item => ({
           planName: item.planName,
@@ -278,7 +281,7 @@ const formatDate = (dateString) => {
   return (
     <div className={styles.App}>
       <h2 className={styles.heading}> Portfolio Summary</h2>
-      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} pnl={processPlansData(datu,profileInfo.planData )} />
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} plansData={allPlansData} pnl={processPlansData(datu,profileInfo.planData )}/>
     </div>
   );
 }

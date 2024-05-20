@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text, Button, Flex } from "@chakra-ui/react";
+import "../dashboard/areaCharts/AreaCharts.scss";
  
 const TopInvestors = () => {
   const [chartIndex, setChartIndex] = useState(0); // 0 for amount invested, 1 for plans bought
@@ -22,9 +22,11 @@ const TopInvestors = () => {
     { name: 'Investor 5', plansBought: 2 },
   ];
  
-  // Sort data in descending order
-  const sortedAmountData = [...dummyInvestorsAmountData].sort((a, b) => b.amountInvested - a.amountInvested);
-  const sortedPlansData = [...dummyInvestorsPlansData].sort((a, b) => b.plansBought - a.plansBought);
+  // Sort investors based on amount invested
+  const sortedInvestorsByAmount = [...dummyInvestorsAmountData].sort((a, b) => b.amountInvested - a.amountInvested);
+ 
+  // Sort investors based on plans bought
+  const sortedInvestorsByPlans = [...dummyInvestorsPlansData].sort((a, b) => b.plansBought - a.plansBought);
  
   // Function to handle next chart
   const handleNextChart = () => {
@@ -32,60 +34,59 @@ const TopInvestors = () => {
   };
  
   return (
-    <Box borderWidth="1px" borderRadius="md" overflow="hidden" p="4" bg="white">
-      <Text fontSize="18px" mb="4" fontFamily="Manrope, sans-serif" color="#525252" fontWeight="bold">Top Investors</Text>
-      <Box>
+    <div className="adv-progress-bar" style={{ backgroundColor: '#ffffff', borderRadius: '0.7rem' }}>
+      <div className="progress-bar-info">
+        <h4 className="adv-progress-bar-title">Top Investors</h4>
+        <br />
+      </div>
+      <div className="adv-progress-bar-list">
         {chartIndex === 0 ? (
           // Render chart based on amount invested
-          sortedAmountData.map((investor, index) => (
-            <Box key={index} mb="4">
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">{investor.name}</Text>
-                <Text fontSize="lg">Amount Invested: ₹{investor.amountInvested}</Text>
-              </Flex>
+          sortedInvestorsByAmount.map((investor, index) => (
+            <div className="progress-bar-item" key={index}>
+              <div className="adv-bar-item-info">
+                <p className="adv-bar-item-info-name">{investor.name}</p>
+                <p className="adv-bar-item-info-value">Amount Invested: ₹{investor.amountInvested}</p>
+              </div>
               {/* Render progress bar */}
-              <Box bg="#E6E6E6" borderRadius="4px" height="20px" mt="8px">
-                <Box
-                  bg="#475BE8"
-                  borderRadius="4px"
-                  height="100%"
-                  width={`${(investor.amountInvested / 10000) * 100}%`}
-                ></Box>
-              </Box>
-            </Box>
+              <div className="adv-bar-item-full">
+                <div
+                  className="adv-bar-item-filled"
+                  style={{
+                    width: `${(investor.amountInvested / 10000) * 100}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
           ))
         ) : (
           // Render chart based on plans bought
-          sortedPlansData.map((investor, index) => (
-            <Box key={index} mb="4">
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="lg" fontWeight="bold">{investor.name}</Text>
-                <Text fontSize="lg">Number of Plans: {investor.plansBought}</Text>
-              </Flex>
+          sortedInvestorsByPlans.map((investor, index) => (
+            <div className="progress-bar-item" key={index}>
+              <div className="adv-bar-item-info">
+                <p className="adv-bar-item-info-name">{investor.name}</p>
+                <p className="adv-bar-item-info-value">Number of Plans: {investor.plansBought}</p>
+              </div>
               {/* Render progress bar */}
-              <Box bg="#E6E6E6" borderRadius="4px" height="20px" mt="8px">
-                <Box
-                  bg="#475BE8"
-                  borderRadius="4px"
-                  height="100%"
-                  width={`${(investor.plansBought / 20) * 100}%`}
-                ></Box>
-              </Box>
-            </Box>
+              <div className="adv-bar-item-full">
+                <div
+                  className="adv-bar-item-filled"
+                  style={{
+                    width: `${(investor.plansBought / 5) * 100}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
           ))
         )}
-      </Box>
+      </div>
       {/* Navigation buttons */}
-      <Box mt="4">
-        <Button
-          variant="outline"
-          colorScheme="blue"
-          onClick={handleNextChart}
-        >
+      <div className="progress-bar-info">
+        <button className="navigation-button" onClick={handleNextChart}>
           {chartIndex === 0 ? 'NEXT' : 'PREVIOUS'}
-        </Button>
-      </Box>
-    </Box>
+        </button>
+      </div>
+    </div>
   );
 }
  

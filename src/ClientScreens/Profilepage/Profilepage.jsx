@@ -119,10 +119,10 @@ const ProfilePage = () => {
             <div className={styles.pp212}>
  
             <p className={styles.ppp}><strong>Your Primary Investment Objectives:</strong>&nbsp;{profileInfo.question_0}</p>
-            <p className={styles.ppp}><strong>Risk Tolerance:</strong>&nbsp;{profileInfo. question_1}</p>
-            <p className={styles.ppp}><strong>Your Investment Experience:</strong>&nbsp;{profileInfo. question_2}</p>
-            <p className={styles.ppp}><strong>Income Level:</strong>&nbsp;{profileInfo. question_3}</p>
-            <p className={styles.ppp}><strong>Your Investment Time Horizon:</strong>&nbsp;{profileInfo.question_4}</p>
+            <p className={styles.ppp}><strong>Your Investment Experience:</strong>&nbsp;{profileInfo. question_1}</p>
+            <p className={styles.ppp}><strong>Income Level:</strong>&nbsp;{profileInfo. question_2}</p>
+            <p className={styles.ppp}><strong>Your Investment Time Horizon:</strong>&nbsp;{profileInfo. question_3}</p>
+            <p className={styles.ppp}><strong>Risk Tolerance:</strong>&nbsp;{profileInfo.question_4}</p>
              
             </div>
             <div className={styles.pp213}>
