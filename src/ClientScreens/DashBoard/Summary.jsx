@@ -169,7 +169,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                 </p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: " 0", gap: "16px" }}>
                 <DonutChartCard />
                 <ExpiryPlanCard />
             </div>
