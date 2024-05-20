@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PiChart from './PiChart';
 import PlanTable from './PlanTable'; // Assuming PlanTable component is imported from a separate file
 import styles from './dashboard.module.css'
-
+import { Link } from "react-router-dom";
+import ProfileCard from "./../../ClientScreens/Plans/ProfileCard";
 import AreaCard from "./../../components/dashboard/areaCards/AreaCard";
 import Carousel from 'react-multi-carousel';
 import DonutChartCard from './DonutChartCard';
@@ -16,8 +17,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import moneyImage1 from './../../assest/images/money1.png';
 import moneyImage2 from './../../assest/images/money2.png';
 import moneyImage3 from './../../assest/images/money3.png';
-function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table, plansData }) {
 
+function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, table, plansData }) {
 
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
@@ -30,6 +31,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
     if (!transactions || !advisorNames || !returns) {
         return null; // Render nothing if any of the props are missing
     }
+
     // Function to calculate total amount invested in each plan
     const calculateTotalInvestment = (transactions) => {
         const investmentMap = new Map();
@@ -45,7 +47,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return investmentMap;
     }
 
-    // console.log("TRANSACTION DATA : ", transactions);
     // Function to calculate total invested amount
     const calculateTotalInvestedAmount = (transactions) => {
         let totalInvestedAmount = 0;
@@ -80,9 +81,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return data;
     }
 
-    // console.log("bargraphdata", etta);
-
-
     const formatCurrency = (value) => {
         const parsedValue = parseFloat(value).toFixed(2);
         const stringValue = String(parsedValue);
@@ -94,22 +92,22 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
 
     const categorizePlans = (plans) => {
         const categories = {
-            lessThan2000: [],
-            lessThan4000: [],
-            lessThan6000: [],
-            lessThan8000: [],
+            2000: [],
+            4000: [],
+            6000: [],
+            8000: [],
             moreThan8000: []
         };
 
         plans.forEach(plan => {
             if (plan.minInvestmentAmount < 2000) {
-                categories.lessThan2000.push(plan);
+                categories[2000].push(plan);
             } else if (plan.minInvestmentAmount < 4000) {
-                categories.lessThan4000.push(plan);
+                categories[4000].push(plan);
             } else if (plan.minInvestmentAmount < 6000) {
-                categories.lessThan6000.push(plan);
+                categories[6000].push(plan);
             } else if (plan.minInvestmentAmount < 8000) {
-                categories.lessThan8000.push(plan);
+                categories[8000].push(plan);
             } else {
                 categories.moreThan8000.push(plan);
             }
@@ -118,15 +116,11 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return categories;
     };
 
-
     const categorizedPlans = categorizePlans(plansData);
 
     return (
         <div>
-
-
             <section className="content-area-cards">
-
                 <AreaCard
                     colors={["#e4e8ef", "#475be8"]}
                     percentFillValue={80}
@@ -150,11 +144,10 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     percentFillValue={40}
                     cardInfo={{
                         title: "Current Value",
-                        value: formatCurrency(totalInvestedAmount + avggg * totalInvestedAmount / 100),
                         value: (
                             <div>
                                 {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
-                                <span style={{ padding: '2px 3px 2px 2px', borderRadius: ' 20% / 50%', fontSize: '14px', marginLeft: '10px', color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
+                                <span style={{ padding: '0.5vh 1vh', borderRadius: ' 23% / 40%', fontSize: '0.75rem', marginLeft: '1vh', color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
                                     &uarr;&nbsp;{avggg.toFixed(2)}%
                                 </span>
                             </div>
@@ -163,8 +156,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     imageSrc={moneyImage3}
                 />
             </section>
-
-
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: "30px 0", gap: "16px" }}>
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
@@ -183,7 +174,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                 <ExpiryPlanCard />
             </div>
 
-
             <div style={{ border: "2px solid #fff", borderRadius: "5px", padding: "10px", marginBottom: "20px", marginTop: "20px", backgroundColor: '#fff' }}>
                 <ChakraProvider>
                     <CliStock />
@@ -198,10 +188,12 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                             const newExpandedCategory = expandedCategory === category ? null : category;
                             setExpandedCategory(newExpandedCategory);
                         }}>
-                            {`Plans Under ${category.replace(/([A-Z])/g, ' $1').trim()}`}
+                            {`Plans Under ${category === 'moreThan8000' ? '8000+' : category}`}
                         </h3>
                         {expandedCategory === category && plans.map(plan => (
-                            <PlanItem key={plan._id} plan={plan} />
+                            <Link to={`/planDetail/${plan._id}`}>
+                            <ProfileCard plan={plan}/>
+                          </Link>
                         ))}
                     </div>
                 ))}

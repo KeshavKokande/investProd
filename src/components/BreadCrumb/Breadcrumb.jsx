@@ -11,6 +11,11 @@ const Breadcrumb = () => {
 
   const homeUrl = isClient ? '/client/client_dashboard' : isAdvisor ? '/advisor_dashboard' : '/';
 
+  const customLabels = {
+    'plansList': 'Plans List',
+    // Add more custom labels as needed
+  };
+
   // If the path is exactly "/client/client_dashboard", only show "Home"
   if (location.pathname === '/client/client_dashboard') {
     return (
@@ -34,10 +39,16 @@ const Breadcrumb = () => {
           .filter((value) => value !== 'client') // Filter out "client"
           .map((value, index) => {
             const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+            const isLast = index === pathnames.length - 1;
+            const label = customLabels[value] || value;
 
             return (
-              <li className="breadcrumb-item" key={to}>
-                <Link to={to}>{value}</Link>
+              <li className={`breadcrumb-item ${isLast ? 'active' : ''}`} key={to} aria-current={isLast ? 'page' : undefined}>
+                {isLast ? (
+                  label
+                ) : (
+                  <Link to={to}>{label}</Link>
+                )}
               </li>
             );
           })}
