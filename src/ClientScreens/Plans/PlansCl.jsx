@@ -57,16 +57,16 @@ function PlansCl() {
     if (plan.photo && plan.photo.contentType && plan.photo.data) {
       const imageData = atob(plan.photo.data); // Decode base64-encoded data
       const cota = plan.photo.contentType; // Use the contentType directly
-  
+
       // Convert the decoded data into a Uint8Array
       const byteArray = new Uint8Array(imageData.length);
       for (let i = 0; i < imageData.length; i++) {
         byteArray[i] = imageData.charCodeAt(i);
       }
-  
+
       // Create a blob from the Uint8Array
       const blob = new Blob([byteArray], { type: cota });
-  
+
       // Create the image URL
       const urlCreator = window.URL || window.webkitURL;
       const imageDataUrl = urlCreator.createObjectURL(blob);
@@ -85,19 +85,24 @@ function PlansCl() {
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div style={{ position: 'relative', top: '-80px' }}>
-        <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        <div style={{ position: 'relative', top: '-80px' }}>
+          <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        </div>
       </div>
-    </div>
     );
   }
 
   return (
     <>
       <h2 style={{ marginBottom: "1rem" }} className={styles.heading}>Explore Plans</h2>
-      <PlanCardList plans={plansWithDecodedImages} ids={kiks} />
+      <PlanCardList
+        plans={plansWithDecodedImages.sort(
+          (a, b) => parseFloat(b.boughtClientIds.length) - parseFloat(a.boughtClientIds.length)
+        )}
+        ids={kiks}
+      />
       <br />
-      <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} ids={kiks}/>
+      <Arraay plans={plansWithDecodedImages} risk={riks.toString().toLowerCase()} ids={kiks} />
     </>
   );
 }

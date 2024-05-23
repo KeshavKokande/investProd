@@ -81,11 +81,11 @@ const PlanCardList = ({ plans, ids }) => {
     if (sortOption === "rating") {
       return filteredPlans.sort(
         (a, b) =>
-          parseFloat(b.noOfSubscription) - parseFloat(a.noOfSubscription)
+          parseFloat(b.boughtClientIds.length) - parseFloat(a.boughtClientIds.length)
       );
     } else if (sortOption === "total_orders") {
       return filteredPlans.sort(
-        (a, b) => parseInt(b.noOfSubscription) - parseInt(a.noOfSubscription)
+        (a, b) => parseInt(b.boughtClientIds.length) - parseInt(a.boughtClientIds.length)
       );
     } else {
       return filteredPlans;

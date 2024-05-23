@@ -24,7 +24,7 @@ const PlanCard = ({ plan }) => {
 <p className={styles.clPStarsPlans}>⭐<br/>10/5</p>
 </div>
 <div className={styles.finl}>
-<p className={styles.clPStarsPlans}>👥<br/>{plan.noOfSubscription}</p>
+<p className={styles.clPStarsPlans}>👥<br/>{plan.boughtClientIds.length}</p>
 </div>
 </footer>
 </div>

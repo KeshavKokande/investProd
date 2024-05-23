@@ -15,7 +15,7 @@ const Arraay = ({ plans, risk, ids }) => {
   // console.log('PLANS DATA: ', risk);
   const topRatedPlans = plans.filter(plan => plan.risk == risk);
 
-  const mostOrderedPlans = plans.sort((a, b) => parseInt(b.noOfSubscription) - parseInt(a.noOfSubscription)).slice(0, 5);
+  const mostOrderedPlans = plans.sort((a, b) => parseInt(b.boughtClientIds.length) - parseInt(a.boughtClientIds.length)).slice(0, 5);
 
   return (
     <div className={styles.CarouselBox}>

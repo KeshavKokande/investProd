@@ -51,11 +51,11 @@ const MultiFormEdit = () => {
             jobRole: capitalize(data.jobRole) || '',
             phone: capitalize(data.phone) || '',
             qualification: capitalize(data.qualification) || '',
-            question_0: capitalize(data.question_0) || '',
-            question_1: capitalize(data.question_1) || '',
-            question_2: capitalize(data.question_2) || '',
-            question_3: capitalize(data.question_3) || '',
-            question_4: capitalize(data.question_4) || ''
+            question_0: (data.question_0) || '',
+            question_1: (data.question_1) || '',
+            question_2: (data.question_2) || '',
+            question_3: (data.question_3) || '',
+            question_4: (data.question_4) || ''
           });
           setIsLoading(false);
         } else {
