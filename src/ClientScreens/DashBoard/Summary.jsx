@@ -116,7 +116,8 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return categories;
     };
 
-    const categorizedPlans = categorizePlans(plansData);
+
+   // const categorizedPlans = categorizePlans(plansData);
 
     return (
         <div>
