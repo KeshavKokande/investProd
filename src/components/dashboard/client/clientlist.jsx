@@ -6,6 +6,7 @@ import avatarBoy from "../../../assets/images/avator.svg";
 const TABLE_HEADS = [
   'Client',
   'Client Email',
+  'Risk',
   'Plan Names',
 ];
 
@@ -118,6 +119,7 @@ const Clientlist = () => {
                       </div>
                     </TableCell>
                     <TableCell>{client.email}</TableCell>
+                    <TableCell>{client.question_4}</TableCell>
                     <TableCell>
                       {getPlanNames(client.boughtPlanIds).map((planName, index) => (
                         <div key={index}>{planName}</div>

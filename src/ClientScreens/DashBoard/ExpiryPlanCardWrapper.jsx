@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'antd';
 import ReactSpeedometer from 'react-d3-speedometer';
 import { Box, Text, Flex, Heading } from '@chakra-ui/react';
@@ -48,6 +48,18 @@ const ExpiryPlanCard = ({ plans }) => {
   );
 };
  
+function processPlanData(data) {
+  const totalDays = 365;
+ 
+  return data.daysLeftForPlans.map(plan => ({
+    name: plan.planName,
+    daysLeft: plan.daysLeft,
+    totalDays: totalDays
+  }));
+}
+ 
+ 
+ 
 // Dummy data
 const dummyPlans = [
   { name: 'Plan A', daysLeft: 91, totalDays: 180 },
@@ -56,7 +68,48 @@ const dummyPlans = [
 ];
  
 const ExpiryPlanCardWrapper = () => {
-  return <ExpiryPlanCard plans={dummyPlans} />;
+ 
+  const [plansData, setPlansData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+ 
+  useEffect(() => {
+    const fetchPlansData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-days-left-to-expire-subs', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          },
+        });
+ 
+        if (!response.ok) {
+          throw new Error('Failed to fetch plans data');
+        }
+ 
+        const data = await response.json();
+        console.log(data);
+        setPlansData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+ 
+    fetchPlansData();
+ 
+    return () => {
+    };
+  }, []);
+ 
+ 
+  if (loading) {
+    return <ExpiryPlanCard plans={dummyPlans} />;
+  }
+
+  return <ExpiryPlanCard plans={processPlanData(plansData)} />;
 };
  
 export default ExpiryPlanCardWrapper;

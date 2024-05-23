@@ -7,6 +7,16 @@ const PiChart = ({ data, title }) => {
   const numDataPoints = data.length;
   const colors = chroma.scale(['#003f5c', '#ffa600']).mode('lch').colors(numDataPoints);
  
+  const formatCurrency = (value) => {
+    const parsedValue = parseFloat(value).toFixed(2);
+    const stringValue = String(parsedValue);
+    const [integerPart, decimalPart] = stringValue.split(".");
+    const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
+    const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
+    return formattedValue;
+};
+
+
   const options = {
     chart: {
       fontFamily: 'sans-serif',
@@ -51,7 +61,7 @@ const PiChart = ({ data, title }) => {
       enabled: true,
       y: {
         formatter: function(val) {
-          return `₹${parseFloat(val).toFixed(2)}`;
+          return formatCurrency(val);
         }
       }
     }
