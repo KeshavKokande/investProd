@@ -3,20 +3,20 @@ import { Card, Button } from 'antd';
 import ReactSpeedometer from 'react-d3-speedometer';
 import { Box, Text, Flex, Heading } from '@chakra-ui/react';
 import styles from './dashboard.module.css';
- 
+
 const ExpiryPlanCard = ({ plans }) => {
   const [currentPlanIndex, setCurrentPlanIndex] = useState(0);
   const currentPlan = plans[currentPlanIndex];
   const maxTotalDays = currentPlan.totalDays;
- 
+
   const handleNextPlan = () => {
     setCurrentPlanIndex((prevIndex) => (prevIndex + 1) % plans.length);
   };
- 
+
   const handlePrevPlan = () => {
     setCurrentPlanIndex((prevIndex) => (prevIndex - 1 + plans.length) % plans.length);
   };
- 
+
   return (
     <Box className={styles.infocard} width="100%" maxWidth="500px" p="4" borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white">
       <strong className={styles.heading} fontSize="18px" fontFamily="sans-serif" fontWeight="bold" textAlign="center" mb="4" marginBottom="30px">
@@ -47,32 +47,27 @@ const ExpiryPlanCard = ({ plans }) => {
     </Box>
   );
 };
- 
+
 function processPlanData(data) {
+  if (!data || !data.daysLeftForPlans) {
+    return [];
+  }
   const totalDays = 365;
- 
+
   return data.daysLeftForPlans.map(plan => ({
     name: plan.planName,
     daysLeft: plan.daysLeft,
     totalDays: totalDays
   }));
 }
- 
- 
- 
-// Dummy data
-const dummyPlans = [
-  { name: 'Plan A', daysLeft: 91, totalDays: 180 },
-  { name: 'Plan B', daysLeft: 15, totalDays: 90 },
-  { name: 'Plan C', daysLeft: 70, totalDays: 365 },
-];
- 
+
+
 const ExpiryPlanCardWrapper = () => {
- 
+
   const [plansData, setPlansData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
- 
+
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
@@ -83,13 +78,12 @@ const ExpiryPlanCardWrapper = () => {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
         });
- 
+  
         if (!response.ok) {
           throw new Error('Failed to fetch plans data');
         }
- 
+  
         const data = await response.json();
-        console.log(data);
         setPlansData(data);
       } catch (err) {
         setError(err.message);
@@ -97,19 +91,19 @@ const ExpiryPlanCardWrapper = () => {
         setLoading(false);
       }
     };
- 
+  
     fetchPlansData();
- 
+  
     return () => {
     };
   }, []);
- 
- 
-  if (loading) {
-    return <ExpiryPlanCard plans={dummyPlans} />;
+  
+
+  if (loading || plansData === null) {
+    return null; // or loading indicator
   }
 
   return <ExpiryPlanCard plans={processPlanData(plansData)} />;
 };
- 
+
 export default ExpiryPlanCardWrapper;
