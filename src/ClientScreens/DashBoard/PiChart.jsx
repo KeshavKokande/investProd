@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import chroma from 'chroma-js';
+import { useNavigate } from 'react-router-dom';
 import styles from "./dashboard.module.css";
- 
+
 const PiChart = ({ data, title }) => {
+  const [hoveredLabel, setHoveredLabel] = useState(null);
+  const navigate = useNavigate();
   const numDataPoints = data.length;
   const colors = chroma.scale(['#003f5c', '#ffa600']).mode('lch').colors(numDataPoints);
- 
+
   const formatCurrency = (value) => {
     const parsedValue = parseFloat(value).toFixed(2);
     const stringValue = String(parsedValue);
@@ -14,15 +17,28 @@ const PiChart = ({ data, title }) => {
     const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
     const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
     return formattedValue;
-};
+  };
 
+  const handleMouseEnter = (index) => {
+    setHoveredLabel(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredLabel(null);
+  };
+
+  const handleLabelClick = (id) => {
+    navigate(`/planDetail/${id}`);
+  };
 
   const options = {
     chart: {
       fontFamily: 'sans-serif',
       type: 'donut',
     },
-    colors: colors,
+    colors: colors.map((color, index) => (
+      hoveredLabel === index ? chroma(color).brighten(2.5).hex() : color
+    )),
     labels: data.map(item => item.name),
     legend: {
       show: false,
@@ -66,7 +82,7 @@ const PiChart = ({ data, title }) => {
       }
     }
   };
- 
+
   return (
     <div style={{display:'flex'}}>
       <div className="mb-2">
@@ -76,7 +92,13 @@ const PiChart = ({ data, title }) => {
       </div>
       <div className={styles.pieChartLabels}>
         {data.map((item, index) => (
-          <div key={index}>
+          <div key={index} 
+            onClick={() => handleLabelClick(item.id)} 
+            onMouseEnter={() => handleMouseEnter(index)} 
+            onMouseLeave={handleMouseLeave} 
+            className={styles.pieChartLabel}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="flex w-full items-center">
               <span style={{ backgroundColor: colors[index] }} className={`mr-2 block h-3 w-full max-w-3 rounded-full`}></span>
               <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
@@ -89,5 +111,5 @@ const PiChart = ({ data, title }) => {
     </div>
   );
 };
- 
+
 export default PiChart;

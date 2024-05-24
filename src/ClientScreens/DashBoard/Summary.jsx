@@ -75,6 +75,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
     // Function to format data for PieChart
     const formatDataForPieChart = (uniquePlans, totalInvestments) => {
         const data = uniquePlans.map((planId) => ({
+            id: planId,
             name: transactions.find(transaction => transaction.planId === planId).planName,
             value: totalInvestments.get(planId)
         }));

@@ -260,3 +260,16 @@ th:last-child {
   justify-content: center;
   align-items: center;
 }
+
+/* to make pi chart label highlighted */
+.pieChartLabel {
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pieChartLabel:hover {
+  transform: translateY(0px) scale(1.20);
+  /* box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px; */
+  /* background-color: #f0f0f0; */
+  /* color: #003f5c; */
+}
