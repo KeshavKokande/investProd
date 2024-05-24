@@ -98,11 +98,3 @@ const AreaTable = () => {
 };
 
 export default AreaTable;
-
-
-
-
-
-
-
-

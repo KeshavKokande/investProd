@@ -13,7 +13,7 @@ function DashboardCl() {
   const [error, setError] = useState(null);
   const [plansData, setPlansData] = useState([]);
   const [allPlansData, setAllPlansData] = useState([]);
-  const [tabData, setTabdata]=useState([]);
+  const [tabData, setTabdata] = useState([]);
   const [profileInfo, setProfileInfo] = useState({
     img: '', // Add the img property to store the image data
     name: '',
@@ -33,7 +33,7 @@ function DashboardCl() {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
-           headers: {
+          headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`
           },
@@ -53,7 +53,7 @@ function DashboardCl() {
             gender: data.gender || '',
             jobRole: data.jobRole || '',
             boughtPlanIds: data.boughtPlanIds || [],
-            planData:data.planData||[]
+            planData: data.planData || []
 
           });
           // console.log(data);
@@ -84,47 +84,48 @@ function DashboardCl() {
     const planInvestmentsMap = new Map();
 
     transactions.forEach(transaction => {
-        const { planName, advisorId, investedAmount, date } = transaction;
-        const advisorIndex = transactions.findIndex(item => item.advisorId === advisorId);
-        const advisorName = advisorNames[advisorIndex]; // Map advisorId to advisorName
+      const { planName, advisorId, investedAmount, date } = transaction;
+      const advisorIndex = transactions.findIndex(item => item.advisorId === advisorId);
+      const advisorName = advisorNames[advisorIndex]; // Map advisorId to advisorName
 
-        // Calculate total invested amount for recurring plans
-        if (planInvestmentsMap.has(planName)) {
-            const currentInvestment = planInvestmentsMap.get(planName);
-            planInvestmentsMap.set(planName, currentInvestment + investedAmount);
-        } else {
-            planInvestmentsMap.set(planName, investedAmount);
-        }
+      // Calculate total invested amount for recurring plans
+      if (planInvestmentsMap.has(planName)) {
+        const currentInvestment = planInvestmentsMap.get(planName);
+        planInvestmentsMap.set(planName, currentInvestment + investedAmount);
+      } else {
+        planInvestmentsMap.set(planName, investedAmount);
+      }
 
-        // Update advisor name
-        transaction.advisorName = advisorName;
+      // Update advisor name
+      transaction.advisorName = advisorName;
     });
 
     // Convert map to array of objects with desired format
     const processedData = Array.from(planInvestmentsMap).map(([planName, totalInvestedAmount]) => {
-        const transactionsForPlan = transactions.filter(transaction => transaction.planName === planName);
-        const latestTransaction = transactionsForPlan.reduce((latest, current) => (
-            new Date(current.date) > new Date(latest.date) ? current : latest
-        ));
+      const transactionsForPlan = transactions.filter(transaction => transaction.planName === planName);
+      const latestTransaction = transactionsForPlan.reduce((latest, current) => (
+        new Date(current.date) > new Date(latest.date) ? current : latest
+      ));
 
-        return {
-            planName: latestTransaction.planName,
-            advisorName: latestTransaction.advisorName,
-            total_investedamount: totalInvestedAmount,
-            last_date_to_investment: formatDate(latestTransaction.date),
-        };
+      return {
+        planName: latestTransaction.planName,
+        advisorName: latestTransaction.advisorName,
+        isPremium: latestTransaction.isPremium,
+        total_investedamount: totalInvestedAmount,
+        last_date_to_investment: formatDate(latestTransaction.date),
+      };
     });
 
     return processedData;
-};
+  };
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const year = date.getFullYear().toString().slice(-2);
-  return `${day}-${month}-20${year}`;
-};
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2);
+    return `${day}-${month}-20${year}`;
+  };
 
 
   useEffect(() => {
@@ -136,7 +137,7 @@ const formatDate = (dateString) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
-        
+
         });
 
 
@@ -174,6 +175,7 @@ const formatDate = (dateString) => {
         }
 
         const data = await response.json();
+
         const filteredPlans = data.plans.filter(plan => profileInfo.boughtPlanIds.includes(plan._id));
         // console.log("filteredPlans", filteredPlans);
         setPlansData(filteredPlans);
@@ -192,7 +194,7 @@ const formatDate = (dateString) => {
 
 
         setDatu(calculatedData.responseData);
-        console.log(datu);
+        // console.log(datu);
         setLoading(false);
 
       } catch (error) {
@@ -206,26 +208,26 @@ const formatDate = (dateString) => {
 
   function processPlansData(responseData, planData) {
     const tbl_data = planData.map(plan => {
-        // Find corresponding responseData entry
-        const responseEntry = responseData.find(response => response.planName === plan.planName);
+      // Find corresponding responseData entry
+      const responseEntry = responseData.find(response => response.planName === plan.planName);
 
-        if (responseEntry) {
-            const currentValue = parseFloat(responseEntry.totalCurrentValue);
-            const avgPrice = plan.avgPrice;
-            const profitPercent = ((currentValue - avgPrice) / avgPrice) * 100;
+      if (responseEntry) {
+        const currentValue = parseFloat(responseEntry.totalCurrentValue);
+        const avgPrice = plan.avgPrice;
+        const profitPercent = ((currentValue - avgPrice) / avgPrice) * 100;
 
-            return {
-                planName: plan.planName,
-                _id: plan._id,
-                profit_percent: profitPercent.toFixed(2) // Keeping it to 2 decimal places
-            };
-        }
-        
-        return null; // If no corresponding entry is found
+        return {
+          planName: plan.planName,
+          _id: plan._id,
+          profit_percent: profitPercent.toFixed(2) // Keeping it to 2 decimal places
+        };
+      }
+
+      return null; // If no corresponding entry is found
     }).filter(entry => entry !== null); // Filter out null entries
 
     return tbl_data;
-}
+  }
 
 
 
@@ -245,13 +247,13 @@ const formatDate = (dateString) => {
     })(document, 'script');
   }, []);
 
-  if (loading) { 
+  if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div style={{ position: 'relative', top: '-80px' }}>
-        <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        <div style={{ position: 'relative', top: '-80px' }}>
+          <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        </div>
       </div>
-    </div>
     );
   }
 
@@ -281,7 +283,7 @@ const formatDate = (dateString) => {
   return (
     <div className={styles.App}>
       <h2 className={styles.heading}> Portfolio Summary</h2>
-      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} plansData={allPlansData} pnl={processPlansData(datu,profileInfo.planData )}/>
+      <InvestmentSummary transactions={transactions} advisorNames={advisorNames} returns={returns} etta={datu} avggg={averageGainPercentage} table={tabData} plansData={allPlansData} pnl={processPlansData(datu, profileInfo.planData)} />
     </div>
   );
 }

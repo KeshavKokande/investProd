@@ -20,6 +20,7 @@ import PlanView from "./ClientScreens/Plans/PlanView";
 import MultiStepForm from "./ClientScreens/FirstForm/MultiStepForm";
 import MultiFormEdit from "./ClientScreens/Profilepage/MultiFormEdit";
 import AdvisorProfilePage from "./ClientScreens/AdvisorProfilePlans/AdvisorProfilePage";
+import RedirectPage from "./components/SignIn/RedirectPage";
 
 import Payment from "./Payment/Payment";
 
@@ -64,6 +65,7 @@ function App() {
           <Route path="/contact" element={<HomepageInfo />} />
           <Route path="/client_registration_form" element={<MultiStepForm />} />
           <Route path="/stocks" element={<Stoks />} />
+          <Route path="/api/v1/check-auth/auth/google/callback" element={<RedirectPage />} />
 
           <Route element={<BaseLayout />}>
             <Route path="/advisor_dashboard" element={<Dashboard />} />

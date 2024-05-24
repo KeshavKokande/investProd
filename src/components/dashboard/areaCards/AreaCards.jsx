@@ -6,19 +6,19 @@ import clientimg from './../../../assest/images/client.png';
 import moneyImage2 from './../../../assest/images/money2.png';
 import moneyImage3 from './../../../assest/images/money3.png';
 import "./AreaCards.scss";
- 
- 
+
+
 const AreaCards = () => {
- 
- 
+
+
   const [isLoading, setIsLoading] = useState(true);
   const [totalClients, setTotalClients] = useState();
   const [totalInvestedAmount, setTotalInvestedAmount] = useState();
   const [totalCurrentProfit, setTotalCurrentProfit] = useState();
   const [plansData, setPlansData] = useState(null);
   const [datu, setDatu] = useState(null);
- 
- 
+
+
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
@@ -33,41 +33,41 @@ const AreaCards = () => {
         const data = await response.json();
         // console.log(data);
         setPlansData(data);
- 
+
         const mappedData = data.plans.map(item => ({
           planName: item.planName,
           stocks: item.stocks,
           startVal: item.minInvestmentAmount,
           cash: item.cash
         }));
- 
+
         const axiosResponse = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
-      
- 
+
+
         const mapData = calculatedData.responseData.map((plan) => ({
           Name: plan.planName,
           gains: plan.total_current_gains,
         }));
         setDatu(calculatedData.responseData);
- 
+
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
       }
- 
- 
+
+
     };
- 
+
     fetchPlansData();
     window.scrollTo(0, 0);
   }, []);
- 
+
   // get-no-of-clients
   useEffect(() => {
     const fetchTotalClients = async () => {
       try {
- 
+
         const response = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/get-no-of-clients', {
           method: 'GET',
           headers: {
@@ -75,7 +75,7 @@ const AreaCards = () => {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
         })
- 
+
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
@@ -85,15 +85,15 @@ const AreaCards = () => {
         console.error('Error fetching user data:', error.message);
       }
     };
- 
+
     fetchTotalClients();
   }, []);
- 
+
   // get-total-invested-amount
   useEffect(() => {
     const fetchTotalInvestedAmount = async () => {
       try {
- 
+
         const response = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/get-total-invested-amount', {
           method: 'GET',
           headers: {
@@ -101,7 +101,7 @@ const AreaCards = () => {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
         })
- 
+
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
@@ -111,10 +111,10 @@ const AreaCards = () => {
         console.error('Error fetching user data:', error.message);
       }
     };
- 
+
     fetchTotalInvestedAmount();
   }, []);
- 
+
   // get-total-current-profit
   // useEffect(() => {
   //   const fetchTotalCurrentProfit = async () => {
@@ -137,10 +137,10 @@ const AreaCards = () => {
   //       console.error('Error fetching user data:', error.message);
   //     }
   //   };
- 
+
   //   fetchTotalCurrentProfit();
   // }, []);
- 
+
   const formatCurrency = (value) => {
     const parsedValue = parseFloat(value).toFixed(2);
     const stringValue = String(parsedValue);
@@ -149,7 +149,7 @@ const AreaCards = () => {
     const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
     return formattedValue;
   };
- 
+
   if (!datu) {
     return (
       <section className="content-area-cards">
@@ -171,33 +171,33 @@ const AreaCards = () => {
       </section>
     );
   }
- 
+
   function calculateAverageGainPercentage(plansData) {
     let totalGainPercentage = 0;
     let totalStocks = 0;
-  
- 
+
+
     plansData.forEach((plan) => {
       plan.individualStocks.forEach((stock) => {
         totalGainPercentage += parseFloat(stock.totalChangePercent);
         totalStocks++;
       });
     });
- 
+
     if (totalStocks === 0) {
       return 0; // Avoid division by zero
     }
- 
+
     const averageGainPercentage = totalGainPercentage / totalStocks;
     console.log("avgper", averageGainPercentage);
     return averageGainPercentage;
-    
+
   }
- 
+
   const averageGainPercentage = calculateAverageGainPercentage(datu);
 
- 
- 
+
+
   return (
     <section className="content-area-cards">
       <AreaCard
@@ -228,8 +228,8 @@ const AreaCards = () => {
           value: (
             <div>
               {formatCurrency((averageGainPercentage * totalInvestedAmount?.totalInvestedAmount / 100) + totalInvestedAmount?.totalInvestedAmount)}
-              <span style={{ fontSize: 'small', color: averageGainPercentage >= 0 ? 'green' : 'red' }}>
-                &nbsp; {averageGainPercentage.toFixed(2)}%
+              <span style={{ padding: '0.5vh 1vh', borderRadius: ' 23% / 40%', fontSize: '0.71rem', marginLeft: '1vh', color: 'white', backgroundColor: averageGainPercentage >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
+                &uarr;&nbsp; {averageGainPercentage.toFixed(2)}%
               </span>
             </div>
           )// text: `Total Current Profit ${formatCurrency(totalCurrentProfit?.totalCumulativeProfit)}`,
@@ -239,5 +239,5 @@ const AreaCards = () => {
     </section>
   );
 };
- 
+
 export default AreaCards;

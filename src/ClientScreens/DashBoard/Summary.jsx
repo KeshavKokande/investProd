@@ -75,6 +75,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
     // Function to format data for PieChart
     const formatDataForPieChart = (uniquePlans, totalInvestments) => {
         const data = uniquePlans.map((planId) => ({
+            id: planId,
             name: transactions.find(transaction => transaction.planId === planId).planName,
             value: totalInvestments.get(planId)
         }));
@@ -116,7 +117,8 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         return categories;
     };
 
-    const categorizedPlans = categorizePlans(plansData);
+
+   // const categorizedPlans = categorizePlans(plansData);
 
     return (
         <div>
@@ -170,7 +172,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: " 0", gap: "16px" }}>
-                <DonutChartCard />
+                <DonutChartCard da={table} ta={pnl} />
                 <ExpiryPlanCard />
             </div>
 
@@ -180,7 +182,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                 </ChakraProvider>
             </div>
 
-            <h2 className={styles.heading}>Plan Information</h2>
+            {/* <h2 className={styles.heading}>Plan Information</h2>
             <Carousel responsive={responsive} infinite={true} className={styles.Carousel}>
                 {Object.entries(categorizedPlans).map(([category, plans]) => (
                     <div key={category}>
@@ -197,7 +199,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         ))}
                     </div>
                 ))}
-            </Carousel>
+            </Carousel> */}
 
             <h2 className={styles.heading}>Plan Information</h2>
             <PlanTable data={table} pnl={pnl} />
@@ -206,15 +208,3 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
 }
 
 export default InvestmentSummary;
-
-
-const PlanItem = ({ plan }) => (
-    <div style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "10px", margin: "10px" }}>
-        <h4>{plan.planName}</h4>
-        <p>Minimum Investment Amount: {plan.minInvestmentAmount}</p>
-        <p>Risk: {plan.risk}</p>
-        <p>Advisor: {plan.advisorName}</p>
-        <p>Advise: {plan.advise}</p>
-        {/* Render other plan details as needed */}
-    </div>
-);

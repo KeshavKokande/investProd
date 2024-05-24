@@ -122,8 +122,9 @@ body {
 }
 
 .adnewplans_heading {
-  font-family: DM serif text;
+  font-family: sans-serif;
   font-size: 2.5vw;
+  font-weight: 400;
 }
 
 .outerMax>h4 {
@@ -549,7 +550,7 @@ body {
   transform: rotate(90deg);
   position: absolute;
   left: 33%;
-  top: 55%;
+  top: 58%;
 }
 
 .stock_list{
@@ -602,7 +603,7 @@ body {
 
 .stock_list_li{
   display: grid;
-  grid-template-columns: 8vw 5vw auto;
+  grid-template-columns: 8vw 6vw auto;
   align-items: center;
   height: 5vh;
 }

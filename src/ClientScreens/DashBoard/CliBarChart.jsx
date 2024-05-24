@@ -32,7 +32,7 @@ const BarChartComponent = ({ plansData }) => {
   // Extract plan names, gains, and colors from the data
   const data = plansData.map(plan => ({
     name: plan.planName,
-    gains: Math.abs(plan.totalCurrentGains),
+    Gains: Math.abs(plan.totalCurrentGains),
     originalGains: plan.totalCurrentGains,
     color: plan.totalCurrentGains < 0 ? 'rgba(255,30,56,255)' : 'rgba(38, 166, 91, 1)',
   }));
@@ -51,7 +51,7 @@ const BarChartComponent = ({ plansData }) => {
         />
         <YAxis tickFormatter={val => Math.abs(val).toFixed(2)} tick={{ fontSize: 12 }} />
         <Tooltip formatter={val => Math.abs(val).toFixed(2)} />
-        <Bar dataKey="gains">
+        <Bar dataKey="Gains">
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
