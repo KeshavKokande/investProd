@@ -35,7 +35,7 @@ const StockChart = ({ stocks, days, setc }) => {
         };
 
         try {
-            const response = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_total_value', JSON.stringify(requestData), {
+            const response = await axios.post('http://localhost:8000/api/v1/stock/calculate_total_value', JSON.stringify(requestData), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
