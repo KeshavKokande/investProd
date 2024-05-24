@@ -45,7 +45,7 @@ const ProfileCard = ({ plan, ids }) => {
           avg_price: stock.price, // Assuming price is the average price
         }))
       };
-      const response = await fetch('http://localhost:8000/api/v1/stock/calculate', {
+      const response = await fetch('https://team4api.azurewebsites.net/api/v1/stock/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
