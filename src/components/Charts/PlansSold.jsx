@@ -1,47 +1,67 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Box } from "@chakra-ui/react";
-import axios from 'axios';
 import "../dashboard/areaCards/AreaCards.scss";
- 
+
 const PlansSold = () => {
   const [plansData, setPlansData] = useState(null);
   const [loading, setLoading] = useState(true);
- 
+
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/advisor/list-of-plans", {
+        const response = await fetch("http://localhost:8000/api/v1/advisor/get-month-wise-plans-sold-free-vs-prem", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
         });
- 
+
         const data = await response.json();
-        setPlansData(data);
+        // Sort plansData array by month
+        data.transactions.sort((a, b) => a.month - b.month);
+        setPlansData(data.transactions);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching plans data:', error.message);
       }
     };
- 
+
     fetchPlansData();
     window.scrollTo(0, 0);
   }, []);
- 
+
+  const getSeriesData = (data) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const seriesData = {
+      free: [],
+      premium: [],
+      categories: []
+    };
+
+    data.forEach(transaction => {
+      seriesData.free.push(transaction.plans.free);
+      seriesData.premium.push(transaction.plans.premium);
+      seriesData.categories.push(months[transaction.month - 1]);
+    });
+
+    return seriesData;
+  };
+
+  const seriesData = plansData ? getSeriesData(plansData) : { free: [], premium: [], categories: [] };
+
   const series = [
     {
       name: "Free Plans",
-      data: [15, 20, 15, 30, 35, 20] // Example data for free plans sold from March 2024
+      data: seriesData.free
     },
     {
       name: "Premium Plans",
-      data: [10, 15, 20, 25, 30, 35] // Example data for premium plans sold from March 2024
+      data: seriesData.premium
     }
   ];
- 
+
   const options = {
     chart: {
       height: 350,
@@ -58,7 +78,7 @@ const PlansSold = () => {
       curve: 'smooth'
     },
     xaxis: {
-      categories: ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'], // Months from March 2024
+      categories: seriesData.categories,
       title: {
         text: 'Month',
         style: {
@@ -79,7 +99,7 @@ const PlansSold = () => {
         }
       },
       min: 0,
-      tickAmount: 5, // Adjust the number of ticks on y-axis as needed
+      tickAmount: 5,
       labels: {
         style: {
           fontFamily: 'sans-serif'
@@ -95,7 +115,7 @@ const PlansSold = () => {
       fontFamily: 'sans-serif'
     }
   };
- 
+
   return (
     <Box className="bar-chart">
       <div className="bar-chart-info">
@@ -106,7 +126,7 @@ const PlansSold = () => {
       </div>
       <div className="bar-chart-wrapper">
         {loading ? (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
             {/* <img src={loadingGif} alt="Loading..." style={{ maxWidth: '100%', maxHeight: '100%', width: '300px' }} /> */}
           </div>
         ) : (
@@ -116,5 +136,5 @@ const PlansSold = () => {
     </Box>
   );
 }
- 
+
 export default PlansSold;
