@@ -14,7 +14,7 @@ const AreaBarChart = () => {
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans", {
+        const response = await fetch("http://localhost:8000/api/v1/advisor/list-of-plans", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const AreaBarChart = () => {
           cash: item.cash
         }));
         
-        const axiosResponse = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('http://localhost:8000/api/v1/stock/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data;
 
         const mapData = calculatedData.responseData.map((plan) => ({

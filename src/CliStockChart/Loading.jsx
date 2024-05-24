@@ -3,7 +3,7 @@ const Loading = () => {
   return (
     <Box
       position='absolute'
-      top='30%'
+      top='65%'
       left='50%'
     >
       <Spinner thickness='5px'

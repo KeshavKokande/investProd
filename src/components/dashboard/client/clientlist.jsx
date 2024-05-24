@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TextField } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TextField, Skeleton } from '@mui/material';
 import '../areaTable/AreaTable.scss';
 import avatarBoy from "../../../assets/images/avator.svg";
 
@@ -14,11 +14,12 @@ const Clientlist = () => {
   const [tableData, setTableData] = useState([]);
   const [planData, setPlansData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const clientsResponse = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/list-of-clients', {
+        const clientsResponse = await fetch('http://localhost:8000/api/v1/advisor/list-of-clients', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ const Clientlist = () => {
           },
         });
 
-        const plansResponse = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans', {
+        const plansResponse = await fetch('http://localhost:8000/api/v1/advisor/list-of-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -45,6 +46,8 @@ const Clientlist = () => {
         setPlansData(plansData.plans);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -97,9 +100,19 @@ const Clientlist = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredTableData.length === 0 ? (
+              {loading ? (
+                // Display skeleton loading while data is being fetched
+                Array.from(new Array(5)).map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell><Skeleton variant="rectangular" width={50} height={50} /></TableCell>
+                    <TableCell><Skeleton variant="text" width={150} /></TableCell>
+                    <TableCell><Skeleton variant="text" width={100} /></TableCell>
+                    <TableCell><Skeleton variant="text" width={150} /></TableCell>
+                  </TableRow>
+                ))
+              ) : filteredTableData.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={3} align="center">No data found</TableCell>
+                  <TableCell colSpan={4} align="center">No data found</TableCell>
                 </TableRow>
               ) : (
                 filteredTableData.map((client) => (
@@ -129,7 +142,6 @@ const Clientlist = () => {
                 ))
               )}
             </TableBody>
-
           </Table>
         </TableContainer>
       </div>

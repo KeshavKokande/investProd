@@ -76,7 +76,7 @@ const ExpiryPlanCardWrapper = () => {
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-days-left-to-expire-subs', {
+        const response = await fetch('http://localhost:8000/api/v1/Client/get-days-left-to-expire-subs', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
