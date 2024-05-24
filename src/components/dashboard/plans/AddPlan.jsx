@@ -28,7 +28,7 @@ const AddPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/stock/get_symbol_lastprice');
+        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/stock/get_symbol_lastprice');
         setSelectedPrices(response.data.symbolPricesByDate);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -209,7 +209,7 @@ const AddPlan = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           // console.log('Form data:', formData);
-          axios.post('http://localhost:8000/api/v1/advisor/add-plans', formData, {
+          axios.post('https://team4api.azurewebsites.net/api/v1/advisor/add-plans', formData, {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -271,7 +271,7 @@ const AddPlan = () => {
 
   async function handlegenaireq() {
 
-    axios.post('http://localhost:8000/api/v1/advisor/getGenAIPlanr', formData.stocks, {
+    axios.post('https://team4api.azurewebsites.net/api/v1/advisor/getGenAIPlanr', formData.stocks, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`

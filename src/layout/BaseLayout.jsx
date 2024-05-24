@@ -14,7 +14,7 @@ const BaseLayout = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/Advisor/get-own-details', {
+        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/Advisor/get-own-details', {
           headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`
