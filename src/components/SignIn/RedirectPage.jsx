@@ -59,16 +59,16 @@ const RedirectPage = () => {
                     Redirecting to the website
                 </Text>
             </Box>
-            <Box>
+            {/* <Box>
                 <img
                     src="/images/AnimationRP.gif"
                     alt="Loading GIF"
                     style={{ width: '400px', height: '200px' }}
                 />
-            </Box>
+            </Box> */}
             {fact && (
-                <Text mt="4" color="gray.600" fontSize="20px" fontFamily="sans-serif">
-                    Investment Tip: {fact}
+                <Text mt="4" color="gray.600" fontSize="30px" fontFamily="sans-serif">
+                  {fact}
                 </Text>
             )}
         </Center>
