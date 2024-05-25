@@ -7,12 +7,12 @@ const RedirectPage = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const fact = params.get('fact');
 
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
         const token = params.get('token');
         const newUser = params.get('newUser') === 'true';
-        const fact = params.get('fact');
         const wlcmMSG = params.get('wlcmMSG');
         const usersJourney = params.get('usersJourney');
 
@@ -43,7 +43,7 @@ const RedirectPage = () => {
             // Handle the error or redirect to an error page
             navigate('/login');
         }
-    }, [location, navigate]);
+    }, [location, navigate, fact, params]);
 
     return (
         <Center height="100vh" flexDirection="column" bg="gray.100">
