@@ -80,7 +80,7 @@ const RedirectPage = () => {
         const usersJourney = params.get('usersJourney');
 
         if (token) {
-            localStorage.setItem('jwtToken', token);
+            localStorage.setItem('jwt', token);
 
             if (newUser) {
                 // Optional: Store additional information if needed
@@ -104,7 +104,7 @@ const RedirectPage = () => {
             };
         } else {
             // Handle the error or redirect to an error page
-            navigate('/error');
+            navigate('/login');
         }
     }, [location, navigate]);
 
