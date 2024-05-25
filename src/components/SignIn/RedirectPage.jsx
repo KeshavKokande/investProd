@@ -61,14 +61,14 @@
 // export default RedirectPage;
 
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Text, Center, Spinner } from '@chakra-ui/react';
 import axios from 'axios';
 
 const RedirectPage = () => {
     const [investmentTip, setInvestmentTip] = useState('');
     const [loading, setLoading] = useState(true);
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
@@ -92,9 +92,9 @@ const RedirectPage = () => {
             // Redirect after 10 seconds based on user type
             const timer = setTimeout(() => {
                 if (newUser) {
-                    history.push('/client_registration_form');
+                    navigate('/client_registration_form');
                 } else {
-                    history.push('/Client_landing');
+                    navigate('/Client_landing');
                 }
             }, 10000);
 
@@ -104,9 +104,9 @@ const RedirectPage = () => {
             };
         } else {
             // Handle the error or redirect to an error page
-            history.push('/error');
+            navigate('/error');
         }
-    }, [location, history]);
+    }, [location, navigate]);
 
     useEffect(() => {
         // Fetch the investment tip from the backend
