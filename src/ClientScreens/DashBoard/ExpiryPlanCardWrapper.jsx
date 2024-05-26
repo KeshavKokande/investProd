@@ -80,7 +80,7 @@ function processPlanData(data) {
  
 // Dummy data
 const dummyPlans = [
-  { name: 'No Data', daysLeft: 0, totalDays: 180 },
+  { name: 'No Data', daysLeft: 0, totalDays: 365 },
   // { name: 'Plan B', daysLeft: 15, totalDays: 90 },
   // { name: 'Plan C', daysLeft: 70, totalDays: 365 },
 ];
