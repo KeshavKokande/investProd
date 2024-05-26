@@ -171,7 +171,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
 
                 <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
                     <center><strong>Returns</strong></center><br />
-                    <BarChartComponent plansData={etta} widthChart={500} />
+                    <BarChartComponent plansData={pnl} widthChart={500} />
                 </p>
             </div>
 

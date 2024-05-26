@@ -30,16 +30,17 @@ const profitCircleStyle = {
 
 const BarChartComponent = ({ plansData }) => {
   // Extract plan names, gains, and colors from the data
+  // console.log("barchart data::::::",plansData)
   const data = plansData.map(plan => ({
     name: plan.planName,
-    Gains: Math.abs(plan.totalCurrentGains),
-    originalGains: plan.totalCurrentGains,
-    color: plan.totalCurrentGains < 0 ? 'rgba(255,30,56,255)' : 'rgba(38, 166, 91, 1)',
+    Gains: Math.abs(plan.profit_percent),
+    originalGains: plan.profit_percent,
+    color: plan.profit_percent < 0 ? 'rgba(255,30,56,255)' : 'rgba(38, 166, 91, 1)',
   }));
 
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data} margin={{ top: 50, right: 30, left: 50, bottom: 80 }}>
+      <BarChart data={data} margin={{ top: 50, right: 10, left: 10, bottom: 80 }}>
         <XAxis 
           dataKey="name" 
           tick={{ fontSize: 12 }} 
