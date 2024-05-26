@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import loadingGif from './../../../assest/images/Animation2.gif'
+import loadingGif from './../../../assest/images/Animation12.gif'
 const AreaProgressChart = () => {
   const [progressData, setProgressData] = useState([]);
   const [loading, setLoading] = useState(true);

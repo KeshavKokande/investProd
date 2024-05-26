@@ -3,7 +3,7 @@ import InvestmentSummary from './Summary';
 import { Typography } from '@mui/material';
 import styles from "./dashboard.module.css";
 import axios from 'axios';
-import loadingGif from "./../../assest/images/Animation.gif";
+import loadingGif from "./../../assest/images/Animation11.gif";
 import CliStock from './../../CliStockChart/CliStock'
 import { ChakraProvider } from '@chakra-ui/react'
 function DashboardCl() {
