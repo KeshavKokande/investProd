@@ -75,7 +75,16 @@ function processPlanData(data) {
     totalDays: totalDays
   }));
 }
-
+ 
+ 
+ 
+// Dummy data
+const dummyPlans = [
+  { name: 'No Data', daysLeft: 0, totalDays: 180 },
+  // { name: 'Plan B', daysLeft: 15, totalDays: 90 },
+  // { name: 'Plan C', daysLeft: 70, totalDays: 365 },
+];
+ 
 const ExpiryPlanCardWrapper = () => {
   const [plansData, setPlansData] = useState(null);
   const [error, setError] = useState(null);
@@ -106,12 +115,17 @@ const ExpiryPlanCardWrapper = () => {
     };
 
     fetchPlansData();
-
-    return () => {};
+    
+ 
+    return () => {
+    };
   }, []);
 
-  if (loading) {
-    return null; // or a loading indicator
+  
+ 
+ 
+  if (loading || (plansData.length==0)) {
+    return <ExpiryPlanCard plans={dummyPlans} />;
   }
 
   return <ExpiryPlanCard plans={processPlanData(plansData)} />;
