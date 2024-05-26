@@ -62,9 +62,9 @@ function processPlanData(data) {
  
 // Dummy data
 const dummyPlans = [
-  { name: 'Plan A', daysLeft: 91, totalDays: 180 },
-  { name: 'Plan B', daysLeft: 15, totalDays: 90 },
-  { name: 'Plan C', daysLeft: 70, totalDays: 365 },
+  { name: 'No Data', daysLeft: 0, totalDays: 180 },
+  // { name: 'Plan B', daysLeft: 15, totalDays: 90 },
+  // { name: 'Plan C', daysLeft: 70, totalDays: 365 },
 ];
  
 const ExpiryPlanCardWrapper = () => {
@@ -99,13 +99,16 @@ const ExpiryPlanCardWrapper = () => {
     };
  
     fetchPlansData();
+    
  
     return () => {
     };
   }, []);
+
+  
  
  
-  if (loading) {
+  if (loading || (plansData.length==0)) {
     return <ExpiryPlanCard plans={dummyPlans} />;
   }
 
