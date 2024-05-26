@@ -32,7 +32,7 @@ function DashboardCl() {
     window.scrollTo(0, 0);
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/Client/get-own-details', {
+        const response = await axios.get('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
           headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${localStorage.getItem('jwt')}`
@@ -131,7 +131,7 @@ function DashboardCl() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-transactions', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-transactions', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -162,7 +162,7 @@ function DashboardCl() {
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ function DashboardCl() {
           cash: item.cash
         }));
 
-        const axiosResponse = await axios.post('http://localhost:8000/api/v1/stock/calculate_sts', { plans_data: mappedData });
+        const axiosResponse = await axios.post('https://team4api.azurewebsites.net/api/v1/stock/calculate_sts', { plans_data: mappedData });
         const calculatedData = axiosResponse.data; // Use axiosResponse.data directly
 
 
