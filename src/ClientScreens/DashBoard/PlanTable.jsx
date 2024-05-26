@@ -23,31 +23,35 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('en-GB', options);
 };
 
-const PlanTable = ({ data,pnl }) => {
+const PlanTable = ({ data, pnl }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(5);
-  
+
   const addProfitPercent = (plans, profits) => {
     // Create a map for quick lookup of profit percent by planName
     const profitMap = new Map();
     profits.forEach(profit => {
       profitMap.set(profit.planName, parseFloat(profit.profit_percent));
     });
-    
+
     // Add profit_percent to each plan
     return plans.map(plan => ({
       ...plan,
       profit_percent: profitMap.get(plan.planName) || 0
     }));
   };
-  
+
   const enrichedData = addProfitPercent(data, pnl);
-  
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
-  // console.log(data);
+
+  // Render text color based on positive or negative value
+  const renderReturns = (value) => {
+    const color = value >= 0 ? 'green' : 'red';
+    return <span style={{ color }}>{value}%</span>;
+  };
 
   const columns = [
     {
@@ -76,6 +80,7 @@ const PlanTable = ({ data,pnl }) => {
       title: 'Returns',
       dataIndex: 'profit_percent',
       key: 'profit_percent',
+      render: (value) => renderReturns(value),
     },
   ];
 

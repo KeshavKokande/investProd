@@ -1,11 +1,31 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { useNavigate } from 'react-router-dom';
 
 const DualAxis = ({ plans_data }) => {
+  // Custom tick formatter to limit characters to 10
+  const navigate = useNavigate();
+
+  const handleBarClick = (event, chartContext, config) => {
+    const planIndex = config.dataPointIndex;
+    const planId = plans_data[planIndex].planId;
+    navigate(`/advisor/editPlan/${planId}`);
+  };
+
+  const tickFormatter = (name) => name.length > 10 ? `${name.substring(0, 10)}...` : name;
+
+  const handleBarHover = (event, chartContext, config) => {
+    chartContext.w.config.chart.cursor = 'pointer';
+  };
+
   const chartOptions = {
     chart: {
       type: 'bar',
       height: 350,
+      events: {
+        dataPointSelection: handleBarClick, // Attach custom click event handler
+        dataPointMouseEnter: handleBarHover, // Attach custom hover event handler
+      },
     },
     plotOptions: {
       bar: {
@@ -25,7 +45,16 @@ const DualAxis = ({ plans_data }) => {
     },
     xaxis: {
       categories: plans_data.map(plan => plan.planName),
+      labels: {
+        formatter: tickFormatter,
+        rotate: -45,
+        rotateAlways: true,
+      },
+      tooltip: {
+        enabled: false,
+      },
     },
+    
     yaxis: [
       {
         axisTicks: {
@@ -73,6 +102,9 @@ const DualAxis = ({ plans_data }) => {
     tooltip: {
       shared: true,
       intersect: false,
+      x: {
+        formatter: (val, { dataPointIndex }) => plans_data[dataPointIndex].planName, // Show full name on tooltip
+      },
     },
     legend: {
       fontSize: '12px',
@@ -88,13 +120,11 @@ const DualAxis = ({ plans_data }) => {
   const chartSeries = [
     {
       name: 'Total Current Value',
-      data: plans_data.map(plan => plan.totalCurrentValue
-      ),
+      data: plans_data.map(plan => plan.totalCurrentValue),
     },
     {
       name: 'Initial Value',
-      data: plans_data.map(plan => plan.initialValue
-      ),
+      data: plans_data.map(plan => plan.initialValue),
     },
   ];
 

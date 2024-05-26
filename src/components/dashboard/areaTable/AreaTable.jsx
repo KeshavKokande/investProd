@@ -12,6 +12,7 @@ const AreaTable = () => {
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(10);
+  const [sortedInfo, setSortedInfo] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,13 +26,15 @@ const AreaTable = () => {
         });
 
         const jsonData = await response.json();
-        setTableData(jsonData.transactions);
+        const sortedData = jsonData.transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setTableData(sortedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, []);
+
   const formatCurrency = (value) => {
     const parsedValue = parseFloat(value).toFixed(2);
     const stringValue = String(parsedValue);
@@ -39,6 +42,25 @@ const AreaTable = () => {
     const formattedIntegerPart = Number(integerPart).toLocaleString("en-IN");
     const formattedValue = `₹${formattedIntegerPart}${decimalPart ? `.${decimalPart}` : ''}`;
     return formattedValue;
+  };
+
+  const handleTableChange = (pagination, filters, sorter) => {
+    setSortedInfo(sorter);
+  };
+
+  const sortedData = () => {
+    if (sortedInfo.order === 'descend') {
+      return tableData.slice().sort((a, b) => {
+        if (sortedInfo.columnKey === 'createdAt') {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        } else if (sortedInfo.columnKey === 'investedAmount') {
+          return parseFloat(a.investedAmount) - parseFloat(b.investedAmount);
+        }
+        return 0;
+      });
+    } else {
+      return tableData;
+    }
   };
 
   const columns = [
@@ -57,20 +79,21 @@ const AreaTable = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       render: (date) => formatDate(date),
+      sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt), // Custom sorting function for 'Date' column
     },
     {
       title: 'Invested Amount',
       dataIndex: 'investedAmount',
       key: 'investedAmount',
-      render: (investedAmount) => formatCurrency(investedAmount)
+      render: (investedAmount) => formatCurrency(investedAmount),
+      sorter: true,
+      defaultSortOrder: 'ascend', // Set default sort order to 'ascend' for 'Invested Amount' column
     },
   ];
 
-  
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
-  const currentItems = tableData ? tableData.slice(indexOfFirstItem, indexOfLastItem) : [];
-
+  const currentItems = sortedData().slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -88,9 +111,10 @@ const AreaTable = () => {
           pagination={{
             current: currentPage,
             pageSize: perPage,
-            total: tableData ? tableData.length : 0, // Ensure tableData is defined before accessing its length
+            total: tableData ? tableData.length : 0,
             onChange: handlePageChange,
           }}
+          onChange={handleTableChange}
         />
       </div>
     </div>
