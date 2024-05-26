@@ -237,7 +237,7 @@ function DashboardCl() {
       var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
       v.onload = function () {
         window.voiceflow.chat.load({
-          verify: { projectID: '65e3fdf05671df3be500cc99' },
+          verify: { projectID: '6649ba50a76c568e0d411bb1' },
           url: 'https://general-runtime.voiceflow.com',
           versionID: 'production'
         });
