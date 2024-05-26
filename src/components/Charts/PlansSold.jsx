@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Box } from "@chakra-ui/react";
 import "../dashboard/areaCards/AreaCards.scss";
-
+ 
 const PlansSold = () => {
   const [plansData, setPlansData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+ 
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
@@ -17,7 +17,7 @@ const PlansSold = () => {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
           },
         });
-
+ 
         const data = await response.json();
         // Sort plansData array by month
         data.transactions.sort((a, b) => a.month - b.month);
@@ -27,11 +27,11 @@ const PlansSold = () => {
         console.error('Error fetching plans data:', error.message);
       }
     };
-
+ 
     fetchPlansData();
     window.scrollTo(0, 0);
   }, []);
-
+ 
   const getSeriesData = (data) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const seriesData = {
@@ -39,18 +39,18 @@ const PlansSold = () => {
       premium: [],
       categories: []
     };
-
+ 
     data.forEach(transaction => {
-      seriesData.free.push(transaction.plans.free);
-      seriesData.premium.push(transaction.plans.premium);
+      seriesData.free.push(transaction.plans.free || 0); // Replace NaN or undefined with 0
+      seriesData.premium.push(transaction.plans.premium || 0); // Replace NaN or undefined with 0
       seriesData.categories.push(months[transaction.month - 1]);
     });
-
+ 
     return seriesData;
   };
-
+ 
   const seriesData = plansData ? getSeriesData(plansData) : { free: [], premium: [], categories: [] };
-
+ 
   const series = [
     {
       name: "Free Plans",
@@ -61,7 +61,7 @@ const PlansSold = () => {
       data: seriesData.premium
     }
   ];
-
+ 
   const options = {
     chart: {
       height: 350,
@@ -107,6 +107,7 @@ const PlansSold = () => {
       }
     },
     legend: {
+      show: true, // Display legends
       position: 'top',
       horizontalAlign: 'right',
       floating: true,
@@ -115,7 +116,8 @@ const PlansSold = () => {
       fontFamily: 'sans-serif'
     }
   };
-
+ 
+ 
   return (
     <Box className="bar-chart">
       <div className="bar-chart-info">
@@ -136,5 +138,5 @@ const PlansSold = () => {
     </Box>
   );
 }
-
+ 
 export default PlansSold;
