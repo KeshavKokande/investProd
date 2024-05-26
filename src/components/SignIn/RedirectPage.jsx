@@ -73,7 +73,7 @@ const RedirectPage = () => {
                     </Text>
                 </Box>
                 {fact && (
-                    <Box mt="4" bg="#6372ff" borderRadius="md" p="4" display="inline-block">
+                    <Box mt="4" bg="#6372ff" borderRadius="50px" p="4" mx="10" display="inline-block">
                     <Text
                         color="#F6F6F6"
                         fontSize={['16px', '20px', '30px']}

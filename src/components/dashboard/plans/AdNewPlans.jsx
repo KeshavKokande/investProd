@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AdPlanCards from "./PlanCard";
 import styles from "./AdNewPlans.module.css";
-import loadingGif from "./../../../assest/images/Animation.gif";
+import loadingGif from "./../../../assest/images/Animation11.gif";
 
 const AdNewPlans = () => {
   const [plansData, setPlansData] = useState(null);

@@ -169,7 +169,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     <PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} />
                 </p>
 
-                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', padding:"40px" }}>
                     <center><strong>Returns</strong></center><br />
                     <BarChartComponent plansData={pnl} widthChart={500} />
                 </p>

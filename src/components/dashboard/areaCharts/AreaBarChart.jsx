@@ -4,7 +4,7 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import "./AreaCharts.scss";
 import axios from 'axios';
 import DualAxis from '../../Dualaxis/DualAxis'
-import loadingGif from "./../../../assest/images/Animation4.gif";
+import loadingGif from "./../../../assest/images/Animation12.gif";
 
 const AreaBarChart = () => {
   const [plansData, setPlansData] = useState(null);

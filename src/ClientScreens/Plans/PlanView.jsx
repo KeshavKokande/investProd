@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import StockChart from '../../components/dashboard/plans/StockChart';
 import Modal from './../../PricingModal/Modal/Modal';
 import './../../PricingModal/PricingApp/PricingApp.css'
-import loadingGif from "./../../assest/images/Animation.gif";
+import loadingGif from "./../../assest/images/Animation11.gif";
 function PlanView() {
   const navigate = useNavigate();
   const { plan_id } = useParams();

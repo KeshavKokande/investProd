@@ -3,7 +3,7 @@ import InvestmentSummary from './Summary';
 import { Typography } from '@mui/material';
 import styles from "./dashboard.module.css";
 import axios from 'axios';
-import loadingGif from "./../../assest/images/Animation.gif";
+import loadingGif from "./../../assest/images/Animation11.gif";
 import CliStock from './../../CliStockChart/CliStock'
 import { ChakraProvider } from '@chakra-ui/react'
 function DashboardCl() {
@@ -237,7 +237,7 @@ function DashboardCl() {
       var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
       v.onload = function () {
         window.voiceflow.chat.load({
-          verify: { projectID: '65e3fdf05671df3be500cc99' },
+          verify: { projectID: '6649ba50a76c568e0d411bb1' },
           url: 'https://general-runtime.voiceflow.com',
           versionID: 'production'
         });
