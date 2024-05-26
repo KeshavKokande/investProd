@@ -3,7 +3,7 @@ import PlanCardList from './PlanCardList';
 import React, { useState, useEffect } from 'react';
 import styles from "./Plans.module.css"
 import axios from 'axios';
-import loadingGif from "./../../assest/images/Animation11.gif";
+import loadingGif from "./../../assest/images/Animation13.gif";
 function PlansCl() {
   const [plansData, setPlansData] = useState([]);
   const [riks, setRiks] = useState([]);
