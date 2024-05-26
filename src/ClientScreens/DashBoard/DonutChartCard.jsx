@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Box, Text, Flex } from '@chakra-ui/react';
 import styles from './dashboard.module.css';
  
-const DonutChartCard = ({ da, ta }) => {
+const DonutChartCard = ({ da, ta, setret }) => {
  
  
   const addProfitPercent = (plans, profits) => {
@@ -54,6 +54,8 @@ const DonutChartCard = ({ da, ta }) => {
   };
  
   const fits = calculateProfitsAndInvestments(ret);
+  setret(fits);
+  
  
   const investmentsData = {
     labels: ['Free Plans', 'Premium Plans'],

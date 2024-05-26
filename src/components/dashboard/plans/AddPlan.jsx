@@ -317,8 +317,8 @@ const AddPlan = () => {
   return (
     <div style={{ display: "flex", flexDirection: "row" }} className={styles.addPlan_form_container}>
       <StockList selectedDate={date} prices={selectedPrices} handleSymbolClick={handleSymbolClick} />
-      <hr className={styles.addPlan_hr} />
-      <div >
+      {/* <hr className={styles.addPlan_hr} /> */}
+      <div style={{borderLeft:"1px solid black", paddingLeft:"50px"}}>
         <div className={styles.addPlan_form_section}>
           <form id={styles.new_plan_form} >
             <div className={styles.formGrp}>
@@ -360,9 +360,9 @@ const AddPlan = () => {
               />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
-            <div className={styles.formGrp}>
+            <div className={styles.formGrp} style={{"display":"flex" ,"alignItems":"baseline"}}>
               <label className={styles.addPlan_label} htmlFor="isPremium">Premium</label>
-              <input className={styles.addPlan_input} type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} onChange={handleChangeToggle} />
+              <input  type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} onChange={handleChangeToggle} />
             </div>
             <div className={`${styles.formGrp} ${styles.formGrp3}`}>
               <label className={styles.addPlan_label} htmlFor="advise">

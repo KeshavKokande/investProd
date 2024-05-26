@@ -86,7 +86,7 @@ const Clientlist = () => {
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '16px'}}
         />
       </div>
       <div className="data-table-diagram">

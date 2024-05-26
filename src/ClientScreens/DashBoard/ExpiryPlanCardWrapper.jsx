@@ -80,7 +80,7 @@ function processPlanData(data) {
  
 // Dummy data
 const dummyPlans = [
-  { name: 'No Data', daysLeft: 0, totalDays: 180 },
+  { name: 'No Data', daysLeft: 0, totalDays: 365 },
   // { name: 'Plan B', daysLeft: 15, totalDays: 90 },
   // { name: 'Plan C', daysLeft: 70, totalDays: 365 },
 ];
@@ -208,7 +208,7 @@ export default ExpiryPlanCardWrapper;
 //   useEffect(() => {
 //     const fetchPlansData = async () => {
 //       try {
-//         const response = await fetch('http://localhost:8000/api/v1/Client/get-days-left-to-expire-subs', {
+//         const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-days-left-to-expire-subs', {
 //           method: 'GET',
 //           headers: {
 //             'Content-Type': 'application/json',
