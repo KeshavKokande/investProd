@@ -227,11 +227,11 @@ const Notifications = ({user}) => {
 
         <Divider />
 
-        <Box sx={{ p: 2 }}>
+        {/* <Box sx={{ p: 2 }}>
           <Link href="#" variant="body2">
             View All
           </Link>
-        </Box>
+        </Box> */}
       </Menu>
     </>
   );
