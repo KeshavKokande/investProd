@@ -39,6 +39,26 @@ const EditPlan = () => {
 
         });
         const data = await response.json();
+        const ata = {
+          stocks: data.plan.stocks.map(stock => ({
+            symbol: stock.symbol,
+            qty: stock.qty,
+            avg_price: stock.price, // Assuming price is the average price
+          }))
+        };
+
+        const ponse = await fetch('http://localhost:8000/api/v1/stock/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(ata)
+        });
+
+        const responseData = await ponse.json();
+        setTab(responseData);
+        setLoading(false);
+        // const data = await response.json();
         // console.log("data = ", data);
 
         setFormData({
@@ -71,37 +91,37 @@ const EditPlan = () => {
 
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const fetchLate = async () => {
-      try {
-        const data = {
-          stocks: formData.stocks.map(stock => ({
-            symbol: stock.symbol,
-            qty: stock.qty,
-            avg_price: stock.price, // Assuming price is the average price
-          }))
-        };
+  //   const fetchLate = async () => {
+  //     try {
+  //       const data = {
+  //         stocks: formData.stocks.map(stock => ({
+  //           symbol: stock.symbol,
+  //           qty: stock.qty,
+  //           avg_price: stock.price, // Assuming price is the average price
+  //         }))
+  //       };
 
-        const response = await fetch('http://localhost:8000/api/v1/stock/calculate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
+  //       const response = await fetch('http://localhost:8000/api/v1/stock/calculate', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify(data)
+  //       });
 
-        const responseData = await response.json();
-        setTab(responseData);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  //       const responseData = await response.json();
+  //       setTab(responseData);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
-    fetchLate();
+  //   fetchLate();
 
-  }, [dataLoading])
+  // }, [dataLoading])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
