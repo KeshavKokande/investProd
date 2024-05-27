@@ -1,6 +1,6 @@
 import { AreaCards, AreaCharts, AreaTable } from "../../components";
 import { useEffect, useState } from "react";
-import loadingGif from "./../../assest/images/Animation11.gif";
+import loadingGif from "./../../assest/images/Animation13.gif";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);

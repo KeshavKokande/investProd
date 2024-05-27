@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AdPlanCards from "./PlanCard";
 import styles from "./AdNewPlans.module.css";
-import loadingGif from "./../../../assest/images/Animation11.gif";
+import loadingGif from "./../../../assest/images/Animation13.gif";
 
 const AdNewPlans = () => {
   const [plansData, setPlansData] = useState(null);
@@ -12,7 +12,7 @@ const AdNewPlans = () => {
   useEffect(() => {
     const fetchPlansData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/advisor/list-of-plans", {
+        const response = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',

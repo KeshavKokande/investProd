@@ -3,7 +3,7 @@ import PlanCardList from './PlanCardList';
 import React, { useState, useEffect } from 'react';
 import styles from "./Plans.module.css"
 import axios from 'axios';
-import loadingGif from "./../../assest/images/Animation11.gif";
+import loadingGif from "./../../assest/images/Animation13.gif";
 function PlansCl() {
   const [plansData, setPlansData] = useState([]);
   const [riks, setRiks] = useState([]);
@@ -14,7 +14,7 @@ function PlansCl() {
     window.scrollTo(0, 0);
     const fetchPlansData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/Client/get-all-plans', {
+        const response = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-all-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ function PlansCl() {
           },
         });
 
-        const ponse = await fetch('http://localhost:8000/api/v1/Client/get-own-details', {
+        const ponse = await fetch('https://team4api.azurewebsites.net/api/v1/Client/get-own-details', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
