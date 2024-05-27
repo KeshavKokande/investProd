@@ -105,7 +105,7 @@ const TopInvestors = () => {
                 <div
                   className="adv-bar-item-filled"
                   style={{
-                    width: `${(investor.totalAmountInvested / maxAmountInvested) * 100}%`,
+                    width: `${(investor.totalAmountInvested / maxAmountInvested) * 70}%`,
                   }}
                 ></div>
               </div>
@@ -124,7 +124,7 @@ const TopInvestors = () => {
                 <div
                   className="adv-bar-item-filled"
                   style={{
-                    width: `${(investor.uniquePlansCount / maxPlansCount) * 100}%`,
+                    width: `${(investor.uniquePlansCount / maxPlansCount) * 70}%`,
                   }}
                 ></div>
               </div>
