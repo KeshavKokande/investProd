@@ -16,7 +16,7 @@ const TopInvestors = () => {
           throw new Error('No JWT token found');
         }
 
-        const amountResponse = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/top-investors-invstd-amt", {
+        const amountResponse = await fetch("http://localhost:8000/api/v1/advisor/top-investors-invstd-amt", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const TopInvestors = () => {
           },
         });
 
-        const plansResponse = await fetch("https://team4api.azurewebsites.net/api/v1/advisor/top-investors", {
+        const plansResponse = await fetch("http://localhost:8000/api/v1/advisor/top-investors", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',

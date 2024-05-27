@@ -186,25 +186,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                 </ChakraProvider>
             </div>
 
-            {/* <h2 className={styles.heading}>Plan Information</h2>
-            <Carousel responsive={responsive} infinite={true} className={styles.Carousel}>
-                {Object.entries(categorizedPlans).map(([category, plans]) => (
-                    <div key={category}>
-                        <h3 onClick={() => {
-                            const newExpandedCategory = expandedCategory === category ? null : category;
-                            setExpandedCategory(newExpandedCategory);
-                        }}>
-                            {`Plans Under ${category === 'moreThan8000' ? '8000+' : category}`}
-                        </h3>
-                        {expandedCategory === category && plans.map(plan => (
-                            <Link to={`/planDetail/${plan._id}`}>
-                            <ProfileCard plan={plan}/>
-                          </Link>
-                        ))}
-                    </div>
-                ))}
-            </Carousel> */}
-
             <h2 className={styles.heading}>Plan Information</h2>
             <PlanTable data={table} pnl={pnl} />
         </div>

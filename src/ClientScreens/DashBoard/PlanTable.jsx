@@ -50,8 +50,9 @@ const PlanTable = ({ data, pnl }) => {
   // Render text color based on positive or negative value
   const renderReturns = (value) => {
     const color = value >= 0 ? 'green' : 'red';
-    return <span style={{ color }}>{value}%</span>;
-  };
+    const fontWeight = 700 ; // You can adjust the weight value as needed
+    return <span style={{ color, fontWeight }}>{value}%</span>;
+};
 
   const columns = [
     {

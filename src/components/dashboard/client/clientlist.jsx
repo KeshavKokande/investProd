@@ -19,7 +19,7 @@ const Clientlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const clientsResponse = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/list-of-clients', {
+        const clientsResponse = await fetch('http://localhost:8000/api/v1/advisor/list-of-clients', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const Clientlist = () => {
           },
         });
 
-        const plansResponse = await fetch('https://team4api.azurewebsites.net/api/v1/advisor/list-of-plans', {
+        const plansResponse = await fetch('http://localhost:8000/api/v1/advisor/list-of-plans', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
