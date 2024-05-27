@@ -2,34 +2,37 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Box, Text, Flex } from '@chakra-ui/react';
 import styles from './dashboard.module.css';
- 
-const DonutChartCard = ({ da, ta }) => {
- 
- 
+
+const DonutChartCard = ({ da, ta, setret }) => {
+
+  const formatToINR = (number) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR'
+    }).format(number);
+  };
+
   const addProfitPercent = (plans, profits) => {
-    // Create a map for quick lookup of profit percent by planName
     const profitMap = new Map();
     profits.forEach(profit => {
       profitMap.set(profit.planName, parseFloat(profit.profit_percent));
     });
- 
-    // Add profit_percent to each plan
+
     return plans.map(plan => ({
       ...plan,
       profit_percent: profitMap.get(plan.planName) || 0
- 
     }));
   };
- 
-  const ret = addProfitPercent(da,ta);
+
+  const ret = addProfitPercent(da, ta);
   console.log(ret);
- 
+
   const calculateProfitsAndInvestments = (plans) => {
     let premiumProfits = 0;
     let nonPremiumProfits = 0;
     let premiumInvested = 0;
     let nonPremiumInvested = 0;
- 
+
     plans.forEach(plan => {
       const profit = (plan.profit_percent / 100) * plan.total_investedamount;
       if (plan.isPremium) {
@@ -40,7 +43,7 @@ const DonutChartCard = ({ da, ta }) => {
         nonPremiumInvested += plan.total_investedamount;
       }
     });
- 
+
     return {
       premium: {
         totalProfits: premiumProfits,
@@ -52,11 +55,15 @@ const DonutChartCard = ({ da, ta }) => {
       }
     };
   };
- 
+
   const fits = calculateProfitsAndInvestments(ret);
- 
+  setret(fits);
+
   const investmentsData = {
-    labels: ['Free Plans', 'Premium Plans'],
+    labels: [
+      `Free Plans: ${formatToINR(fits.nonPremium.totalInvested)}`,
+      `Premium Plans: ${formatToINR(fits.premium.totalInvested)}`
+    ],
     datasets: [
       {
         label: 'Investments',
@@ -65,18 +72,21 @@ const DonutChartCard = ({ da, ta }) => {
       },
     ],
   };
- 
+
   const returnsData = {
-    labels: ['Free Plans', 'Premium Plans'],
+    labels: [
+      `Free Plans: ${formatToINR(fits.nonPremium.totalProfits)}`,
+      `Premium Plans: ${formatToINR(fits.premium.totalProfits)}`
+    ],
     datasets: [
       {
         label: 'Returns',
-        data: [fits.nonPremium.totalProfits,fits.premium.totalProfits],
+        data: [fits.nonPremium.totalProfits, fits.premium.totalProfits],
         backgroundColor: ['#475BE8', '#FFA600'],
       },
     ],
   };
- 
+
   return (
     <Box className={styles.infocard}>
       <Flex className={styles.chartContainer}>
@@ -96,5 +106,5 @@ const DonutChartCard = ({ da, ta }) => {
     </Box>
   );
 };
- 
+
 export default DonutChartCard;

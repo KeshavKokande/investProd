@@ -27,6 +27,10 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
         mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
     };
     const [expandedCategory, setExpandedCategory] = useState(null);
+    const[ret,setRet]=useState({ 
+        premium: { totalProfits: 0, totalInvested: 0 },
+        nonPremium: { totalProfits: 0, totalInvested: 0 } 
+        })
 
     if (!transactions || !advisorNames || !returns) {
         return null; // Render nothing if any of the props are missing
@@ -128,7 +132,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     percentFillValue={80}
                     cardInfo={{
                         title: "Total Amount Invested",
-                        value: formatCurrency(totalInvestedAmount),
+                        value: formatCurrency(ret.premium.totalInvested+ret.premium.totalInvested),
                     }}
                     imageSrc={moneyImage1}
                 />
@@ -137,7 +141,7 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     percentFillValue={50}
                     cardInfo={{
                         title: "Total Profit/Loss",
-                        value: formatCurrency(avggg * totalInvestedAmount / 100),
+                        value: formatCurrency(ret.nonPremium.totalProfits+ret.premium.totalProfits),
                     }}
                     imageSrc={moneyImage2}
                 />
@@ -148,9 +152,9 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                         title: "Current Value",
                         value: (
                             <div>
-                                {formatCurrency((totalInvestedAmount + avggg * totalInvestedAmount / 100))}
+                                {formatCurrency(ret.premium.totalInvested+ret.premium.totalInvested+ret.nonPremium.totalProfits+ret.premium.totalProfits)}
                                 <span style={{ padding: '0.5vh 1vh', borderRadius: ' 23% / 40%', fontSize: '0.75rem', marginLeft: '1vh', color: 'white', backgroundColor: avggg >= 0 ? 'rgba(38, 166, 91, 1)' : 'rgba(255,30,56,255)' }}>
-                                    &uarr;&nbsp;{avggg.toFixed(2)}%
+                                    &uarr;&nbsp;{(((ret.nonPremium.totalProfits+ret.premium.totalProfits)/(ret.nonPremium.totalInvested+ret.premium.totalInvested))*100).toFixed(2)}%
                                 </span>
                             </div>
                         )
@@ -165,14 +169,14 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     <PiChart data={formatDataForPieChart(Array.from(new Set(transactions.map(transaction => (transaction.planId)))), totalInvestments)} />
                 </p>
 
-                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', }}>
+                <p id={styles.piechart} style={{ fontSize: " x-large", borderRadius: '0.7rem', padding:"40px" }}>
                     <center><strong>Returns</strong></center><br />
-                    <BarChartComponent plansData={etta} widthChart={500} />
+                    <BarChartComponent plansData={pnl} widthChart={500} />
                 </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", padding: " 0", gap: "16px" }}>
-                <DonutChartCard da={table} ta={pnl} />
+                <DonutChartCard da={table} ta={pnl} setret={setRet} />
                 <ExpiryPlanCard />
             </div>
 
@@ -181,25 +185,6 @@ function InvestmentSummary({ transactions, advisorNames, returns, etta, avggg, t
                     <CliStock />
                 </ChakraProvider>
             </div>
-
-            {/* <h2 className={styles.heading}>Plan Information</h2>
-            <Carousel responsive={responsive} infinite={true} className={styles.Carousel}>
-                {Object.entries(categorizedPlans).map(([category, plans]) => (
-                    <div key={category}>
-                        <h3 onClick={() => {
-                            const newExpandedCategory = expandedCategory === category ? null : category;
-                            setExpandedCategory(newExpandedCategory);
-                        }}>
-                            {`Plans Under ${category === 'moreThan8000' ? '8000+' : category}`}
-                        </h3>
-                        {expandedCategory === category && plans.map(plan => (
-                            <Link to={`/planDetail/${plan._id}`}>
-                            <ProfileCard plan={plan}/>
-                          </Link>
-                        ))}
-                    </div>
-                ))}
-            </Carousel> */}
 
             <h2 className={styles.heading}>Plan Information</h2>
             <PlanTable data={table} pnl={pnl} />
