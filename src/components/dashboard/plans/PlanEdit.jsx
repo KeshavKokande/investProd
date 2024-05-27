@@ -17,7 +17,7 @@ const EditPlan = () => {
     risk: '',
     advise: '',
     stocks: [],
-    cash: 0,
+    cash: '',
     isPremium: false
   });
   const [errors, setErrors] = useState({});
@@ -45,7 +45,7 @@ const EditPlan = () => {
           risk: data.plan.risk,
           advise: data.plan.advise,
           stocks: data.plan.stocks,
-          cash: 0,
+          cash: data.plan.cash,
           isPremium:data.plan.isPremium
         });
         setCc(data.plan.cash);
