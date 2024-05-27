@@ -32,9 +32,10 @@ const EditPlan = () => {
       try {
         const response = await fetch(`http://localhost:8000/api/v1/advisor/get-plan-details/${edit}`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-           },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          },
 
         });
         const data = await response.json();
@@ -46,7 +47,7 @@ const EditPlan = () => {
           advise: data.plan.advise,
           stocks: data.plan.stocks,
           cash: data.plan.cash,
-          isPremium:data.plan.isPremium
+          isPremium: data.plan.isPremium
         });
         setCc(data.plan.cash);
       } catch (error) {
@@ -110,6 +111,21 @@ const EditPlan = () => {
     });
   };
 
+  const formatCurrency = (amount) => {
+    // Convert amount to a number
+    const parsedAmount = parseFloat(amount);
+
+    // Check if parsedAmount is a valid number
+    if (!isNaN(parsedAmount)) {
+      // Use toFixed to limit the decimal places to 3 and convert it back to string
+      const roundedAmount = parsedAmount.toFixed(2);
+      const formattedAmount = roundedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return `₹ ${formattedAmount}`;
+    } else {
+      // If amount is not a valid number, return empty string or handle accordingly
+      return '';
+    }
+  };
 
   const handleAddStock = () => {
     if (newSymbol && newQty > 0) {
@@ -338,7 +354,7 @@ const EditPlan = () => {
             </div>
             <div className={styles.formGrp}>
               <label className={styles.addPlan_label} htmlFor="minInvestmentAmount">Minimum Investment Amount:</label>
-              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={tab.total_current_value} readOnly />
+              <input className={styles.addPlan_input} type="text" id="minInvestmentAmount" name="minInvestmentAmount" value={formatCurrency(tab.total_current_value)} readOnly />
               {errors.minInvestmentAmount && <div className={styles.error}><strong>{errors.minInvestmentAmount}</strong></div>}
             </div>
             <div className={styles.formGrp}>
@@ -362,22 +378,8 @@ const EditPlan = () => {
               <input className={styles.addPlan_input} placeholder='Select stock from the list' type="text" id="newSymbol" value={newSymbol} onChange={e => setNewSymbol(e.target.value)} readOnly />
               <button type="button" onClick={handleAddStock}>&#x2713;</button>
             </div>
-
-            {/* <div className={styles.addPlan_stocks}> */}
-              
-
-              {/* <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="newSymbol">Symbol:</label> */}
-
-              {/* <input type="text" id="newSymbol" value={newSymbol} readOnly /> */}
-              {/* </div> */}
-              {/* <div className={styles.formGrp}>
-              <label className={styles.addPlan_label} htmlFor="newQty">Quantity:</label>
-              <input className={styles.addPlan_input} type="number" id="newQty" value={newQty} onChange={e => setNewQty(parseInt(e.target.value))} />
-            </div> */}
-            {/* </div> */}
             <div style={{ position: 'relative', width: '100%' }}>
-              <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw'}} />
+              <hr style={{ width: '35.7vw', margin: '0', marginLeft: '0vw' }} />
             </div>
             <div className={styles.addPlan_stock_cards}>
               {formData.stocks.map(stock => (
@@ -387,7 +389,7 @@ const EditPlan = () => {
                     <p>
                       Weightage - {(stock.qty * getPricePercentage(selectedPrices[stock.symbol])).toFixed(2)}% of Total Value
                     </p>
-                    <p>Price:</p>
+                    <p>Price:{formatCurrency(selectedPrices[stock.symbol])}</p>
                   </div>
                   <div className={styles.addPlan_card_button}>
                     <button type="button" onClick={() => handleBuyStock(stock.symbol, 1, selectedPrices[stock.symbol])} style={{ color: 'green' }}>+</button>
