@@ -50,7 +50,7 @@ const RedirectPage = () => {
                         <p>{fact}</p>
                     </div>
                 )}
-                <a href="#" className={styles.button}>Go to Dashboard</a>
+                <a  className={styles.button}>Go to Dashboard</a>
             </div>
         </div>
     );
