@@ -44,8 +44,12 @@ const RedirectPage = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
-                <h1 className={styles.heading}>Thank You for Registering!</h1>
-                <p className={styles.paragraph}>Your registration has been successfully completed.</p>
+                <h1 className={styles.heading}>Welcome To InVest!</h1>
+                {fact && (
+                    <div className={styles['fact-box']}>
+                        <p>{fact}</p>
+                    </div>
+                )}
                 <a href="#" className={styles.button}>Go to Dashboard</a>
             </div>
         </div>
@@ -53,3 +57,5 @@ const RedirectPage = () => {
 };
  
 export default RedirectPage;
+
+
