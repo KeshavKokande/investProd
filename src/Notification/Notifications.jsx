@@ -91,14 +91,12 @@ const Notifications = ({user}) => {
   };
 
   const getTimeDifference = (timestamp) => {
-    const IST_OFFSET = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
-  
     const currentTime = new Date();
-    const notificationTime = new Date(new Date(timestamp).getTime() + IST_OFFSET);
+    const notificationTime = new Date(timestamp);
     const differenceInSeconds = Math.floor(
       (currentTime - notificationTime) / 1000
     );
-  
+
     if (differenceInSeconds < 60) {
       return `${differenceInSeconds} seconds ago`;
     } else if (differenceInSeconds < 3600) {
